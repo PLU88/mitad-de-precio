@@ -115,5 +115,20 @@
  {"id": "jior", "nombre": "Jior", "dominio": "jior.cl", "tipo": "shopify"},
  {"id": "magentaglass", "nombre": "Magenta Glass", "dominio": "magentaglass.cl", "tipo": "especial", "activa": false, "nota": "Jumpseller: falta un lector para su plataforma."},
  {"id": "travel", "nombre": "Travel Tienda", "dominio": "tienda.travel.cl", "tipo": "especial", "activa": false, "nota": "No respondió (error de conexión)."},
- {"id": "construmart", "nombre": "Construmart", "dominio": "www.construmart.cl", "tipo": "especial", "activa": false, "nota": "Magento con API cerrada (403) y precios en formato propio; por revisar."}
+ {"id": "construmart", "nombre": "Construmart", "dominio": "www.construmart.cl", "tipo": "especial", "activa": false, "nota": "Magento con API cerrada (403) y precios en formato propio; por revisar."},
+ {"id": "spotessence", "nombre": "Spot Essence", "dominio": "spotessence.cl", "tipo": "shopify"},
+ {"id": "aguahouse", "nombre": "Agua House Deco", "dominio": "www.aguahousedeco.cl", "tipo": "shopify"},
+ {"id": "kado", "nombre": "Kado", "dominio": "www.kado.cl", "tipo": "shopify"},
+ {"id": "hoga", "nombre": "Hoga", "dominio": "hoga.cl", "tipo": "shopify"},
+ {"id": "casalimon", "nombre": "Casa Limón", "dominio": "www.casalimon.cl", "tipo": "shopify"},
+ {"id": "patioriente", "nombre": "Patio Oriente", "dominio": "patioriente.com", "tipo": "shopify"},
+ {"id": "dkohome", "nombre": "DKO Home", "dominio": "dkohome.cl", "tipo": "shopify"},
+ {"id": "form", "nombre": "Form", "dominio": "form.cl", "tipo": "shopify"},
+ {"id": "elgarage", "nombre": "El Garage", "dominio": "www.tiendaelgarage.cl", "tipo": "shopify"},
+ {"id": "casamia", "nombre": "Casa Mía Deco", "dominio": "casamiadeco.cl", "tipo": "shopify"},
+ {"id": "casaenorden", "nombre": "Casa en Orden", "dominio": "casaenorden.cl", "tipo": "shopify"},
+ {"id": "humana", "nombre": "Humana", "dominio": "humanastore.cl", "tipo": "shopify"},
+ {"id": "jacinta", "nombre": "Jacinta", "dominio": "jacintatienda.cl", "tipo": "shopify"},
+ {"id": "anastassia", "nombre": "Anastassia", "dominio": "www.anastassia.cl", "tipo": "shopify"},
+ {"id": "aymaria", "nombre": "Ay María", "dominio": "www.aymariatienda.cl", "tipo": "especial", "activa": false, "nota": "La tienda está cerrada con contraseña."}
 ]
