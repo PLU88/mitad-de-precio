@@ -1,7 +1,7 @@
 // Sesión de miembros: consultar, pedir acceso, ingresar y salir.
 import {
   responder, soloPost, normalizarCorreo, correoValido, texto, leerMiembros, guardarMiembros,
-  contarPendientes, MAX_PENDIENTES, MAX_INTENTOS, hashCodigo, crearSesion, cookie, miembroConectado,
+  contarPendientes, MAX_PENDIENTES, MAX_INTENTOS, hashCodigo, crearSesion, cookie, miembroConectado, avisarSolicitud,
 } from "./_lib.js";
 
 export default async function handler(req, res) {
@@ -46,6 +46,7 @@ export default async function handler(req, res) {
         intentos: 0,
       };
       await guardarMiembros(datos);
+      await avisarSolicitud(datos.miembros[correo], "https://" + (req.headers["x-forwarded-host"] || req.headers.host || "priveofertazos.cl"));
       return responder(res, 200, { ok: true, mensaje: "¡Listo! Recibimos tu solicitud. Te avisaremos cuando sea aprobada." });
     }
 

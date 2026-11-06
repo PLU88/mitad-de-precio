@@ -139,6 +139,46 @@ export function claveAdminCorrecta(clave) {
   return Boolean(esperada) && igual(firmar("p|" + String(clave || "")), firmar("p|" + esperada));
 }
 
+// ---------------------------------------------------------------- aviso por correo (Resend)
+function escapar(t) {
+  return String(t || "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+}
+
+/** Avisa a la dueña que llegó una solicitud nueva. Si falla, la solicitud igual queda guardada. */
+export async function avisarSolicitud(m, sitio) {
+  const clave = process.env.RESEND_API_KEY, para = process.env.AVISAR_A;
+  if (!clave || !para) return;
+  const panel = sitio + "/admin.html";
+  const lineas = [
+    "Nombre: " + m.nombre,
+    "Correo: " + m.email,
+    m.whatsapp ? "WhatsApp: " + m.whatsapp : "",
+    m.mensaje ? "Cómo nos conoció: " + m.mensaje : "",
+  ].filter(Boolean);
+  const html =
+    '<div style="font-family:Arial,sans-serif;font-size:15px;color:#1A1A2E;line-height:1.5">' +
+    '<p style="font-family:Georgia,serif;font-style:italic;font-size:22px;margin:0">Privé <span style="font-family:Arial Black,Arial,sans-serif;font-style:normal;font-size:14px;letter-spacing:2px;color:#D61F69">OFERTAZOS</span></p>' +
+    "<p><b>" + escapar(m.nombre) + "</b> pidió acceso.</p><p>" + lineas.map(escapar).join("<br>") + "</p>" +
+    '<p><a href="' + panel + '" style="display:inline-block;background:#D61F69;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:bold">Abrir el panel para aprobar</a></p></div>';
+  try {
+    const r = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: "Bearer " + clave, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: process.env.AVISO_DESDE || "Privé Ofertazos <onboarding@resend.dev>",
+        to: [para],
+        reply_to: m.email,
+        subject: "Nueva solicitud de acceso: " + m.nombre,
+        text: m.nombre + " pidió acceso a Privé Ofertazos.\n\n" + lineas.join("\n") + "\n\nApruébala aquí: " + panel,
+        html,
+      }),
+    });
+    if (!r.ok) console.error("Resend respondió " + r.status + ": " + (await r.text()));
+  } catch (e) {
+    console.error("No se pudo enviar el aviso:", e);
+  }
+}
+
 // ---------------------------------------------------------------- ofertas cifradas
 let cache = { cuando: 0, datos: null };
 
