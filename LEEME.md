@@ -4,8 +4,10 @@ Sitio: **https://mitad-de-precio.vercel.app** · Panel de administración: **htt
 
 El proyecto tiene tres partes:
 
-1. **El recolector** (`recolector/recolectar.py`, en GitHub): cada 6 horas revisa las tiendas de
-   `tiendas.json` y se queda con los productos con stock y 50% o más de descuento.
+1. **El recolector** (`recolector/recolectar.py`, en GitHub): cada 30 minutos revisa las tiendas de
+   `tiendas.json` (8 a la vez) y se queda con los productos con stock y 50% o más de descuento.
+   Los resultados se guardan en la rama `datos`, que se reemplaza en cada vuelta para que el
+   repositorio no crezca.
 2. **El cifrado** (`recolector/cifrar.py`): guarda esas ofertas cifradas en `datos/ofertas.enc`.
    Solo el sitio en Vercel tiene la clave para leerlas, así que nadie puede verlas desde GitHub.
 3. **El sitio de miembros** (carpeta `sitio/`, publicado en Vercel): la gente pide acceso, tú la
@@ -25,12 +27,10 @@ Si alguien se equivoca de código 8 veces seguidas, queda bloqueado hasta que le
 ## Tiendas
 
 Las tiendas están en `tiendas.json`. Para apagar una, cambia `"activa": true` por `"activa": false`
-(ícono del lápiz en GitHub). Cada vuelta deja en `datos/estado.json` cuántas ofertas trajo cada tienda
+(ícono del lápiz en GitHub). Cada vuelta deja en `datos/estado.json` (rama `datos`) cuántas ofertas trajo cada tienda
 o por qué falló.
 
-**Activas (25):** Hites, abc, Mashini, Under Armour, Rockford, Hush Puppies, Lippi, Merrell, Columbia,
-Umbrale, Lineatre, Lounge, Raindoor, Blockstore, Volkanica, Nicopoly, Crocs, Locura LPK, Vans, Leonisa,
-Intime, Only, Wild Lama, Doite y Fashion's Park (estas cuatro últimas, solo cuando tienen liquidación).
+**Activas (73):** Hites, Fashion's Park, Hush Puppies, Under Armour, Crocs, Vans, Lippi, Merrell, Blockstore, Lounge, Mashini, Leonisa, Only, Wild Lama, Volkanica, Intime, Umbrale, Columbia, abc, Lineatre, Locura LPK, Raindoor, Rockford, Doite, Nicopoly, Falabella, Sodimac, Tricot, Maicao, CIC, SuperZoo, Sparta, Liola, Rapsodia, Ópticas Schilling, Thomas, Ellus, Levi's, Calvin Klein, Tommy Hilfiger, Reebok, Blush-Bar, Sally Beauty, Dr. Simi, Casa Royal, Electrolux, Oster, Swarovski, Miniso, Ficcus, Pillín, Colloky, Motorola, Nostalgic, Guante, Amphora, Steve Madden, Avon, Petrizzio, Farmex, Dermotienda, Ópticas GMO, Kitchen Center, Tramontina, Sur Diseño, Patagonia, Salomon, Petvet, Contrapunto, Bebesit, The Body Shop, EcoFarmacias, Feria Chilena del Libro.
 Si una tienda tiene el certificado de seguridad incompleto, agrega `"ssl_flexible": true` en su línea.
 
 **Agregar una tienda Shopify** (muchas marcas chilenas lo son): abre
@@ -68,3 +68,13 @@ aceptes. La página ya marca esos enlaces como patrocinados.
 - `DESCUENTO_MINIMO = 50` — descuento mínimo que se guarda.
 - `MAX_PAGINAS = 40` — cuántas páginas revisa por tienda como máximo.
 - `PAUSA_SEGUNDOS = 1.0` — pausa entre consultas; no la bajes, para no molestar a las tiendas.
+
+## Probar tiendas nuevas
+
+1. Agrega las direcciones (una por línea, por ejemplo `www.mitienda.cl`) a `herramientas/dominios.txt`.
+2. En GitHub, pestaña **Actions** → **Sondear tiendas** → **Run workflow** (Ejecutar).
+3. El resultado queda en la rama `sondeo`, archivo `muestras/sondeo.json`: cada tienda dice si se
+   puede leer (`shopify`, `vtex`, `woo`) o qué plataforma usa (`no`, con pistas).
+
+El recolector sabe leer: Shopify, VTEX, WooCommerce, Magento, Salesforce (Hites, abc, Tricot, Maicao,
+CIC, SuperZoo) y Falabella/Sodimac.
