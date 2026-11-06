@@ -1,0 +1,6345 @@
+<div class="grid-header-scroll"></div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="0">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '2427_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "2427_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="2427_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=2427_m">
+            <div class="product-tile" data-cat="alimento-natural-perro">
+    <!-- dwMarker="product" dwContentID="b4b228f5815978526ff2ffafab" -->
+    <div class="image-container">
+    <a href="/perro/alimentos/alimento-natural/bravery-salmon-adult-alimento-para-perro/2427_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw38088055/images/676c9-salmon-adulto-large-breed.jpg"
+             alt="Bravery salm&oacute;n adult alimento para perro"
+             title="Bravery salm&oacute;n adult alimento para perro, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw1d2db5b6/SuperZoo/Etiquetas/20.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+        <div class="tag-item" style="background:  #15822a;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;;">
+            <div class="tag-name">Natural</div>
+        </div>
+    
+        <div class="tag-item" style="background:  #897563;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;color:#fffbca;">
+            <div class="tag-name">Libre de grano</div>
+        </div>
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Bravery</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/perro/alimentos/alimento-natural/bravery-salmon-adult-alimento-para-perro/2427_m.html">
+		
+				<h2 class="text-base">Bravery salm&oacute;n adult alimento para perro</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        <span class="range">
+    
+
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+            <span class="value" content="30990">
+        
+        
+        
+        $30.990
+
+
+        </span>
+    </span>
+</span>
+
+    -
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+            <span class="value" content="60792">
+        
+        
+        $60.792
+
+
+        </span>
+    </span>
+</span>
+
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=2427_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=2427_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/perro/alimentos/alimento-natural/bravery-salmon-adult-alimento-para-perro/2427_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimento-natural-perro' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Bravery salm&oacute;n adult alimento para perro";
+	var decoded = decodeHTML(rawname); 
+	var price = "60792";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "2427_m",
+		price: price,
+		variant: '',
+		brand: "Bravery",
+		category: "alimento-natural-perro"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="1">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '563_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "563_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="563_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=563_m">
+            <div class="product-tile" data-cat="alimentos-seco-perro">
+    <!-- dwMarker="product" dwContentID="cfc49cb31d2365b6ff17201a3f" -->
+    <div class="image-container">
+    <a href="/perro/alimentos/alimentos-seco/fit-formula-adulto-alimento-para-perro/563_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw0474b5be/images/563_m.jpg"
+             alt="Fit Formula Adulto alimento para perro"
+             title="Fit Formula Adulto alimento para perro, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw1d2db5b6/SuperZoo/Etiquetas/20.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Fit Formula</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/perro/alimentos/alimentos-seco/fit-formula-adulto-alimento-para-perro/563_m.html">
+		
+				<h2 class="text-base">Fit Formula Adulto alimento para perro</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        
+        <span>
+    
+
+    
+        
+        <del>
+            <span class="strike-through list">
+                <span class="value" content="46990">
+                    <span class="sr-only">
+                        Precio de oferta desde
+                    </span>
+                    $46.990
+
+
+                    <span class="sr-only">
+                        a
+                    </span>
+                </span>
+            </span>
+        </del>
+    
+
+    
+    <span class="sales">
+        
+        
+        
+            <span class="value" content="37592">
+        
+        $37.592
+
+
+        </span>
+    </span>
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=563_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=563_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/perro/alimentos/alimentos-seco/fit-formula-adulto-alimento-para-perro/563_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-perro' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Fit Formula Adulto alimento para perro";
+	var decoded = decodeHTML(rawname); 
+	var price = "37592";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "563_m",
+		price: price,
+		variant: '',
+		brand: "Fit Formula",
+		category: "alimentos-seco-perro"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="2">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '2425_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "2425_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="2425_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=2425_m">
+            <div class="product-tile" data-cat="alimento-natural-perro">
+    <!-- dwMarker="product" dwContentID="9ecb36c42660d167a1da6c8ad2" -->
+    <div class="image-container">
+    <a href="/perro/alimentos/alimento-natural/bravery-chicken-adult-alimento-para-perro/2425_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwc048a17c/images/3f3a3-chicken-adult.jpg"
+             alt="Bravery Chicken Adult alimento para perro"
+             title="Bravery Chicken Adult alimento para perro, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw1d2db5b6/SuperZoo/Etiquetas/20.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+        <div class="tag-item" style="background:  #15822a;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;;">
+            <div class="tag-name">Natural</div>
+        </div>
+    
+        <div class="tag-item" style="background:  #897563;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;color:#fffbca;">
+            <div class="tag-name">Libre de grano</div>
+        </div>
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Bravery</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/perro/alimentos/alimento-natural/bravery-chicken-adult-alimento-para-perro/2425_m.html">
+		
+				<h2 class="text-base">Bravery Chicken Adult alimento para perro</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        <span class="range">
+    
+
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+            <span class="value" content="28990">
+        
+        
+        
+        $28.990
+
+
+        </span>
+    </span>
+</span>
+
+    -
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+            <span class="value" content="58392">
+        
+        
+        $58.392
+
+
+        </span>
+    </span>
+</span>
+
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=2425_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=2425_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/perro/alimentos/alimento-natural/bravery-chicken-adult-alimento-para-perro/2425_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimento-natural-perro' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Bravery Chicken Adult alimento para perro";
+	var decoded = decodeHTML(rawname); 
+	var price = "58392";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "2425_m",
+		price: price,
+		variant: '',
+		brand: "Bravery",
+		category: "alimento-natural-perro"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="3">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '14816',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "14816", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="14816" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=14816">
+            <div class="product-tile" data-cat="antiparasitarios-gato-cl">
+    <!-- dwMarker="product" dwContentID="a19c3dfe9bfbbe29189417007f" -->
+    <div class="image-container">
+    <a href="/gato/farmacia-e-higiene/antiparasitarios/solucion-topica-antiparasitaria-para-gatos-de-25-a-75-kg-x-1pipeta/14816.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw793c870e/images/sku14816.jpg"
+             alt="Soluci&oacute;n t&oacute;pica antiparasitaria para gatos de 2,5 a 7,5 KG x 1pipeta"
+             title="Soluci&oacute;n t&oacute;pica antiparasitaria para gatos de 2,5 a 7,5 KG x 1pipeta, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw2566c555/SuperZoo/Etiquetas/Precio-bomba.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Nexgard Combo</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/gato/farmacia-e-higiene/antiparasitarios/solucion-topica-antiparasitaria-para-gatos-de-25-a-75-kg-x-1pipeta/14816.html">
+		
+				<h2 class="text-base">Soluci&oacute;n t&oacute;pica antiparasitaria para gatos de 2,5 a 7,5 KG x 1pipeta</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        
+        <span>
+    
+
+    
+        
+        <del>
+            <span class="strike-through list">
+                <span class="value" content="16990">
+                    <span class="sr-only">
+                        Precio de oferta desde
+                    </span>
+                    $16.990
+
+
+                    <span class="sr-only">
+                        a
+                    </span>
+                </span>
+            </span>
+        </del>
+    
+
+    
+    <span class="sales">
+        
+        
+        
+            <span class="value" content="11990">
+        
+        $11.990
+
+
+        </span>
+    </span>
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=14816">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary purchase-button add-single-product" href="/gato/farmacia-e-higiene/antiparasitarios/solucion-topica-antiparasitaria-para-gatos-de-25-a-75-kg-x-1pipeta/14816.html"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span>Comprar</span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/gato/farmacia-e-higiene/antiparasitarios/solucion-topica-antiparasitaria-para-gatos-de-25-a-75-kg-x-1pipeta/14816.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'antiparasitarios-gato-cl' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Soluci&oacute;n t&oacute;pica antiparasitaria para gatos de 2,5 a 7,5 KG x 1pipeta";
+	var decoded = decodeHTML(rawname); 
+	var price = "11990";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "14816",
+		price: price,
+		variant: '',
+		brand: "Nexgard Combo",
+		category: "antiparasitarios-gato-cl"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="4">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '8656',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "8656", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="8656" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=8656">
+            <div class="product-tile" data-cat="alimento-natural-perro">
+    <!-- dwMarker="product" dwContentID="b7d8f5cce775de8de6f18a86a6" -->
+    <div class="image-container">
+    <a href="/perro/alimentos/alimento-natural/bravery-lamb-adult-large-medium-breeds-alimento-para-perro/8656.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwb295481d/images/15cbc-4kg.jpg"
+             alt="Bravery Lamb Adult Large/Medium Breeds alimento para perro"
+             title="Bravery Lamb Adult Large/Medium Breeds alimento para perro, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw1d2db5b6/SuperZoo/Etiquetas/20.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+        <div class="tag-item" style="background: #15822a;font-family:'Arial Black';padding: 0 1rem !important;font-size: 10px;">
+            <div class="tag-name">Natural</div>
+        </div>
+    
+        <div class="tag-item" style="background: #897563;font-family:'Arial Black';padding: 0 1rem !important;font-size: 10pxcolor:#fffbca;">
+            <div class="tag-name">Libre de grano</div>
+        </div>
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Bravery</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/perro/alimentos/alimento-natural/bravery-lamb-adult-large-medium-breeds-alimento-para-perro/8656.html">
+		
+				<h2 class="text-base">Bravery Lamb Adult Large/Medium Breeds alimento para perro</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        
+        <span>
+    
+
+    
+        
+        <del>
+            <span class="strike-through list">
+                <span class="value" content="75990">
+                    <span class="sr-only">
+                        Precio de oferta desde
+                    </span>
+                    $75.990
+
+
+                    <span class="sr-only">
+                        a
+                    </span>
+                </span>
+            </span>
+        </del>
+    
+
+    
+    <span class="sales">
+        
+        
+        
+            <span class="value" content="60792">
+        
+        $60.792
+
+
+        </span>
+    </span>
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=8656">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=8656"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/perro/alimentos/alimento-natural/bravery-lamb-adult-large-medium-breeds-alimento-para-perro/8656.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimento-natural-perro' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Bravery Lamb Adult Large/Medium Breeds alimento para perro";
+	var decoded = decodeHTML(rawname); 
+	var price = "60792";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "8656",
+		price: price,
+		variant: '',
+		brand: "Bravery",
+		category: "alimento-natural-perro"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="5">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '4829_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "4829_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="4829_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=4829_m">
+            <div class="product-tile" data-cat="alimento-natural-perro">
+    <!-- dwMarker="product" dwContentID="60e7652a8132cb3c7b986926a0" -->
+    <div class="image-container">
+    <a href="/perro/alimentos/alimento-natural/bravery-lamb-adult-large-medium-breeds-alimento-para-perro/4829_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwb295481d/images/15cbc-4kg.jpg"
+             alt="Bravery Lamb Adult Large/Medium Breeds alimento para perro"
+             title="Bravery Lamb Adult Large/Medium Breeds alimento para perro, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw1d2db5b6/SuperZoo/Etiquetas/20.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+        <div class="tag-item" style="background:  #15822a;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;;">
+            <div class="tag-name">Natural</div>
+        </div>
+    
+        <div class="tag-item" style="background:  #897563;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;color:#fffbca;">
+            <div class="tag-name">Libre de grano</div>
+        </div>
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Bravery</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/perro/alimentos/alimento-natural/bravery-lamb-adult-large-medium-breeds-alimento-para-perro/4829_m.html">
+		
+				<h2 class="text-base">Bravery Lamb Adult Large/Medium Breeds alimento para perro</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        <span class="range">
+    
+
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+            <span class="value" content="30990">
+        
+        
+        
+        $30.990
+
+
+        </span>
+    </span>
+</span>
+
+    -
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+            <span class="value" content="60792">
+        
+        
+        $60.792
+
+
+        </span>
+    </span>
+</span>
+
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=4829_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=4829_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/perro/alimentos/alimento-natural/bravery-lamb-adult-large-medium-breeds-alimento-para-perro/4829_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimento-natural-perro' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Bravery Lamb Adult Large/Medium Breeds alimento para perro";
+	var decoded = decodeHTML(rawname); 
+	var price = "60792";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "4829_m",
+		price: price,
+		variant: '',
+		brand: "Bravery",
+		category: "alimento-natural-perro"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="6">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '652_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "652_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="652_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=652_m">
+            <div class="product-tile" data-cat="alimentos-seco-gato">
+    <!-- dwMarker="product" dwContentID="692024473e2e4a59c4e291c762" -->
+    <div class="image-container">
+    <a href="/gato/alimentos/alimento-seco/fit-formula-gato-adulto-alimento-para-gato/652_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw5fa1505f/images/4969e-gato-10-web.jpg"
+             alt="Fit Formula Gato Adulto alimento para gato"
+             title="Fit Formula Gato Adulto alimento para gato, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw240e002a/SuperZoo/Etiquetas/15.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Fit Formula</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/gato/alimentos/alimento-seco/fit-formula-gato-adulto-alimento-para-gato/652_m.html">
+		
+				<h2 class="text-base">Fit Formula Gato Adulto alimento para gato</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        
+        <span>
+    
+
+    
+        
+        <del>
+            <span class="strike-through list">
+                <span class="value" content="34990">
+                    <span class="sr-only">
+                        Precio de oferta desde
+                    </span>
+                    $34.990
+
+
+                    <span class="sr-only">
+                        a
+                    </span>
+                </span>
+            </span>
+        </del>
+    
+
+    
+    <span class="sales">
+        
+        
+        
+            <span class="value" content="27992">
+        
+        $27.992
+
+
+        </span>
+    </span>
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=652_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=652_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/gato/alimentos/alimento-seco/fit-formula-gato-adulto-alimento-para-gato/652_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-gato' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Fit Formula Gato Adulto alimento para gato";
+	var decoded = decodeHTML(rawname); 
+	var price = "27992";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "652_m",
+		price: price,
+		variant: '',
+		brand: "Fit Formula",
+		category: "alimentos-seco-gato"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="7">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '7204',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "7204", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="7204" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=7204">
+            <div class="product-tile" data-cat="alimentos-seco-perro">
+    <!-- dwMarker="product" dwContentID="cccace142bd3dad64f4f2a87f6" -->
+    <div class="image-container">
+    <a href="/perro/alimentos/alimentos-seco/salvaje-adulto-con-pollo-15-kg-alimento-para-perro/7204.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw0cb880ed/images/Salvaje adulto con pollo 15 KG alimento para perro.jpg"
+             alt="Salvaje adulto con pollo 15 KG alimento para perro"
+             title="Salvaje adulto con pollo 15 KG alimento para perro, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw9811b91b/SuperZoo/Etiquetas/SuperPrecios.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Salvaje</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/perro/alimentos/alimentos-seco/salvaje-adulto-con-pollo-15-kg-alimento-para-perro/7204.html">
+		
+				<h2 class="text-base">Salvaje adulto con pollo 15 KG alimento para perro</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        
+        <span>
+    
+
+    
+        
+        <del>
+            <span class="strike-through list">
+                <span class="value" content="39990">
+                    <span class="sr-only">
+                        Precio de oferta desde
+                    </span>
+                    $39.990
+
+
+                    <span class="sr-only">
+                        a
+                    </span>
+                </span>
+            </span>
+        </del>
+    
+
+    
+    <span class="sales">
+        
+        
+        
+            <span class="value" content="29990">
+        
+        $29.990
+
+
+        </span>
+    </span>
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=7204">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary purchase-button add-single-product" href="/perro/alimentos/alimentos-seco/salvaje-adulto-con-pollo-15-kg-alimento-para-perro/7204.html"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span>Comprar</span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/perro/alimentos/alimentos-seco/salvaje-adulto-con-pollo-15-kg-alimento-para-perro/7204.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-perro' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Salvaje adulto con pollo 15 KG alimento para perro";
+	var decoded = decodeHTML(rawname); 
+	var price = "29990";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "7204",
+		price: price,
+		variant: '',
+		brand: "Salvaje",
+		category: "alimentos-seco-perro"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="8">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '9_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "9_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="9_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=9_m">
+            <div class="product-tile" data-cat="alimentos-seco-perro">
+    <!-- dwMarker="product" dwContentID="193ef6df6362d0cb7e7516bd6c" -->
+    <div class="image-container">
+    <a href="/perro/alimentos/alimentos-seco/royal-canin-adulto-mini-adult-alimento-para-perro/9_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwcdd6bd50/images/86c84-mini-adulto-02.jpg.jpg"
+             alt="Royal Canin adulto Mini Adult alimento para perro"
+             title="Royal Canin adulto Mini Adult alimento para perro, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw2566c555/SuperZoo/Etiquetas/Precio-bomba.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Royal Canin</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/perro/alimentos/alimentos-seco/royal-canin-adulto-mini-adult-alimento-para-perro/9_m.html">
+		
+				<h2 class="text-base">Royal Canin adulto Mini Adult alimento para perro</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        <span class="range">
+    
+
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+            <span class="value" content="12990">
+        
+        
+        
+        $12.990
+
+
+        </span>
+    </span>
+</span>
+
+    -
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+            <span class="value" content="39990">
+        
+        
+        $39.990
+
+
+        </span>
+    </span>
+</span>
+
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=9_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=9_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/perro/alimentos/alimentos-seco/royal-canin-adulto-mini-adult-alimento-para-perro/9_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-perro' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Royal Canin adulto Mini Adult alimento para perro";
+	var decoded = decodeHTML(rawname); 
+	var price = "39990";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "9_m",
+		price: price,
+		variant: '',
+		brand: "Royal Canin",
+		category: "alimentos-seco-perro"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="9">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '2435_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "2435_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="2435_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=2435_m">
+            <div class="product-tile" data-cat="alimentos-seco-gato">
+    <!-- dwMarker="product" dwContentID="21c0af3fa09e7430528a034347" -->
+    <div class="image-container">
+    <a href="/gato/alimentos/alimento-seco/bravery-salmon-adult-cat-sterilized-alimento-para-gato/2435_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwa1125616/images/2435_m.jpg"
+             alt="Bravery Salm&oacute;n Adult Cat Sterilized alimento para gato"
+             title="Bravery Salm&oacute;n Adult Cat Sterilized alimento para gato, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+        <div class="tag-item" style="background:  #15822a;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;;">
+            <div class="tag-name">Natural</div>
+        </div>
+    
+        <div class="tag-item" style="background:  #897563;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;color:#fffbca;">
+            <div class="tag-name">Libre de grano</div>
+        </div>
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Bravery</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/gato/alimentos/alimento-seco/bravery-salmon-adult-cat-sterilized-alimento-para-gato/2435_m.html">
+		
+				<h2 class="text-base">Bravery Salm&oacute;n Adult Cat Sterilized alimento para gato</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        <span class="range">
+    
+
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+            <span class="value" content="26990">
+        
+        
+        
+        $26.990
+
+
+        </span>
+    </span>
+</span>
+
+    -
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+            <span class="value" content="63990">
+        
+        
+        $63.990
+
+
+        </span>
+    </span>
+</span>
+
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=2435_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=2435_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/gato/alimentos/alimento-seco/bravery-salmon-adult-cat-sterilized-alimento-para-gato/2435_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-gato' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Bravery Salm&oacute;n Adult Cat Sterilized alimento para gato";
+	var decoded = decodeHTML(rawname); 
+	var price = "63990";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "2435_m",
+		price: price,
+		variant: '',
+		brand: "Bravery",
+		category: "alimentos-seco-gato"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="10">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '2433_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "2433_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="2433_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=2433_m">
+            <div class="product-tile" data-cat="alimentos-seco-gato">
+    <!-- dwMarker="product" dwContentID="5c2b6ee4b949c2c8c07714baae" -->
+    <div class="image-container">
+    <a href="/gato/alimentos/alimento-seco/bravery-chicken-adult-cat-alimento-para-gato/2433_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwf30e77a8/images/549a0-web.jpg"
+             alt="Bravery Chicken Adult Cat alimento para gato"
+             title="Bravery Chicken Adult Cat alimento para gato, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+        <div class="tag-item" style="background:  #15822a;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;;">
+            <div class="tag-name">Natural</div>
+        </div>
+    
+        <div class="tag-item" style="background:  #897563;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;color:#fffbca;">
+            <div class="tag-name">Libre de grano</div>
+        </div>
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Bravery</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/gato/alimentos/alimento-seco/bravery-chicken-adult-cat-alimento-para-gato/2433_m.html">
+		
+				<h2 class="text-base">Bravery Chicken Adult Cat alimento para gato</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        <span class="range">
+    
+
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+            <span class="value" content="24990">
+        
+        
+        
+        $24.990
+
+
+        </span>
+    </span>
+</span>
+
+    -
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+            <span class="value" content="57990">
+        
+        
+        $57.990
+
+
+        </span>
+    </span>
+</span>
+
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=2433_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=2433_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/gato/alimentos/alimento-seco/bravery-chicken-adult-cat-alimento-para-gato/2433_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-gato' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Bravery Chicken Adult Cat alimento para gato";
+	var decoded = decodeHTML(rawname); 
+	var price = "57990";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "2433_m",
+		price: price,
+		variant: '',
+		brand: "Bravery",
+		category: "alimentos-seco-gato"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="11">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '3773_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "3773_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="3773_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=3773_m">
+            <div class="product-tile" data-cat="arena-para-gato-cl">
+    <!-- dwMarker="product" dwContentID="90674c149b9ebcbb58fe78a73e" -->
+    <div class="image-container">
+    <a href="/gato/arena-y-accesorios/arena-para-gato/arena-para-gatos-aglomerante/3773_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw29f1281b/images/7299_1.jpg"
+             alt="Arena para gatos Aglomerante"
+             title="Arena para gatos Aglomerante, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw45d1ae26/SuperZoo/Etiquetas/30.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Tk-Pet</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/gato/arena-y-accesorios/arena-para-gato/arena-para-gatos-aglomerante/3773_m.html">
+		
+				<h2 class="text-base">Arena para gatos Aglomerante</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        <span class="range">
+    
+
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+            <span class="value" content="6993">
+        
+        
+        
+        $6.993
+
+
+        </span>
+    </span>
+</span>
+
+    -
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+            <span class="value" content="31990">
+        
+        
+        $31.990
+
+
+        </span>
+    </span>
+</span>
+
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=3773_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=3773_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/gato/arena-y-accesorios/arena-para-gato/arena-para-gatos-aglomerante/3773_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'arena-para-gato-cl' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Arena para gatos Aglomerante";
+	var decoded = decodeHTML(rawname); 
+	var price = "31990";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "3773_m",
+		price: price,
+		variant: '',
+		brand: "Tk-Pet",
+		category: "arena-para-gato-cl"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="12">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '3410_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "3410_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="3410_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=3410_m">
+            <div class="product-tile" data-cat="alimentos-seco-perro">
+    <!-- dwMarker="product" dwContentID="be2aecd4160354bae656b55ee9" -->
+    <div class="image-container">
+    <a href="/perro/alimentos/alimentos-seco/dogxtreme-adult-pollo-y-arroz-alimento-seco-para-perro/3410_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw648d4088/images/Dogxtreme Adult pollo y arroz alimento para perro.jpg"
+             alt="Dogxtreme Adult pollo y arroz alimento seco para perro"
+             title="Dogxtreme Adult pollo y arroz alimento seco para perro, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw9811b91b/SuperZoo/Etiquetas/SuperPrecios.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Dogxtreme</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/perro/alimentos/alimentos-seco/dogxtreme-adult-pollo-y-arroz-alimento-seco-para-perro/3410_m.html">
+		
+				<h2 class="text-base">Dogxtreme Adult pollo y arroz alimento seco para perro</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        <span class="range">
+    
+
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+            <span class="value" content="15990">
+        
+        
+        
+        $15.990
+
+
+        </span>
+    </span>
+</span>
+
+    -
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+            <span class="value" content="39990">
+        
+        
+        $39.990
+
+
+        </span>
+    </span>
+</span>
+
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=3410_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=3410_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/perro/alimentos/alimentos-seco/dogxtreme-adult-pollo-y-arroz-alimento-seco-para-perro/3410_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-perro' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Dogxtreme Adult pollo y arroz alimento seco para perro";
+	var decoded = decodeHTML(rawname); 
+	var price = "39990";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "3410_m",
+		price: price,
+		variant: '',
+		brand: "Dogxtreme",
+		category: "alimentos-seco-perro"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="13">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '7205',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "7205", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="7205" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=7205">
+            <div class="product-tile" data-cat="alimentos-seco-perro">
+    <!-- dwMarker="product" dwContentID="95e725579218e5bfcc0d38c0b6" -->
+    <div class="image-container">
+    <a href="/perro/alimentos/alimentos-seco/salvaje-adulto-con-salmon-alimento-para-perros-15kg/7205.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwfc33c0c0/images/Salvaje adulto con salmon 15 KG alimento para perro.jpg"
+             alt="Salvaje adulto con salm&oacute;n alimento para perros 15KG"
+             title="Salvaje adulto con salm&oacute;n alimento para perros 15KG, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw950d46ea/SuperZoo/Etiquetas/30-2.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Salvaje</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/perro/alimentos/alimentos-seco/salvaje-adulto-con-salmon-alimento-para-perros-15kg/7205.html">
+		
+				<h2 class="text-base">Salvaje adulto con salm&oacute;n alimento para perros 15KG</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        
+        <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+        
+            <span class="value" content="39990">
+        
+        $39.990
+
+
+        </span>
+    </span>
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=7205">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary purchase-button add-single-product" href="/perro/alimentos/alimentos-seco/salvaje-adulto-con-salmon-alimento-para-perros-15kg/7205.html"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span>Comprar</span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/perro/alimentos/alimentos-seco/salvaje-adulto-con-salmon-alimento-para-perros-15kg/7205.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-perro' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Salvaje adulto con salm&oacute;n alimento para perros 15KG";
+	var decoded = decodeHTML(rawname); 
+	var price = "39990";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "7205",
+		price: price,
+		variant: '',
+		brand: "Salvaje",
+		category: "alimentos-seco-perro"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="14">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '10077FC',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "10077FC", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="10077FC" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=10077FC">
+            <div class="product-tile" data-cat="arena-para-gato-cl">
+    <!-- dwMarker="product" dwContentID="e1a0b931bb5126a1e286473ec6" -->
+    <div class="image-container">
+    <a href="/gato/arena-y-accesorios/arena-para-gato/arena-para-gatos-aglomerante-20-kg/10077FC.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw6d196c58/images/10077FC.jpg"
+             alt="Arena para gatos Aglomerante 20 KG"
+             title="Arena para gatos Aglomerante 20 KG, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dwa0359e89/SuperPet/Etiquetas/default/50-liqui.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+        <div class="tag-item" style="background: #C0DD97;font-family:'Arial Black';padding: 0 1rem !important;font-size: 10px;color:#173404;">
+            <div class="tag-name">EMPAQUE CON DETALLE</div>
+        </div>
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Tk-Pet</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/gato/arena-y-accesorios/arena-para-gato/arena-para-gatos-aglomerante-20-kg/10077FC.html">
+		
+				<h2 class="text-base">Arena para gatos Aglomerante 20 KG</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        
+        <span>
+    
+
+    
+        
+        <del>
+            <span class="strike-through list">
+                <span class="value" content="31990">
+                    <span class="sr-only">
+                        Precio de oferta desde
+                    </span>
+                    $31.990
+
+
+                    <span class="sr-only">
+                        a
+                    </span>
+                </span>
+            </span>
+        </del>
+    
+
+    
+    <span class="sales">
+        
+        
+        
+            <span class="value" content="15995">
+        
+        $15.995
+
+
+        </span>
+    </span>
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=10077FC">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary purchase-button add-single-product" href="/gato/arena-y-accesorios/arena-para-gato/arena-para-gatos-aglomerante-20-kg/10077FC.html"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span>Comprar</span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/gato/arena-y-accesorios/arena-para-gato/arena-para-gatos-aglomerante-20-kg/10077FC.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'arena-para-gato-cl' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Arena para gatos Aglomerante 20 KG";
+	var decoded = decodeHTML(rawname); 
+	var price = "15995";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "10077FC",
+		price: price,
+		variant: '',
+		brand: "Tk-Pet",
+		category: "arena-para-gato-cl"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="15">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '45_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "45_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="45_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=45_m">
+            <div class="product-tile" data-cat="alimentos-seco-gato">
+    <!-- dwMarker="product" dwContentID="0c1788e470319a55959b023d2c" -->
+    <div class="image-container">
+    <a href="/gato/alimentos/alimento-seco/royal-canin-adulto-indoor-alimento-para-gato/45_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw4b3e67bf/images/45_m.jpg"
+             alt="Royal Canin adulto Indoor alimento para gato"
+             title="Royal Canin adulto Indoor alimento para gato, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw2566c555/SuperZoo/Etiquetas/Precio-bomba.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Royal Canin</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/gato/alimentos/alimento-seco/royal-canin-adulto-indoor-alimento-para-gato/45_m.html">
+		
+				<h2 class="text-base">Royal Canin adulto Indoor alimento para gato</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        <span class="range">
+    
+
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+            <span class="value" content="22990">
+        
+        
+        
+        $22.990
+
+
+        </span>
+    </span>
+</span>
+
+    -
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+            <span class="value" content="42990">
+        
+        
+        $42.990
+
+
+        </span>
+    </span>
+</span>
+
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=45_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=45_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/gato/alimentos/alimento-seco/royal-canin-adulto-indoor-alimento-para-gato/45_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-gato' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Royal Canin adulto Indoor alimento para gato";
+	var decoded = decodeHTML(rawname); 
+	var price = "42990";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "45_m",
+		price: price,
+		variant: '',
+		brand: "Royal Canin",
+		category: "alimentos-seco-gato"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="16">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '1590_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "1590_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="1590_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=1590_m">
+            <div class="product-tile" data-cat="alimentos-seco-gato">
+    <!-- dwMarker="product" dwContentID="838c02737bea5830a6822d6425" -->
+    <div class="image-container">
+    <a href="/gato/alimentos/alimento-seco/taste-of-the-wild-canyon-river-gato-alimento-para-gato/1590_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwbfd8161f/images/f18aa-cayon-river1.jpg"
+             alt="Taste Of The Wild Canyon River Gato alimento para gato"
+             title="Taste Of The Wild Canyon River Gato alimento para gato, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw240e002a/SuperZoo/Etiquetas/15.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+        <div class="tag-item" style="background:  #15822a;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;;">
+            <div class="tag-name">Natural</div>
+        </div>
+    
+        <div class="tag-item" style="background:  #897563;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;color:#fffbca;">
+            <div class="tag-name">Libre de grano</div>
+        </div>
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Taste Of The Wild</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/gato/alimentos/alimento-seco/taste-of-the-wild-canyon-river-gato-alimento-para-gato/1590_m.html">
+		
+				<h2 class="text-base">Taste Of The Wild Canyon River Gato alimento para gato</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        <span class="range">
+    
+
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+            <span class="value" content="20792">
+        
+        
+        
+        $20.792
+
+
+        </span>
+    </span>
+</span>
+
+    -
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+            <span class="value" content="46741">
+        
+        
+        $46.741
+
+
+        </span>
+    </span>
+</span>
+
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=1590_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=1590_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/gato/alimentos/alimento-seco/taste-of-the-wild-canyon-river-gato-alimento-para-gato/1590_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-gato' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Taste Of The Wild Canyon River Gato alimento para gato";
+	var decoded = decodeHTML(rawname); 
+	var price = "46741";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "1590_m",
+		price: price,
+		variant: '',
+		brand: "Taste Of The Wild",
+		category: "alimentos-seco-gato"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="17">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '5966',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "5966", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="5966" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=5966">
+            <div class="product-tile" data-cat="alimentos-snack-y-premios-gato">
+    <!-- dwMarker="product" dwContentID="a7403d1f2fd6eea5f67a5e06db" -->
+    <div class="image-container">
+    <a href="/gato/alimentos/snack-y-premios/churu-de-pollo-con-camaron-56gr/5966.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw1af324e3/images/Churu de pollo con camaron 56GR.jpg"
+             alt="Churu de pollo con camar&oacute;n 56GR"
+             title="Churu de pollo con camar&oacute;n 56GR, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Churu</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/gato/alimentos/snack-y-premios/churu-de-pollo-con-camaron-56gr/5966.html">
+		
+				<h2 class="text-base">Churu de pollo con camar&oacute;n 56GR</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        
+        <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+        
+            <span class="value" content="3190">
+        
+        $3.190
+
+
+        </span>
+    </span>
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=5966">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary purchase-button add-single-product" href="/gato/alimentos/snack-y-premios/churu-de-pollo-con-camaron-56gr/5966.html"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span>Comprar</span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/gato/alimentos/snack-y-premios/churu-de-pollo-con-camaron-56gr/5966.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-snack-y-premios-gato' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Churu de pollo con camar&oacute;n 56GR";
+	var decoded = decodeHTML(rawname); 
+	var price = "3190";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "5966",
+		price: price,
+		variant: '',
+		brand: "Churu",
+		category: "alimentos-snack-y-premios-gato"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="18">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '3411_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "3411_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="3411_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=3411_m">
+            <div class="product-tile" data-cat="alimentos-seco-perro">
+    <!-- dwMarker="product" dwContentID="ff5f3bb11ccad59d003b6af59e" -->
+    <div class="image-container">
+    <a href="/perro/alimentos/alimentos-seco/dogxtreme-adult-salmon-y-arroz-alimento-para-perro/3411_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw9efb394a/images/Dogxtreme Adult Salmon y arroz alimento para perro.jpg"
+             alt="Dogxtreme Adult Salm&oacute;n y arroz alimento para perro"
+             title="Dogxtreme Adult Salm&oacute;n y arroz alimento para perro, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw9811b91b/SuperZoo/Etiquetas/SuperPrecios.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Dogxtreme</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/perro/alimentos/alimentos-seco/dogxtreme-adult-salmon-y-arroz-alimento-para-perro/3411_m.html">
+		
+				<h2 class="text-base">Dogxtreme Adult Salm&oacute;n y arroz alimento para perro</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        <span class="range">
+    
+
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+            <span class="value" content="15990">
+        
+        
+        
+        $15.990
+
+
+        </span>
+    </span>
+</span>
+
+    -
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+            <span class="value" content="42990">
+        
+        
+        $42.990
+
+
+        </span>
+    </span>
+</span>
+
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=3411_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=3411_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/perro/alimentos/alimentos-seco/dogxtreme-adult-salmon-y-arroz-alimento-para-perro/3411_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-perro' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Dogxtreme Adult Salm&oacute;n y arroz alimento para perro";
+	var decoded = decodeHTML(rawname); 
+	var price = "42990";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "3411_m",
+		price: price,
+		variant: '',
+		brand: "Dogxtreme",
+		category: "alimentos-seco-perro"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="19">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '6470',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "6470", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="6470" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=6470">
+            <div class="product-tile" data-cat="alimentos-seco-gato">
+    <!-- dwMarker="product" dwContentID="3f7526df53a7f2efe5b318189f" -->
+    <div class="image-container">
+    <a href="/gato/alimentos/alimento-seco/taste-of-the-wild-canyon-river-gato-alimento-para-gato/6470.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwbfd8161f/images/f18aa-cayon-river1.jpg"
+             alt="Taste Of The Wild Canyon River Gato alimento para gato"
+             title="Taste Of The Wild Canyon River Gato alimento para gato, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw240e002a/SuperZoo/Etiquetas/15.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+        <div class="tag-item" style="background: #15822a;font-family:'Arial Black';padding: 0 1rem !important;font-size: 10px;">
+            <div class="tag-name">Natural</div>
+        </div>
+    
+        <div class="tag-item" style="background: #897563;font-family:'Arial Black';padding: 0 1rem !important;font-size: 10pxcolor:#fffbca;">
+            <div class="tag-name">Libre de grano</div>
+        </div>
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Taste Of The Wild</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/gato/alimentos/alimento-seco/taste-of-the-wild-canyon-river-gato-alimento-para-gato/6470.html">
+		
+				<h2 class="text-base">Taste Of The Wild Canyon River Gato alimento para gato</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        
+        <span>
+    
+
+    
+        
+        <del>
+            <span class="strike-through list">
+                <span class="value" content="54990">
+                    <span class="sr-only">
+                        Precio de oferta desde
+                    </span>
+                    $54.990
+
+
+                    <span class="sr-only">
+                        a
+                    </span>
+                </span>
+            </span>
+        </del>
+    
+
+    
+    <span class="sales">
+        
+        
+        
+            <span class="value" content="46741">
+        
+        $46.741
+
+
+        </span>
+    </span>
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=6470">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=6470"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/gato/alimentos/alimento-seco/taste-of-the-wild-canyon-river-gato-alimento-para-gato/6470.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-gato' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Taste Of The Wild Canyon River Gato alimento para gato";
+	var decoded = decodeHTML(rawname); 
+	var price = "46741";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "6470",
+		price: price,
+		variant: '',
+		brand: "Taste Of The Wild",
+		category: "alimentos-seco-gato"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="20">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '2426_m',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "2426_m", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="2426_m" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=2426_m">
+            <div class="product-tile" data-cat="alimento-natural-perro">
+    <!-- dwMarker="product" dwContentID="a51d8b03ca7667677f41663535" -->
+    <div class="image-container">
+    <a href="/perro/alimentos/alimento-natural/bravery-iberian-pork-adult-alimento-para-perro/2426_m.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwee9005e6/images/85d18-pork-adult.jpg"
+             alt="Bravery Iberian Pork Adult alimento para perro"
+             title="Bravery Iberian Pork Adult alimento para perro, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+        
+            <div class="product-promo promo-img">
+                <img src="/on/demandware.static/-/Sites/default/dw1d2db5b6/SuperZoo/Etiquetas/20.png"/>
+            </div>
+        
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+        <div class="tag-item" style="background:  #15822a;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;;">
+            <div class="tag-name">Natural</div>
+        </div>
+    
+        <div class="tag-item" style="background:  #897563;font-weight: bold !important;padding: 0 1rem 0 1rem !important;font-size:12px;color:#fffbca;">
+            <div class="tag-name">Libre de grano</div>
+        </div>
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Bravery</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/perro/alimentos/alimento-natural/bravery-iberian-pork-adult-alimento-para-perro/2426_m.html">
+		
+				<h2 class="text-base">Bravery Iberian Pork Adult alimento para perro</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        <span class="range">
+    
+
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+            <span class="value" content="30990">
+        
+        
+        
+        $30.990
+
+
+        </span>
+    </span>
+</span>
+
+    -
+    
+    
+    <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+            <span class="value" content="60792">
+        
+        
+        $60.792
+
+
+        </span>
+    </span>
+</span>
+
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=2426_m">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary quickview purchase-button js-quickview-btn btn-js-loading" href="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-ShowQuickView?pid=2426_m"
+                        data-toggle="modal"
+                        data-target="#quickViewModal"
+                        style="pointer-events:none;"
+                        aria-disabled="true"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span class="btn-text">Comprar</span>
+                        <span class="btn-loader-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/perro/alimentos/alimento-natural/bravery-iberian-pork-adult-alimento-para-perro/2426_m.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimento-natural-perro' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Bravery Iberian Pork Adult alimento para perro";
+	var decoded = decodeHTML(rawname); 
+	var price = "60792";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "2426_m",
+		price: price,
+		variant: '',
+		brand: "Bravery",
+		category: "alimento-natural-perro"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="21">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '14878',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "14878", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="14878" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=14878">
+            <div class="product-tile" data-cat="alimentos-snack-y-premios-gato">
+    <!-- dwMarker="product" dwContentID="26efcf192acfd6b9377d70c6d0" -->
+    <div class="image-container">
+    <a href="/gato/alimentos/snack-y-premios/churu-para-gatos-atun-camaron-56-gr/14878.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dwb357e944/images/sku14878_1.jpg"
+             alt="Churu para gatos at&uacute;n/camar&oacute;n 56 GR"
+             title="Churu para gatos at&uacute;n/camar&oacute;n 56 GR, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Churu</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/gato/alimentos/snack-y-premios/churu-para-gatos-atun-camaron-56-gr/14878.html">
+		
+				<h2 class="text-base">Churu para gatos at&uacute;n/camar&oacute;n 56 GR</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        
+        <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+        
+            <span class="value" content="3190">
+        
+        $3.190
+
+
+        </span>
+    </span>
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=14878">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary purchase-button add-single-product" href="/gato/alimentos/snack-y-premios/churu-para-gatos-atun-camaron-56-gr/14878.html"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span>Comprar</span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/gato/alimentos/snack-y-premios/churu-para-gatos-atun-camaron-56-gr/14878.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-snack-y-premios-gato' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Churu para gatos at&uacute;n/camar&oacute;n 56 GR";
+	var decoded = decodeHTML(rawname); 
+	var price = "3190";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "14878",
+		price: price,
+		variant: '',
+		brand: "Churu",
+		category: "alimentos-snack-y-premios-gato"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="22">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '7392',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "7392", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="7392" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=7392">
+            <div class="product-tile" data-cat="alimentos-seco-gato">
+    <!-- dwMarker="product" dwContentID="46bd3334e163355410bfd0576d" -->
+    <div class="image-container">
+    <a href="/gato/alimentos/alimento-seco/bravery-cat-chicken-adult-sterilized-alimento-para-gato-7kg/7392.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw2f41bac6/images/c99f7-4ga070003.jpg"
+             alt="Bravery Cat Chicken Adult Sterilized alimento para gato 7KG"
+             title="Bravery Cat Chicken Adult Sterilized alimento para gato 7KG, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+        <div class="tag-item" style="background: #15822a;font-family:'Arial Black';padding: 0 1rem !important;font-size: 10px;">
+            <div class="tag-name">Natural</div>
+        </div>
+    
+        <div class="tag-item" style="background: #897563;font-family:'Arial Black';padding: 0 1rem !important;font-size: 10pxcolor:#fffbca;">
+            <div class="tag-name">Libre de grano</div>
+        </div>
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Bravery</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/gato/alimentos/alimento-seco/bravery-cat-chicken-adult-sterilized-alimento-para-gato-7kg/7392.html">
+		
+				<h2 class="text-base">Bravery Cat Chicken Adult Sterilized alimento para gato 7KG</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        
+        <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+        
+            <span class="value" content="59990">
+        
+        $59.990
+
+
+        </span>
+    </span>
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=7392">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary purchase-button add-single-product" href="/gato/alimentos/alimento-seco/bravery-cat-chicken-adult-sterilized-alimento-para-gato-7kg/7392.html"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span>Comprar</span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/gato/alimentos/alimento-seco/bravery-cat-chicken-adult-sterilized-alimento-para-gato-7kg/7392.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-seco-gato' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Bravery Cat Chicken Adult Sterilized alimento para gato 7KG";
+	var decoded = decodeHTML(rawname); 
+	var price = "59990";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "7392",
+		price: price,
+		variant: '',
+		brand: "Bravery",
+		category: "alimentos-seco-gato"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+    <div class="col-6 col-lg-4 tile-col p-0" data-pos="23">
+        <!-- CQuotient Activity Tracking (viewCategory-cquotient.js) -->
+<script type="text/javascript">//<!--
+/* <![CDATA[ */
+(function(){
+try {
+    if(window.CQuotient) {
+	var cq_params = {};
+	
+	cq_params.cookieId = window.CQuotient.getCQCookieId();
+	cq_params.userId = window.CQuotient.getCQUserId();
+	cq_params.emailId = CQuotient.getCQHashedEmail();
+	cq_params.loginId = CQuotient.getCQHashedLogin();
+	cq_params.accumulate = true;
+	cq_params.products = [{
+	    id: '8046',
+	    sku: ''
+	}];
+	cq_params.categoryId = 'root';
+	cq_params.refinements = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+	cq_params.personalized = 'false';
+	cq_params.sortingRule = 'Default sorting rule start SuperZoo';
+	cq_params.imageUUID = '__UNDEFINED__';
+	cq_params.realm = "BJQS";
+	cq_params.siteId = "SuperZoo";
+	cq_params.instanceType = "prd";
+	cq_params.queryLocale = "es_CL";
+	cq_params.locale = window.CQuotient.locale;
+	
+	if(window.CQuotient.sendActivity)
+	    window.CQuotient.sendActivity(CQuotient.clientId, 'viewCategory', cq_params);
+	else
+	    window.CQuotient.activities.push({
+	    	activityType: 'viewCategory',
+	    	parameters: cq_params
+	    });
+  }
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewCategoryProduct-active_data.js) */
+(function(){
+try {
+	if (dw.ac) {
+		var search_params = {};
+		search_params.persd = 'false';
+		search_params.refs = '[{\"name\":\"Category\",\"value\":\"root\"}]';
+		search_params.sort = 'Default sorting rule start SuperZoo';
+		search_params.imageUUID = '';
+		search_params.searchID = 'cd94cc9d-71c8-4455-aa5c-415a4ca55914';
+		search_params.locale = 'es_CL';
+		search_params.queryLocale = 'es_CL';
+		search_params.showProducts = 'true';
+		dw.ac.applyContext({category: "root", searchData: search_params});
+		if (typeof dw.ac._scheduleDataSubmission === "function") {
+			dw.ac._scheduleDataSubmission();
+		}
+	}
+} catch(err) {}
+})();
+/* ]]> */
+// -->
+</script>
+<script type="text/javascript">//<!--
+/* <![CDATA[ (viewProduct-active_data.js) */
+dw.ac._capture({id: "8046", type: "searchhit"});
+/* ]]> */
+// -->
+</script>
+            
+
+
+    
+        <div class="product" data-pid="8046" data-url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/Product-GetById?id=8046">
+            <div class="product-tile" data-cat="alimentos-snack-y-premios-perro">
+    <!-- dwMarker="product" dwContentID="d2e55bc0290cb5d28f81fa7fe7" -->
+    <div class="image-container">
+    <a href="/perro/alimentos/snack-y-premios/churu-perro-8p-pollo-con-atun-20gr-x-8-160gr/8046.html">
+    
+        <img class="tile-image"
+             src="/on/demandware.static/-/Sites-SuperZoo-master-catalog/default/dw7107e085/images/sku8046_1.jpg"
+             alt="Churu perro 8p pollo con at&uacute;n 20GR x 8 160GR"
+             title="Churu perro 8p pollo con at&uacute;n 20GR x 8 160GR, "
+             />
+	
+      
+	
+<div class="product-promo-container">
+    
+    
+    
+    
+</div>   
+    </a>
+</div>
+<div class="tags-attribute">
+    
+    
+    
+</div>
+
+
+    <div class="tile-body">
+        <div class="pdp-brand">
+
+	<span class="product-brand text-micro text-micro-lg">Churu</span>
+
+</div>
+        <div class="pdp-link">
+    <a class="link" href="/perro/alimentos/snack-y-premios/churu-perro-8p-pollo-con-atun-20gr-x-8-160gr/8046.html">
+		
+				<h2 class="text-base">Churu perro 8p pollo con at&uacute;n 20GR x 8 160GR</h2>
+		
+	</a>
+</div>
+
+
+        
+        
+                
+    <div class="price">
+        
+        <span>
+    
+
+    
+
+    
+    <span class="sales">
+        
+        
+        
+            <span class="value" content="6190">
+        
+        $6.190
+
+
+        </span>
+    </span>
+</span>
+
+    </div>
+
+
+        
+        
+        
+            <div class="tile-ratings">
+
+    <wainclude url="/on/demandware.store/Sites-SuperZoo-Site/es_CL/NetReviews-IncludeStars?pid=8046">
+
+</div>
+
+
+        
+        
+            
+        
+    </div>
+    <!-- END_dwmarker -->
+    
+        <div class="tile_button_container_desktop">
+            
+                <div class="tile_button_container">
+                    <a class="btn-primary purchase-button add-single-product" href="/perro/alimentos/snack-y-premios/churu-perro-8p-pollo-con-atun-20gr-x-8-160gr/8046.html"
+                        title="Comprar"
+                        aria-label="Comprar">
+
+                        <span>Comprar</span>
+                    </a>
+                </div>
+            
+        </div>
+        <div class="tile_button_container_mobile">
+            <div class="tile_button_container">
+                <a class="btn-primary purchase-button to-product" href="/perro/alimentos/snack-y-premios/churu-perro-8p-pollo-con-atun-20gr-x-8-160gr/8046.html"
+                    title="Comprar"
+                    aria-label="Comprar">
+
+                    <span>Comprar</span>
+                </a>
+            </div>
+        </div>
+    
+</div>
+
+	<script type="text/javascript">       
+		_etmc.push(["setOrgId", "524001566"]);
+		_etmc.push(["trackPageView", { "category" : 'alimentos-snack-y-premios-perro' }]);	            
+	</script>
+
+
+<script>
+//Product Tile: get items data to send to gtm datalayer.
+//global array to store the data.
+	window.productTileData = (!window.productTileData) ? [] : window.productTileData;
+	var container = document.querySelector('.product-tile');
+	//remove html entities from name
+	var decodeHTML = function (html) {
+		var txt = document.createElement('textarea');
+		txt.innerHTML = html;
+		return txt.value;
+		
+	};
+	var rawname = "Churu perro 8p pollo con at&uacute;n 20GR x 8 160GR";
+	var decoded = decodeHTML(rawname); 
+	var price = "6190";
+	var isPage = document.querySelector('.page').getAttribute('data-action');
+	var list = (isPage === "Product-Show") ? 'Product detail' : (isPage === "Search-Show") ? 'Product list' : null;
+	var productDetails = {
+		name: decoded ,
+		id: "8046",
+		price: price,
+		variant: '',
+		brand: "Churu",
+		category: "alimentos-snack-y-premios-perro"
+	   }
+	productTileData.push(productDetails);
+	var pos = productTileData.indexOf(productDetails);
+	productTileData[pos].position = pos;
+	if (list != null) { productTileData[pos].list = list };
+</script> 
+
+
+        </div>
+        
+
+        
+    </div>
+
+
+<div class="col-12 grid-footer"
+     data-sort-options="{&quot;options&quot;:[{&quot;displayName&quot;:&quot;Mejores resultados&quot;,&quot;id&quot;:&quot;Sorting rule start SuperZoo&quot;,&quot;url&quot;:&quot;https://www.superzoo.cl/on/demandware.store/Sites-SuperZoo-Site/es_CL/Search-UpdateGrid?cgid=root&amp;srule=Default%20sorting%20rule%20start%20SuperZoo&amp;start=0&amp;sz=24&quot;},{&quot;displayName&quot;:&quot;Recomendados&quot;,&quot;id&quot;:&quot;best-matches&quot;,&quot;url&quot;:&quot;https://www.superzoo.cl/on/demandware.store/Sites-SuperZoo-Site/es_CL/Search-UpdateGrid?cgid=root&amp;srule=best-matches&amp;start=0&amp;sz=24&quot;},{&quot;displayName&quot;:&quot;Precio menor&quot;,&quot;id&quot;:&quot;price-low-to-high&quot;,&quot;url&quot;:&quot;https://www.superzoo.cl/on/demandware.store/Sites-SuperZoo-Site/es_CL/Search-UpdateGrid?cgid=root&amp;srule=price-low-to-high&amp;start=0&amp;sz=24&quot;},{&quot;displayName&quot;:&quot;Precio mayor&quot;,&quot;id&quot;:&quot;price-high-to-low&quot;,&quot;url&quot;:&quot;https://www.superzoo.cl/on/demandware.store/Sites-SuperZoo-Site/es_CL/Search-UpdateGrid?cgid=root&amp;srule=price-high-to-low&amp;start=0&amp;sz=24&quot;},{&quot;displayName&quot;:&quot;Nombre A - Z&quot;,&quot;id&quot;:&quot;product-name-ascending&quot;,&quot;url&quot;:&quot;https://www.superzoo.cl/on/demandware.store/Sites-SuperZoo-Site/es_CL/Search-UpdateGrid?cgid=root&amp;srule=product-name-ascending&amp;start=0&amp;sz=24&quot;},{&quot;displayName&quot;:&quot;Nombre Z - A&quot;,&quot;id&quot;:&quot;product-name-descending&quot;,&quot;url&quot;:&quot;https://www.superzoo.cl/on/demandware.store/Sites-SuperZoo-Site/es_CL/Search-UpdateGrid?cgid=root&amp;srule=product-name-descending&amp;start=0&amp;sz=24&quot;},{&quot;displayName&quot;:&quot;Marca&quot;,&quot;id&quot;:&quot;brand&quot;,&quot;url&quot;:&quot;https://www.superzoo.cl/on/demandware.store/Sites-SuperZoo-Site/es_CL/Search-UpdateGrid?cgid=root&amp;srule=brand&amp;start=0&amp;sz=24&quot;},{&quot;displayName&quot;:&quot;M&aacute;s Populares&quot;,&quot;id&quot;:&quot;most-popular&quot;,&quot;url&quot;:&quot;https://www.superzoo.cl/on/demandware.store/Sites-SuperZoo-Site/es_CL/Search-UpdateGrid?cgid=root&amp;srule=most-popular&amp;start=0&amp;sz=24&quot;},{&quot;displayName&quot;:&quot;M&aacute;s Vendidos&quot;,&quot;id&quot;:&quot;top-sellers&quot;,&quot;url&quot;:&quot;https://www.superzoo.cl/on/demandware.store/Sites-SuperZoo-Site/es_CL/Search-UpdateGrid?cgid=root&amp;srule=top-sellers&amp;start=0&amp;sz=24&quot;}],&quot;ruleId&quot;:&quot;Default sorting rule start SuperZoo&quot;}"
+     data-page-size="24.0"
+     data-page-number="0"
+>
+    
+    
+        <div class="show-more mt-4">
+            <div class="text-center">
+                <button class="btn btn-secondary-low col-12 col-sm-4"
+                        data-url="https://www.superzoo.cl/on/demandware.store/Sites-SuperZoo-Site/es_CL/Search-UpdateGrid?cgid=root&amp;start=24&amp;sz=12"
+                >
+                    M&aacute;s resultados
+                </button>
+            </div>
+        </div>
+    
+
+    <input type="hidden" class="permalink" value="https://www.superzoo.cl/buscar?cgid=root&amp;start=0&amp;sz=24" />
+    
+        <input type="hidden" class="category-id" value="root" />
+    
+</div>

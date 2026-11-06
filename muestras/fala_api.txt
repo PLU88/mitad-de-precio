@@ -1,0 +1,1 @@
+{"errors":[{"code":"001","title":"Validation error","detail":{"statusCode":400,"code":"FST_ERR_VALIDATION","validation":[{"instancePath":"","schemaPath":"#/required","keyword":"required","params":{"missingProperty":"categoryId"},"message":"must have required property 'categoryId'"}],"validationConte

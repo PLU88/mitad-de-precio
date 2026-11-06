@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="es">
+    <head >
+        <script>
+    var LOCALE = 'es\u002DCL';
+    var BASE_URL = 'https\u003A\u002F\u002Fnewbalance.cl\u002F';
+    var require = {
+        'baseUrl': 'https\u003A\u002F\u002Fnewbalance.cl\u002Fstatic\u002Fversion1793287780\u002Ffrontend\u002FImprontus\u
