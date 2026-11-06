@@ -1,11 +1,10 @@
 // Funciones compartidas: sesiones, miembros y descifrado de ofertas.
 import crypto from "node:crypto";
-import zlib from "node:zlib";
 import { get, put } from "@vercel/blob";
 
 const SECRETO = process.env.SESSION_SECRET || "";
 const FUENTE_OFERTAS =
-  process.env.OFERTAS_URL || "https://raw.githubusercontent.com/PLU88/mitad-de-precio/main/datos/ofertas.enc";
+  process.env.OFERTAS_URL || "https://raw.githubusercontent.com/PLU88/mitad-de-precio/datos/datos/ofertas.enc";
 const ARCHIVO_MIEMBROS = "miembros.json";
 const DIAS_SESION = 30;
 const HORAS_ADMIN = 12;
@@ -151,8 +150,8 @@ export function descifrar(sobre, privadaPem) {
   const todo = Buffer.from(sobre.d, "base64");
   const descifrador = crypto.createDecipheriv("aes-256-gcm", clave, Buffer.from(sobre.n, "base64"));
   descifrador.setAuthTag(todo.subarray(todo.length - 16));
-  const comprimido = Buffer.concat([descifrador.update(todo.subarray(0, todo.length - 16)), descifrador.final()]);
-  return JSON.parse(zlib.gunzipSync(comprimido).toString("utf8"));
+  // Devuelve el JSON todavía comprimido (gzip): se envía tal cual al navegador, que lo descomprime solo.
+  return Buffer.concat([descifrador.update(todo.subarray(0, todo.length - 16)), descifrador.final()]);
 }
 
 export async function ofertas() {
