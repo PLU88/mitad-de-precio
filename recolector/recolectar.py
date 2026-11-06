@@ -52,7 +52,7 @@ SSL_FLEXIBLE.verify_mode = ssl.CERT_NONE
 _local = threading.local()   # cada tienda se revisa en su propio hilo
 TIENDAS_A_LA_VEZ = 8
 
-USER_AGENT = ("Mozilla/5.0 (compatible; MitadDePrecioBot/1.0; "
+USER_AGENT = ("Mozilla/5.0 (compatible; PriveOfertazosBot/1.0; "
               "+https://plu88.github.io/mitad-de-precio/)")
 
 

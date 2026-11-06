@@ -1,4 +1,4 @@
-# Mitad de Precio — ofertas del retail chileno con 50% o más, solo para miembros
+# Privé Ofertazos — ofertas del retail chileno con 50% o más, solo para miembros
 
 Sitio: **https://mitad-de-precio.vercel.app** · Panel de administración: **https://mitad-de-precio.vercel.app/admin.html**
 

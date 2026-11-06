@@ -4,15 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Administrar miembros · Mitad de Precio</title>
+<title>Administrar miembros · Privé Ofertazos</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20160%20160%22%3E%3Ccircle%20cx%3D%2280%22%20cy%3D%2280%22%20r%3D%2274%22%20fill%3D%22%23fff%22%20stroke%3D%22%231A1A2E%22%20stroke-width%3D%226%22/%3E%3Ctext%20x%3D%2296%22%20y%3D%22110%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%20Black%2CArial%2Csans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2278%22%20fill%3D%22%23D61F69%22%3EO%3C/text%3E%3Ctext%20x%3D%2266%22%20y%3D%22114%22%20text-anchor%3D%22middle%22%20font-family%3D%22Georgia%2Cserif%22%20font-style%3D%22italic%22%20font-size%3D%22112%22%20fill%3D%22%231A1A2E%22%3EP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=Montserrat:wght@600;900&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 <style>
 /* Panel de trabajo: lista de personas con su estado como etiqueta de color y acciones grandes para el celular. */
 :root {
   --fondo: #f3f4f6; --superficie: #ffffff; --tinta: #16181d; --tinta-suave: #5b616e; --linea: #dfe2e8;
-  --acento: #d7262e; --bien: #1f7a4d; --bien-fondo: #e3f5ea; --espera: #8a5a00; --espera-fondo: #fff4d6;
+  --acento: #D61F69; --bien: #1f7a4d; --bien-fondo: #e3f5ea; --espera: #8a5a00; --espera-fondo: #fff4d6;
   --apagado: #5b616e; --apagado-fondo: #eceef2;
   --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
   --cuerpo: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -21,13 +22,13 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --fondo: #111317; --superficie: #1b1e24; --tinta: #eceef2; --tinta-suave: #9aa1ad; --linea: #2c3039;
-    --acento: #ff4a4f; --bien: #6fd49c; --bien-fondo: #133222; --espera: #ffcf66; --espera-fondo: #3a2c0c;
+    --acento: #FF4F8B; --bien: #6fd49c; --bien-fondo: #133222; --espera: #ffcf66; --espera-fondo: #3a2c0c;
     --apagado: #9aa1ad; --apagado-fondo: #262a31; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --fondo: #111317; --superficie: #1b1e24; --tinta: #eceef2; --tinta-suave: #9aa1ad; --linea: #2c3039;
-  --acento: #ff4a4f; --bien: #6fd49c; --bien-fondo: #133222; --espera: #ffcf66; --espera-fondo: #3a2c0c;
+  --acento: #FF4F8B; --bien: #6fd49c; --bien-fondo: #133222; --espera: #ffcf66; --espera-fondo: #3a2c0c;
   --apagado: #9aa1ad; --apagado-fondo: #262a31; color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -70,13 +71,27 @@ button:disabled { opacity: .6; cursor: wait; }
 .msg { margin: 0; font-size: 14px; }
 .msg.error { color: var(--acento); }
 .vacio { color: var(--tinta-suave); text-align: center; padding: 24px 8px; }
+
+/* Logo Privé Ofertazos: monograma PO (azul marino + fucsia) y nombre en dos tipografías. */
+:root { --marino: #1A1A2E; --marca: #D61F69; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --marino: #F2F2F7; --marca: #FF4F8B; } }
+:root[data-theme="dark"] { --marino: #F2F2F7; --marca: #FF4F8B; }
+.logo { display: inline-flex; align-items: center; gap: 10px; color: var(--marino); }
+.logo .monograma { flex: none; }
+.logo .palabra { display: grid; line-height: 1; }
+.logo .prive { font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 400; font-size: 26px; }
+.logo .ofertazos { font-family: Montserrat, "Arial Black", sans-serif; font-weight: 900; font-size: 15px; letter-spacing: 3px; color: var(--marca); margin-top: 1px; }
+.logo.grande .prive { font-size: 40px; }
+.logo.grande .ofertazos { font-size: 22px; letter-spacing: 4px; }
+.lema { font-family: Montserrat, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--tinta-suave); margin: 0; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 </style>
 </head>
 <body>
 <div class="contenedor">
   <div class="cabeza">
     <div>
-      <h1>Mitad <span>de Precio</span></h1>
+      <h1 class="sr">Privé Ofertazos</h1><div class="logo" role="img" aria-label="Privé Ofertazos"><svg class="monograma" width="48" height="48" viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="74" fill="none" stroke="currentColor" stroke-width="4"></circle><text x="96" y="110" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="78" fill="var(--marca)">O</text><text x="66" y="114" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-style="italic" font-weight="400" font-size="112" fill="currentColor">P</text></svg><span class="palabra"><span class="prive">Privé</span><span class="ofertazos">OFERTAZOS</span></span></div>
       <p class="sub">Administración de miembros</p>
     </div>
     <button class="suave" id="salir" type="button" hidden>Cerrar sesión</button>
@@ -125,7 +140,7 @@ button:disabled { opacity: .6; cursor: wait; }
     return d;
   }
   function mensajeAcceso(m, codigo) {
-    return "¡Hola " + m.nombre.split(" ")[0] + "! Ya tienes acceso a Mitad de Precio, las ofertas de 50% a 80% del retail chileno.\n\n" +
+    return "¡Hola " + m.nombre.split(" ")[0] + "! Ya tienes acceso a Privé Ofertazos: lo mejor del retail chileno, a mitad de precio.\n\n" +
       "Entra en " + SITIO + " con:\nCorreo: " + m.email + "\nCódigo: " + codigo + "\n\nEl código es personal, no lo compartas.";
   }
 
@@ -183,7 +198,7 @@ button:disabled { opacity: .6; cursor: wait; }
         acc.appendChild(wa);
       }
       var mail = el("a", "btn suave", "Enviar por correo");
-      mail.href = "mailto:" + m.email + "?subject=" + encodeURIComponent("Tu acceso a Mitad de Precio") + "&body=" + encodeURIComponent(texto);
+      mail.href = "mailto:" + m.email + "?subject=" + encodeURIComponent("Tu acceso a Privé Ofertazos") + "&body=" + encodeURIComponent(texto);
       acc.appendChild(mail);
       var cp = el("button", "suave", "Copiar mensaje"); cp.type = "button";
       cp.addEventListener("click", function () {

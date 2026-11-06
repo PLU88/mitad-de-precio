@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mitad de Precio</title>
-<meta name="description" content="Ofertas del retail chileno con 50%, 60%, 70% y 80% de descuento, en un solo lugar.">
+<title>Privé Ofertazos</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20160%20160%22%3E%3Ccircle%20cx%3D%2280%22%20cy%3D%2280%22%20r%3D%2274%22%20fill%3D%22%23fff%22%20stroke%3D%22%231A1A2E%22%20stroke-width%3D%226%22/%3E%3Ctext%20x%3D%2296%22%20y%3D%22110%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%20Black%2CArial%2Csans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2278%22%20fill%3D%22%23D61F69%22%3EO%3C/text%3E%3Ctext%20x%3D%2266%22%20y%3D%22114%22%20text-anchor%3D%22middle%22%20font-family%3D%22Georgia%2Cserif%22%20font-style%3D%22italic%22%20font-size%3D%22112%22%20fill%3D%22%231A1A2E%22%3EP%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Privé Ofertazos: lo mejor del retail chileno, a mitad de precio. Ofertas de 50%, 60%, 70% y 80% en un solo lugar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=Montserrat:wght@600;900&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 <style>
 /* Idea: etiquetas de liquidación. Cifras grandes y condensadas como en un cartel de precio,
    un color por tramo de descuento, tarjetas sobrias para que manden los números. */
@@ -17,7 +18,7 @@
   --tinta: #16181d;
   --tinta-suave: #5b616e;
   --linea: #dfe2e8;
-  --acento: #d7262e;
+  --acento: #D61F69;
   --t50: #f2b705; --t50-tinta: #2b2100;
   --t60: #f07b13; --t60-tinta: #2a1200;
   --t70: #d7262e; --t70-tinta: #ffffff;
@@ -31,14 +32,14 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --fondo: #111317; --superficie: #1b1e24; --tinta: #eceef2; --tinta-suave: #9aa1ad; --linea: #2c3039;
-    --acento: #ff4a4f; --t70: #e8363d; --t80: #c02a7f;
+    --acento: #FF4F8B; --t70: #e8363d; --t80: #c02a7f;
     --alerta: #ffcf66; --alerta-fondo: #3a2c0c; --bien: #6fd49c; --bien-fondo: #133222;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --fondo: #111317; --superficie: #1b1e24; --tinta: #eceef2; --tinta-suave: #9aa1ad; --linea: #2c3039;
-  --acento: #ff4a4f; --t70: #e8363d; --t80: #c02a7f;
+  --acento: #FF4F8B; --t70: #e8363d; --t80: #c02a7f;
   --alerta: #ffcf66; --alerta-fondo: #3a2c0c; --bien: #6fd49c; --bien-fondo: #133222;
   color-scheme: dark;
 }
@@ -133,11 +134,27 @@ main { max-width: 1180px; margin: 0 auto; padding: 14px 16px 40px; display: grid
 .salir { appearance: none; background: none; border: 0; color: var(--tinta-suave); font: 600 13px var(--cuerpo); text-decoration: underline; cursor: pointer; padding: 0; margin-left: auto; }
 footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--tinta-suave); font-size: 12.5px; }
 @media (prefers-reduced-motion: no-preference) { .tarjeta { transition: transform .12s ease; } .tarjeta:hover { transform: translateY(-2px); } }
+
+/* Logo Privé Ofertazos: monograma PO (azul marino + fucsia) y nombre en dos tipografías. */
+:root { --marino: #1A1A2E; --marca: #D61F69; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --marino: #F2F2F7; --marca: #FF4F8B; } }
+:root[data-theme="dark"] { --marino: #F2F2F7; --marca: #FF4F8B; }
+.logo { display: inline-flex; align-items: center; gap: 10px; color: var(--marino); }
+.logo .monograma { flex: none; }
+.logo .palabra { display: grid; line-height: 1; }
+.logo .prive { font-family: "Playfair Display", Georgia, serif; font-style: italic; font-weight: 400; font-size: 26px; }
+.logo .ofertazos { font-family: Montserrat, "Arial Black", sans-serif; font-weight: 900; font-size: 15px; letter-spacing: 3px; color: var(--marca); margin-top: 1px; }
+.logo.grande .prive { font-size: 40px; }
+.logo.grande .ofertazos { font-size: 22px; letter-spacing: 4px; }
+.lema { font-family: Montserrat, sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--tinta-suave); margin: 0; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.marca { align-items: center; }
 </style>
 </head>
 <body>
 <section class="acceso" id="acceso" hidden>
-  <div class="marca"><h1 style="font:800 30px/1 var(--display);text-transform:uppercase;margin:0">Mitad <span style="color:var(--acento)">de Precio</span></h1></div>
+  <div class="marca"><div class="logo grande" role="img" aria-label="Privé Ofertazos"><svg class="monograma" width="64" height="64" viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="74" fill="none" stroke="currentColor" stroke-width="4"></circle><text x="96" y="110" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="78" fill="var(--marca)">O</text><text x="66" y="114" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-style="italic" font-weight="400" font-size="112" fill="currentColor">P</text></svg><span class="palabra"><span class="prive">Privé</span><span class="ofertazos">OFERTAZOS</span></span></div></div>
+  <p class="lema">Lo mejor, a mitad de precio</p>
   <h2>Ofertas de 50% a 80% en el retail chileno, solo para miembros</h2>
   <p class="lead">Reunimos cada 30 minutos los productos con descuentos de verdad. Pide acceso y te enviaremos tu código personal cuando seas aprobado.</p>
   <div class="paneles">
@@ -163,8 +180,8 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
 <header class="cabecera">
   <div class="cabecera-in">
     <div class="marca">
-      <h1>Mitad <span>de Precio</span></h1>
-      <p>Ofertas del retail chileno con 50% o más de descuento</p>
+      <h1 class="sr">Privé Ofertazos</h1><div class="logo" role="img" aria-label="Privé Ofertazos"><svg class="monograma" width="44" height="44" viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="74" fill="none" stroke="currentColor" stroke-width="4"></circle><text x="96" y="110" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="78" fill="var(--marca)">O</text><text x="66" y="114" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-style="italic" font-weight="400" font-size="112" fill="currentColor">P</text></svg><span class="palabra"><span class="prive">Privé</span><span class="ofertazos">OFERTAZOS</span></span></div>
+      <p class="lema">Lo mejor, a mitad de precio</p>
       <button class="salir" id="salir" type="button" hidden>Salir</button>
     </div>
     <div class="tramos" role="group" aria-label="Descuento mínimo">
