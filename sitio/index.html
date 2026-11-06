@@ -71,11 +71,36 @@ a { color: inherit; }
 .tramo[aria-pressed="true"] small { color: inherit; opacity: .85; }
 
 .filtros { display: grid; grid-template-columns: 1fr; gap: 8px; }
-@media (min-width: 720px) { .filtros { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+.fila-buscar { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+@media (min-width: 720px) { .filtros { grid-template-columns: 2fr 3fr; } }
 .filtros input, .filtros select { width: 100%; font: 500 15px var(--cuerpo); color: var(--tinta); background: var(--fondo);
   border: 1px solid var(--linea); border-radius: 8px; padding: 9px 8px; text-overflow: ellipsis; }
 .fila-sel { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-@media (min-width: 720px) { .fila-sel { display: contents; } }
+.filtros select:disabled { opacity: .55; }
+.btn-filtros { appearance: none; border: 1px solid var(--linea); background: var(--superficie); color: var(--tinta); border-radius: 8px;
+  padding: 0 12px; font: 700 14px var(--cuerpo); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.btn-filtros[aria-expanded="true"] { background: var(--tinta); color: var(--superficie); border-color: var(--tinta); }
+.btn-filtros .num { background: var(--acento); color: #fff; border-radius: 999px; font-size: 12px; min-width: 20px; height: 20px; display: inline-grid; place-items: center; padding: 0 5px; }
+.panel-filtros { border-top: 1px solid var(--linea); padding-top: 10px; display: grid; gap: 14px; max-height: 70vh; overflow: auto; }
+@media (min-width: 720px) { .panel-filtros { grid-template-columns: 1fr 1fr; column-gap: 24px; max-height: none; } .panel-filtros .ancho { grid-column: 1 / -1; } }
+.grupo { display: grid; gap: 6px; min-width: 0; }
+.grupo > b { font-size: 13px; color: var(--tinta-suave); text-transform: uppercase; letter-spacing: .05em; }
+.opciones { display: flex; flex-wrap: wrap; gap: 6px; }
+.opciones.tallas { max-height: 132px; overflow: auto; }
+.opcion { appearance: none; border: 1px solid var(--linea); background: var(--superficie); color: var(--tinta); border-radius: 999px;
+  padding: 6px 11px; font: 600 13.5px var(--cuerpo); cursor: pointer; display: inline-flex; gap: 5px; align-items: baseline; }
+.opcion small { color: var(--tinta-suave); font-weight: 500; font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.opcion[aria-pressed="true"] { background: var(--tinta); color: var(--superficie); border-color: var(--tinta); }
+.opcion[aria-pressed="true"] small { color: inherit; opacity: .75; }
+.opcion:disabled { opacity: .4; cursor: default; }
+.grupo select { width: 100%; font: 500 15px var(--cuerpo); color: var(--tinta); background: var(--fondo); border: 1px solid var(--linea); border-radius: 8px; padding: 9px 8px; }
+.acciones-filtros { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
+.limpiar { appearance: none; background: none; border: 0; color: var(--tinta-suave); font: 600 14px var(--cuerpo); text-decoration: underline; cursor: pointer; padding: 6px 0; }
+.ver { appearance: none; border: 0; background: var(--acento); color: #fff; border-radius: 8px; padding: 10px 16px; font: 700 14px var(--cuerpo); cursor: pointer; }
+.activos { display: flex; flex-wrap: wrap; gap: 6px; }
+.activos button { appearance: none; border: 0; background: var(--fondo); color: var(--tinta); border-radius: 999px; padding: 4px 10px; font: 600 12.5px var(--cuerpo); cursor: pointer; }
+.activos button::after { content: " ✕"; color: var(--tinta-suave); }
+.tallas-card { font-size: 12px; color: var(--tinta-suave); overflow-wrap: anywhere; }
 
 main { max-width: 1180px; margin: 0 auto; padding: 14px 16px 40px; display: grid; gap: 14px; }
 .aviso { background: var(--alerta-fondo); color: var(--alerta); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; }
@@ -191,10 +216,13 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
       <button class="tramo" data-t="80" aria-pressed="false"><b>80%</b><small>o más</small></button>
     </div>
     <div class="filtros">
-      <input id="buscar" type="search" placeholder="Buscar: zapatillas, chaqueta, mochila…" aria-label="Buscar producto">
+      <div class="fila-buscar">
+        <input id="buscar" type="search" placeholder="Buscar: zapatillas, chaqueta, mochila…" aria-label="Buscar producto">
+        <button class="btn-filtros" id="btnFiltros" type="button" aria-expanded="false" aria-controls="panelFiltros">Filtros <span class="num" id="numFiltros" hidden></span></button>
+      </div>
       <div class="fila-sel">
-        <select id="tienda" aria-label="Tienda"><option value="">Tiendas</option></select>
         <select id="categoria" aria-label="Categoría"><option value="">Categorías</option></select>
+        <select id="subcategoria" aria-label="Tipo de producto"><option value="">Tipo</option></select>
         <select id="orden" aria-label="Ordenar">
           <option value="desc">Más descuento</option>
           <option value="ahorro">Más ahorro $</option>
@@ -202,6 +230,18 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
         </select>
       </div>
     </div>
+    <div class="panel-filtros" id="panelFiltros" hidden>
+      <div class="grupo"><b>Género</b><div class="opciones" id="opGenero"></div></div>
+      <div class="grupo"><b>Talla</b><div class="opciones tallas" id="opTalla"></div></div>
+      <div class="grupo"><b>Tienda</b><select id="tienda" aria-label="Tienda"><option value="">Todas las tiendas</option></select></div>
+      <div class="grupo"><b>Marca</b><select id="marca" aria-label="Marca"><option value="">Todas las marcas</option></select></div>
+      <div class="grupo"><b>Precio</b><select id="precioMax" aria-label="Precio máximo">
+        <option value="0">Cualquier precio</option><option value="5000">Hasta $5.000</option><option value="10000">Hasta $10.000</option>
+        <option value="20000">Hasta $20.000</option><option value="30000">Hasta $30.000</option><option value="50000">Hasta $50.000</option>
+        <option value="100000">Hasta $100.000</option><option value="200000">Hasta $200.000</option></select></div>
+      <div class="acciones-filtros ancho"><button class="limpiar" id="limpiar" type="button">Limpiar filtros</button><button class="ver" id="verOfertas" type="button">Ver ofertas</button></div>
+    </div>
+    <div class="activos" id="activos"></div>
   </div>
 </header>
 
@@ -228,39 +268,76 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   var AFILIADOS = {};
 
   var POR_PAGINA = 60;
-  var estado = { min: 50, q: "", tienda: "", categoria: "", orden: "desc", ocultarDudosos: false, mostrar: POR_PAGINA };
+  var GENEROS = ["Mujer", "Hombre", "Niña", "Niño", "Bebé"];
+  var GUARDAR = ["min", "tienda", "categoria", "subcategoria", "orden", "ocultarDudosos", "genero", "tallas", "marca", "precioMax"];
+  var VACIO = { tienda: "", categoria: "", subcategoria: "", genero: [], tallas: [], marca: "", precioMax: 0 };
+  var estado = { min: 50, q: "", orden: "desc", ocultarDudosos: false, mostrar: POR_PAGINA };
+  Object.keys(VACIO).forEach(function (k) { estado[k] = Array.isArray(VACIO[k]) ? [] : VACIO[k]; });
   var ofertas = [];
 
   var $ = function (id) { return document.getElementById(id); };
   var clp = new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 });
-  var normalizar = function (s) { return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); };
+  var miles = new Intl.NumberFormat("es-CL");
+  var normalizar = function (s) { return (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); };
   var tramo = function (d) { return d >= 80 ? 80 : d >= 70 ? 70 : d >= 60 ? 60 : 50; };
 
   try {
     var guardado = JSON.parse(localStorage.getItem("mdp-filtros") || "{}");
-    ["min", "tienda", "categoria", "orden", "ocultarDudosos"].forEach(function (k) { if (k in guardado) estado[k] = guardado[k]; });
+    GUARDAR.forEach(function (k) { if (k in guardado && typeof guardado[k] === typeof estado[k]) estado[k] = guardado[k]; });
   } catch (e) {}
   function guardar() {
-    try { localStorage.setItem("mdp-filtros", JSON.stringify({ min: estado.min, tienda: estado.tienda, categoria: estado.categoria, orden: estado.orden, ocultarDudosos: estado.ocultarDudosos })); } catch (e) {}
+    try { var g = {}; GUARDAR.forEach(function (k) { g[k] = estado[k]; }); localStorage.setItem("mdp-filtros", JSON.stringify(g)); } catch (e) {}
   }
 
-  // ---------- render
+  // Orden de tallas: letras, Única, números, meses, años.
+  var LETRAS = ["XXS", "XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL", "5XL"];
+  function claveTalla(t) {
+    var a = t.split("/")[0];
+    if (LETRAS.indexOf(a) >= 0) return [0, LETRAS.indexOf(a) + (t.indexOf("/") >= 0 ? 0.5 : 0)];
+    if (t === "Única") return [1, 0];
+    var n = parseFloat(t) || 0;
+    if (/M$/.test(t)) return [3, n];
+    if (/A$/.test(t)) return [4, n];
+    return isNaN(parseFloat(t)) ? [5, 0] : [2, n];
+  }
+  function compararTallas(a, b) { var x = claveTalla(a), y = claveTalla(b); return x[0] - y[0] || x[1] - y[1] || a.localeCompare(b); }
+
+  // ---------- filtros
+  // `sin` deja fuera un filtro, para contar cuántas ofertas tendría cada opción de ese filtro.
+  function pasa(o, sin) {
+    if (o.descuento < estado.min) return false;
+    if (sin !== "tienda" && estado.tienda && o.tienda !== estado.tienda) return false;
+    if (sin !== "categoria" && estado.categoria && o.categoria !== estado.categoria) return false;
+    if (sin !== "subcategoria" && sin !== "categoria" && estado.subcategoria && o.subcategoria !== estado.subcategoria) return false;
+    if (sin !== "marca" && estado.marca && o.marca !== estado.marca) return false;
+    if (estado.precioMax && o.precio > estado.precioMax) return false;
+    if (estado.ocultarDudosos && o.dudoso) return false;
+    if (sin !== "genero" && estado.genero.length && !(o.genero || []).some(function (g) { return estado.genero.indexOf(g) >= 0; })) return false;
+    if (sin !== "tallas" && estado.tallas.length && !(o.tallas || []).some(function (t) { return estado.tallas.indexOf(t) >= 0; })) return false;
+    if (estado.q) {
+      var t = o._texto || (o._texto = normalizar(o.nombre + " " + (o.marca || "") + " " + o.categoria + " " + (o.subcategoria || "")));
+      for (var i = 0; i < estado._q.length; i++) if (t.indexOf(estado._q[i]) < 0) return false;
+    }
+    return true;
+  }
   function filtradas() {
-    var q = normalizar(estado.q).split(/\s+/).filter(Boolean);
-    var lista = ofertas.filter(function (o) {
-      if (o.descuento < estado.min) return false;
-      if (estado.tienda && o.tienda !== estado.tienda) return false;
-      if (estado.categoria && o.categoria !== estado.categoria) return false;
-      if (estado.ocultarDudosos && o.dudoso) return false;
-      if (q.length) { var t = normalizar(o.nombre + " " + (o.marca || "") + " " + o.categoria); for (var i = 0; i < q.length; i++) if (t.indexOf(q[i]) < 0) return false; }
-      return true;
-    });
+    estado._q = normalizar(estado.q).split(/\s+/).filter(Boolean);
+    var lista = ofertas.filter(function (o) { return pasa(o); });
     var cmp = {
       desc: function (a, b) { return b.descuento - a.descuento || a.precio - b.precio; },
       ahorro: function (a, b) { return (b.precio_normal - b.precio) - (a.precio_normal - a.precio); },
       barato: function (a, b) { return a.precio - b.precio; }
     }[estado.orden];
     return lista.sort(cmp);
+  }
+  function contar(sin, campo) {
+    var c = {};
+    ofertas.forEach(function (o) {
+      if (!pasa(o, sin)) return;
+      var v = o[campo];
+      (Array.isArray(v) ? v : [v]).forEach(function (x) { if (x) c[x] = (c[x] || 0) + 1; });
+    });
+    return c;
   }
 
   // Pide a la tienda una versión pequeña de la foto (carga más rápido en el celular).
@@ -298,6 +375,10 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     if (o.minimo_30d) chips.appendChild(el("span", "chip bien", "Precio más bajo en 30 días"));
     if (o.dudoso) { var d = el("span", "chip alerta", "Descuento dudoso"); d.title = "El \"precio normal\" casi no se ha cobrado en las últimas semanas."; chips.appendChild(d); }
     if (chips.childNodes.length) c.appendChild(chips);
+    if (o.tallas && o.tallas.length) {
+      var ts = o.tallas.slice(0, 8).join(" · ") + (o.tallas.length > 8 ? " …" : "");
+      c.appendChild(el("span", "tallas-card", "Tallas: " + ts));
+    }
     var a = el("a", "boton", "Ver en " + o.tienda);
     a.href = (AFILIADOS[o.tienda] || function (u) { return u; })(o.url);
     a.target = "_blank"; a.rel = "noopener nofollow sponsored";
@@ -306,12 +387,87 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     return art;
   }
 
+  function opcion(texto, cantidad, activa, alTocar) {
+    var b = el("button", "opcion"); b.type = "button";
+    b.append(texto); b.appendChild(el("small", null, miles.format(cantidad)));
+    b.setAttribute("aria-pressed", String(activa));
+    b.disabled = !cantidad && !activa;
+    b.addEventListener("click", alTocar);
+    return b;
+  }
+  function alternar(lista, v) { var i = lista.indexOf(v); if (i >= 0) lista.splice(i, 1); else lista.push(v); }
+  function cambio() { estado.mostrar = POR_PAGINA; guardar(); render(); }
+
+  function llenar(s, valores, actual, rotuloVacio, cuentas) {
+    s.textContent = "";
+    var op = el("option", null, rotuloVacio); op.value = ""; s.appendChild(op);
+    valores.forEach(function (v) { var o = el("option", null, v + (cuentas ? " (" + miles.format(cuentas[v] || 0) + ")" : "")); o.value = v; s.appendChild(o); });
+    s.value = valores.indexOf(actual) >= 0 ? actual : "";
+    return s.value;
+  }
+  var porNombre = function (a, b) { return a.localeCompare(b, "es"); };
+
+  function pintarFiltros() {
+    // categoría y tipo (subcategoría)
+    var cCat = contar("categoria", "categoria");
+    estado.categoria = llenar($("categoria"), Object.keys(cCat).sort(porNombre), estado.categoria, "Categorías");
+    var cSub = contar("subcategoria", "subcategoria");
+    var subs = Object.keys(cSub).sort(porNombre);
+    var s = $("subcategoria");
+    if (estado.categoria) {
+      estado.subcategoria = llenar(s, subs, estado.subcategoria, "Tipo: todos", cSub);
+      s.disabled = !subs.length;
+    } else {
+      estado.subcategoria = llenar(s, [], "", "Tipo (elige categoría)");
+      s.disabled = true;
+    }
+    // género
+    var cGen = contar("genero", "genero"), g = $("opGenero"); g.textContent = "";
+    GENEROS.forEach(function (v) {
+      g.appendChild(opcion(v, cGen[v] || 0, estado.genero.indexOf(v) >= 0, function () { alternar(estado.genero, v); cambio(); }));
+    });
+    // tallas
+    var cTal = contar("tallas", "tallas"), t = $("opTalla"); t.textContent = "";
+    estado.tallas.forEach(function (v) { if (!(v in cTal)) cTal[v] = 0; });
+    var tallas = Object.keys(cTal).sort(compararTallas);
+    if (!tallas.length) t.appendChild(el("span", "tallas-card", "Las ofertas que estás viendo no informan tallas."));
+    tallas.forEach(function (v) {
+      t.appendChild(opcion(v, cTal[v], estado.tallas.indexOf(v) >= 0, function () { alternar(estado.tallas, v); cambio(); }));
+    });
+    // tienda y marca
+    var cTi = contar("tienda", "tienda");
+    estado.tienda = llenar($("tienda"), Object.keys(cTi).sort(porNombre), estado.tienda, "Todas las tiendas", cTi);
+    var cMa = contar("marca", "marca");
+    var marcas = Object.keys(cMa).sort(function (a, b) { return cMa[b] - cMa[a] || porNombre(a, b); }).slice(0, 300).sort(porNombre);
+    if (estado.marca && marcas.indexOf(estado.marca) < 0) marcas.unshift(estado.marca);
+    estado.marca = llenar($("marca"), marcas, estado.marca, "Todas las marcas", cMa);
+    $("precioMax").value = String(estado.precioMax);
+
+    // filtros activos (para ver y quitar de un toque)
+    var activos = [];
+    if (estado.subcategoria) activos.push([estado.subcategoria, function () { estado.subcategoria = ""; }]);
+    estado.genero.forEach(function (v) { activos.push([v, function () { alternar(estado.genero, v); }]); });
+    estado.tallas.forEach(function (v) { activos.push(["Talla " + v, function () { alternar(estado.tallas, v); }]); });
+    if (estado.tienda) activos.push([estado.tienda, function () { estado.tienda = ""; }]);
+    if (estado.marca) activos.push([estado.marca, function () { estado.marca = ""; }]);
+    if (estado.precioMax) activos.push(["Hasta " + clp.format(estado.precioMax), function () { estado.precioMax = 0; }]);
+    var caja = $("activos"); caja.textContent = "";
+    activos.forEach(function (a) {
+      var b = el("button", null, a[0]); b.type = "button"; b.setAttribute("aria-label", "Quitar filtro " + a[0]);
+      b.addEventListener("click", function () { a[1](); cambio(); });
+      caja.appendChild(b);
+    });
+    var n = estado.genero.length + estado.tallas.length + (estado.tienda ? 1 : 0) + (estado.marca ? 1 : 0) + (estado.precioMax ? 1 : 0);
+    $("numFiltros").hidden = !n; $("numFiltros").textContent = n;
+  }
+
   function render() {
     document.querySelectorAll(".tramo").forEach(function (b) { b.setAttribute("aria-pressed", String(+b.dataset.t === estado.min)); });
+    pintarFiltros();
     var lista = filtradas();
     var g = $("grilla"); g.textContent = "";
     if (!lista.length) {
-      g.appendChild(el("p", "vacio", "No hay ofertas con estos filtros. Prueba con un descuento menor u otra tienda."));
+      g.appendChild(el("p", "vacio", "No hay ofertas con estos filtros. Prueba quitando alguno o con un descuento menor."));
     } else {
       var frag = document.createDocumentFragment();
       lista.slice(0, estado.mostrar).forEach(function (o) { frag.appendChild(tarjeta(o)); });
@@ -319,22 +475,13 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     }
     $("mas").hidden = lista.length <= estado.mostrar;
     var conteo = $("conteo"); conteo.textContent = "";
-    var b = el("b", null, lista.length.toLocaleString("es-CL"));
+    var b = el("b", null, miles.format(lista.length));
     conteo.append(b, lista.length === 1 ? " oferta de " : " ofertas de ", estado.min + "% o más");
-  }
-
-  function llenarSelect(id, valores, actual) {
-    var s = $(id);
-    valores.forEach(function (v) { var op = el("option", null, v); op.value = v; s.appendChild(op); });
-    s.value = valores.indexOf(actual) >= 0 ? actual : "";
-    estado[id] = s.value;
+    $("verOfertas").textContent = "Ver " + miles.format(lista.length) + (lista.length === 1 ? " oferta" : " ofertas");
   }
 
   function iniciar(datos, esDemo, actualizado) {
     ofertas = datos;
-    var unicos = function (k) { return Array.from(new Set(ofertas.map(function (o) { return o[k]; }))).sort(function (a, b) { return a.localeCompare(b, "es"); }); };
-    llenarSelect("tienda", unicos("tienda"), estado.tienda);
-    llenarSelect("categoria", unicos("categoria"), estado.categoria);
     $("orden").value = estado.orden;
     $("ocultarDudosos").checked = estado.ocultarDudosos;
     if (actualizado) {
@@ -346,15 +493,24 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
 
   // ---------- eventos
   document.querySelectorAll(".tramo").forEach(function (b) {
-    b.addEventListener("click", function () { estado.min = +b.dataset.t; estado.mostrar = POR_PAGINA; guardar(); render(); });
+    b.addEventListener("click", function () { estado.min = +b.dataset.t; cambio(); });
   });
   var t;
   $("buscar").addEventListener("input", function (e) { clearTimeout(t); t = setTimeout(function () { estado.q = e.target.value; estado.mostrar = POR_PAGINA; render(); }, 150); });
-  ["tienda", "categoria", "orden"].forEach(function (id) {
-    $(id).addEventListener("change", function (e) { estado[id] = e.target.value; estado.mostrar = POR_PAGINA; guardar(); render(); });
+  $("categoria").addEventListener("change", function (e) { estado.categoria = e.target.value; estado.subcategoria = ""; estado.tallas = []; cambio(); });
+  ["subcategoria", "tienda", "marca", "orden"].forEach(function (id) {
+    $(id).addEventListener("change", function (e) { estado[id] = e.target.value; cambio(); });
   });
-  $("ocultarDudosos").addEventListener("change", function (e) { estado.ocultarDudosos = e.target.checked; guardar(); render(); });
+  $("precioMax").addEventListener("change", function (e) { estado.precioMax = +e.target.value; cambio(); });
+  $("ocultarDudosos").addEventListener("change", function (e) { estado.ocultarDudosos = e.target.checked; cambio(); });
   $("mas").addEventListener("click", function () { estado.mostrar += POR_PAGINA; render(); });
+  function abrirFiltros(abrir) { $("panelFiltros").hidden = !abrir; $("btnFiltros").setAttribute("aria-expanded", String(abrir)); }
+  $("btnFiltros").addEventListener("click", function () { abrirFiltros($("panelFiltros").hidden); });
+  $("verOfertas").addEventListener("click", function () { abrirFiltros(false); $("grilla").scrollIntoView({ behavior: "smooth", block: "start" }); });
+  $("limpiar").addEventListener("click", function () {
+    Object.keys(VACIO).forEach(function (k) { estado[k] = Array.isArray(VACIO[k]) ? [] : VACIO[k]; });
+    cambio();
+  });
 
   // ---------- acceso de miembros
   function api(url, cuerpo) {
