@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          S=https://priveofertazos.cl
+          S=https://prive-ofertazos.vercel.app
           curl -sS -X POST $S/api/sesion -H 'Content-Type: application/json' -d '{"accion":"solicitar","nombre":"Prueba del aviso","email":"prueba-aviso@priveofertazos.cl","mensaje":"Solicitud de prueba: se borra sola"}'; echo
           sleep 20
           curl -sS -c c.txt -X POST $S/api/admin -H 'Content-Type: application/json' -d "{\"accion\":\"entrar\",\"clave\":\"${{ inputs.clave }}\"}" -o /dev/null -w "entrar %{http_code}\n"
