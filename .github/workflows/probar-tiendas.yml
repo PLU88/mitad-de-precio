@@ -1,0 +1,54 @@
+name: Probar tiendas
+on:
+  workflow_dispatch:
+jobs:
+  probar:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          python3 - <<'PY'
+          import json, urllib.request, gzip, ssl, re
+          UA = "Mozilla/5.0 (compatible; MitadDePrecioBot/1.0; +https://mitad-de-precio.vercel.app/)"
+          C = {"Umbrale":["www.umbrale.cl"],"Liola":["www.liola.cl"],"Studio F":["www.studiof.cl"],"Rapsodia":["www.rapsodia.cl"],
+               "Lineatre":["www.lineatre.cl","www.lineatre.com"],"Columbia":["www.columbia.cl"],"Doite":["www.doite.cl"],
+               "Nicopoly":["www.nicopoly.cl"],"Umbro":["www.umbro.cl"],"Locura LPK":["www.lpk.cl","www.locuralpk.cl","www.lpkchile.cl"],
+               "Raindoor":["www.raindoor.cl"],"Americanino":["www.americanino.cl"],"Converse":["www.converse.cl"],
+               "abc":["www.abc.cl"],"Adidas":["www.adidas.cl"],"Rockford":["www.rockford.cl"],"Cat":["www.cat.cl"]}
+          laxo = ssl.create_default_context(); laxo.check_hostname = False; laxo.verify_mode = ssl.CERT_NONE
+          def get(url, ctx=None):
+              try:
+                  r = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Encoding": "gzip"}), timeout=20, context=ctx)
+                  b = r.read(); b = gzip.decompress(b) if b[:2] == b"\x1f\x8b" else b
+                  return r.status, r.geturl(), b.decode("utf-8", "replace")
+              except urllib.error.HTTPError as e: return e.code, url, ""
+              except Exception as e: return "ERR", url, str(e)[:70]
+          def shop(b):
+              ps = json.loads(b).get("products", []); n = 0
+              for p in ps:
+                  for v in p.get("variants", []):
+                      try:
+                          pr, ca = float(v.get("price") or 0), float(v.get("compare_at_price") or 0)
+                          if ca > pr > 0 and 1-pr/ca >= .5: n += 1; break
+                      except: pass
+              return f"SHOPIFY productos={len(ps)} con50%={n}"
+          for marca, doms in C.items():
+              for d in doms:
+                  ctx = None
+                  c, final, b = get(f"https://{d}/products.json?limit=250")
+                  if c == "ERR" and "CERTIFICATE" in b:
+                      ctx = laxo; c, final, b = get(f"https://{d}/products.json?limit=250", ctx); marca_ssl = " [SSL incompleto]"
+                  else: marca_ssl = ""
+                  if c == 200 and b.lstrip().startswith("{"):
+                      try: res = shop(b)
+                      except Exception: res = "json raro"
+                  else:
+                      cv, fv, bv = get(f"https://{d}/api/catalog_system/pub/products/search?_from=0&_to=49&O=OrderByBestDiscountDESC", ctx)
+                      if cv in (200, 206) and bv.lstrip().startswith("["):
+                          res = f"VTEX productos={len(json.loads(bv))}"
+                      else:
+                          c2, f2, h = get(f"https://{d}/", ctx); low = h.lower()
+                          sitios = sorted(set(re.findall(r"Sites-([A-Za-z0-9_]+)-Site", h)))[:3]
+                          pistas = [p for p in ("shopify","vtex","woocommerce","magento","demandware","jumpseller","bsale","__next") if p in low]
+                          res = f"no (portada {c2} {f2[:40]} pistas={','.join(pistas)} sfcc={sitios} vtex={cv})"
+                  print(f"{marca:11} {d:20} {c}{marca_ssl} | {res}")
+          PY
