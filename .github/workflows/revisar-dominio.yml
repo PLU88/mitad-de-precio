@@ -5,9 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          for d in priveofertazos.cl www.priveofertazos.cl; do
-            echo "== $d"; echo "NS:"; dig +short NS priveofertazos.cl @8.8.8.8; echo "A (Google):"; dig +short A $d @8.8.8.8; echo "A (Cloudflare):"; dig +short A $d @1.1.1.1
-            echo "A (Vercel):"; dig +short A $d @ns1.vercel-dns.com
-            curl -sS -m 20 -o /dev/null -w "https %{http_code} %{redirect_url}\n" https://$d/ || true
-          done
-          echo "NS en el registro .cl:"; dig +short NS priveofertazos.cl @a.nic.cl
+          echo "--- registro .cl"; dig NS priveofertazos.cl @a.nic.cl +noall +authority +answer +comments | grep -E "status|NS"
+          echo "--- vercel"; dig A priveofertazos.cl @ns1.vercel-dns.com +noall +answer +comments | grep -E "status|IN"
+          dig A www.priveofertazos.cl @ns1.vercel-dns.com +noall +answer +comments | grep -E "status|IN"
+          echo "--- google"; dig A priveofertazos.cl @8.8.8.8 +noall +answer +comments | grep -E "status|IN"
