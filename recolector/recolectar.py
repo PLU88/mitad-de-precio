@@ -403,11 +403,12 @@ def recolectar_magento(tienda):
     sufijo = tienda.get("sufijo_url", ".html")
     consulta = CONSULTA_MAGENTO_TALLAS
     for pagina in range(1, tienda.get("max_paginas", 60) + 1):
-        url = f"https://{tienda['dominio']}/graphql?query=" + urllib.parse.quote(consulta % pagina)
+        api = tienda.get("graphql", tienda["dominio"])  # algunas tiendas tienen la API en otro subdominio
+        url = f"https://{api}/graphql?query=" + urllib.parse.quote(consulta % pagina)
         datos = pedir_json(url)
         if pagina == 1 and consulta is CONSULTA_MAGENTO_TALLAS and not ((datos or {}).get("data") or {}).get("products"):
             consulta = CONSULTA_MAGENTO  # esta tienda no acepta la consulta de variantes: se usa la simple
-            datos = pedir_json(f"https://{tienda['dominio']}/graphql?query=" + urllib.parse.quote(consulta % pagina))
+            datos = pedir_json(f"https://{api}/graphql?query=" + urllib.parse.quote(consulta % pagina))
         try:
             items = datos["data"]["products"]["items"]
         except (TypeError, KeyError):
@@ -431,7 +432,7 @@ def recolectar_magento(tienda):
             ofertas.append(nueva_oferta(
                 tienda, it.get("sku"), it.get("name"), "", " ".join(cats[:3]), precio, normal,
                 (it.get("small_image") or {}).get("url", ""),
-                f"https://{tienda['dominio']}/{it['url_key']}{it.get('url_suffix') or sufijo}",
+                f"https://{tienda['dominio']}/{it['url_key']}{sufijo if tienda.get('sufijo_url') else (it.get('url_suffix') or sufijo)}",
                 tallas_oferta, " ".join(cats)))
         time.sleep(PAUSA_SEGUNDOS)
     return ofertas

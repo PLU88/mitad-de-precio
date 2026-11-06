@@ -85,7 +85,7 @@
  {"id": "lider", "nombre": "Lider", "dominio": "www.lider.cl", "tipo": "especial", "activa": false, "nota": "Plataforma propia (Next.js)."},
  {"id": "jumbo", "nombre": "Jumbo", "dominio": "www.jumbo.cl", "tipo": "especial", "activa": false, "nota": "Plataforma propia de Cencosud (Next.js)."},
  {"id": "santaisabel", "nombre": "Santa Isabel", "dominio": "www.santaisabel.cl", "tipo": "especial", "activa": false, "nota": "Plataforma propia de Cencosud (Next.js)."},
- {"id": "casaideas", "nombre": "Casaideas", "dominio": "www.casaideas.cl", "tipo": "especial", "activa": false, "nota": "Magento con portada propia; catálogo no público."},
+ {"id": "casaideas", "nombre": "Casaideas", "dominio": "casaideas.cl", "tipo": "magento", "graphql": "headless.casaideas.cl", "sufijo_url": "/"},
  {"id": "ahumada", "nombre": "Farmacias Ahumada", "dominio": "www.farmaciasahumada.cl", "tipo": "especial", "activa": false, "nota": "Salesforce sin datos en la grilla. Candidata a lector propio."},
  {"id": "puma", "nombre": "Puma", "dominio": "cl.puma.com", "tipo": "especial", "activa": false, "nota": "Magento sin catálogo público."},
  {"id": "northface", "nombre": "The North Face", "dominio": "www.thenorthface.cl", "tipo": "especial", "activa": false, "nota": "Magento, bloquea consultas (403)."},
