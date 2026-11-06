@@ -10,9 +10,9 @@
  {"id": "merrell",      "nombre": "Merrell",         "dominio": "www.merrell.cl",        "tipo": "shopify", "activa": true},
  {"id": "blockstore",   "nombre": "Blockstore",      "dominio": "www.blockstore.cl",     "tipo": "shopify", "activa": true},
  {"id": "lounge",       "nombre": "Lounge",          "dominio": "www.lounge.cl",         "tipo": "shopify", "activa": true},
- {"id": "colloky",      "nombre": "Colloky",         "dominio": "www.colloky.cl",        "tipo": "shopify", "activa": true},
- {"id": "ellus",        "nombre": "Ellus",           "dominio": "www.ellus.cl",          "tipo": "shopify", "activa": true},
- {"id": "reebok",       "nombre": "Reebok",          "dominio": "www.reebok.cl",         "tipo": "shopify", "activa": true},
+ {"id": "colloky",      "nombre": "Colloky",         "dominio": "www.colloky.cl",        "tipo": "shopify", "activa": false, "nota": "Shopify con compresión no estándar; pendiente."},
+ {"id": "ellus",        "nombre": "Ellus",           "dominio": "www.ellus.cl",          "tipo": "shopify", "activa": false, "nota": "Shopify con compresión no estándar; pendiente."},
+ {"id": "reebok",       "nombre": "Reebok",          "dominio": "www.reebok.cl",         "tipo": "shopify", "activa": false, "nota": "Shopify con compresión no estándar; pendiente."},
 
  {"id": "paris",        "nombre": "Paris",           "dominio": "www.paris.cl",          "tipo": "especial", "activa": false, "nota": "Bloquea consultas desde servidores (403)."},
  {"id": "easy",         "nombre": "Easy",            "dominio": "www.easy.cl",           "tipo": "especial", "activa": false, "nota": "Bloquea consultas desde servidores (403)."},

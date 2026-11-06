@@ -27,28 +27,31 @@ No necesitas servidor ni instalar nada en tu computador.
 
 Desde ahí se actualiza solo cada 6 horas.
 
-## Agregar o quitar tiendas
+## Tiendas
 
-Edita `tiendas.json` directamente en GitHub (ícono del lápiz). Cada tienda es una línea:
+Las tiendas están en `tiendas.json`. Para apagar una, cambia `"activa": true` por `"activa": false`
+(ícono del lápiz en GitHub). Cada vuelta deja en `docs/estado.json` cuántas ofertas trajo cada tienda
+o por qué falló.
+
+**Activas (10):** Hites, Fashion's Park, Hush Puppies, Under Armour, Crocs, Vans, Lippi, Merrell,
+Blockstore y Lounge.
+
+**Agregar una tienda Shopify** (muchas marcas chilenas lo son): abre
+`https://LA-TIENDA.cl/products.json` en el navegador. Si ves texto que empieza con `{"products":`,
+sirve. Agrega una línea así:
 
 ```json
-{"id": "mitienda", "nombre": "Mi Tienda", "dominio": "www.mitienda.cl", "tipo": "vtex", "activa": true}
+{"id": "mitienda", "nombre": "Mi Tienda", "dominio": "www.mitienda.cl", "tipo": "shopify", "activa": true},
 ```
 
-**¿Cómo saber si una tienda sirve?** Abre en tu navegador:
-`https://www.LA-TIENDA.cl/api/catalog_system/pub/products/search?_from=0&_to=0`
-Si ves texto con llaves `{ }` y datos del producto, la tienda usa VTEX y funciona con este recolector.
-Si ves la página normal o un error, no sirve (por ahora). Para desactivar una tienda pon `"activa": false`.
+**No se pueden leer por ahora** (quedan anotadas con `"tipo": "especial"` y el motivo):
 
-La lista tiene dos grupos:
+- Bloquean consultas automáticas: Paris, Easy, Ripley, Tottus, Nike, Adidas, Zara, H&M, Unimarc,
+  Decathlon y The North Face.
+- Usan plataformas propias sin catálogo público: Falabella, Homecenter Sodimac, Lider, Jumbo,
+  Santa Isabel, Casaideas, Puma, abc/La Polar, Tricot, Farmacias Ahumada y Mercado Libre.
 
-- **Con `"activa": true`**: 23 tiendas candidatas (Paris, Unimarc, Casaideas, Nike, Tricot, Corona,
-  farmacias, marcas deportivas y otras). El recolector prueba cada una; las que no usen VTEX o bloqueen
-  la consulta aparecen con `"ok": false` y un motivo en `docs/estado.json`, y simplemente se saltan.
-- **Con `"tipo": "especial"`**: Falabella, Homecenter Sodimac, Tottus, Ripley, Lider, Zara, H&M,
-  Adidas y Mercado Libre. Usan sistemas propios, casi siempre con protección contra programas
-  automáticos, y este recolector no puede leerlas. Quedan anotadas para sumarlas más adelante con un
-  servicio de datos de pago (como Apify) o un adaptador hecho a medida.
+Para algunas de ellas existen servicios de datos de pago (por ejemplo Apify).
 
 ## Qué significan las etiquetas
 
@@ -66,5 +69,5 @@ aceptes. La página ya marca esos enlaces como patrocinados.
 ## Ajustes rápidos (en `recolector/recolectar.py`)
 
 - `DESCUENTO_MINIMO = 50` — descuento mínimo que se guarda.
-- `MAX_PAGINAS = 40` — cuántas páginas de 50 productos revisa por tienda.
+- `MAX_PAGINAS = 40` — cuántas páginas revisa por tienda como máximo.
 - `PAUSA_SEGUNDOS = 1.0` — pausa entre consultas; no la bajes, para no molestar a las tiendas.

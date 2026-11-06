@@ -52,11 +52,14 @@ def leer_json(ruta, por_defecto):
         return por_defecto
 
 
-def escribir_json(ruta, datos):
+def escribir_json(ruta, datos, compacto=False):
     os.makedirs(os.path.dirname(ruta), exist_ok=True)
     tmp = ruta + ".tmp"
     with open(tmp, "w", encoding="utf-8") as f:
-        json.dump(datos, f, ensure_ascii=False, indent=1)
+        if compacto:
+            json.dump(datos, f, ensure_ascii=False, separators=(",", ":"))
+        else:
+            json.dump(datos, f, ensure_ascii=False, indent=1)
     os.replace(tmp, ruta)
 
 
@@ -187,7 +190,7 @@ def recolectar_shopify(tienda):
 
 # ---------------------------------------------------------------- Salesforce (SFCC)
 TILE = re.compile(r'data-gtmselectitem="([^"]+)"')
-HREF = re.compile(r'<a[^>]+href="(https?://[^"]+?\.html)[^"]*"')
+HREF = re.compile(r'<a[^>]+href="((?:https?://[^"/]+)?/[^"?]+?\.html)[^"]*"')
 IMG = re.compile(r'<img[^>]+(?:src|data-src)="(https?://[^"]+?\.(?:jpg|jpeg|png|webp)[^"]*)"')
 
 
@@ -207,13 +210,17 @@ def leer_grilla_sfcc(tienda, texto):
         rebaja = a_numero(item.get("discount"))
         if not precio:
             continue
+        if precio <= 1000 and precio + rebaja >= 9990:
+            continue  # "$1.000" en productos caros: casi siempre es un error de precio
         enlace = HREF.search(trozo)
         imagen = IMG.search(trozo)
+        if not enlace:
+            continue  # sin enlace a la ficha no sirve mostrarlo
         productos.append(nueva_oferta(
             tienda, item.get("item_id"), item.get("item_name"), item.get("item_brand"),
             item.get("item_category"), precio, precio + rebaja,
             html.unescape(imagen.group(1)) if imagen else "",
-            html.unescape(enlace.group(1)) if enlace else f"https://{tienda['dominio']}/"))
+            urllib.parse.urljoin(f"https://{tienda['dominio']}/", html.unescape(enlace.group(1)))))
     return productos
 
 
@@ -381,8 +388,8 @@ def main():
     actualizar_historial(historial, ofertas, hoy)
 
     ofertas.sort(key=lambda o: (-o["descuento"], o["precio"]))
-    escribir_json(ARCHIVO_SALIDA, {"actualizado": ahora, "total": len(ofertas), "ofertas": ofertas})
-    escribir_json(ARCHIVO_HISTORIAL, historial)
+    escribir_json(ARCHIVO_SALIDA, {"actualizado": ahora, "total": len(ofertas), "ofertas": ofertas}, compacto=True)
+    escribir_json(ARCHIVO_HISTORIAL, historial, compacto=True)
     print(f"Listo: {len(ofertas)} ofertas de {DESCUENTO_MINIMO}% o más.")
     return 0
 
