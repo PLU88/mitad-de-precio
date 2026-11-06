@@ -1,10 +1,10 @@
 {
- "actualizado": "2026-11-06T15:40+00:00",
+ "actualizado": "2026-11-06T15:44+00:00",
  "tiendas": [
   {
    "tienda": "Hites",
-   "ok": false,
-   "error": "No se pudo conectar: unsupported operand type(s) for +: 'int' and 'str'"
+   "ok": true,
+   "ofertas": 1875
   },
   {
    "tienda": "Fashion's Park",
@@ -19,7 +19,7 @@
   {
    "tienda": "Under Armour",
    "ok": true,
-   "ofertas": 799
+   "ofertas": 797
   },
   {
    "tienda": "Crocs",
