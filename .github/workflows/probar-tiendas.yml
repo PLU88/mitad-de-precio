@@ -1,0 +1,46 @@
+name: Probar tiendas
+on:
+  workflow_dispatch:
+jobs:
+  probar:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          python3 - <<'PY'
+          import json, urllib.request, gzip
+          UA = "Mozilla/5.0 (compatible; MitadDePrecioBot/1.0; +https://mitad-de-precio.vercel.app/)"
+          C = {"iO": ["www.iochile.cl","www.io.cl","www.ioclothing.cl"], "Ash": ["www.ash.cl","www.ashchile.cl"],
+               "Wild Lama": ["www.wildlama.cl","www.wildlama.com"], "Gnomo": ["www.gnomo.cl","www.gnomo.com"],
+               "Mashini": ["www.mashini.cl","www.machini.cl"], "Volcán": ["www.volcan.cl","www.volkanica.cl","www.volcanchile.cl"],
+               "Desigual": ["www.desigual.cl","www.desigual.com"], "Only": ["www.only.cl","www.onlychile.cl"],
+               "Wados": ["www.wados.cl"], "Leonisa": ["www.leonisa.cl","www.leonisa.com"], "Intime": ["www.intime.cl"]}
+          def get(url):
+              try:
+                  r = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Encoding": "gzip"}), timeout=20)
+                  b = r.read(); b = gzip.decompress(b) if b[:2] == b"\x1f\x8b" else b
+                  return r.status, r.geturl(), b.decode("utf-8", "replace")
+              except urllib.error.HTTPError as e: return e.code, url, ""
+              except Exception as e: return "ERR", url, str(e)[:60]
+          for marca, doms in C.items():
+              for d in doms:
+                  c, final, b = get(f"https://{d}/products.json?limit=250")
+                  res = ""
+                  if c == 200 and b.lstrip().startswith("{"):
+                      try:
+                          ps = json.loads(b).get("products", [])
+                          n50 = 0
+                          for p in ps:
+                              for v in p.get("variants", []):
+                                  try:
+                                      pr, ca = float(v.get("price") or 0), float(v.get("compare_at_price") or 0)
+                                      if ca > pr > 0 and 1 - pr/ca >= .5 and v.get("available", True): n50 += 1; break
+                                  except: pass
+                          res = f"SHOPIFY productos={len(ps)} con50%={n50}"
+                      except Exception as e: res = "json raro"
+                  else:
+                      c2, f2, h = get(f"https://{d}/")
+                      low = h.lower()
+                      pistas = [p for p in ("shopify","vtex","woocommerce","magento","demandware","jumpseller","bsale","next") if p in low]
+                      res = f"no shopify (portada {c2} {f2[:45]} pistas={','.join(pistas)})"
+                  print(f"{marca:10} {d:22} {c} {final[:55]} | {res}")
+          PY
