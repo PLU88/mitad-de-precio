@@ -10,6 +10,12 @@
  {"id": "merrell",      "nombre": "Merrell",         "dominio": "www.merrell.cl",        "tipo": "shopify", "activa": true},
  {"id": "blockstore",   "nombre": "Blockstore",      "dominio": "www.blockstore.cl",     "tipo": "shopify", "activa": true},
  {"id": "lounge",       "nombre": "Lounge",          "dominio": "www.lounge.cl",         "tipo": "shopify", "activa": true},
+ {"id": "mashini",      "nombre": "Mashini",         "dominio": "www.mashini.cl",        "tipo": "shopify", "activa": true},
+ {"id": "leonisa",      "nombre": "Leonisa",         "dominio": "www.leonisa.cl",        "tipo": "shopify", "activa": true},
+ {"id": "only",         "nombre": "Only",            "dominio": "www.only.cl",           "tipo": "shopify", "activa": true},
+ {"id": "wildlama",     "nombre": "Wild Lama",       "dominio": "www.wildlama.cl",       "tipo": "shopify", "activa": true},
+ {"id": "volkanica",    "nombre": "Volkanica",       "dominio": "www.volkanica.cl",      "tipo": "shopify", "activa": true},
+ {"id": "intime",       "nombre": "Intime",          "dominio": "www.intime.cl",         "tipo": "vtex",    "activa": true},
  {"id": "colloky",      "nombre": "Colloky",         "dominio": "www.colloky.cl",        "tipo": "shopify", "activa": false, "nota": "Shopify con compresión no estándar; pendiente."},
  {"id": "ellus",        "nombre": "Ellus",           "dominio": "www.ellus.cl",          "tipo": "shopify", "activa": false, "nota": "Shopify con compresión no estándar; pendiente."},
  {"id": "reebok",       "nombre": "Reebok",          "dominio": "www.reebok.cl",         "tipo": "shopify", "activa": false, "nota": "Shopify con compresión no estándar; pendiente."},
@@ -35,5 +41,9 @@
  {"id": "ahumada",      "nombre": "Farmacias Ahumada","dominio": "www.farmaciasahumada.cl","tipo": "especial", "activa": false, "nota": "Salesforce sin datos en la grilla. Candidata a lector propio."},
  {"id": "puma",         "nombre": "Puma",            "dominio": "cl.puma.com",           "tipo": "especial", "activa": false, "nota": "Magento sin catálogo público."},
  {"id": "northface",    "nombre": "The North Face",  "dominio": "www.thenorthface.cl",   "tipo": "especial", "activa": false, "nota": "Magento, bloquea consultas (403)."},
+ {"id": "io",           "nombre": "iO",              "dominio": "www.iochile.cl",        "tipo": "especial", "activa": false, "nota": "Plataforma propia (Magento con portada Next.js)."},
+ {"id": "ash",          "nombre": "Ash",             "dominio": "www.ash.cl",            "tipo": "especial", "activa": false, "nota": "Plataforma propia (Next.js)."},
+ {"id": "desigual",     "nombre": "Desigual",        "dominio": "www.desigual.com",      "tipo": "especial", "activa": false, "nota": "Salesforce global; sin tienda chilena propia."},
+ {"id": "wados",        "nombre": "Wados",           "dominio": "www.wados.cl",          "tipo": "especial", "activa": false, "nota": "Bloquea consultas desde servidores (403)."},
  {"id": "mercadolibre", "nombre": "Mercado Libre",   "dominio": "www.mercadolibre.cl",   "tipo": "especial", "activa": false, "nota": "Su API exige registrarse como desarrollador."}
 ]
