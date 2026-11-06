@@ -1,10 +1,10 @@
 {
- "actualizado": "2026-11-06T15:44+00:00",
+ "actualizado": "2026-11-06T15:49+00:00",
  "tiendas": [
   {
    "tienda": "Hites",
    "ok": true,
-   "ofertas": 1875
+   "ofertas": 1868
   },
   {
    "tienda": "Fashion's Park",
@@ -50,21 +50,6 @@
    "tienda": "Lounge",
    "ok": true,
    "ofertas": 141
-  },
-  {
-   "tienda": "Colloky",
-   "ok": false,
-   "error": "Respuesta inesperada: no respondió como tienda Shopify."
-  },
-  {
-   "tienda": "Ellus",
-   "ok": false,
-   "error": "Respuesta inesperada: no respondió como tienda Shopify."
-  },
-  {
-   "tienda": "Reebok",
-   "ok": false,
-   "error": "Respuesta inesperada: no respondió como tienda Shopify."
   }
  ]
 }
