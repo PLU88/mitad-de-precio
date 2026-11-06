@@ -547,7 +547,7 @@ def recolectar_falabella(tienda):
 
 
 # ---------------------------------------------------------------- Magento leyendo la grilla HTML (iO, Ash)
-BLOQUE_MAGENTO = re.compile(r'<li class="item product product-item"')
+BLOQUE_MAGENTO = re.compile(r'<li[^>]*class="[^"]*\bproduct-item\b')
 
 
 def leer_grilla_magento(tienda, texto):

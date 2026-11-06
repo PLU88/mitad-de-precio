@@ -130,5 +130,10 @@
  {"id": "humana", "nombre": "Humana", "dominio": "humanastore.cl", "tipo": "shopify"},
  {"id": "jacinta", "nombre": "Jacinta", "dominio": "jacintatienda.cl", "tipo": "shopify"},
  {"id": "anastassia", "nombre": "Anastassia", "dominio": "www.anastassia.cl", "tipo": "shopify"},
- {"id": "aymaria", "nombre": "Ay María", "dominio": "www.aymariatienda.cl", "tipo": "especial", "activa": false, "nota": "La tienda está cerrada con contraseña."}
+ {"id": "aymaria", "nombre": "Ay María", "dominio": "www.aymariatienda.cl", "tipo": "especial", "activa": false, "nota": "La tienda está cerrada con contraseña."},
+ {"id": "stern", "nombre": "Stern", "dominio": "stern.cl", "tipo": "magento"},
+ {"id": "surprice", "nombre": "Surprice", "dominio": "www.surprice.cl", "tipo": "magento_html", "max_paginas": 25, "categorias": ["ofertas/liquidacion", "ofertas/zapatillazo-desde-50", "cyber", "ofertas"]},
+ {"id": "kliper", "nombre": "Kliper", "dominio": "www.kliper.cl", "tipo": "magento_html", "max_paginas": 40, "categorias": ["ofertas/todo-mujer", "ofertas/todo-hombre", "ofertas", "plp/mid-season-sale"]},
+ {"id": "todomoda", "nombre": "Todo Moda", "dominio": "cl.todomoda.com", "tipo": "magento_html", "genero": "Mujer", "categorias": ["flash-sale.html"]},
+ {"id": "cannonhome", "nombre": "Cannon Home", "dominio": "cannonhome.cl", "tipo": "especial", "activa": false, "nota": "Magento con API cerrada (403) y grilla propia; por revisar."}
 ]
