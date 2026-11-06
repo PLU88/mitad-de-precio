@@ -1,0 +1,120 @@
+{
+ "actualizado": "2026-11-06T15:30+00:00",
+ "tiendas": [
+  {
+   "tienda": "Paris",
+   "ok": false,
+   "error": "La tienda bloqueó la consulta (error 403). Desactívala en tiendas.json."
+  },
+  {
+   "tienda": "Easy",
+   "ok": false,
+   "error": "La tienda bloqueó la consulta (error 403). Desactívala en tiendas.json."
+  },
+  {
+   "tienda": "Jumbo",
+   "ok": false,
+   "error": "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+  },
+  {
+   "tienda": "Santa Isabel",
+   "ok": false,
+   "error": "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+  },
+  {
+   "tienda": "Unimarc",
+   "ok": false,
+   "error": "La tienda respondió con error 500."
+  },
+  {
+   "tienda": "Hites",
+   "ok": false,
+   "error": "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+  },
+  {
+   "tienda": "La Polar",
+   "ok": false,
+   "error": "No respondió como tienda VTEX: usa otra plataforma o bloquea consultas."
+  },
+  {
+   "tienda": "abc",
+   "ok": false,
+   "error": "No respondió como tienda VTEX: usa otra plataforma o bloquea consultas."
+  },
+  {
+   "tienda": "Tricot",
+   "ok": false,
+   "error": "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+  },
+  {
+   "tienda": "Corona",
+   "ok": false,
+   "error": "No se pudo conectar: <urlopen error [Errno -3] Temporary failure in name resolution>"
+  },
+  {
+   "tienda": "Fashion's Park",
+   "ok": false,
+   "error": "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+  },
+  {
+   "tienda": "Casaideas",
+   "ok": false,
+   "error": "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+  },
+  {
+   "tienda": "PC Factory",
+   "ok": false,
+   "error": "No respondió como tienda VTEX: usa otra plataforma o bloquea consultas."
+  },
+  {
+   "tienda": "Nike",
+   "ok": false,
+   "error": "La tienda bloqueó la consulta (error 403). Desactívala en tiendas.json."
+  },
+  {
+   "tienda": "Puma",
+   "ok": false,
+   "error": "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+  },
+  {
+   "tienda": "Skechers",
+   "ok": false,
+   "error": "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+  },
+  {
+   "tienda": "The North Face",
+   "ok": false,
+   "error": "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+  },
+  {
+   "tienda": "Decathlon",
+   "ok": false,
+   "error": "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+  },
+  {
+   "tienda": "Rockford",
+   "ok": false,
+   "error": "No se pudo conectar: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)>"
+  },
+  {
+   "tienda": "Hush Puppies",
+   "ok": false,
+   "error": "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+  },
+  {
+   "tienda": "Cruz Verde",
+   "ok": false,
+   "error": "No respondió como tienda VTEX: usa otra plataforma o bloquea consultas."
+  },
+  {
+   "tienda": "Salcobrand",
+   "ok": false,
+   "error": "La tienda respondió con error 301."
+  },
+  {
+   "tienda": "Farmacias Ahumada",
+   "ok": false,
+   "error": "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+  }
+ ]
+}
