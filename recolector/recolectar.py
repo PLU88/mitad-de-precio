@@ -148,7 +148,7 @@ def nueva_oferta(tienda, pid, nombre, marca, cat_tienda, precio, normal, imagen,
         "imagen": imagen or "",
         "url": url,
     }
-    generos = genero(nombre, cat_tienda, pistas, url)
+    generos = genero(nombre, cat_tienda, pistas, url) or ([tienda["genero"]] if tienda.get("genero") and categoria in CON_TALLAS else [])
     if generos:
         oferta["genero"] = generos
     if not tallas:
@@ -545,7 +545,87 @@ def recolectar_falabella(tienda):
     return ofertas
 
 
-RECOLECTORES = {"shopify": recolectar_shopify, "sfcc": recolectar_sfcc, "vtex": recolectar_vtex,
+# ---------------------------------------------------------------- Magento leyendo la grilla HTML (iO, Ash)
+BLOQUE_MAGENTO = re.compile(r'<li class="item product product-item"')
+
+
+def leer_grilla_magento(tienda, texto):
+    productos = []
+    cortes = [m.start() for m in BLOQUE_MAGENTO.finditer(texto)] + [len(texto)]
+    for ini, fin in zip(cortes, cortes[1:]):
+        trozo = texto[ini:fin]
+        pid = re.search(r'data-product-id="(\d+)"', trozo)
+        final = re.search(r'data-price-amount="([0-9.]+)"\s+data-price-type="finalPrice"', trozo)
+        antes = re.search(r'data-price-amount="([0-9.]+)"\s+data-price-type="oldPrice"', trozo)
+        enlace = re.search(r'class="product-item-link"[^>]*href="([^"]+)"|href="([^"]+)"[^>]*class="product-item-link"', trozo)
+        nombre = re.search(r'class="product-item-link"[^>]*>(.*?)</a>', trozo, re.S)
+        imagen = re.search(r'class="product-image-photo"[^>]*src="([^"]+)"|src="([^"]+)"[^>]*class="product-image-photo"', trozo)
+        if not (pid and final and antes and enlace and nombre):
+            continue
+        texto_nombre = html.unescape(re.sub(r"<[^>]+>", " ", nombre.group(1)))
+        tallas_oferta = re.findall(r'option-label="([^"]+)"[^>]*data-attribute-code="(?:size|talla)', trozo)
+        productos.append(nueva_oferta(
+            tienda, pid.group(1), re.sub(r"\s+", " ", texto_nombre).strip().capitalize(), tienda["nombre"], "",
+            float(final.group(1)), float(antes.group(1)),
+            html.unescape(next(g for g in imagen.groups() if g)) if imagen else "",
+            html.unescape(next(g for g in enlace.groups() if g)), tallas_oferta))
+    return productos
+
+
+def recolectar_magento_html(tienda):
+    """Recorre las categorías indicadas en tiendas.json, página por página (36 productos por página)."""
+    ofertas, vistos = [], set()
+    for categoria in tienda["categorias"]:
+        for pagina in range(1, tienda.get("max_paginas", 15) + 1):
+            url = f"https://{tienda['dominio']}/{categoria}?p={pagina}&product_list_limit=36"
+            productos = leer_grilla_magento(tienda, pedir(url, acepta="text/html"))
+            nuevos = [o for o in productos if o["id"] not in vistos]
+            vistos.update(o["id"] for o in productos)
+            ofertas += [o for o in nuevos if o["descuento"] >= DESCUENTO_MINIMO]
+            if not nuevos:
+                break  # Magento repite la última página cuando se acaban
+            time.sleep(PAUSA_SEGUNDOS)
+    return ofertas
+
+
+# ---------------------------------------------------------------- PrestaShop leyendo el listado de rebajas (El Volcán)
+def leer_listado_prestashop(tienda, texto):
+    productos = []
+    nombres = list(re.finditer(r'<span class="digi-product-name">(.*?)</span>', texto, re.S))
+    for i, m in enumerate(nombres):
+        antes = texto[max(0, m.start() - 2500):m.start()]
+        despues = texto[m.end():nombres[i + 1].start() if i + 1 < len(nombres) else m.end() + 5000]
+        enlace = re.findall(r'<a href="(https?://[^"]+\.html)"', antes)
+        imagen = re.findall(r'<img[^>]+src="(https?://[^"]+)"', antes)
+        marca = re.findall(r'<h3 class="digi-product-brand">(.*?)</h3>', antes)
+        final = re.search(r'digi-product-price-final">\s*\$?\s*([0-9.]+)', despues)
+        normal = re.search(r'class="regular-price">\s*\$?\s*([0-9.]+)', despues)
+        pid = re.search(r'-(\d+)\.html$', enlace[-1]) if enlace else None
+        if not (enlace and final and normal and pid):
+            continue
+        productos.append(nueva_oferta(
+            tienda, pid.group(1), html.unescape(m.group(1)).strip(),
+            html.unescape(marca[-1]).replace("\xa0", " ").strip() if marca else "", enlace[-1],
+            a_numero(final.group(1)), a_numero(normal.group(1)), imagen[-1] if imagen else "", enlace[-1]))
+    return productos
+
+
+def recolectar_prestashop_html(tienda):
+    ofertas, vistos = [], set()
+    for pagina in range(1, tienda.get("max_paginas", 30) + 1):
+        url = f"https://{tienda['dominio']}{tienda.get('listado', '/productos-rebajados')}?page={pagina}"
+        productos = [o for o in leer_listado_prestashop(tienda, pedir(url, acepta="text/html")) if o["id"] not in vistos]
+        if not productos:
+            if pagina == 1:
+                raise ValueError("el listado de rebajas llegó vacío")
+            break
+        vistos.update(o["id"] for o in productos)
+        ofertas += [o for o in productos if o["descuento"] >= DESCUENTO_MINIMO]
+        time.sleep(PAUSA_SEGUNDOS)
+    return ofertas
+
+
+RECOLECTORES = {"shopify": recolectar_shopify, "magento_html": recolectar_magento_html, "prestashop_html": recolectar_prestashop_html, "sfcc": recolectar_sfcc, "vtex": recolectar_vtex,
                 "magento": recolectar_magento, "woo": recolectar_woo, "falabella": recolectar_falabella}
 
 
