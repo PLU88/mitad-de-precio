@@ -1,10 +1,10 @@
 {
- "actualizado": "2026-11-06T17:03+00:00",
+ "actualizado": "2026-11-06T17:37+00:00",
  "tiendas": [
   {
    "tienda": "Hites",
    "ok": true,
-   "ofertas": 1868
+   "ofertas": 1637
   },
   {
    "tienda": "Fashion's Park",
@@ -44,7 +44,7 @@
   {
    "tienda": "Blockstore",
    "ok": true,
-   "ofertas": 91
+   "ofertas": 90
   },
   {
    "tienda": "Lounge",
@@ -80,6 +80,51 @@
    "tienda": "Intime",
    "ok": true,
    "ofertas": 4
+  },
+  {
+   "tienda": "Umbrale",
+   "ok": true,
+   "ofertas": 179
+  },
+  {
+   "tienda": "Columbia",
+   "ok": false,
+   "error": "La tienda no publica ese catálogo (error 404)."
+  },
+  {
+   "tienda": "abc",
+   "ok": false,
+   "error": "Respuesta inesperada: la grilla de productos llegó vacía."
+  },
+  {
+   "tienda": "Lineatre",
+   "ok": true,
+   "ofertas": 150
+  },
+  {
+   "tienda": "Locura LPK",
+   "ok": true,
+   "ofertas": 48
+  },
+  {
+   "tienda": "Raindoor",
+   "ok": true,
+   "ofertas": 131
+  },
+  {
+   "tienda": "Rockford",
+   "ok": true,
+   "ofertas": 419
+  },
+  {
+   "tienda": "Doite",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Nicopoly",
+   "ok": true,
+   "ofertas": 61
   }
  ]
 }
