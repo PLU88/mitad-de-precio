@@ -317,8 +317,8 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
       aviso.hidden = false;
       aviso.innerHTML = "<strong>Datos de demostración.</strong> Estos productos y precios son ejemplos para probar la página; no son ofertas reales, por eso el botón busca un artículo parecido en la tienda. Con el recolector funcionando, cada botón abre la ficha exacta del producto en oferta.";
     } else if (actualizado) {
-      $("pie").textContent = "Actualizado: " + new Date(actualizado).toLocaleString("es-CL", { dateStyle: "medium", timeStyle: "short" }) +
-        ". Los precios y el stock los fija cada tienda y pueden cambiar. Revisa el precio final antes de comprar.";
+      $("pie").textContent = "Actualizado el " + new Date(actualizado).toLocaleString("es-CL", { dateStyle: "medium", timeStyle: "short" }) +
+        " · Los precios y el stock los fija cada tienda y pueden cambiar. Revisa el precio final antes de comprar.";
     }
     render();
   }

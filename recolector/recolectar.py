@@ -118,12 +118,12 @@ def calcular_descuento(precio, normal):
 CATEGORIAS = [
     ("Calzado", r"zapat|zapatill|bot[ai]n|\bbotas?\b|sandal|calzado|chala|pantufl|mocas|sneaker|\bshoes?\b|clog|zueco"),
     ("Deportes", r"deport|running|trekking|outdoor|bicicl|fitness|yoga|camping|\bgym\b|futbol|fútbol"),
+    ("Accesorios", r"mochila|bolso|cartera|billetera|gorr[oa]|jockey|lentes|reloj|cintur[oó]n|calcet|bufanda|guantes|accesorio|maleta|equipaje|porta ?celular|funda|carcasa"),
     ("Tecnología", r"notebook|celular|smartphone|tablet|\btv\b|televis|monitor|audífon|audifon|parlante|consola|tecnolog|computador|smartwatch|cámara"),
     ("Electrohogar", r"refriger|lavadora|secadora|microond|horno|freidora|aspirador|cafetera|hervidor|licuadora|electrohogar|cocina a gas|estufa"),
     ("Muebles y hogar", r"sof[aá]|silla|mesa|cama|colch[oó]n|plum[oó]n|s[aá]bana|almohad|mueble|cortina|alfombra|hogar|decoraci|vajilla|toalla|bater[ií]a de cocina|l[aá]mpara"),
     ("Belleza y salud", r"perfum|crema|shampoo|maquill|belleza|cosm[eé]t|farmacia|vitamin|dermo|protector solar|colonia"),
     ("Infantil", r"infantil|beb[eé]|niñ[oa]s?|kids|juguet|junior|escolar"),
-    ("Accesorios", r"mochila|bolso|cartera|billetera|gorr[oa]|jockey|lentes|reloj|cintur[oó]n|calcet|bufanda|guantes|accesorio|maleta|equipaje"),
     ("Vestuario", r"polera|poler[oó]n|pantal[oó]n|jean|chaqueta|parka|vestido|camisa|blusa|falda|short|calza|buzo|sweater|chaleco|abrigo|ropa|vestuario|polar|cortaviento|traje de baño|bikini|pijama|\btop\b|jacket|hoodie|t-shirt|tee\b"),
 ]
 
