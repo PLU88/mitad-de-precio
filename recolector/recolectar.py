@@ -24,6 +24,7 @@ import html
 import json
 import os
 import re
+import ssl
 import sys
 import time
 import urllib.error
@@ -40,6 +41,14 @@ DESCUENTO_MINIMO = 50          # % mínimo para guardar una oferta
 MAX_PAGINAS = 40               # tope de páginas por tienda
 PAUSA_SEGUNDOS = 1.0           # pausa entre consultas, para no sobrecargar a la tienda
 DIAS_HISTORIAL = 60
+# Algunas tiendas tienen su certificado de seguridad incompleto: los navegadores lo completan solos,
+# Python no. Para esas tiendas ("ssl_flexible": true en tiendas.json) se omite esa verificación.
+# Solo se leen precios públicos, así que no se expone ningún dato.
+SSL_FLEXIBLE = ssl.create_default_context()
+SSL_FLEXIBLE.check_hostname = False
+SSL_FLEXIBLE.verify_mode = ssl.CERT_NONE
+_ssl_actual = None
+
 USER_AGENT = ("Mozilla/5.0 (compatible; MitadDePrecioBot/1.0; "
               "+https://plu88.github.io/mitad-de-precio/)")
 
@@ -72,7 +81,7 @@ def pedir(url, intentos=3, acepta="application/json"):
             req = urllib.request.Request(url, headers={
                 "User-Agent": USER_AGENT, "Accept": acepta, "Accept-Language": "es-CL,es;q=0.9",
                 "Accept-Encoding": "gzip"})
-            with urllib.request.urlopen(req, timeout=40) as r:
+            with urllib.request.urlopen(req, timeout=40, context=_ssl_actual) as r:
                 crudo = r.read()
             if crudo[:2] == b"\x1f\x8b":
                 crudo = gzip.decompress(crudo)
@@ -357,8 +366,10 @@ def main():
 
     hoy = dt.date.today().isoformat()
     todas, estado = [], []
+    global _ssl_actual
     for tienda in tiendas:
         inicio = time.time()
+        _ssl_actual = SSL_FLEXIBLE if tienda.get("ssl_flexible") else None
         try:
             recolector = RECOLECTORES[tienda.get("tipo", "vtex")]
             ofertas = recolector(tienda)
