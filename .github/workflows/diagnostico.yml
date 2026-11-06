@@ -1,0 +1,22 @@
+name: Diagnóstico de tiendas
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diagnostico:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: >
+          python herramientas/diagnostico.py
+          www.paris.cl www.easy.cl www.jumbo.cl www.santaisabel.cl www.unimarc.cl www.hites.com
+          www.lapolar.cl www.abc.cl www.tricot.cl www.fashionspark.com www.casaideas.cl www.pcfactory.cl
+          www.nike.cl cl.puma.com www.skechers.cl www.thenorthface.cl www.decathlon.cl www.hushpuppies.cl
+          www.cruzverde.cl www.salcobrand.cl www.farmaciasahumada.cl www.rockford.cl
+          www.falabella.com www.sodimac.cl www.tottus.cl simple.ripley.cl www.lider.cl www.adidas.cl
+          www.zara.com www2.hm.com www.corona.cl www.casaideas.com www.dafiti.cl www.mercadolibre.cl
