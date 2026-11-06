@@ -1,10 +1,10 @@
 {
- "actualizado": "2026-11-06T17:37+00:00",
+ "actualizado": "2026-11-06T17:47+00:00",
  "tiendas": [
   {
    "tienda": "Hites",
    "ok": true,
-   "ofertas": 1637
+   "ofertas": 1837
   },
   {
    "tienda": "Fashion's Park",
@@ -88,13 +88,13 @@
   },
   {
    "tienda": "Columbia",
-   "ok": false,
-   "error": "La tienda no publica ese catálogo (error 404)."
+   "ok": true,
+   "ofertas": 201
   },
   {
    "tienda": "abc",
-   "ok": false,
-   "error": "Respuesta inesperada: la grilla de productos llegó vacía."
+   "ok": true,
+   "ofertas": 657
   },
   {
    "tienda": "Lineatre",
