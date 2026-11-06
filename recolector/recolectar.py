@@ -370,6 +370,10 @@ def main():
             estado.append({"tienda": tienda["nombre"], "ok": False, "error": motivo})
             print(f"✘ {tienda['nombre']}: {motivo}")
 
+    # descartar precios de relleno ("antes $999.999") y rebajas imposibles (95% o más)
+    todas = [o for o in todas
+             if not re.fullmatch(r"9{5,}", str(o["precio_normal"])) and o["descuento"] < 95]
+
     # quitar duplicados (mismo id) quedándose con el mayor descuento
     unicas = {}
     for o in todas:
