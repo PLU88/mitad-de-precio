@@ -23,9 +23,11 @@ import gzip
 import html
 import json
 import os
+import concurrent.futures
 import re
 import ssl
 import sys
+import threading
 import time
 import urllib.error
 import urllib.parse
@@ -47,7 +49,8 @@ DIAS_HISTORIAL = 60
 SSL_FLEXIBLE = ssl.create_default_context()
 SSL_FLEXIBLE.check_hostname = False
 SSL_FLEXIBLE.verify_mode = ssl.CERT_NONE
-_ssl_actual = None
+_local = threading.local()   # cada tienda se revisa en su propio hilo
+TIENDAS_A_LA_VEZ = 8
 
 USER_AGENT = ("Mozilla/5.0 (compatible; MitadDePrecioBot/1.0; "
               "+https://plu88.github.io/mitad-de-precio/)")
@@ -81,7 +84,7 @@ def pedir(url, intentos=3, acepta="application/json"):
             req = urllib.request.Request(url, headers={
                 "User-Agent": USER_AGENT, "Accept": acepta, "Accept-Language": "es-CL,es;q=0.9",
                 "Accept-Encoding": "gzip"})
-            with urllib.request.urlopen(req, timeout=40, context=_ssl_actual) as r:
+            with urllib.request.urlopen(req, timeout=40, context=getattr(_local, "ssl", None)) as r:
                 crudo = r.read()
             if crudo[:2] == b"\x1f\x8b":
                 crudo = gzip.decompress(crudo)
@@ -276,9 +279,9 @@ def recolectar_sfcc(tienda):
     base = f"https://{tienda['dominio']}/on/demandware.store/Sites-{tienda['sitio']}-Site/default/Search-UpdateGrid"
     regla = tienda.get("orden", "discount-off")
     ofertas, vistos = [], set()
-    for pagina in range(MAX_PAGINAS):
-        url = f"{base}?cgid={tienda.get('categoria', 'root')}&srule={regla}&start={pagina * 48}&sz=48"
-        lector = leer_grilla_abc if tienda.get("formato") == "abc" else leer_grilla_sfcc
+    for pagina in range(tienda.get("max_paginas", MAX_PAGINAS)):
+        url = f"{base}?cgid={tienda.get('categoria', 'root')}&start={pagina * 48}&sz=48" + (f"&srule={regla}" if regla else "")
+        lector = {"abc": leer_grilla_abc, "generica": leer_grilla_sfcc_generica}.get(tienda.get("formato"), leer_grilla_sfcc)
         productos = lector(tienda, pedir(url, acepta="text/html"))
         if not productos:
             if pagina == 0:
@@ -337,7 +340,169 @@ def recolectar_vtex(tienda):
     return ofertas
 
 
-RECOLECTORES = {"shopify": recolectar_shopify, "sfcc": recolectar_sfcc, "vtex": recolectar_vtex}
+# ---------------------------------------------------------------- Salesforce genérico (precios en content="...")
+TILE_PID = re.compile(r'data-pid="([^"]+)"')
+
+
+def leer_grilla_sfcc_generica(tienda, texto):
+    """Grillas Salesforce que muestran el precio normal (list/strike) y el de venta (sales) como content="…"."""
+    productos, cortes, ultimo = [], [], None
+    for m in TILE_PID.finditer(texto):
+        if m.group(1) != ultimo:
+            cortes.append((m.start(), m.group(1)))
+            ultimo = m.group(1)
+    for i, (ini, pid) in enumerate(cortes):
+        fin = cortes[i + 1][0] if i + 1 < len(cortes) else len(texto)
+        trozo = texto[ini:fin]
+        venta = normal = 0.0
+        for m in re.finditer(r'content="([0-9]+(?:\.[0-9]+)?)"', trozo):
+            antes = trozo[max(0, m.start() - 300):m.start()]
+            pos_venta = antes.rfind("sales")
+            pos_normal = max(antes.rfind("list"), antes.rfind("strike"), antes.rfind("price-normal"))
+            valor = float(m.group(1))
+            if pos_venta > pos_normal and not venta:
+                venta = valor
+            elif pos_normal > pos_venta and not normal:
+                normal = valor
+        enlace = re.search(r'href="((?:https?://[^"/]+)?/[^"?]+?\.html)', trozo)
+        nombre = (re.search(r'class="pdp-link"[^>]*>\s*<a[^>]*>\s*([^<\s][^<]{3,199})<', trozo)
+                  or re.search(r'<img[^>]+title="([^"]{4,200})"', trozo)
+                  or re.search(r'<img[^>]+alt="([^"]{4,200})"', trozo))
+        imagen = re.search(r'<img[^>]+(?:data-src|src)="(https?://[^"]+?\.(?:jpg|jpeg|png|webp)[^"]*)"', trozo)
+        if not (venta and normal and enlace and nombre):
+            continue
+        productos.append(nueva_oferta(
+            tienda, pid, html.unescape(nombre.group(1)).strip(), "", "", venta, normal,
+            html.unescape(imagen.group(1)) if imagen else "",
+            urllib.parse.urljoin(f"https://{tienda['dominio']}/", html.unescape(enlace.group(1)))))
+    return productos
+
+
+# ---------------------------------------------------------------- Magento (GraphQL público)
+CONSULTA_MAGENTO = ('{products(search:"",pageSize:100,currentPage:%d){total_count items{name sku url_key url_suffix '
+                    'stock_status small_image{url} categories{name} price_range{minimum_price{regular_price{value} '
+                    'final_price{value}}}}}}')
+
+
+def recolectar_magento(tienda):
+    ofertas = []
+    sufijo = tienda.get("sufijo_url", ".html")
+    for pagina in range(1, tienda.get("max_paginas", 60) + 1):
+        url = f"https://{tienda['dominio']}/graphql?query=" + urllib.parse.quote(CONSULTA_MAGENTO % pagina)
+        datos = pedir_json(url)
+        try:
+            items = datos["data"]["products"]["items"]
+        except (TypeError, KeyError):
+            if pagina == 1:
+                raise ValueError("no respondió como tienda Magento")
+            break
+        if not items:
+            break
+        for it in items:
+            if it.get("stock_status") == "OUT_OF_STOCK":
+                continue
+            precios = (it.get("price_range") or {}).get("minimum_price") or {}
+            precio = a_numero((precios.get("final_price") or {}).get("value"))
+            normal = a_numero((precios.get("regular_price") or {}).get("value"))
+            if calcular_descuento(precio, normal) < DESCUENTO_MINIMO or not it.get("url_key"):
+                continue
+            cats = [c.get("name", "") for c in it.get("categories") or []]
+            ofertas.append(nueva_oferta(
+                tienda, it.get("sku"), it.get("name"), "", " ".join(cats[:3]), precio, normal,
+                (it.get("small_image") or {}).get("url", ""),
+                f"https://{tienda['dominio']}/{it['url_key']}{it.get('url_suffix') or sufijo}"))
+        time.sleep(PAUSA_SEGUNDOS)
+    return ofertas
+
+
+# ---------------------------------------------------------------- WooCommerce (Store API pública)
+def recolectar_woo(tienda):
+    ofertas = []
+    for pagina in range(1, MAX_PAGINAS + 1):
+        datos = pedir_json(f"https://{tienda['dominio']}/wp-json/wc/store/v1/products?on_sale=true&per_page=100&page={pagina}")
+        if not isinstance(datos, list):
+            if pagina == 1:
+                raise ValueError("no respondió como tienda WooCommerce")
+            break
+        if not datos:
+            break
+        for p in datos:
+            pr = p.get("prices") or {}
+            div = 10 ** int(pr.get("currency_minor_unit") or 0)
+            precio = a_numero(pr.get("sale_price") or pr.get("price")) / div
+            normal = a_numero(pr.get("regular_price")) / div
+            if not p.get("is_in_stock", True) or calcular_descuento(precio, normal) < DESCUENTO_MINIMO:
+                continue
+            imgs = p.get("images") or []
+            cats = [c.get("name", "") for c in p.get("categories") or []]
+            ofertas.append(nueva_oferta(
+                tienda, p.get("id"), html.unescape(p.get("name") or ""), "", " ".join(cats[:2]), precio, normal,
+                imgs[0].get("src", "") if imgs else "", p.get("permalink") or ""))
+        time.sleep(PAUSA_SEGUNDOS)
+    return ofertas
+
+
+# ---------------------------------------------------------------- Falabella / Sodimac (datos de la página)
+TERMINOS_FALABELLA = [
+    "zapatillas", "zapatos", "botines", "sandalias", "polera", "poleron", "chaqueta", "parka", "pantalon", "jeans",
+    "vestido", "blusa", "camisa", "short", "pijama", "ropa interior", "traje de baño", "mochila", "cartera", "billetera",
+    "reloj", "lentes de sol", "perfume", "maquillaje", "crema", "sabanas", "plumon", "toalla", "cortina", "alfombra",
+    "sofa", "colchon", "cama", "mesa", "silla", "lampara", "olla", "sarten", "vajilla", "freidora", "aspiradora",
+    "cafetera", "televisor", "notebook", "celular", "audifonos", "parlante", "smartwatch", "juguete", "bicicleta",
+    "carpa", "maleta", "herramientas", "taladro", "organizador", "decoracion",
+]
+FILTRO_50 = "f.range.derived.variant.discount=50%25+dcto+y+m%C3%A1s"
+NEXT_DATA = re.compile(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', re.S)
+
+
+def precios_falabella(lista):
+    """Precio normal = el tachado; precio actual = el menor no tachado, sin contar el exclusivo con tarjeta (CMR)."""
+    normal, actuales = 0.0, []
+    for p in lista or []:
+        valor = a_numero((p.get("price") or [""])[0])
+        if not valor:
+            continue
+        if p.get("crossed") or p.get("type") == "normalPrice":
+            normal = max(normal, valor)
+        elif p.get("type") != "cmrPrice":
+            actuales.append(valor)
+    return (min(actuales) if actuales else 0.0), normal
+
+
+def recolectar_falabella(tienda):
+    base = f"https://{tienda['dominio']}/{tienda['sitio']}/search"
+    ofertas, vistos, fallos = [], set(), 0
+    for termino in tienda.get("terminos", TERMINOS_FALABELLA):
+        for pagina in range(1, tienda.get("paginas_por_termino", 2) + 1):
+            url = f"{base}?Ntt={urllib.parse.quote(termino)}&{FILTRO_50}&page={pagina}"
+            try:
+                m = NEXT_DATA.search(pedir(url, acepta="text/html"))
+                resultados = json.loads(m.group(1))["props"]["pageProps"].get("results") or [] if m else []
+            except Exception:
+                fallos += 1
+                if fallos >= 5 and not ofertas:
+                    raise
+                break
+            if not resultados:
+                break
+            for r in resultados:
+                pid = r.get("productId")
+                if not pid or pid in vistos:
+                    continue
+                vistos.add(pid)
+                precio, normal = precios_falabella(r.get("prices"))
+                if calcular_descuento(precio, normal) < DESCUENTO_MINIMO:
+                    continue
+                imagenes = r.get("mediaUrls") or []
+                ofertas.append(nueva_oferta(
+                    tienda, pid, r.get("displayName"), r.get("brand", "").title(), termino, precio, normal,
+                    imagenes[0] if imagenes else "", r.get("url") or ""))
+            time.sleep(PAUSA_SEGUNDOS)
+    return ofertas
+
+
+RECOLECTORES = {"shopify": recolectar_shopify, "sfcc": recolectar_sfcc, "vtex": recolectar_vtex,
+                "magento": recolectar_magento, "woo": recolectar_woo, "falabella": recolectar_falabella}
 
 
 def explicar_error(e):
@@ -403,21 +568,23 @@ def main():
         return 1
 
     hoy = dt.date.today().isoformat()
-    todas, estado = [], []
-    global _ssl_actual
-    for tienda in tiendas:
+    def revisar(tienda):
+        _local.ssl = SSL_FLEXIBLE if tienda.get("ssl_flexible") else None
         inicio = time.time()
-        _ssl_actual = SSL_FLEXIBLE if tienda.get("ssl_flexible") else None
         try:
-            recolector = RECOLECTORES[tienda.get("tipo", "vtex")]
-            ofertas = recolector(tienda)
-            todas.extend(ofertas)
-            estado.append({"tienda": tienda["nombre"], "ok": True, "ofertas": len(ofertas)})
-            print(f"✔ {tienda['nombre']}: {len(ofertas)} ofertas ({time.time() - inicio:.0f}s)")
+            ofertas = RECOLECTORES[tienda.get("tipo", "vtex")](tienda)
+            print(f"✔ {tienda['nombre']}: {len(ofertas)} ofertas ({time.time() - inicio:.0f}s)", flush=True)
+            return ofertas, {"tienda": tienda["nombre"], "ok": True, "ofertas": len(ofertas)}
         except Exception as e:  # una tienda caída no debe botar todo
             motivo = explicar_error(e)
-            estado.append({"tienda": tienda["nombre"], "ok": False, "error": motivo})
-            print(f"✘ {tienda['nombre']}: {motivo}")
+            print(f"✘ {tienda['nombre']}: {motivo}", flush=True)
+            return [], {"tienda": tienda["nombre"], "ok": False, "error": motivo}
+
+    todas, estado = [], []
+    with concurrent.futures.ThreadPoolExecutor(TIENDAS_A_LA_VEZ) as hilos:
+        for ofertas, est in hilos.map(revisar, tiendas):
+            todas.extend(ofertas)
+            estado.append(est)
 
     # descartar precios de relleno ("antes $999.999") y rebajas imposibles (95% o más)
     todas = [o for o in todas

@@ -2,8 +2,13 @@ name: Actualizar ofertas
 
 on:
   schedule:
-    - cron: "17 */6 * * *"   # cada 6 horas
+    - cron: "*/30 * * * *"   # cada 30 minutos (GitHub puede atrasarlo algunos minutos)
   workflow_dispatch:          # botón "Run workflow" para correrlo a mano
+
+# Si una vuelta todavía no termina, la siguiente espera en vez de encimarse.
+concurrency:
+  group: actualizar-ofertas
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -11,7 +16,7 @@ permissions:
 jobs:
   actualizar:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 28
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -19,14 +24,22 @@ jobs:
           python-version: "3.12"
       - name: Instalar cifrado
         run: pip install "cryptography>=42"
+      - name: Traer el historial de precios de la vuelta anterior
+        run: |
+          git fetch --depth 1 origin datos:refs/remotes/origin/datos || true
+          git show origin/datos:datos/historial.json > datos/historial.json 2>/dev/null || echo '{}' > datos/historial.json
       - name: Recolectar ofertas
         run: python recolector/recolectar.py
       - name: Cifrar ofertas
         run: python recolector/cifrar.py
-      - name: Guardar resultados
+      - name: Publicar en la rama "datos" (se reemplaza cada vez, así el repositorio no crece)
         run: |
-          git config user.name "bot-ofertas"
-          git config user.email "bot-ofertas@users.noreply.github.com"
-          git add datos/ofertas.enc datos/estado.json datos/historial.json
-          git diff --staged --quiet || git commit -m "Ofertas actualizadas"
-          git push
+          mkdir -p /tmp/pub/datos
+          if [ -f datos/ofertas.enc ]; then cp datos/ofertas.enc /tmp/pub/datos/;
+          else git show origin/datos:datos/ofertas.enc > /tmp/pub/datos/ofertas.enc; fi
+          cp datos/estado.json datos/historial.json /tmp/pub/datos/
+          cd /tmp/pub
+          git init -q -b datos
+          git add .
+          git -c user.name="bot-ofertas" -c user.email="bot-ofertas@users.noreply.github.com" commit -qm "Ofertas $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" datos

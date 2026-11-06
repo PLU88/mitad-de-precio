@@ -1,4 +1,8 @@
 datos/ofertas.json
+datos/ofertas.enc
+datos/estado.json
+datos/historial.json
 __pycache__/
 node_modules/
 .vercel/
+muestras/
