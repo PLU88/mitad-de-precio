@@ -83,9 +83,9 @@ a { color: inherit; }
 .btn-filtros .num { background: var(--acento); color: #fff; border-radius: 999px; font-size: 12px; min-width: 20px; height: 20px; display: inline-grid; place-items: center; padding: 0 5px; }
 .panel-filtros { border-top: 1px solid var(--linea); padding-top: 10px; display: grid; gap: 14px; max-height: 70vh; overflow: auto; }
 @media (min-width: 720px) { .panel-filtros { grid-template-columns: 1fr 1fr; column-gap: 24px; max-height: none; } .panel-filtros .ancho { grid-column: 1 / -1; } }
-.grupo { display: grid; gap: 6px; min-width: 0; }
+.grupo { display: grid; gap: 6px; min-width: 0; align-content: start; }
 .grupo > b { font-size: 13px; color: var(--tinta-suave); text-transform: uppercase; letter-spacing: .05em; }
-.opciones { display: flex; flex-wrap: wrap; gap: 6px; }
+.opciones { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-start; align-content: flex-start; }
 .opciones.tallas { max-height: 132px; overflow: auto; }
 .opcion { appearance: none; border: 1px solid var(--linea); background: var(--superficie); color: var(--tinta); border-radius: 999px;
   padding: 6px 11px; font: 600 13.5px var(--cuerpo); cursor: pointer; display: inline-flex; gap: 5px; align-items: baseline; }
@@ -418,7 +418,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
       estado.subcategoria = llenar(s, subs, estado.subcategoria, "Tipo: todos", cSub);
       s.disabled = !subs.length;
     } else {
-      estado.subcategoria = llenar(s, [], "", "Tipo (elige categoría)");
+      estado.subcategoria = llenar(s, [], "", "Tipo");
       s.disabled = true;
     }
     // género
