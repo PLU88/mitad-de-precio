@@ -6,3 +6,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 herramientas/sondeo_io.py
+      - run: python3 herramientas/sondear.py herramientas/dominios_nuevos.txt && python3 -c "import json;print(json.dumps(json.load(open('muestras/sondeo.json')),ensure_ascii=False,indent=1)[:12000])"
