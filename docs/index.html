@@ -336,13 +336,19 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   $("mas").addEventListener("click", function () { estado.mostrar += POR_PAGINA; render(); });
 
   // ---------- carga: ofertas.json real, o demo si no existe
-  fetch("ofertas.json", { cache: "no-store" })
-    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function (d) {
-      if (!d || !Array.isArray(d.ofertas) || !d.ofertas.length) throw new Error("vacío");
-      iniciar(d.ofertas, false, d.actualizado);
-    })
-    .catch(function () { iniciar(datosDemo(), true); });
+  // Primero el archivo junto a la página (GitHub Pages); si no está, el del repositorio en GitHub.
+  var FUENTES = ["ofertas.json", "https://raw.githubusercontent.com/PLU88/mitad-de-precio/main/docs/ofertas.json"];
+  function cargar(i) {
+    if (i >= FUENTES.length) { iniciar(datosDemo(), true); return; }
+    fetch(FUENTES[i], { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) {
+        if (!d || !Array.isArray(d.ofertas) || !d.ofertas.length) throw new Error("vacío");
+        iniciar(d.ofertas, false, d.actualizado);
+      })
+      .catch(function () { cargar(i + 1); });
+  }
+  cargar(0);
 })();
 </script>
 </body>
