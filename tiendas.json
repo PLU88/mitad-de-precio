@@ -108,5 +108,11 @@
  {"id": "menajexpress", "nombre": "Menajexpress", "dominio": "menajexpress.cl", "tipo": "woo"},
  {"id": "puntochef", "nombre": "Punto Chef", "dominio": "puntochef.cl", "tipo": "woo"},
  {"id": "lecreuset", "nombre": "Le Creuset", "dominio": "www.lecreuset.cl", "tipo": "especial", "activa": false, "nota": "Salesforce Commerce sin grilla pública conocida; por revisar."},
- {"id": "zuhaus", "nombre": "Zuhaus", "dominio": "zuhaus.cl", "tipo": "especial", "activa": false, "nota": "Respondió 429 (demasiadas consultas); reintentar."}
+ {"id": "zuhaus", "nombre": "Zuhaus", "dominio": "zuhaus.cl", "tipo": "especial", "activa": false, "nota": "Respondió 429 (demasiadas consultas); reintentar."},
+ {"id": "importclick", "nombre": "Importclick", "dominio": "importclick.cl", "tipo": "shopify"},
+ {"id": "eurohome", "nombre": "Eurohome", "dominio": "eurohome.cl", "tipo": "shopify"},
+ {"id": "baima", "nombre": "Baima Family", "dominio": "baimafamily.cl", "tipo": "shopify"},
+ {"id": "jior", "nombre": "Jior", "dominio": "jior.cl", "tipo": "shopify"},
+ {"id": "magentaglass", "nombre": "Magenta Glass", "dominio": "magentaglass.cl", "tipo": "especial", "activa": false, "nota": "Jumpseller: falta un lector para su plataforma."},
+ {"id": "travel", "nombre": "Travel Tienda", "dominio": "tienda.travel.cl", "tipo": "especial", "activa": false, "nota": "No respondió (error de conexión)."}
 ]

@@ -5,4 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python3 herramientas/sondear.py herramientas/dominios_nuevos.txt
+      - run: python3 herramientas/sondeo_io.py
