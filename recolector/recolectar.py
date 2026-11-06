@@ -469,12 +469,28 @@ def precios_falabella(lista):
     return (min(actuales) if actuales else 0.0), normal
 
 
+def url_final(url):
+    """Sigue las redirecciones y devuelve la dirección donde termina (Sodimac lleva la búsqueda a una categoría)."""
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html", "Accept-Encoding": "gzip"})
+    with urllib.request.urlopen(req, timeout=40, context=getattr(_local, "ssl", None)) as r:
+        return r.geturl()
+
+
 def recolectar_falabella(tienda):
     base = f"https://{tienda['dominio']}/{tienda['sitio']}/search"
     ofertas, vistos, fallos = [], set(), 0
     for termino in tienda.get("terminos", TERMINOS_FALABELLA):
+        busqueda = f"{base}?Ntt={urllib.parse.quote(termino)}"
+        if tienda.get("busca_por_categoria"):
+            try:
+                busqueda = url_final(busqueda).split("#")[0]
+            except Exception:
+                continue
+            if "/lista/" not in busqueda and "/category/" not in busqueda:
+                continue  # la búsqueda no llevó a una categoría
+        separador = "&" if "?" in busqueda else "?"
         for pagina in range(1, tienda.get("paginas_por_termino", 2) + 1):
-            url = f"{base}?Ntt={urllib.parse.quote(termino)}&{FILTRO_50}&page={pagina}"
+            url = f"{busqueda}{separador}{FILTRO_50}&page={pagina}"
             try:
                 m = NEXT_DATA.search(pedir(url, acepta="text/html"))
                 resultados = json.loads(m.group(1))["props"]["pageProps"].get("results") or [] if m else []
