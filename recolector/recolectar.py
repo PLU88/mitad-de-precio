@@ -575,17 +575,23 @@ def leer_grilla_magento(tienda, texto):
 
 def recolectar_magento_html(tienda):
     """Recorre las categorías indicadas en tiendas.json, página por página (36 productos por página)."""
-    ofertas, vistos = [], set()
+    ofertas, vistos, errores = [], set(), []
     for categoria in tienda["categorias"]:
         for pagina in range(1, tienda.get("max_paginas", 15) + 1):
             url = f"https://{tienda['dominio']}/{categoria}?p={pagina}&product_list_limit=36"
-            productos = leer_grilla_magento(tienda, pedir(url, acepta="text/html"))
+            try:
+                productos = leer_grilla_magento(tienda, pedir(url, acepta="text/html"))
+            except Exception as e:  # una categoría con problemas no bota las demás
+                errores.append(e)
+                break
             nuevos = [o for o in productos if o["id"] not in vistos]
             vistos.update(o["id"] for o in productos)
             ofertas += [o for o in nuevos if o["descuento"] >= DESCUENTO_MINIMO]
             if not nuevos:
                 break  # Magento repite la última página cuando se acaban
-            time.sleep(PAUSA_SEGUNDOS)
+            time.sleep(tienda.get("pausa", PAUSA_SEGUNDOS))
+    if errores and not vistos:
+        raise errores[0]
     return ofertas
 
 
