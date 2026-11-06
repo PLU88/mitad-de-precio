@@ -154,5 +154,20 @@
  {"id": "belsport", "nombre": "Belsport", "dominio": "www.belsport.cl", "tipo": "especial", "activa": false, "nota": "Protección Cloudflare."},
  {"id": "bold", "nombre": "Bold", "dominio": "www.bold.cl", "tipo": "especial", "activa": false, "nota": "Protección Cloudflare."},
  {"id": "newbalance", "nombre": "New Balance", "dominio": "newbalance.cl", "tipo": "especial", "activa": false, "nota": "Salesforce Commerce; la grilla no respondió."},
- {"id": "casadeldeporte", "nombre": "La Casa del Deporte", "dominio": "lacasadeldeporte.cl", "tipo": "especial", "activa": false, "nota": "No respondió (error de conexión)."}
+ {"id": "casadeldeporte", "nombre": "La Casa del Deporte", "dominio": "lacasadeldeporte.cl", "tipo": "especial", "activa": false, "nota": "No respondió (error de conexión)."},
+ {"id": "charcuteria", "nombre": "La Charcutería Artesanal", "dominio": "lacharcuteriartesanal.cl", "tipo": "shopify"},
+ {"id": "lasalmendras", "nombre": "Las Almendras", "dominio": "las-almendras.cl", "tipo": "shopify"},
+ {"id": "piwen", "nombre": "Piwen", "dominio": "www.piwen.cl", "tipo": "shopify"},
+ {"id": "lacotidiana", "nombre": "La Cotidiana", "dominio": "lacotidiana.cl", "tipo": "shopify"},
+ {"id": "mixgreen", "nombre": "Mixgreen", "dominio": "www.mixgreen.cl", "tipo": "shopify"},
+ {"id": "mercadosilvestre", "nombre": "Mercado Silvestre", "dominio": "mercadosilvestre.cl", "tipo": "shopify"},
+ {"id": "lapunta", "nombre": "Comidas La Punta", "dominio": "comidaslapunta.cl", "tipo": "woo"},
+ {"id": "ccnuts", "nombre": "CC Nuts", "dominio": "ccnuts.cl", "tipo": "woo"},
+ {"id": "lasoberania", "nombre": "La Soberanía", "dominio": "lasoberania.cl", "tipo": "woo"},
+ {"id": "elpistacho", "nombre": "Tostaduría El Pistacho", "dominio": "tostaduriaelpistacho.cl", "tipo": "woo"},
+ {"id": "forkchile", "nombre": "Fork", "dominio": "forkchile.cl", "tipo": "especial", "activa": false, "nota": "Plataforma no identificada."},
+ {"id": "laoferta", "nombre": "La Oferta", "dominio": "laoferta.cl", "tipo": "especial", "activa": false, "nota": "Bloquea consultas desde servidores (403)."},
+ {"id": "lasmellizas", "nombre": "Las Mellizas", "dominio": "www.lasmellizas.com", "tipo": "especial", "activa": false, "nota": "Bsale: falta un lector para su plataforma."},
+ {"id": "booz", "nombre": "Booz", "dominio": "www.booz.cl", "tipo": "especial", "activa": false, "nota": "Plataforma no identificada."},
+ {"id": "pedidosya", "nombre": "PedidosYa", "dominio": "www.pedidosya.cl", "tipo": "especial", "activa": false, "nota": "Aplicación de delivery; no publica un catálogo abierto."}
 ]
