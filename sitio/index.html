@@ -86,16 +86,18 @@ main { max-width: 1180px; margin: 0 auto; padding: 14px 16px 40px; display: grid
 
 .grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 10px; }
 @media (min-width: 720px) { .grilla { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; } }
-.tarjeta { background: var(--superficie); border: 1px solid var(--linea); border-radius: 12px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
-.foto { position: relative; aspect-ratio: 1 / 1; background: var(--fondo); display: grid; place-items: center; }
-.foto img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+.tarjeta { background: var(--superficie); border: 1px solid var(--linea); border-radius: 12px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.foto { position: relative; aspect-ratio: 1 / 1; background: var(--fondo); display: grid; place-items: center; overflow: hidden; }
+.foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #fff; }
 .foto .ph { font: 700 13px var(--cuerpo); color: var(--tinta-suave); text-transform: uppercase; letter-spacing: .06em; text-align: center; padding: 10px; }
-.etiqueta { position: absolute; top: 8px; left: 8px; font: 800 24px/1 var(--display); padding: 5px 8px 4px; border-radius: 6px; }
+.etiqueta { position: absolute; z-index: 1; top: 8px; left: 8px; font: 800 24px/1 var(--display); padding: 5px 8px 4px; border-radius: 6px; }
 .etiqueta.t50 { background: var(--t50); color: var(--t50-tinta); }
 .etiqueta.t60 { background: var(--t60); color: var(--t60-tinta); }
 .etiqueta.t70 { background: var(--t70); color: var(--t70-tinta); }
 .etiqueta.t80 { background: var(--t80); color: var(--t80-tinta); }
-.cuerpo { padding: 10px 11px 12px; display: grid; gap: 6px; align-content: start; }
+.cuerpo { padding: 10px 11px 12px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.cuerpo .boton { margin-top: auto; }
+.nombre, .tienda, .normal { overflow-wrap: anywhere; }
 .tienda { font-size: 12px; font-weight: 700; color: var(--tinta-suave); text-transform: uppercase; letter-spacing: .05em; }
 .nombre { font-size: 14px; font-weight: 500; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .precios { display: grid; gap: 0; }
@@ -244,6 +246,15 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     return lista.sort(cmp);
   }
 
+  // Pide a la tienda una versión pequeña de la foto (carga más rápido en el celular).
+  function fotoLiviana(u) {
+    try {
+      var x = new URL(u);
+      if (x.hostname.indexOf("cdn.shopify.com") >= 0 || x.pathname.indexOf("/cdn/shop/") >= 0) { x.searchParams.set("width", "400"); return x.toString(); }
+      if (x.pathname.indexOf("/dw/image/") >= 0) { x.searchParams.set("sw", "400"); x.searchParams.set("sh", "400"); return x.toString(); }
+      return u;
+    } catch (e) { return u; }
+  }
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
 
   function tarjeta(o) {
@@ -251,7 +262,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     var foto = el("div", "foto");
     var ph = el("div", "ph", o.categoria);
     if (o.imagen) {
-      var img = new Image(); img.loading = "lazy"; img.alt = ""; img.referrerPolicy = "no-referrer"; img.src = o.imagen;
+      var img = new Image(); img.loading = "lazy"; img.alt = ""; img.referrerPolicy = "no-referrer"; img.src = fotoLiviana(o.imagen);
       img.onerror = function () { img.replaceWith(ph); };
       foto.appendChild(img);
     } else foto.appendChild(ph);
