@@ -12,7 +12,8 @@ Cómo funciona, en simple:
        - vtex:    tiendas VTEX publican un catálogo ordenable por descuento.
   3. Se queda con los productos con stock y descuento >= 50%.
   4. Guarda el historial de precios para detectar descuentos "inflados".
-  5. Escribe docs/ofertas.json, que es lo que muestra la página web.
+  5. Escribe datos/ofertas.json; luego cifrar.py lo convierte en datos/ofertas.enc,
+     que solo la página de miembros puede leer.
 
 Solo usa Python estándar: no hay que instalar nada.
 Uso:  python recolector/recolectar.py
@@ -31,9 +32,9 @@ import urllib.request
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ARCHIVO_TIENDAS = os.path.join(RAIZ, "tiendas.json")
-ARCHIVO_SALIDA = os.path.join(RAIZ, "docs", "ofertas.json")
+ARCHIVO_SALIDA = os.path.join(RAIZ, "datos", "ofertas.json")   # no se sube: se cifra
 ARCHIVO_HISTORIAL = os.path.join(RAIZ, "datos", "historial.json")
-ARCHIVO_ESTADO = os.path.join(RAIZ, "docs", "estado.json")
+ARCHIVO_ESTADO = os.path.join(RAIZ, "datos", "estado.json")
 
 DESCUENTO_MINIMO = 50          # % mínimo para guardar una oferta
 MAX_PAGINAS = 40               # tope de páginas por tienda
@@ -293,7 +294,7 @@ RECOLECTORES = {"shopify": recolectar_shopify, "sfcc": recolectar_sfcc, "vtex": 
 
 
 def explicar_error(e):
-    """Traduce el error a algo entendible en docs/estado.json."""
+    """Traduce el error a algo entendible en datos/estado.json."""
     if isinstance(e, urllib.error.HTTPError):
         if e.code in (401, 403):
             return f"La tienda bloqueó la consulta (error {e.code})."

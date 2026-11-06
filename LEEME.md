@@ -1,36 +1,31 @@
-# Mitad de Precio — ofertas del retail chileno con 50% o más
+# Mitad de Precio — ofertas del retail chileno con 50% o más, solo para miembros
 
-Este proyecto tiene dos partes que funcionan solas y gratis en GitHub:
+Sitio: **https://mitad-de-precio.vercel.app** · Panel de administración: **https://mitad-de-precio.vercel.app/admin.html**
 
-1. **El recolector** (`recolector/recolectar.py`): cada 6 horas revisa las tiendas de
-   `tiendas.json`, se queda con los productos con stock y 50% o más de descuento, y guarda el
-   resultado en `docs/ofertas.json`.
-2. **La página web** (`docs/index.html`): muestra esas ofertas con filtros de 50/60/70/80%,
-   tienda, categoría y búsqueda. Si todavía no hay ofertas reales, muestra datos de demostración.
+El proyecto tiene tres partes:
 
-No necesitas servidor ni instalar nada en tu computador.
+1. **El recolector** (`recolector/recolectar.py`, en GitHub): cada 6 horas revisa las tiendas de
+   `tiendas.json` y se queda con los productos con stock y 50% o más de descuento.
+2. **El cifrado** (`recolector/cifrar.py`): guarda esas ofertas cifradas en `datos/ofertas.enc`.
+   Solo el sitio en Vercel tiene la clave para leerlas, así que nadie puede verlas desde GitHub.
+3. **El sitio de miembros** (carpeta `sitio/`, publicado en Vercel): la gente pide acceso, tú la
+   apruebas en el panel, y entra con su correo y un código personal.
 
-## Puesta en marcha (unos 20 minutos)
+## Cómo aprobar miembros
 
-1. **Crea una cuenta en GitHub** en github.com (gratis).
-2. **Crea un repositorio nuevo**: botón verde "New", nombre `mitad-de-precio`, marca **Public**, "Create repository".
-3. **Sube los archivos**: en el repositorio, "uploading an existing file", arrastra *todo el contenido*
-   de esta carpeta (incluida la carpeta oculta `.github`) y presiona "Commit changes".
-   - Si tu computador oculta la carpeta `.github`, créala a mano en GitHub: "Add file" → "Create new file"
-     y escribe como nombre `.github/workflows/actualizar.yml`; pega el contenido de ese archivo.
-4. **Publica la página**: Settings → Pages → "Deploy from a branch" → rama `main`, carpeta `/docs` → Save.
-   En un par de minutos tu sitio estará en `https://TU-USUARIO.github.io/mitad-de-precio/`.
-5. **Enciende el recolector**: pestaña Actions → si lo pide, "I understand… enable" → elige
-   "Actualizar ofertas" → "Run workflow". Tarda unos minutos.
-6. **Revisa el resultado**: abre `docs/estado.json` en el repositorio. Cada tienda aparece con
-   `"ok": true` (y cuántas ofertas encontró) o `"ok": false` (con el motivo).
+1. Entra al panel con tu clave de administración.
+2. En **Solicitudes** verás a quienes pidieron acceso. Toca **Aprobar**.
+3. Aparece el código de esa persona. Toca **Enviar por WhatsApp** (o por correo, o **Copiar mensaje**).
+   El código se muestra una sola vez; si se pierde, usa **Crear código nuevo**.
+4. La persona entra una vez y queda conectada 30 días en ese aparato.
 
-Desde ahí se actualiza solo cada 6 horas.
+Para sacar a alguien: pestaña **Con acceso** → **Quitar acceso** (funciona al instante).
+Si alguien se equivoca de código 8 veces seguidas, queda bloqueado hasta que le crees un código nuevo.
 
 ## Tiendas
 
 Las tiendas están en `tiendas.json`. Para apagar una, cambia `"activa": true` por `"activa": false`
-(ícono del lápiz en GitHub). Cada vuelta deja en `docs/estado.json` cuántas ofertas trajo cada tienda
+(ícono del lápiz en GitHub). Cada vuelta deja en `datos/estado.json` cuántas ofertas trajo cada tienda
 o por qué falló.
 
 **Activas (10):** Hites, Fashion's Park, Hush Puppies, Under Armour, Crocs, Vans, Lippi, Merrell,
@@ -63,7 +58,7 @@ Ambas necesitan unos días de historial para empezar a aparecer.
 
 ## Ganar comisiones (opcional)
 
-En `docs/index.html` busca `var AFILIADOS = {};` y agrega la regla de cada programa en el que te
+En `sitio/index.html` busca `var AFILIADOS = {};` y agrega la regla de cada programa en el que te
 aceptes. La página ya marca esos enlaces como patrocinados.
 
 ## Ajustes rápidos (en `recolector/recolectar.py`)

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Administrar miembros · Mitad de Precio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Panel de trabajo: lista de personas con su estado como etiqueta de color y acciones grandes para el celular. */
+:root {
+  --fondo: #f3f4f6; --superficie: #ffffff; --tinta: #16181d; --tinta-suave: #5b616e; --linea: #dfe2e8;
+  --acento: #d7262e; --bien: #1f7a4d; --bien-fondo: #e3f5ea; --espera: #8a5a00; --espera-fondo: #fff4d6;
+  --apagado: #5b616e; --apagado-fondo: #eceef2;
+  --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --cuerpo: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fondo: #111317; --superficie: #1b1e24; --tinta: #eceef2; --tinta-suave: #9aa1ad; --linea: #2c3039;
+    --acento: #ff4a4f; --bien: #6fd49c; --bien-fondo: #133222; --espera: #ffcf66; --espera-fondo: #3a2c0c;
+    --apagado: #9aa1ad; --apagado-fondo: #262a31; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --fondo: #111317; --superficie: #1b1e24; --tinta: #eceef2; --tinta-suave: #9aa1ad; --linea: #2c3039;
+  --acento: #ff4a4f; --bien: #6fd49c; --bien-fondo: #133222; --espera: #ffcf66; --espera-fondo: #3a2c0c;
+  --apagado: #9aa1ad; --apagado-fondo: #262a31; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; }
+body { background: var(--fondo); color: var(--tinta); font: 15px/1.45 var(--cuerpo); }
+:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
+.contenedor { max-width: 760px; margin: 0 auto; padding: 16px; display: grid; gap: 14px; }
+h1 { font: 800 28px/1 var(--display); text-transform: uppercase; margin: 0; }
+h1 span { color: var(--acento); }
+.sub { margin: 2px 0 0; color: var(--tinta-suave); font-size: 13px; }
+.cabeza { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; flex-wrap: wrap; }
+.tarjeta { background: var(--superficie); border: 1px solid var(--linea); border-radius: 12px; padding: 14px; display: grid; gap: 8px; }
+label { display: grid; gap: 4px; font-size: 13px; font-weight: 600; color: var(--tinta-suave); }
+input { font: 500 16px var(--cuerpo); color: var(--tinta); background: var(--fondo); border: 1px solid var(--linea); border-radius: 8px; padding: 10px; width: 100%; }
+button, .btn { appearance: none; border: 1px solid transparent; border-radius: 8px; padding: 10px 14px; font: 700 14px var(--cuerpo); cursor: pointer; text-decoration: none; text-align: center; display: inline-block; }
+.primario { background: var(--tinta); color: var(--superficie); }
+.aprobar { background: var(--bien); color: #fff; }
+.suave { background: transparent; color: var(--tinta); border-color: var(--linea); }
+.peligro { background: transparent; color: var(--acento); border-color: var(--linea); }
+.wa { background: #1f7a4d; color: #fff; }
+button:disabled { opacity: .6; cursor: wait; }
+.resumen { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.cifra { background: var(--superficie); border: 1px solid var(--linea); border-radius: 10px; padding: 10px; }
+.cifra b { display: block; font: 800 28px/1 var(--display); font-variant-numeric: tabular-nums; }
+.cifra span { font-size: 12px; color: var(--tinta-suave); }
+.pestanas { display: flex; gap: 6px; flex-wrap: wrap; }
+.pestanas button[aria-pressed="true"] { background: var(--tinta); color: var(--superficie); }
+.persona { display: grid; gap: 6px; }
+.fila { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.nombre { font-weight: 700; font-size: 16px; }
+.dato { color: var(--tinta-suave); font-size: 13px; overflow-wrap: anywhere; }
+.estado { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+.estado.pendiente { background: var(--espera-fondo); color: var(--espera); }
+.estado.aprobado { background: var(--bien-fondo); color: var(--bien); }
+.estado.rechazado { background: var(--apagado-fondo); color: var(--apagado); }
+.acciones { display: flex; gap: 8px; flex-wrap: wrap; }
+.codigo { background: var(--bien-fondo); border-radius: 10px; padding: 12px; display: grid; gap: 8px; }
+.codigo strong { font: 800 30px/1 var(--display); letter-spacing: .06em; color: var(--bien); }
+.msg { margin: 0; font-size: 14px; }
+.msg.error { color: var(--acento); }
+.vacio { color: var(--tinta-suave); text-align: center; padding: 24px 8px; }
+</style>
+</head>
+<body>
+<div class="contenedor">
+  <div class="cabeza">
+    <div>
+      <h1>Mitad <span>de Precio</span></h1>
+      <p class="sub">Administración de miembros</p>
+    </div>
+    <button class="suave" id="salir" type="button" hidden>Cerrar sesión</button>
+  </div>
+
+  <form class="tarjeta" id="formEntrar" novalidate>
+    <label for="clave">Clave de administración<input id="clave" type="password" autocomplete="current-password" required></label>
+    <button class="primario" type="submit">Entrar</button>
+    <p class="msg" id="msgEntrar" role="status"></p>
+  </form>
+
+  <div id="panel" hidden>
+    <div class="contenedor" style="padding:0">
+      <div class="resumen">
+        <div class="cifra"><b id="nPend">0</b><span>esperando</span></div>
+        <div class="cifra"><b id="nAprob">0</b><span>con acceso</span></div>
+        <div class="cifra"><b id="nRech">0</b><span>sin acceso</span></div>
+      </div>
+      <div class="pestanas" role="group" aria-label="Filtrar">
+        <button class="suave" data-f="pendiente" aria-pressed="true">Solicitudes</button>
+        <button class="suave" data-f="aprobado" aria-pressed="false">Con acceso</button>
+        <button class="suave" data-f="rechazado" aria-pressed="false">Sin acceso</button>
+      </div>
+      <p class="msg" id="msgPanel" role="status"></p>
+      <div id="lista" class="contenedor" style="padding:0"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var SITIO = location.origin;
+  var filtro = "pendiente", miembros = [], codigos = {};
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function api(cuerpo) {
+    return fetch("/api/admin", { method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin", body: JSON.stringify(cuerpo) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { d._status = r.status; return d; }); });
+  }
+  function fecha(iso) { return iso ? new Date(iso).toLocaleDateString("es-CL", { day: "numeric", month: "short", year: "numeric" }) : ""; }
+  function numeroWhatsapp(n) {
+    var d = String(n || "").replace(/\D/g, "");
+    if (d.length === 9 && d[0] === "9") d = "56" + d;
+    if (d.length === 8) d = "569" + d;
+    return d;
+  }
+  function mensajeAcceso(m, codigo) {
+    return "¡Hola " + m.nombre.split(" ")[0] + "! Ya tienes acceso a Mitad de Precio, las ofertas de 50% a 80% del retail chileno.\n\n" +
+      "Entra en " + SITIO + " con:\nCorreo: " + m.email + "\nCódigo: " + codigo + "\n\nEl código es personal, no lo compartas.";
+  }
+
+  function mostrarPanel() { $("formEntrar").hidden = true; $("panel").hidden = false; $("salir").hidden = false; cargar(); }
+  function mostrarEntrar() { $("formEntrar").hidden = false; $("panel").hidden = true; $("salir").hidden = true; }
+
+  function cargar() {
+    api({ accion: "listar" }).then(function (d) {
+      if (d._status === 401) return mostrarEntrar();
+      if (!d.miembros) { $("msgPanel").className = "msg error"; $("msgPanel").textContent = d.error || "No se pudo cargar la lista."; return; }
+      miembros = d.miembros; pintar();
+    });
+  }
+
+  function accion(nombre, m, boton) {
+    if ((nombre === "quitar" || nombre === "borrar") && !window.__confirmado) {
+      var ok = boton.dataset.confirmar === "1";
+      if (!ok) { boton.dataset.confirmar = "1"; boton.textContent = "Toca otra vez para confirmar"; return; }
+    }
+    boton.disabled = true;
+    api({ accion: nombre, email: m.email }).then(function (d) {
+      boton.disabled = false;
+      if (d._status === 401) return mostrarEntrar();
+      if (!d.ok) { $("msgPanel").className = "msg error"; $("msgPanel").textContent = d.error || "No se pudo completar."; return; }
+      $("msgPanel").textContent = "";
+      if (d.codigo) { codigos[m.email] = d.codigo; filtro = "aprobado"; }
+      cargar();
+    });
+  }
+
+  function tarjeta(m) {
+    var t = el("article", "tarjeta persona");
+    var f = el("div", "fila");
+    f.appendChild(el("span", "nombre", m.nombre));
+    f.appendChild(el("span", "estado " + m.estado, { pendiente: "Esperando", aprobado: "Con acceso", rechazado: "Sin acceso" }[m.estado]));
+    if (m.bloqueado) f.appendChild(el("span", "estado rechazado", "Bloqueado por intentos"));
+    t.appendChild(f);
+    t.appendChild(el("div", "dato", m.email + (m.whatsapp ? " · WhatsApp " + m.whatsapp : "")));
+    if (m.mensaje) t.appendChild(el("div", "dato", "“" + m.mensaje + "”"));
+    var info = "Pidió acceso el " + fecha(m.creado);
+    if (m.ultimo_ingreso) info += " · Última entrada " + fecha(m.ultimo_ingreso);
+    t.appendChild(el("div", "dato", info));
+
+    var codigo = codigos[m.email];
+    if (codigo && m.estado === "aprobado") {
+      var c = el("div", "codigo");
+      c.appendChild(el("div", "dato", "Código de acceso (cópialo ahora: por seguridad no se vuelve a mostrar)"));
+      c.appendChild(el("strong", null, codigo));
+      var acc = el("div", "acciones");
+      var texto = mensajeAcceso(m, codigo);
+      if (m.whatsapp) {
+        var wa = el("a", "btn wa", "Enviar por WhatsApp");
+        wa.href = "https://wa.me/" + numeroWhatsapp(m.whatsapp) + "?text=" + encodeURIComponent(texto);
+        wa.target = "_blank"; wa.rel = "noopener";
+        acc.appendChild(wa);
+      }
+      var mail = el("a", "btn suave", "Enviar por correo");
+      mail.href = "mailto:" + m.email + "?subject=" + encodeURIComponent("Tu acceso a Mitad de Precio") + "&body=" + encodeURIComponent(texto);
+      acc.appendChild(mail);
+      var cp = el("button", "suave", "Copiar mensaje"); cp.type = "button";
+      cp.addEventListener("click", function () {
+        navigator.clipboard.writeText(texto).then(function () { cp.textContent = "Copiado"; }, function () { cp.textContent = "No se pudo copiar"; });
+      });
+      acc.appendChild(cp);
+      c.appendChild(acc);
+      t.appendChild(c);
+    }
+
+    var a = el("div", "acciones");
+    function boton(txt, cls, nombre) { var b = el("button", cls, txt); b.type = "button"; b.addEventListener("click", function () { accion(nombre, m, b); }); a.appendChild(b); }
+    if (m.estado === "pendiente") { boton("Aprobar", "aprobar", "aprobar"); boton("Rechazar", "peligro", "rechazar"); }
+    if (m.estado === "aprobado") { boton("Crear código nuevo", "suave", "nuevo_codigo"); boton("Quitar acceso", "peligro", "quitar"); }
+    if (m.estado === "rechazado") { boton("Dar acceso", "aprobar", "aprobar"); boton("Borrar de la lista", "peligro", "borrar"); }
+    t.appendChild(a);
+    return t;
+  }
+
+  function pintar() {
+    var cuenta = { pendiente: 0, aprobado: 0, rechazado: 0 };
+    miembros.forEach(function (m) { cuenta[m.estado] = (cuenta[m.estado] || 0) + 1; });
+    $("nPend").textContent = cuenta.pendiente; $("nAprob").textContent = cuenta.aprobado; $("nRech").textContent = cuenta.rechazado;
+    document.querySelectorAll(".pestanas button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.f === filtro)); });
+    var lista = $("lista"); lista.textContent = "";
+    var visibles = miembros.filter(function (m) { return m.estado === filtro; });
+    if (!visibles.length) {
+      lista.appendChild(el("p", "vacio", { pendiente: "No hay solicitudes nuevas.", aprobado: "Todavía nadie tiene acceso.", rechazado: "No hay personas sin acceso." }[filtro]));
+      return;
+    }
+    visibles.forEach(function (m) { lista.appendChild(tarjeta(m)); });
+  }
+
+  document.querySelectorAll(".pestanas button").forEach(function (b) {
+    b.addEventListener("click", function () { filtro = b.dataset.f; pintar(); });
+  });
+  $("formEntrar").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var b = e.target.querySelector("button"), msg = $("msgEntrar");
+    b.disabled = true; msg.textContent = "";
+    api({ accion: "entrar", clave: $("clave").value }).then(function (d) {
+      b.disabled = false;
+      if (d.ok) { $("clave").value = ""; mostrarPanel(); } else { msg.className = "msg error"; msg.textContent = d.error || "No se pudo entrar."; }
+    });
+  });
+  $("salir").addEventListener("click", function () { api({ accion: "salir" }).then(mostrarEntrar); });
+  api({ accion: "listar" }).then(function (d) { if (d.miembros) { miembros = d.miembros; $("formEntrar").hidden = true; $("panel").hidden = false; $("salir").hidden = false; pintar(); } else mostrarEntrar(); });
+})();
+</script>
+</body>
+</html>
