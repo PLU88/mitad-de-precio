@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-06T16:30+00:00",
+ "actualizado": "2026-11-06T16:58+00:00",
  "tiendas": [
   {
    "tienda": "Hites",
@@ -50,6 +50,36 @@
    "tienda": "Lounge",
    "ok": true,
    "ofertas": 141
+  },
+  {
+   "tienda": "Mashini",
+   "ok": true,
+   "ofertas": 1449
+  },
+  {
+   "tienda": "Leonisa",
+   "ok": true,
+   "ofertas": 10
+  },
+  {
+   "tienda": "Only",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Wild Lama",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Volkanica",
+   "ok": true,
+   "ofertas": 84
+  },
+  {
+   "tienda": "Intime",
+   "ok": true,
+   "ofertas": 4
   }
  ]
 }
