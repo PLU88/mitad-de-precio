@@ -33,6 +33,9 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from clasificar import clasificar, genero, tallas as ordenar_tallas, ES_OPCION_TALLA  # noqa: E402
+
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ARCHIVO_TIENDAS = os.path.join(RAIZ, "tiendas.json")
 ARCHIVO_SALIDA = os.path.join(RAIZ, "datos", "ofertas.json")   # no se sube: se cifra
@@ -127,41 +130,30 @@ def calcular_descuento(precio, normal):
     return round((1 - precio / normal) * 100)
 
 
-# Categorías comunes para todas las tiendas (cada tienda nombra las suyas distinto)
-CATEGORIAS = [
-    ("Calzado", r"zapat|zapatill|bot[ai]n|\bbotas?\b|sandal|calzado|chala|pantufl|mocas|sneaker|\bshoes?\b|clog|zueco"),
-    ("Deportes", r"deport|running|trekking|outdoor|bicicl|fitness|yoga|camping|\bgym\b|futbol|fútbol"),
-    ("Accesorios", r"mochila|bolso|cartera|billetera|gorr[oa]|jockey|lentes|reloj|cintur[oó]n|calcet|bufanda|guantes|accesorio|maleta|equipaje|porta ?celular|funda|carcasa"),
-    ("Tecnología", r"notebook|celular|smartphone|tablet|\btv\b|televis|monitor|audífon|audifon|parlante|consola|tecnolog|computador|smartwatch|cámara"),
-    ("Electrohogar", r"refriger|lavadora|secadora|microond|horno|freidora|aspirador|cafetera|hervidor|licuadora|electrohogar|cocina a gas|estufa"),
-    ("Muebles y hogar", r"sof[aá]|silla|mesa|cama|colch[oó]n|plum[oó]n|s[aá]bana|almohad|mueble|cortina|alfombra|hogar|decoraci|vajilla|toalla|bater[ií]a de cocina|l[aá]mpara"),
-    ("Belleza y salud", r"perfum|crema|shampoo|maquill|belleza|cosm[eé]t|farmacia|vitamin|dermo|protector solar|colonia"),
-    ("Infantil", r"infantil|beb[eé]|niñ[oa]s?|kids|juguet|junior|escolar"),
-    ("Vestuario", r"polera|poler[oó]n|pantal[oó]n|jean|chaqueta|parka|vestido|camisa|blusa|falda|short|calza|buzo|sweater|chaleco|abrigo|ropa|vestuario|polar|cortaviento|traje de baño|bikini|pijama|\btop\b|jacket|hoodie|t-shirt|tee\b"),
-]
-
-
-def categoria_comun(*textos):
-    t = " ".join(x for x in textos if x).lower()
-    for nombre, patron in CATEGORIAS:
-        if re.search(patron, t):
-            return nombre
-    return "Otros"
-
-
-def nueva_oferta(tienda, pid, nombre, marca, cat_tienda, precio, normal, imagen, url):
-    return {
+def nueva_oferta(tienda, pid, nombre, marca, cat_tienda, precio, normal, imagen, url, tallas=None, pistas=""):
+    """Arma una oferta. `cat_tienda` y `pistas` (etiquetas, rutas de categoría) ayudan a clasificarla."""
+    nombre = (nombre or "").strip()
+    categoria, subcategoria = clasificar(nombre, cat_tienda, pistas, url)
+    oferta = {
         "id": f"{tienda['id']}-{pid}",
         "tienda": tienda["nombre"],
-        "nombre": (nombre or "").strip(),
+        "nombre": nombre,
         "marca": (marca or "").strip(),
-        "categoria": categoria_comun(cat_tienda, nombre),
+        "categoria": categoria,
+        "subcategoria": subcategoria,
         "precio": int(round(precio)),
         "precio_normal": int(round(normal)),
         "descuento": calcular_descuento(precio, normal),
         "imagen": imagen or "",
         "url": url,
     }
+    generos = genero(nombre, cat_tienda, pistas, url)
+    if generos:
+        oferta["genero"] = generos
+    lista = ordenar_tallas(tallas or [])
+    if lista:
+        oferta["tallas"] = lista
+    return oferta
 
 
 # ---------------------------------------------------------------- Shopify
@@ -179,7 +171,8 @@ def recolectar_shopify(tienda):
         if not productos:
             break
         for p in productos:
-            mejor = None
+            mejor, tallas_oferta = None, []
+            posiciones = [o.get("position") for o in p.get("options") or [] if ES_OPCION_TALLA.search(o.get("name") or "")]
             for v in p.get("variants") or []:
                 if v.get("available") is False:
                     continue
@@ -189,14 +182,18 @@ def recolectar_shopify(tienda):
                 except ValueError:
                     continue
                 d = calcular_descuento(precio, normal)
+                if d >= DESCUENTO_MINIMO:
+                    tallas_oferta += [v.get(f"option{pos}") for pos in posiciones]
                 if d >= DESCUENTO_MINIMO and (mejor is None or d > mejor[0]):
                     mejor = (d, precio, normal)
             if mejor:
                 imagenes = p.get("images") or []
+                etiquetas = p.get("tags") or []
+                etiquetas = " ".join(etiquetas) if isinstance(etiquetas, list) else str(etiquetas)
                 ofertas.append(nueva_oferta(
                     tienda, p.get("id"), p.get("title"), p.get("vendor"), p.get("product_type"),
                     mejor[1], mejor[2], imagenes[0].get("src") if imagenes else "",
-                    f"{base}/products/{p.get('handle')}"))
+                    f"{base}/products/{p.get('handle')}", tallas_oferta, etiquetas))
         time.sleep(PAUSA_SEGUNDOS)
     return ofertas
 
@@ -317,7 +314,7 @@ def recolectar_vtex(tienda):
             break
         sobre_umbral = 0
         for p in datos:
-            mejor = None
+            mejor, tallas_oferta = None, []
             for item in p.get("items") or []:
                 imgs = item.get("images") or []
                 for s in item.get("sellers") or []:
@@ -325,14 +322,20 @@ def recolectar_vtex(tienda):
                     if co.get("AvailableQuantity", 0) <= 0:
                         continue
                     d = calcular_descuento(co.get("Price"), co.get("ListPrice"))
+                    if d >= DESCUENTO_MINIMO:
+                        for campo in item.get("variations") or []:
+                            if ES_OPCION_TALLA.search(campo):
+                                tallas_oferta += item.get(campo) or []
                     if mejor is None or d > mejor[0]:
                         mejor = (d, co["Price"], co["ListPrice"], imgs[0].get("imageUrl") if imgs else "")
             if mejor and mejor[0] >= DESCUENTO_MINIMO:
                 cats = p.get("categories") or [""]
+                pistas = " ".join(cats) + " " + " ".join(
+                    " ".join(map(str, v)) for k, v in p.items() if re.search(r"g[eé]nero|sexo|gender", k, re.I) and isinstance(v, list))
                 ofertas.append(nueva_oferta(
                     tienda, p.get("productId"), p.get("productName"), p.get("brand"), cats[0],
                     mejor[1], mejor[2], mejor[3],
-                    p.get("link") or f"https://{tienda['dominio']}/{p.get('linkText', '')}/p"))
+                    p.get("link") or f"https://{tienda['dominio']}/{p.get('linkText', '')}/p", tallas_oferta, pistas))
                 sobre_umbral += 1
         if sobre_umbral == 0:
             break
@@ -384,12 +387,20 @@ CONSULTA_MAGENTO = ('{products(search:"",pageSize:100,currentPage:%d){total_coun
                     'final_price{value}}}}}}')
 
 
+CONSULTA_MAGENTO_TALLAS = CONSULTA_MAGENTO.replace(
+    "price_range{", "... on ConfigurableProduct{variants{product{stock_status} attributes{code label}}} price_range{")
+
+
 def recolectar_magento(tienda):
     ofertas = []
     sufijo = tienda.get("sufijo_url", ".html")
+    consulta = CONSULTA_MAGENTO_TALLAS
     for pagina in range(1, tienda.get("max_paginas", 60) + 1):
-        url = f"https://{tienda['dominio']}/graphql?query=" + urllib.parse.quote(CONSULTA_MAGENTO % pagina)
+        url = f"https://{tienda['dominio']}/graphql?query=" + urllib.parse.quote(consulta % pagina)
         datos = pedir_json(url)
+        if pagina == 1 and consulta is CONSULTA_MAGENTO_TALLAS and not ((datos or {}).get("data") or {}).get("products"):
+            consulta = CONSULTA_MAGENTO  # esta tienda no acepta la consulta de variantes: se usa la simple
+            datos = pedir_json(f"https://{tienda['dominio']}/graphql?query=" + urllib.parse.quote(consulta % pagina))
         try:
             items = datos["data"]["products"]["items"]
         except (TypeError, KeyError):
@@ -407,10 +418,14 @@ def recolectar_magento(tienda):
             if calcular_descuento(precio, normal) < DESCUENTO_MINIMO or not it.get("url_key"):
                 continue
             cats = [c.get("name", "") for c in it.get("categories") or []]
+            tallas_oferta = [a.get("label") for v in it.get("variants") or []
+                             if (v.get("product") or {}).get("stock_status") != "OUT_OF_STOCK"
+                             for a in v.get("attributes") or [] if ES_OPCION_TALLA.search(a.get("code") or "")]
             ofertas.append(nueva_oferta(
                 tienda, it.get("sku"), it.get("name"), "", " ".join(cats[:3]), precio, normal,
                 (it.get("small_image") or {}).get("url", ""),
-                f"https://{tienda['dominio']}/{it['url_key']}{it.get('url_suffix') or sufijo}"))
+                f"https://{tienda['dominio']}/{it['url_key']}{it.get('url_suffix') or sufijo}",
+                tallas_oferta, " ".join(cats)))
         time.sleep(PAUSA_SEGUNDOS)
     return ofertas
 
@@ -435,9 +450,11 @@ def recolectar_woo(tienda):
                 continue
             imgs = p.get("images") or []
             cats = [c.get("name", "") for c in p.get("categories") or []]
+            tallas_oferta = [t.get("name") for a in p.get("attributes") or [] if ES_OPCION_TALLA.search(a.get("name") or "")
+                             for t in a.get("terms") or []]
             ofertas.append(nueva_oferta(
                 tienda, p.get("id"), html.unescape(p.get("name") or ""), "", " ".join(cats[:2]), precio, normal,
-                imgs[0].get("src", "") if imgs else "", p.get("permalink") or ""))
+                imgs[0].get("src", "") if imgs else "", p.get("permalink") or "", tallas_oferta, " ".join(cats)))
         time.sleep(PAUSA_SEGUNDOS)
     return ofertas
 
