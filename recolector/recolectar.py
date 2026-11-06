@@ -34,7 +34,8 @@ import urllib.parse
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from clasificar import clasificar, genero, tallas as ordenar_tallas, ES_OPCION_TALLA  # noqa: E402
+from clasificar import (clasificar, genero, tallas as ordenar_tallas, ES_OPCION_TALLA,  # noqa: E402
+                        TALLA_EN_NOMBRE, CON_TALLAS)
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ARCHIVO_TIENDAS = os.path.join(RAIZ, "tiendas.json")
@@ -150,7 +151,10 @@ def nueva_oferta(tienda, pid, nombre, marca, cat_tienda, precio, normal, imagen,
     generos = genero(nombre, cat_tienda, pistas, url)
     if generos:
         oferta["genero"] = generos
-    lista = ordenar_tallas(tallas or [])
+    if not tallas:
+        m = TALLA_EN_NOMBRE.search(nombre)  # "Zapato nude Talla 38"
+        tallas = [m.group(1)] if m else []
+    lista = ordenar_tallas(tallas) if categoria in CON_TALLAS else []
     if lista:
         oferta["tallas"] = lista
     return oferta
@@ -226,11 +230,14 @@ def leer_grilla_sfcc(tienda, texto):
         imagen = IMG.search(trozo)
         if not enlace:
             continue  # sin enlace a la ficha no sirve mostrarlo
+        tallas_oferta = []
+        for bloque in re.findall(r'<select[^>]*tile-variation-Talla[^>]*>(.*?)</select>', trozo, re.S):
+            tallas_oferta += [v for d, v in re.findall(r'<option([^>]*)data-attr-value="([^"]+)"', bloque) if "disabled" not in d]
         productos.append(nueva_oferta(
             tienda, item.get("item_id"), item.get("item_name"), item.get("item_brand"),
             item.get("item_category"), precio, precio + rebaja,
             html.unescape(imagen.group(1)) if imagen else "",
-            urllib.parse.urljoin(f"https://{tienda['dominio']}/", html.unescape(enlace.group(1)))))
+            urllib.parse.urljoin(f"https://{tienda['dominio']}/", html.unescape(enlace.group(1))), tallas_oferta))
     return productos
 
 
@@ -527,9 +534,13 @@ def recolectar_falabella(tienda):
                 if calcular_descuento(precio, normal) < DESCUENTO_MINIMO:
                     continue
                 imagenes = r.get("mediaUrls") or []
+                tallas_oferta = [t.get("value") for v in r.get("variants") or [] for op in v.get("options") or []
+                                 for t in op.get("sizes") or [] if t.get("available", True)]
+                tallas_oferta += [op.get("label") for v in r.get("variants") or [] if ES_OPCION_TALLA.search(v.get("type") or "")
+                                  for op in v.get("options") or []]
                 ofertas.append(nueva_oferta(
                     tienda, pid, r.get("displayName"), r.get("brand", "").title(), termino, precio, normal,
-                    imagenes[0] if imagenes else "", r.get("url") or ""))
+                    imagenes[0] if imagenes else "", r.get("url") or "", tallas_oferta, r.get("productType") or ""))
             time.sleep(PAUSA_SEGUNDOS)
     return ofertas
 

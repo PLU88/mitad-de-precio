@@ -205,12 +205,20 @@ _LETRA = r"(?:XXS|XS|S|M|L|XL|XXL|3XL|4XL|5XL)"
 def normalizar_talla(valor):
     """Convierte una talla al formato del sitio, o None si no parece talla (colores, medidas, etc.)."""
     t = sin_tildes(str(valor or "")).upper().strip()
-    t = re.sub(r"^(TALLAS?|TALLE|TALLA:|N[°ºO]?\.?|NRO\.?|NUMERO|T\.)\s*", "", t).strip()
+    t = re.sub(r"^(TALLAS?|TALLE|TALLA:|N[°ºO]?\.?|NRO\.?|NUMERO|T\.|T-)\s*", "", t).strip()
     t = re.sub(r"\s*(CL|CHI|EU|EUR|AR|BR)$", "", t).strip().replace(",", ".")
     if not t:
         return None
     if t in _UNICA:
         return "Única"
+    m = re.fullmatch(r"(1[5-9]|[2-4]\d)(0|5)", t)  # "395" = 39.5 (algunas tiendas escriben el número sin punto)
+    if m:
+        return m.group(1) + (".5" if m.group(2) == "5" else "")
+    m = re.fullmatch(r"M?(\d{1,2})\s*W(\d{1,2})", t)  # Crocs: "3W5" = hombre 3 / mujer 5
+    if m:
+        return "M" + m.group(1) + "/W" + m.group(2)
+    if re.fullmatch(r"C\d{1,2}|J\d{1,2}", t):  # Crocs niños: C4, J2
+        return t
     t = _ALIAS.get(t, t)
     if re.fullmatch(_LETRA, t):
         return t
@@ -237,6 +245,8 @@ def clave_talla(t):
         return (0, ORDEN_LETRAS.index(primera) + (0.5 if "/" in t else 0))
     if t == "Única":
         return (1, 0)
+    if re.fullmatch(r"[CJ]\d+|M\d+/W\d+", t):
+        return (6 if t[0] != "M" else 7, float(re.search(r"\d+", t).group(0)))
     n = re.match(r"\d+(\.\d+)?", t)
     numero = float(n.group(0)) if n else 0
     if t.endswith("M"):
@@ -252,4 +262,8 @@ def tallas(valores):
     return sorted(vistas, key=clave_talla)
 
 
-ES_OPCION_TALLA = re.compile(r"talla|talle|size|numero|número|\bn[°º]|calce", re.I)
+ES_OPCION_TALLA = re.compile(r"talla|talle|size|numero|número|\bn[°º]|calce|tamano|tamaño|cintura|waist", re.I)
+
+
+TALLA_EN_NOMBRE = re.compile(r"\btalla\s+(\d{2}(?:[.,]5)?|XXS|XS|S|M|L|XL|XXL|unica|única)\b", re.I)
+CON_TALLAS = {"Vestuario", "Calzado", "Accesorios", "Deportes"}
