@@ -3,6 +3,9 @@ name: Diagnóstico de tiendas
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   diagnostico:
     runs-on: ubuntu-latest
@@ -12,11 +15,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: >
-          python herramientas/diagnostico.py
-          www.paris.cl www.easy.cl www.jumbo.cl www.santaisabel.cl www.unimarc.cl www.hites.com
-          www.lapolar.cl www.abc.cl www.tricot.cl www.fashionspark.com www.casaideas.cl www.pcfactory.cl
-          www.nike.cl cl.puma.com www.skechers.cl www.thenorthface.cl www.decathlon.cl www.hushpuppies.cl
-          www.cruzverde.cl www.salcobrand.cl www.farmaciasahumada.cl www.rockford.cl
-          www.falabella.com www.sodimac.cl www.tottus.cl simple.ripley.cl www.lider.cl www.adidas.cl
-          www.zara.com www2.hm.com www.corona.cl www.casaideas.com www.dafiti.cl www.mercadolibre.cl
+      - run: python herramientas/diagnostico2.py
+      - name: Guardar muestras en la rama diagnostico
+        run: |
+          git config user.name "bot-ofertas"
+          git config user.email "bot-ofertas@users.noreply.github.com"
+          git checkout -b diagnostico
+          git add -f muestras
+          git commit -qm "Muestras de diagnóstico" || true
+          git push -f origin diagnostico
