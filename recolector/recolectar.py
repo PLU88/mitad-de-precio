@@ -66,7 +66,8 @@ def pedir(url, intentos=3, acepta="application/json"):
     for i in range(intentos):
         try:
             req = urllib.request.Request(url, headers={
-                "User-Agent": USER_AGENT, "Accept": acepta, "Accept-Language": "es-CL,es;q=0.9"})
+                "User-Agent": USER_AGENT, "Accept": acepta, "Accept-Language": "es-CL,es;q=0.9",
+                "Accept-Encoding": "gzip"})
             with urllib.request.urlopen(req, timeout=40) as r:
                 crudo = r.read()
             if crudo[:2] == b"\x1f\x8b":
@@ -89,6 +90,19 @@ def pedir_json(url, intentos=3):
         return json.loads(texto)
     except json.JSONDecodeError:
         return None
+
+
+def a_numero(valor):
+    """Convierte '21.990', '21990.0' o 21990 en número; devuelve 0 si no se puede."""
+    if isinstance(valor, (int, float)):
+        return float(valor)
+    texto = re.sub(r"[^0-9,.]", "", str(valor or ""))
+    if re.fullmatch(r"\d{1,3}(\.\d{3})+", texto):
+        texto = texto.replace(".", "")
+    try:
+        return float(texto.replace(",", "."))
+    except ValueError:
+        return 0.0
 
 
 def calcular_descuento(precio, normal):
@@ -189,8 +203,8 @@ def leer_grilla_sfcc(tienda, texto):
         except json.JSONDecodeError:
             continue
         item = dato.get("item") or dato
-        precio = item.get("price") or dato.get("value") or 0
-        rebaja = item.get("discount") or 0
+        precio = a_numero(item.get("price") or dato.get("value"))
+        rebaja = a_numero(item.get("discount"))
         if not precio:
             continue
         enlace = HREF.search(trozo)
