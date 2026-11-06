@@ -6,6 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "== Vercel =="; curl -sS -o /tmp/v.html -w "%{http_code}\n" https://mitad-de-precio.vercel.app/; grep -o "<title>[^<]*" /tmp/v.html; grep -c "raw.githubusercontent" /tmp/v.html
-          echo "== JSON CORS =="; curl -sS -D - -o /tmp/o.json -H "Origin: https://mitad-de-precio.vercel.app" https://raw.githubusercontent.com/PLU88/mitad-de-precio/main/docs/ofertas.json | grep -iE "^HTTP|access-control-allow-origin|content-type"; python3 -c "import json;d=json.load(open('/tmp/o.json'));print('ofertas',d['total'],d['actualizado'])"
-          echo "== Imagen Hites =="; curl -sS -o /dev/null -w "%{http_code} %{content_type}\n" -H "Referer: https://mitad-de-precio.vercel.app/" "$(python3 -c "import json;d=json.load(open('/tmp/o.json'));print(next(o['imagen'] for o in d['ofertas'] if o['tienda']=='Hites'))")"
+          curl -sS -o /tmp/o.json https://raw.githubusercontent.com/PLU88/mitad-de-precio/main/docs/ofertas.json
+          UA="Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
+          for T in Hites "Under Armour" Crocs; do
+            IMG=$(python3 -c "import json,sys;d=json.load(open('/tmp/o.json'));print(next(o['imagen'] for o in d['ofertas'] if o['tienda']==sys.argv[1]))" "$T")
+            echo "$T sin-referer: $(curl -sS -o /dev/null -w '%{http_code} %{content_type}' -A "$UA" "$IMG")"
+            echo "$T con-referer: $(curl -sS -o /dev/null -w '%{http_code} %{content_type}' -A "$UA" -H 'Referer: https://mitad-de-precio.vercel.app/' "$IMG")"
+          done
