@@ -28,8 +28,10 @@ Las tiendas están en `tiendas.json`. Para apagar una, cambia `"activa": true` p
 (ícono del lápiz en GitHub). Cada vuelta deja en `datos/estado.json` cuántas ofertas trajo cada tienda
 o por qué falló.
 
-**Activas (10):** Hites, Fashion's Park, Hush Puppies, Under Armour, Crocs, Vans, Lippi, Merrell,
-Blockstore y Lounge.
+**Activas (27):** Hites, abc, Mashini, Under Armour, Rockford, Hush Puppies, Lippi, Merrell, Columbia,
+Umbrale, Lineatre, Lounge, Raindoor, Blockstore, Volkanica, Nicopoly, Crocs, Locura LPK, Vans, Leonisa,
+Intime, Only, Wild Lama, Doite y Fashion's Park (estas cuatro últimas, solo cuando tienen liquidación).
+Si una tienda tiene el certificado de seguridad incompleto, agrega `"ssl_flexible": true` en su línea.
 
 **Agregar una tienda Shopify** (muchas marcas chilenas lo son): abre
 `https://LA-TIENDA.cl/products.json` en el navegador. Si ves texto que empieza con `{"products":`,
