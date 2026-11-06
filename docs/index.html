@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mitad de Precio</title>
+<meta name="description" content="Ofertas del retail chileno con 50%, 60%, 70% y 80% de descuento, en un solo lugar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Idea: etiquetas de liquidación. Cifras grandes y condensadas como en un cartel de precio,
+   un color por tramo de descuento, tarjetas sobrias para que manden los números. */
+:root {
+  --fondo: #f3f4f6;
+  --superficie: #ffffff;
+  --tinta: #16181d;
+  --tinta-suave: #5b616e;
+  --linea: #dfe2e8;
+  --acento: #d7262e;
+  --t50: #f2b705; --t50-tinta: #2b2100;
+  --t60: #f07b13; --t60-tinta: #2a1200;
+  --t70: #d7262e; --t70-tinta: #ffffff;
+  --t80: #9d1660; --t80-tinta: #ffffff;
+  --alerta: #8a5a00; --alerta-fondo: #fff4d6;
+  --bien: #1f7a4d; --bien-fondo: #e3f5ea;
+  --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --cuerpo: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fondo: #111317; --superficie: #1b1e24; --tinta: #eceef2; --tinta-suave: #9aa1ad; --linea: #2c3039;
+    --acento: #ff4a4f; --t70: #e8363d; --t80: #c02a7f;
+    --alerta: #ffcf66; --alerta-fondo: #3a2c0c; --bien: #6fd49c; --bien-fondo: #133222;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --fondo: #111317; --superficie: #1b1e24; --tinta: #eceef2; --tinta-suave: #9aa1ad; --linea: #2c3039;
+  --acento: #ff4a4f; --t70: #e8363d; --t80: #c02a7f;
+  --alerta: #ffcf66; --alerta-fondo: #3a2c0c; --bien: #6fd49c; --bien-fondo: #133222;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--fondo); color: var(--tinta); font: 15px/1.45 var(--cuerpo); }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
+
+.cabecera { background: var(--superficie); border-bottom: 1px solid var(--linea); }
+@media (min-width: 720px) { .cabecera { position: sticky; top: 0; z-index: 5; } }
+.cabecera-in { max-width: 1180px; margin: 0 auto; padding: 12px 16px 10px; display: grid; gap: 10px; }
+.marca { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.marca h1 { font: 800 30px/1 var(--display); letter-spacing: .01em; margin: 0; text-transform: uppercase; }
+.marca h1 span { color: var(--acento); }
+.marca p { margin: 0; color: var(--tinta-suave); font-size: 13px; }
+
+.tramos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.tramo { appearance: none; border: 2px solid var(--linea); background: var(--superficie); color: var(--tinta);
+  border-radius: 10px; padding: 6px 4px 5px; cursor: pointer; display: grid; justify-items: center; gap: 0; font-family: var(--cuerpo); }
+.tramo b { font: 800 26px/1 var(--display); }
+.tramo small { font-size: 11px; color: var(--tinta-suave); }
+.tramo[aria-pressed="true"] { border-color: transparent; }
+.tramo[data-t="50"][aria-pressed="true"] { background: var(--t50); color: var(--t50-tinta); }
+.tramo[data-t="60"][aria-pressed="true"] { background: var(--t60); color: var(--t60-tinta); }
+.tramo[data-t="70"][aria-pressed="true"] { background: var(--t70); color: var(--t70-tinta); }
+.tramo[data-t="80"][aria-pressed="true"] { background: var(--t80); color: var(--t80-tinta); }
+.tramo[aria-pressed="true"] small { color: inherit; opacity: .85; }
+
+.filtros { display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 720px) { .filtros { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+.filtros input, .filtros select { width: 100%; font: 500 15px var(--cuerpo); color: var(--tinta); background: var(--fondo);
+  border: 1px solid var(--linea); border-radius: 8px; padding: 9px 8px; text-overflow: ellipsis; }
+.fila-sel { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+@media (min-width: 720px) { .fila-sel { display: contents; } }
+
+main { max-width: 1180px; margin: 0 auto; padding: 14px 16px 40px; display: grid; gap: 14px; }
+.aviso { background: var(--alerta-fondo); color: var(--alerta); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; }
+.aviso strong { font-weight: 700; }
+.resumen { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; color: var(--tinta-suave); font-size: 13.5px; }
+.resumen b { color: var(--tinta); font-variant-numeric: tabular-nums; }
+.interruptor { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.interruptor input { accent-color: var(--acento); width: 18px; height: 18px; }
+
+.grilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 10px; }
+@media (min-width: 720px) { .grilla { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; } }
+.tarjeta { background: var(--superficie); border: 1px solid var(--linea); border-radius: 12px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+.foto { position: relative; aspect-ratio: 1 / 1; background: var(--fondo); display: grid; place-items: center; }
+.foto img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+.foto .ph { font: 700 13px var(--cuerpo); color: var(--tinta-suave); text-transform: uppercase; letter-spacing: .06em; text-align: center; padding: 10px; }
+.etiqueta { position: absolute; top: 8px; left: 8px; font: 800 24px/1 var(--display); padding: 5px 8px 4px; border-radius: 6px; }
+.etiqueta.t50 { background: var(--t50); color: var(--t50-tinta); }
+.etiqueta.t60 { background: var(--t60); color: var(--t60-tinta); }
+.etiqueta.t70 { background: var(--t70); color: var(--t70-tinta); }
+.etiqueta.t80 { background: var(--t80); color: var(--t80-tinta); }
+.cuerpo { padding: 10px 11px 12px; display: grid; gap: 6px; align-content: start; }
+.tienda { font-size: 12px; font-weight: 700; color: var(--tinta-suave); text-transform: uppercase; letter-spacing: .05em; }
+.nombre { font-size: 14px; font-weight: 500; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.precios { display: grid; gap: 0; }
+.precio { font: 700 25px/1.05 var(--display); font-variant-numeric: tabular-nums; }
+.normal { font-size: 12.5px; color: var(--tinta-suave); font-variant-numeric: tabular-nums; }
+.normal s { text-decoration-thickness: 1px; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { font-size: 11.5px; font-weight: 600; padding: 2px 7px; border-radius: 999px; }
+.chip.bien { background: var(--bien-fondo); color: var(--bien); }
+.chip.alerta { background: var(--alerta-fondo); color: var(--alerta); }
+.boton { display: block; text-align: center; text-decoration: none; font-weight: 700; font-size: 14px; padding: 9px; border-radius: 8px;
+  background: var(--tinta); color: var(--superficie); margin-top: 4px; }
+.boton:hover { background: var(--acento); color: #fff; }
+.mas { justify-self: center; appearance: none; border: 1px solid var(--linea); background: var(--superficie); color: var(--tinta);
+  font: 700 15px var(--cuerpo); padding: 11px 22px; border-radius: 999px; cursor: pointer; }
+.vacio { text-align: center; color: var(--tinta-suave); padding: 40px 10px; }
+footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--tinta-suave); font-size: 12.5px; }
+@media (prefers-reduced-motion: no-preference) { .tarjeta { transition: transform .12s ease; } .tarjeta:hover { transform: translateY(-2px); } }
+</style>
+</head>
+<body>
+<header class="cabecera">
+  <div class="cabecera-in">
+    <div class="marca">
+      <h1>Mitad <span>de Precio</span></h1>
+      <p>Ofertas del retail chileno con 50% o más de descuento</p>
+    </div>
+    <div class="tramos" role="group" aria-label="Descuento mínimo">
+      <button class="tramo" data-t="50" aria-pressed="true"><b>50%</b><small>o más</small></button>
+      <button class="tramo" data-t="60" aria-pressed="false"><b>60%</b><small>o más</small></button>
+      <button class="tramo" data-t="70" aria-pressed="false"><b>70%</b><small>o más</small></button>
+      <button class="tramo" data-t="80" aria-pressed="false"><b>80%</b><small>o más</small></button>
+    </div>
+    <div class="filtros">
+      <input id="buscar" type="search" placeholder="Buscar: notebook, zapatillas, sofá…" aria-label="Buscar producto">
+      <div class="fila-sel">
+        <select id="tienda" aria-label="Tienda"><option value="">Tiendas</option></select>
+        <select id="categoria" aria-label="Categoría"><option value="">Categorías</option></select>
+        <select id="orden" aria-label="Ordenar">
+          <option value="desc">Más descuento</option>
+          <option value="ahorro">Más ahorro $</option>
+          <option value="barato">Más barato</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="aviso" id="aviso" hidden></div>
+  <div class="resumen">
+    <span id="conteo"></span>
+    <label class="interruptor" for="ocultarDudosos">
+      <input type="checkbox" id="ocultarDudosos"> Ocultar descuentos dudosos
+    </label>
+  </div>
+  <div class="grilla" id="grilla" aria-live="polite"></div>
+  <button class="mas" id="mas" hidden>Ver más ofertas</button>
+</main>
+<footer id="pie">Los precios y el stock los fija cada tienda y pueden cambiar. Revisa el precio final antes de comprar.</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // Enlaces de afiliado: cuando te aceptes en un programa, transforma aquí la URL.
+  // Ejemplo: "Paris": u => "https://tu-enlace-awin/?url=" + encodeURIComponent(u)
+  var AFILIADOS = {};
+
+  var POR_PAGINA = 60;
+  var estado = { min: 50, q: "", tienda: "", categoria: "", orden: "desc", ocultarDudosos: false, mostrar: POR_PAGINA };
+  var ofertas = [];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var clp = new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 });
+  var normalizar = function (s) { return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); };
+  var tramo = function (d) { return d >= 80 ? 80 : d >= 70 ? 70 : d >= 60 ? 60 : 50; };
+
+  try {
+    var guardado = JSON.parse(localStorage.getItem("mdp-filtros") || "{}");
+    ["min", "tienda", "categoria", "orden", "ocultarDudosos"].forEach(function (k) { if (k in guardado) estado[k] = guardado[k]; });
+  } catch (e) {}
+  function guardar() {
+    try { localStorage.setItem("mdp-filtros", JSON.stringify({ min: estado.min, tienda: estado.tienda, categoria: estado.categoria, orden: estado.orden, ocultarDudosos: estado.ocultarDudosos })); } catch (e) {}
+  }
+
+  // ---------- datos de demostración (se usan solo si no existe ofertas.json)
+  function datosDemo() {
+    var base = [
+      ["Paris", "Vestuario", "Parka acolchada mujer con capucha", 69990, 80],
+      ["Paris", "Vestuario", "Polerón canguro algodón hombre", 24990, 60],
+      ["Paris", "Calzado", "Zapatillas urbanas cuero blancas", 59990, 70],
+      ["Paris", "Dormitorio", "Plumón 2 plazas microfibra", 49990, 55],
+      ["Paris", "Tecnología", "Audífonos inalámbricos con cancelación de ruido", 129990, 62],
+      ["Hites", "Electrohogar", "Freidora de aire 5,5 L", 89990, 58],
+      ["Hites", "Tecnología", "Smart TV 55\" 4K UHD", 449990, 51],
+      ["Hites", "Vestuario", "Jeans slim fit hombre", 29990, 75],
+      ["Hites", "Muebles", "Sofá 3 cuerpos tela gris", 399990, 65],
+      ["La Polar", "Vestuario", "Vestido midi estampado", 34990, 81],
+      ["La Polar", "Calzado", "Botines caña media mujer", 49990, 66],
+      ["La Polar", "Infantil", "Set pijama polar niño", 19990, 72],
+      ["La Polar", "Dormitorio", "Juego de sábanas 1,5 plazas 144 hilos", 22990, 53],
+      ["abc", "Tecnología", "Notebook 15,6\" Ryzen 5, 16 GB, 512 GB SSD", 699990, 50],
+      ["abc", "Electrohogar", "Aspiradora robot con mapeo", 299990, 68],
+      ["abc", "Tecnología", "Smartwatch deportivo GPS", 149990, 57],
+      ["abc", "Electrohogar", "Microondas 20 L digital", 79990, 52],
+      ["Easy", "Herramientas", "Taladro percutor inalámbrico 18 V", 119990, 54],
+      ["Easy", "Jardín", "Set terraza 4 sillas aluminio", 349990, 61],
+      ["Easy", "Baño", "Mueble vanitorio 60 cm con lavamanos", 129990, 70],
+      ["Easy", "Iluminación", "Lámpara de pie LED regulable", 39990, 77],
+      ["Easy", "Cocina", "Batería de cocina 10 piezas acero", 99990, 63],
+      ["PC Factory", "Tecnología", "Monitor 27\" IPS 165 Hz", 249990, 56],
+      ["PC Factory", "Tecnología", "Teclado mecánico RGB", 69990, 64],
+      ["PC Factory", "Tecnología", "Disco SSD externo 1 TB", 119990, 51],
+      ["PC Factory", "Tecnología", "Mouse gamer inalámbrico", 49990, 73],
+      ["Jumbo", "Hogar", "Set 6 vasos de vidrio templado", 12990, 50],
+      ["Jumbo", "Juguetería", "Bloques de construcción 500 piezas", 39990, 69],
+      ["Jumbo", "Mascotas", "Cama para perro mediana", 29990, 58],
+      ["Jumbo", "Electrohogar", "Hervidor eléctrico 1,7 L", 24990, 60],
+      ["Paris", "Deportes", "Bicicleta aro 29 aluminio", 399990, 59],
+      ["Hites", "Deportes", "Trotadora plegable 1,5 HP", 499990, 66],
+      ["La Polar", "Belleza", "Secador de pelo iónico 2200 W", 39990, 71],
+      ["abc", "Infantil", "Coche de paseo travel system", 249990, 55]
+    ];
+    var webs = { "Paris": "https://www.paris.cl", "Hites": "https://www.hites.com", "La Polar": "https://www.lapolar.cl", "abc": "https://www.abc.cl", "Easy": "https://www.easy.cl", "PC Factory": "https://www.pcfactory.cl", "Jumbo": "https://www.jumbo.cl" };
+    return base.map(function (b, i) {
+      var normal = b[3], precio = Math.round(normal * (1 - b[4] / 100) / 10) * 10;
+      return { id: "demo-" + i, tienda: b[0], categoria: b[1], nombre: b[2], precio_normal: normal, precio: precio,
+        descuento: b[4], imagen: "", demo: true,
+        url: "https://www.google.com/search?q=" + encodeURIComponent("site:" + webs[b[0]].replace("https://www.", "") + " " + b[2]), minimo_30d: i % 4 === 0, dudoso: i % 9 === 4 };
+    });
+  }
+
+  // ---------- render
+  function filtradas() {
+    var q = normalizar(estado.q).split(/\s+/).filter(Boolean);
+    var lista = ofertas.filter(function (o) {
+      if (o.descuento < estado.min) return false;
+      if (estado.tienda && o.tienda !== estado.tienda) return false;
+      if (estado.categoria && o.categoria !== estado.categoria) return false;
+      if (estado.ocultarDudosos && o.dudoso) return false;
+      if (q.length) { var t = normalizar(o.nombre + " " + (o.marca || "") + " " + o.categoria); for (var i = 0; i < q.length; i++) if (t.indexOf(q[i]) < 0) return false; }
+      return true;
+    });
+    var cmp = {
+      desc: function (a, b) { return b.descuento - a.descuento || a.precio - b.precio; },
+      ahorro: function (a, b) { return (b.precio_normal - b.precio) - (a.precio_normal - a.precio); },
+      barato: function (a, b) { return a.precio - b.precio; }
+    }[estado.orden];
+    return lista.sort(cmp);
+  }
+
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+
+  function tarjeta(o) {
+    var art = el("article", "tarjeta");
+    var foto = el("div", "foto");
+    var ph = el("div", "ph", o.categoria);
+    if (o.imagen) {
+      var img = new Image(); img.loading = "lazy"; img.alt = ""; img.src = o.imagen;
+      img.onerror = function () { img.replaceWith(ph); };
+      foto.appendChild(img);
+    } else foto.appendChild(ph);
+    foto.appendChild(el("span", "etiqueta t" + tramo(o.descuento), "-" + o.descuento + "%"));
+    art.appendChild(foto);
+
+    var c = el("div", "cuerpo");
+    c.appendChild(el("span", "tienda", o.tienda));
+    c.appendChild(el("h2", "nombre", o.nombre));
+    var p = el("div", "precios");
+    p.appendChild(el("span", "precio", clp.format(o.precio)));
+    var n = el("span", "normal"); n.append("Antes "); n.appendChild(el("s", null, clp.format(o.precio_normal)));
+    n.append(" · ahorras " + clp.format(o.precio_normal - o.precio));
+    p.appendChild(n); c.appendChild(p);
+    var chips = el("div", "chips");
+    if (o.minimo_30d) chips.appendChild(el("span", "chip bien", "Precio más bajo en 30 días"));
+    if (o.dudoso) { var d = el("span", "chip alerta", "Descuento dudoso"); d.title = "El \"precio normal\" casi no se ha cobrado en las últimas semanas."; chips.appendChild(d); }
+    if (chips.childNodes.length) c.appendChild(chips);
+    var a = el("a", "boton", (o.demo ? "Buscar en " : "Ver en ") + o.tienda);
+    a.href = (AFILIADOS[o.tienda] || function (u) { return u; })(o.url);
+    a.target = "_blank"; a.rel = "noopener nofollow sponsored";
+    c.appendChild(a);
+    art.appendChild(c);
+    return art;
+  }
+
+  function render() {
+    document.querySelectorAll(".tramo").forEach(function (b) { b.setAttribute("aria-pressed", String(+b.dataset.t === estado.min)); });
+    var lista = filtradas();
+    var g = $("grilla"); g.textContent = "";
+    if (!lista.length) {
+      g.appendChild(el("p", "vacio", "No hay ofertas con estos filtros. Prueba con un descuento menor u otra tienda."));
+    } else {
+      var frag = document.createDocumentFragment();
+      lista.slice(0, estado.mostrar).forEach(function (o) { frag.appendChild(tarjeta(o)); });
+      g.appendChild(frag);
+    }
+    $("mas").hidden = lista.length <= estado.mostrar;
+    var conteo = $("conteo"); conteo.textContent = "";
+    var b = el("b", null, lista.length.toLocaleString("es-CL"));
+    conteo.append(b, lista.length === 1 ? " oferta de " : " ofertas de ", estado.min + "% o más");
+  }
+
+  function llenarSelect(id, valores, actual) {
+    var s = $(id);
+    valores.forEach(function (v) { var op = el("option", null, v); op.value = v; s.appendChild(op); });
+    s.value = valores.indexOf(actual) >= 0 ? actual : "";
+    estado[id] = s.value;
+  }
+
+  function iniciar(datos, esDemo, actualizado) {
+    ofertas = datos;
+    var unicos = function (k) { return Array.from(new Set(ofertas.map(function (o) { return o[k]; }))).sort(function (a, b) { return a.localeCompare(b, "es"); }); };
+    llenarSelect("tienda", unicos("tienda"), estado.tienda);
+    llenarSelect("categoria", unicos("categoria"), estado.categoria);
+    $("orden").value = estado.orden;
+    $("ocultarDudosos").checked = estado.ocultarDudosos;
+    var aviso = $("aviso");
+    if (esDemo) {
+      aviso.hidden = false;
+      aviso.innerHTML = "<strong>Datos de demostración.</strong> Estos productos y precios son ejemplos para probar la página; no son ofertas reales, por eso el botón busca un artículo parecido en la tienda. Con el recolector funcionando, cada botón abre la ficha exacta del producto en oferta.";
+    } else if (actualizado) {
+      $("pie").textContent = "Actualizado: " + new Date(actualizado).toLocaleString("es-CL", { dateStyle: "medium", timeStyle: "short" }) +
+        ". Los precios y el stock los fija cada tienda y pueden cambiar. Revisa el precio final antes de comprar.";
+    }
+    render();
+  }
+
+  // ---------- eventos
+  document.querySelectorAll(".tramo").forEach(function (b) {
+    b.addEventListener("click", function () { estado.min = +b.dataset.t; estado.mostrar = POR_PAGINA; guardar(); render(); });
+  });
+  var t;
+  $("buscar").addEventListener("input", function (e) { clearTimeout(t); t = setTimeout(function () { estado.q = e.target.value; estado.mostrar = POR_PAGINA; render(); }, 150); });
+  ["tienda", "categoria", "orden"].forEach(function (id) {
+    $(id).addEventListener("change", function (e) { estado[id] = e.target.value; estado.mostrar = POR_PAGINA; guardar(); render(); });
+  });
+  $("ocultarDudosos").addEventListener("change", function (e) { estado.ocultarDudosos = e.target.checked; guardar(); render(); });
+  $("mas").addEventListener("click", function () { estado.mostrar += POR_PAGINA; render(); });
+
+  // ---------- carga: ofertas.json real, o demo si no existe
+  fetch("ofertas.json", { cache: "no-store" })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (d) {
+      if (!d || !Array.isArray(d.ofertas) || !d.ofertas.length) throw new Error("vacío");
+      iniciar(d.ofertas, false, d.actualizado);
+    })
+    .catch(function () { iniciar(datosDemo(), true); });
+})();
+</script>
+</body>
+</html>
