@@ -1,28 +1,40 @@
-"""Sondeo temporal de iochile.cl (Magento): consultas GraphQL con filtros y lectura de la grilla HTML."""
+"""Sondeo temporal: grillas HTML de Magento (iO, Ash) y PrestaShop (El Volcán)."""
 import re, json, gzip, urllib.request, urllib.parse
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36"
-def get(url, acepta="application/json"):
-    r = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": acepta, "Accept-Encoding": "gzip"})
-    with urllib.request.urlopen(r, timeout=40) as x:
+def get(url, acepta="text/html", extra=None):
+    h = {"User-Agent": UA, "Accept": acepta, "Accept-Encoding": "gzip", "Accept-Language": "es-CL,es;q=0.9"}; h.update(extra or {})
+    with urllib.request.urlopen(urllib.request.Request(url, headers=h), timeout=40) as x:
         b = x.read(); b = gzip.decompress(b) if x.headers.get("Content-Encoding") == "gzip" else b
-        return b.decode("utf-8", "replace")
-campos = "total_count items{name sku url_key url_suffix __typename stock_status small_image{url} categories{name} price_range{minimum_price{regular_price{value} final_price{value}}}}"
-for nombre, filtro in [("precio", 'filter:{price:{from:"1"}}'), ("sku", 'filter:{sku:{match:"0"}}'), ("cat2", 'filter:{category_id:{eq:"2"}}'),
-                       ("nombre", 'filter:{name:{match:"a"}}'), ("search a", 'search:"a"'), ("search polera", 'search:"polera"')]:
-    q = "{products(%s,pageSize:3,currentPage:1){%s}}" % (filtro, campos)
+        return x.geturl(), b.decode("utf-8", "replace")
+q = '{storeConfig{store_code store_name} products(search:"",pageSize:2){total_count items{name}}}'
+for dom in ["www.iochile.cl", "www.ashchile.cl"]:
+    for store in [None, "io", "io_storeview", "default", "ash", "ash_storeview", "cl"]:
+        try:
+            _, t = get(f"https://{dom}/graphql?query=" + urllib.parse.quote(q), "application/json", {"Store": store} if store else None)
+            print(f"[{dom} gql store={store}]", t[:300])
+        except Exception as e:
+            print(f"[{dom} gql store={store}] ERROR", e)
     try:
-        print(f"[{nombre}]", get("https://www.iochile.cl/graphql?query=" + urllib.parse.quote(q))[:700])
+        _, home = get(f"https://{dom}/")
+        enlaces = sorted(set(re.findall(r'href="(https://' + re.escape(dom) + r'/[^"#?]*(?:sale|outlet|oferta|descuento|rebaja|liquidaci|cyber|promo|black)[^"#?]*)"', home, re.I)))
+        print(f"[{dom}] enlaces de ofertas:", enlaces[:20])
+        cats = sorted(set(re.findall(r'href="(https://' + re.escape(dom) + r'/[a-z0-9-]+\.html)"', home)))
+        print(f"[{dom}] categorías .html:", len(cats), cats[:40])
+        for u in (enlaces[:2] or []) + [f"https://{dom}/catalogsearch/result/?q=%25"]:
+            try:
+                final, h = get(u + ("&" if "?" in u else "?") + "product_list_limit=36")
+                print(f"  [{u}] -> {final} items={len(re.findall(r'product-item-info', h))} old={len(re.findall(r'data-price-type=.oldPrice', h))} final={len(re.findall(r'data-price-type=.finalPrice', h))} total={re.findall(r'toolbar-number\">(\d+)', h)[:3]}")
+                m = re.search(r'(?s)data-price-type="oldPrice".{0,200}', h)
+                if m: print("    ", re.sub(r"\s+", " ", h[max(0, m.start()-900):m.end()])[:1300])
+            except Exception as e:
+                print(f"  [{u}] ERROR", e)
     except Exception as e:
-        print(f"[{nombre}] ERROR", e)
-try:
-    print("[categorias]", get("https://www.iochile.cl/graphql?query=" + urllib.parse.quote("{categories{items{uid id name url_path product_count children{id name url_path product_count}}}}"))[:1500])
-except Exception as e:
-    print("[categorias] ERROR", e)
-try:
-    h = get("https://www.iochile.cl/bottoms.html?product_list_limit=36", "text/html")
-    print("[grilla] bytes", len(h), "| items", len(re.findall(r'class="[^"]*product-item-info', h)),
-          "| old-price", h.count("old-price"), "| data-price-amount", len(re.findall(r'data-price-amount="', h)))
-    m = re.search(r'(?s)<li class="item product product-item.{0,3000}', h)
-    print(re.sub(r"\s+", " ", m.group(0))[:2500] if m else "sin items")
-except Exception as e:
-    print("[grilla] ERROR", e)
+        print(f"[{dom}] ERROR", e)
+for u in ["https://www.elvolcan.cl/index.php?controller=prices-drop", "https://www.elvolcan.cl/productos-rebajados", "https://www.elvolcan.cl/prices-drop"]:
+    try:
+        final, h = get(u)
+        print(f"[volcan {u}] -> {final} bytes={len(h)} miniaturas={len(re.findall(r'js-product-miniature', h))} regular={h.count('regular-price')} paginas={re.findall(r'[?&]page=(\d+)', h)[-3:]}")
+        m = re.search(r'(?s)<article[^>]*js-product-miniature.{0,2500}', h)
+        if m: print("   ", re.sub(r"\s+", " ", m.group(0))[:2500]); break
+    except Exception as e:
+        print(f"[volcan {u}] ERROR", e)
