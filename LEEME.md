@@ -58,6 +58,15 @@ Para algunas de ellas existen servicios de datos de pago (por ejemplo Apify).
 
 Ambas necesitan unos días de historial para empezar a aparecer.
 
+## Categorías, tipos, género y tallas
+
+`recolector/clasificar.py` decide la categoría y el tipo de cada producto leyendo su nombre
+(por ejemplo "Polerón niña…" queda en Vestuario › Polerones y polares, género Niña). Si un producto
+cae en el tipo equivocado o en "Otros", agrega la palabra a la lista `REGLAS` de ese archivo.
+
+Las tallas salen de cada tienda (solo las tallas con stock y con el descuento). abc y Tricot no
+las muestran en sus listados, así que sus productos aparecen sin tallas.
+
 ## Ganar comisiones (opcional)
 
 En `sitio/index.html` busca `var AFILIADOS = {};` y agrega la regla de cada programa en el que te
