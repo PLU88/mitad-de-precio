@@ -4,9 +4,12 @@ Recolector de ofertas del retail chileno (descuentos de 50% o más).
 
 Cómo funciona, en simple:
   1. Lee la lista de tiendas en tiendas.json.
-  2. A cada tienda le pide su catálogo público ordenado por "mayor descuento".
-     (Muchas tiendas chilenas usan la plataforma VTEX, que publica ese catálogo
-     sin clave ni login: es lo mismo que usa la propia página de la tienda.)
+  2. Lee el catálogo público de cada tienda con el "lector" que corresponde a su
+     plataforma:
+       - shopify: tiendas Shopify publican /products.json con precio y precio anterior.
+       - sfcc:    tiendas Salesforce (como Hites) muestran su grilla ordenada por
+                  descuento, y cada producto trae sus datos en la página.
+       - vtex:    tiendas VTEX publican un catálogo ordenable por descuento.
   3. Se queda con los productos con stock y descuento >= 50%.
   4. Guarda el historial de precios para detectar descuentos "inflados".
   5. Escribe docs/ofertas.json, que es lo que muestra la página web.
@@ -15,8 +18,11 @@ Solo usa Python estándar: no hay que instalar nada.
 Uso:  python recolector/recolectar.py
 """
 import datetime as dt
+import gzip
+import html
 import json
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -30,11 +36,11 @@ ARCHIVO_HISTORIAL = os.path.join(RAIZ, "datos", "historial.json")
 ARCHIVO_ESTADO = os.path.join(RAIZ, "docs", "estado.json")
 
 DESCUENTO_MINIMO = 50          # % mínimo para guardar una oferta
-POR_PAGINA = 50                # VTEX entrega como máximo 50 productos por consulta
-MAX_PAGINAS = 40               # tope por tienda (40 x 50 = 2.000 productos revisados)
+MAX_PAGINAS = 40               # tope de páginas por tienda
 PAUSA_SEGUNDOS = 1.0           # pausa entre consultas, para no sobrecargar a la tienda
 DIAS_HISTORIAL = 60
-USER_AGENT = "OfertasChileBot/1.0 (recolector de ofertas; contacto en el sitio)"
+USER_AGENT = ("Mozilla/5.0 (compatible; MitadDePrecioBot/1.0; "
+              "+https://plu88.github.io/mitad-de-precio/)")
 
 
 # ---------------------------------------------------------------- utilidades
@@ -54,124 +60,229 @@ def escribir_json(ruta, datos):
     os.replace(tmp, ruta)
 
 
-def pedir_json(url, intentos=3):
-    """Descarga una URL y la interpreta como JSON. Devuelve None si no es JSON."""
+def pedir(url, intentos=3, acepta="application/json"):
+    """Descarga una URL y devuelve el texto (descomprime gzip si hace falta)."""
     ultimo_error = None
     for i in range(intentos):
         try:
-            req = urllib.request.Request(
-                url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"}
-            )
-            with urllib.request.urlopen(req, timeout=30) as r:
-                cuerpo = r.read().decode("utf-8", errors="replace")
-            try:
-                return json.loads(cuerpo)
-            except json.JSONDecodeError:
-                return None  # respondió HTML u otra cosa: no es VTEX
+            req = urllib.request.Request(url, headers={
+                "User-Agent": USER_AGENT, "Accept": acepta, "Accept-Language": "es-CL,es;q=0.9"})
+            with urllib.request.urlopen(req, timeout=40) as r:
+                crudo = r.read()
+            if crudo[:2] == b"\x1f\x8b":
+                crudo = gzip.decompress(crudo)
+            return crudo.decode("utf-8", errors="replace")
         except urllib.error.HTTPError as e:
             ultimo_error = e
-            if e.code in (400, 403, 404):
+            if e.code in (400, 401, 403, 404):
                 raise  # no tiene sentido reintentar
-        except (urllib.error.URLError, TimeoutError) as e:
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
             ultimo_error = e
-        time.sleep(2 * (i + 1))
+        time.sleep(3 * (i + 1))
     raise ultimo_error
 
 
+def pedir_json(url, intentos=3):
+    """Como pedir(), pero interpreta JSON. Devuelve None si la respuesta no es JSON."""
+    texto = pedir(url, intentos)
+    try:
+        return json.loads(texto)
+    except json.JSONDecodeError:
+        return None
+
+
+def calcular_descuento(precio, normal):
+    if not precio or not normal or normal <= precio:
+        return 0
+    return round((1 - precio / normal) * 100)
+
+
+# Categorías comunes para todas las tiendas (cada tienda nombra las suyas distinto)
+CATEGORIAS = [
+    ("Calzado", r"zapat|zapatill|bot[ai]n|\bbotas?\b|sandal|calzado|chala|pantufl|mocas|sneaker|\bshoes?\b|clog|zueco"),
+    ("Deportes", r"deport|running|trekking|outdoor|bicicl|fitness|yoga|camping|\bgym\b|futbol|fútbol"),
+    ("Tecnología", r"notebook|celular|smartphone|tablet|\btv\b|televis|monitor|audífon|audifon|parlante|consola|tecnolog|computador|smartwatch|cámara"),
+    ("Electrohogar", r"refriger|lavadora|secadora|microond|horno|freidora|aspirador|cafetera|hervidor|licuadora|electrohogar|cocina a gas|estufa"),
+    ("Muebles y hogar", r"sof[aá]|silla|mesa|cama|colch[oó]n|plum[oó]n|s[aá]bana|almohad|mueble|cortina|alfombra|hogar|decoraci|vajilla|toalla|bater[ií]a de cocina|l[aá]mpara"),
+    ("Belleza y salud", r"perfum|crema|shampoo|maquill|belleza|cosm[eé]t|farmacia|vitamin|dermo|protector solar|colonia"),
+    ("Infantil", r"infantil|beb[eé]|niñ[oa]s?|kids|juguet|junior|escolar"),
+    ("Accesorios", r"mochila|bolso|cartera|billetera|gorr[oa]|jockey|lentes|reloj|cintur[oó]n|calcet|bufanda|guantes|accesorio|maleta|equipaje"),
+    ("Vestuario", r"polera|poler[oó]n|pantal[oó]n|jean|chaqueta|parka|vestido|camisa|blusa|falda|short|calza|buzo|sweater|chaleco|abrigo|ropa|vestuario|polar|cortaviento|traje de baño|bikini|pijama|\btop\b|jacket|hoodie|t-shirt|tee\b"),
+]
+
+
+def categoria_comun(*textos):
+    t = " ".join(x for x in textos if x).lower()
+    for nombre, patron in CATEGORIAS:
+        if re.search(patron, t):
+            return nombre
+    return "Otros"
+
+
+def nueva_oferta(tienda, pid, nombre, marca, cat_tienda, precio, normal, imagen, url):
+    return {
+        "id": f"{tienda['id']}-{pid}",
+        "tienda": tienda["nombre"],
+        "nombre": (nombre or "").strip(),
+        "marca": (marca or "").strip(),
+        "categoria": categoria_comun(cat_tienda, nombre),
+        "precio": int(round(precio)),
+        "precio_normal": int(round(normal)),
+        "descuento": calcular_descuento(precio, normal),
+        "imagen": imagen or "",
+        "url": url,
+    }
+
+
+# ---------------------------------------------------------------- Shopify
+def recolectar_shopify(tienda):
+    """Recorre /products.json (250 productos por página)."""
+    base = "https://" + tienda["dominio"]
+    ofertas = []
+    for pagina in range(1, MAX_PAGINAS + 1):
+        datos = pedir_json(f"{base}/products.json?limit=250&page={pagina}")
+        if not isinstance(datos, dict) or "products" not in datos:
+            if pagina == 1:
+                raise ValueError("no respondió como tienda Shopify")
+            break
+        productos = datos["products"]
+        if not productos:
+            break
+        for p in productos:
+            mejor = None
+            for v in p.get("variants") or []:
+                if v.get("available") is False:
+                    continue
+                try:
+                    precio = float(v.get("price") or 0)
+                    normal = float(v.get("compare_at_price") or 0)
+                except ValueError:
+                    continue
+                d = calcular_descuento(precio, normal)
+                if d >= DESCUENTO_MINIMO and (mejor is None or d > mejor[0]):
+                    mejor = (d, precio, normal)
+            if mejor:
+                imagenes = p.get("images") or []
+                ofertas.append(nueva_oferta(
+                    tienda, p.get("id"), p.get("title"), p.get("vendor"), p.get("product_type"),
+                    mejor[1], mejor[2], imagenes[0].get("src") if imagenes else "",
+                    f"{base}/products/{p.get('handle')}"))
+        time.sleep(PAUSA_SEGUNDOS)
+    return ofertas
+
+
+# ---------------------------------------------------------------- Salesforce (SFCC)
+TILE = re.compile(r'data-gtmselectitem="([^"]+)"')
+HREF = re.compile(r'<a[^>]+href="(https?://[^"]+?\.html)[^"]*"')
+IMG = re.compile(r'<img[^>]+(?:src|data-src)="(https?://[^"]+?\.(?:jpg|jpeg|png|webp)[^"]*)"')
+
+
+def leer_grilla_sfcc(tienda, texto):
+    """Extrae productos de una grilla Salesforce que trae los datos en data-gtmselectitem."""
+    productos = []
+    posiciones = [m for m in TILE.finditer(texto)]
+    for i, m in enumerate(posiciones):
+        fin = posiciones[i + 1].start() if i + 1 < len(posiciones) else m.end() + 8000
+        trozo = texto[m.end():fin]
+        try:
+            dato = json.loads(html.unescape(m.group(1)))
+        except json.JSONDecodeError:
+            continue
+        item = dato.get("item") or dato
+        precio = item.get("price") or dato.get("value") or 0
+        rebaja = item.get("discount") or 0
+        if not precio:
+            continue
+        enlace = HREF.search(trozo)
+        imagen = IMG.search(trozo)
+        productos.append(nueva_oferta(
+            tienda, item.get("item_id"), item.get("item_name"), item.get("item_brand"),
+            item.get("item_category"), precio, precio + rebaja,
+            html.unescape(imagen.group(1)) if imagen else "",
+            html.unescape(enlace.group(1)) if enlace else f"https://{tienda['dominio']}/"))
+    return productos
+
+
+def recolectar_sfcc(tienda):
+    """Pide la grilla ordenada por mayor descuento, de 48 en 48, hasta bajar del 50%."""
+    base = f"https://{tienda['dominio']}/on/demandware.store/Sites-{tienda['sitio']}-Site/default/Search-UpdateGrid"
+    regla = tienda.get("orden", "discount-off")
+    ofertas, vistos = [], set()
+    for pagina in range(MAX_PAGINAS):
+        url = f"{base}?cgid={tienda.get('categoria', 'root')}&srule={regla}&start={pagina * 48}&sz=48"
+        productos = leer_grilla_sfcc(tienda, pedir(url, acepta="text/html"))
+        if not productos:
+            if pagina == 0:
+                raise ValueError("la grilla de productos llegó vacía")
+            break
+        sobre_umbral = 0
+        for o in productos:
+            if o["id"] in vistos:
+                continue
+            vistos.add(o["id"])
+            if o["descuento"] >= DESCUENTO_MINIMO:
+                ofertas.append(o)
+                sobre_umbral += 1
+        if sobre_umbral == 0:
+            break  # viene ordenado por descuento: lo que sigue es menor
+        time.sleep(PAUSA_SEGUNDOS)
+    return ofertas
+
+
 # ---------------------------------------------------------------- VTEX
-def url_busqueda_vtex(tienda, desde, hasta):
-    params = {"O": "OrderByBestDiscountDESC", "_from": desde, "_to": hasta}
-    if tienda.get("canal"):
-        params["sc"] = tienda["canal"]
-    return (
-        f"https://{tienda['dominio']}/api/catalog_system/pub/products/search?"
-        + urllib.parse.urlencode(params)
-    )
-
-
-def categoria_principal(producto):
-    cats = producto.get("categories") or []
-    if not cats:
-        return "Otros"
-    # VTEX entrega rutas tipo "/Tecnología/Celulares/"; la más corta es la raíz
-    raiz = min(cats, key=len).strip("/").split("/")[0]
-    return raiz or "Otros"
-
-
-def mejor_oferta_vtex(producto, tienda):
-    """Devuelve la mejor oferta (mayor descuento con stock) de un producto, o None."""
-    mejor = None
-    for item in producto.get("items") or []:
-        imagenes = item.get("images") or []
-        imagen = imagenes[0].get("imageUrl") if imagenes else ""
-        for vendedor in item.get("sellers") or []:
-            oferta = vendedor.get("commertialOffer") or {}
-            precio = oferta.get("Price") or 0
-            normal = oferta.get("ListPrice") or 0
-            if oferta.get("AvailableQuantity", 0) <= 0:
-                continue
-            if precio <= 0 or normal <= precio:
-                continue
-            descuento = round((1 - precio / normal) * 100)
-            if mejor is None or descuento > mejor["descuento"]:
-                enlace = producto.get("link") or (
-                    f"https://{tienda['dominio']}/{producto.get('linkText', '')}/p"
-                )
-                mejor = {
-                    "id": f"{tienda['id']}-{producto.get('productId')}",
-                    "tienda": tienda["nombre"],
-                    "nombre": (producto.get("productName") or "").strip(),
-                    "marca": producto.get("brand") or "",
-                    "categoria": categoria_principal(producto),
-                    "precio": int(round(precio)),
-                    "precio_normal": int(round(normal)),
-                    "descuento": descuento,
-                    "imagen": imagen,
-                    "url": enlace,
-                    "vendedor": vendedor.get("sellerName") or "",
-                }
-    return mejor
-
-
 def recolectar_vtex(tienda):
     ofertas = []
     for pagina in range(MAX_PAGINAS):
-        desde = pagina * POR_PAGINA
-        hasta = desde + POR_PAGINA - 1
-        datos = pedir_json(url_busqueda_vtex(tienda, desde, hasta))
-        if datos is None or not isinstance(datos, list):
+        desde = pagina * 50
+        params = {"O": "OrderByBestDiscountDESC", "_from": desde, "_to": desde + 49}
+        url = f"https://{tienda['dominio']}/api/catalog_system/pub/products/search?" + urllib.parse.urlencode(params)
+        datos = pedir_json(url)
+        if not isinstance(datos, list):
             if pagina == 0:
                 raise ValueError("no respondió como tienda VTEX")
             break
         if not datos:
             break
         sobre_umbral = 0
-        for producto in datos:
-            o = mejor_oferta_vtex(producto, tienda)
-            if o and o["descuento"] >= DESCUENTO_MINIMO:
-                ofertas.append(o)
+        for p in datos:
+            mejor = None
+            for item in p.get("items") or []:
+                imgs = item.get("images") or []
+                for s in item.get("sellers") or []:
+                    co = s.get("commertialOffer") or {}
+                    if co.get("AvailableQuantity", 0) <= 0:
+                        continue
+                    d = calcular_descuento(co.get("Price"), co.get("ListPrice"))
+                    if mejor is None or d > mejor[0]:
+                        mejor = (d, co["Price"], co["ListPrice"], imgs[0].get("imageUrl") if imgs else "")
+            if mejor and mejor[0] >= DESCUENTO_MINIMO:
+                cats = p.get("categories") or [""]
+                ofertas.append(nueva_oferta(
+                    tienda, p.get("productId"), p.get("productName"), p.get("brand"), cats[0],
+                    mejor[1], mejor[2], mejor[3],
+                    p.get("link") or f"https://{tienda['dominio']}/{p.get('linkText', '')}/p"))
                 sobre_umbral += 1
-        # La lista viene ordenada por descuento: si una página entera ya no
-        # tiene ofertas sobre el umbral, las siguientes tampoco.
         if sobre_umbral == 0:
             break
         time.sleep(PAUSA_SEGUNDOS)
     return ofertas
 
 
-RECOLECTORES = {"vtex": recolectar_vtex}
+RECOLECTORES = {"shopify": recolectar_shopify, "sfcc": recolectar_sfcc, "vtex": recolectar_vtex}
 
 
 def explicar_error(e):
     """Traduce el error a algo entendible en docs/estado.json."""
     if isinstance(e, urllib.error.HTTPError):
-        if e.code == 403:
-            return "La tienda bloqueó la consulta (error 403). Desactívala en tiendas.json."
+        if e.code in (401, 403):
+            return f"La tienda bloqueó la consulta (error {e.code})."
         if e.code == 404:
-            return "La tienda no tiene catálogo VTEX (error 404): usa otra plataforma."
+            return "La tienda no publica ese catálogo (error 404)."
+        if e.code == 429:
+            return "La tienda pidió esperar (demasiadas consultas). Se reintentará en la próxima vuelta."
         return f"La tienda respondió con error {e.code}."
     if isinstance(e, ValueError):
-        return "No respondió como tienda VTEX: usa otra plataforma o bloquea consultas."
+        return f"Respuesta inesperada: {e}."
     if isinstance(e, KeyError):
         return "Tipo de tienda no soportado todavía."
     return f"No se pudo conectar: {str(e)[:150]}"
@@ -244,16 +355,20 @@ def main():
             unicas[o["id"]] = o
     ofertas = list(unicas.values())
 
+    ahora = dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes")
+    escribir_json(ARCHIVO_ESTADO, {"actualizado": ahora, "tiendas": estado})
+    if not ofertas:
+        print("No llegó ninguna oferta: se mantienen las del día anterior.")
+        return 0
+
     historial = leer_json(ARCHIVO_HISTORIAL, {})
     for o in ofertas:
         evaluar_con_historial(o, historial.get(o["id"], []), hoy)
     actualizar_historial(historial, ofertas, hoy)
 
     ofertas.sort(key=lambda o: (-o["descuento"], o["precio"]))
-    ahora = dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes")
     escribir_json(ARCHIVO_SALIDA, {"actualizado": ahora, "total": len(ofertas), "ofertas": ofertas})
     escribir_json(ARCHIVO_HISTORIAL, historial)
-    escribir_json(ARCHIVO_ESTADO, {"actualizado": ahora, "tiendas": estado})
     print(f"Listo: {len(ofertas)} ofertas de {DESCUENTO_MINIMO}% o más.")
     return 0
 
