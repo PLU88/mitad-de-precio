@@ -234,6 +234,43 @@ def leer_grilla_sfcc(tienda, texto):
     return productos
 
 
+TILE_ABC = re.compile(r'class="product-tile__wrapper" data-pid="([^"]+)"')
+
+
+def precio_bloque(trozo, clase):
+    m = re.search(clase + r'[^>]*>.*?data-value="([0-9.]+)"', trozo, re.S)
+    return float(m.group(1)) if m else 0.0
+
+
+def leer_grilla_abc(tienda, texto):
+    """Grilla Salesforce de abc/La Polar: usa el precio internet (no el exclusivo con tarjeta)."""
+    productos = []
+    posiciones = list(TILE_ABC.finditer(texto))
+    for i, m in enumerate(posiciones):
+        fin = posiciones[i + 1].start() if i + 1 < len(posiciones) else len(texto)
+        trozo = texto[m.start():fin]
+        normal = precio_bloque(trozo, r'js-normal-price')
+        precio = precio_bloque(trozo, r'js-internet-price') or normal
+        enlace = re.search(r'href="(/[^"?]+\.html)"[^>]*itemprop="url"', trozo) or re.search(r'href="(/[^"?]+\.html)"', trozo)
+        nombre = re.search(r'data-product-name="([^"]+)"', trozo)
+        imagen = re.search(r'class="tile-image[^"]*"[^>]*src="(https?://[^"]+)"', trozo)
+        gtm = re.search(r'data-gtm="([^"]+)"', trozo)
+        marca = categoria = ""
+        if gtm:
+            try:
+                imp = json.loads(html.unescape(gtm.group(1)))["ecommerce"]["impressions"]
+                marca, categoria = imp.get("brand", ""), imp.get("category", "")
+            except (ValueError, KeyError, TypeError):
+                pass
+        if not (precio and normal and enlace and nombre):
+            continue
+        productos.append(nueva_oferta(
+            tienda, m.group(1), html.unescape(nombre.group(1)), marca.title(), html.unescape(categoria),
+            precio, normal, html.unescape(imagen.group(1)) if imagen else "",
+            urllib.parse.urljoin(f"https://{tienda['dominio']}/", enlace.group(1))))
+    return productos
+
+
 def recolectar_sfcc(tienda):
     """Pide la grilla ordenada por mayor descuento, de 48 en 48, hasta bajar del 50%."""
     base = f"https://{tienda['dominio']}/on/demandware.store/Sites-{tienda['sitio']}-Site/default/Search-UpdateGrid"
@@ -241,7 +278,8 @@ def recolectar_sfcc(tienda):
     ofertas, vistos = [], set()
     for pagina in range(MAX_PAGINAS):
         url = f"{base}?cgid={tienda.get('categoria', 'root')}&srule={regla}&start={pagina * 48}&sz=48"
-        productos = leer_grilla_sfcc(tienda, pedir(url, acepta="text/html"))
+        lector = leer_grilla_abc if tienda.get("formato") == "abc" else leer_grilla_sfcc
+        productos = lector(tienda, pedir(url, acepta="text/html"))
         if not productos:
             if pagina == 0:
                 raise ValueError("la grilla de productos llegó vacía")
@@ -254,7 +292,7 @@ def recolectar_sfcc(tienda):
             if o["descuento"] >= DESCUENTO_MINIMO:
                 ofertas.append(o)
                 sobre_umbral += 1
-        if sobre_umbral == 0:
+        if sobre_umbral == 0 and pagina + 1 >= tienda.get("paginas_minimas", 1):
             break  # viene ordenado por descuento: lo que sigue es menor
         time.sleep(PAUSA_SEGUNDOS)
     return ofertas
