@@ -1,0 +1,13 @@
+name: Revisión temporal del dominio
+on: workflow_dispatch
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for d in priveofertazos.cl www.priveofertazos.cl; do
+            echo "== $d"; echo "NS:"; dig +short NS priveofertazos.cl @8.8.8.8; echo "A (Google):"; dig +short A $d @8.8.8.8; echo "A (Cloudflare):"; dig +short A $d @1.1.1.1
+            echo "A (Vercel):"; dig +short A $d @ns1.vercel-dns.com
+            curl -sS -m 20 -o /dev/null -w "https %{http_code} %{redirect_url}\n" https://$d/ || true
+          done
+          echo "NS en el registro .cl:"; dig +short NS priveofertazos.cl @a.nic.cl
