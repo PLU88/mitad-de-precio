@@ -1,10 +1,15 @@
 // Publica en Instagram (@priveofertazos) el carrusel y las historias del día.
 // La llama Vercel una vez al día (ver vercel.json). También se puede llamar desde el panel (sesión de administración).
-// El permiso de Instagram (token) se guarda en el almacenamiento privado y se renueva solo cada semana.
+// Dos tipos de permiso (token):
+//  - "EAA…": token de usuario del sistema de Meta (inicio de sesión unificado). No caduca. Usa graph.facebook.com.
+//  - "IG…":  token de Instagram Login. Dura 60 días y se renueva solo cada semana. Usa graph.instagram.com.
+// ?probar=1 solo revisa que el permiso funcione (no publica nada).
 import { get, put } from "@vercel/blob";
 import { esAdmin, responder } from "./_lib.js";
 
-const GRAPH = "https://graph.instagram.com/v25.0";
+const VERSION = "v25.0";
+let GRAPH = "https://graph.instagram.com/" + VERSION;
+const ID_INSTAGRAM = process.env.IG_USER_ID || "17841480277275471"; // @priveofertazos
 const RAW = "https://raw.githubusercontent.com/PLU88/mitad-de-precio/datos/datos/publicaciones/";
 const ARCHIVO = "instagram.json";
 const SIETE_DIAS = 7 * 864e5;
@@ -57,11 +62,19 @@ export default async function handler(req, res) {
   try {
     const estado = await leerEstado();
     estado.publicado = estado.publicado || {};
-    let token = estado.token || process.env.IG_TOKEN;
+    let token = process.env.IG_TOKEN && process.env.IG_TOKEN.startsWith("EAA") ? process.env.IG_TOKEN : (estado.token || process.env.IG_TOKEN);
     if (!token) return responder(res, 200, { ok: false, motivo: "Todavía no hay permiso de Instagram (falta el token)." });
+    const deMeta = token.startsWith("EAA");
+    GRAPH = (deMeta ? "https://graph.facebook.com/" : "https://graph.instagram.com/") + VERSION;
 
-    // renovar el permiso (dura 60 días; se renueva cada semana)
-    if (!estado.renovado || Date.now() - Date.parse(estado.renovado) > SIETE_DIAS) {
+    if (deMeta) {
+      if (!estado.usuario || estado.usuario.id !== ID_INSTAGRAM) {
+        const yo = await graph(`/${ID_INSTAGRAM}?fields=id,username`, token);
+        estado.usuario = { id: yo.id, nombre: yo.username };
+        await guardarEstado(estado);
+      }
+    } else if (!estado.renovado || Date.now() - Date.parse(estado.renovado) > SIETE_DIAS) {
+      // renovar el permiso de Instagram Login (dura 60 días; se renueva cada semana)
       const nuevo = await graph(`https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token`, token);
       token = nuevo.access_token;
       estado.token = token;
@@ -74,6 +87,10 @@ export default async function handler(req, res) {
       await guardarEstado(estado);
     }
 
+    if (req.query && req.query.probar) {
+      const info = await graph(`/${estado.usuario.id}?fields=username,media_count,followers_count`, token);
+      return responder(res, 200, { ok: true, prueba: true, cuenta: info.username, publicaciones: info.media_count, seguidores: info.followers_count, tipo: deMeta ? "meta" : "instagram" });
+    }
     const fecha = (req.query && req.query.fecha) || hoyEnChile();
     if (estado.publicado[fecha]) return responder(res, 200, { ok: true, motivo: "Lo de hoy ya está publicado.", fecha });
     const indice = await fetch(RAW + "indice.json?v=" + Date.now()).then((r) => r.json());
