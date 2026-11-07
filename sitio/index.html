@@ -287,9 +287,6 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   <div class="aviso" id="aviso" hidden></div>
   <div class="resumen">
     <span id="conteo"></span>
-    <label class="interruptor" for="ocultarDudosos">
-      <input type="checkbox" id="ocultarDudosos"> Ocultar descuentos dudosos
-    </label>
   </div>
   <div class="grilla" id="grilla" aria-live="polite"></div>
   <button class="mas" id="mas" hidden>Ver más ofertas</button>
@@ -308,9 +305,9 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
 
   var POR_PAGINA = 60;
   var GENEROS = ["Mujer", "Hombre", "Niña", "Niño", "Bebé"];
-  var GUARDAR = ["min", "tienda", "categoria", "subcategoria", "orden", "ocultarDudosos", "genero", "tallas", "marca", "precioMax"];
+  var GUARDAR = ["min", "tienda", "categoria", "subcategoria", "orden", "genero", "tallas", "marca", "precioMax"];
   var VACIO = { tienda: "", categoria: "", subcategoria: "", genero: [], tallas: [], marca: "", precioMax: 0 };
-  var estado = { min: 50, q: "", orden: "desc", ocultarDudosos: false, mostrar: POR_PAGINA };
+  var estado = { min: 50, q: "", orden: "desc", mostrar: POR_PAGINA };
   Object.keys(VACIO).forEach(function (k) { estado[k] = Array.isArray(VACIO[k]) ? [] : VACIO[k]; });
   var ofertas = [];
 
@@ -350,7 +347,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     if (sin !== "subcategoria" && sin !== "categoria" && estado.subcategoria && o.subcategoria !== estado.subcategoria) return false;
     if (sin !== "marca" && estado.marca && o.marca !== estado.marca) return false;
     if (estado.precioMax && o.precio > estado.precioMax) return false;
-    if (estado.ocultarDudosos && o.dudoso) return false;
+    if (o.dudoso) return false; // descuentos poco creíbles: no se muestran
     if (sin !== "genero" && estado.genero.length && !(o.genero || []).some(function (g) { return estado.genero.indexOf(g) >= 0; })) return false;
     if (sin !== "tallas" && estado.tallas.length && !(o.tallas || []).some(function (t) { return estado.tallas.indexOf(t) >= 0; })) return false;
     if (estado.q) {
@@ -412,7 +409,6 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     p.appendChild(n); c.appendChild(p);
     var chips = el("div", "chips");
     if (o.minimo_30d) chips.appendChild(el("span", "chip bien", "Precio más bajo en 30 días"));
-    if (o.dudoso) { var d = el("span", "chip alerta", "Descuento dudoso"); d.title = "El \"precio normal\" casi no se ha cobrado en las últimas semanas."; chips.appendChild(d); }
     if (chips.childNodes.length) c.appendChild(chips);
     if (o.tallas && o.tallas.length) {
       var ts = o.tallas.slice(0, 8).join(" · ") + (o.tallas.length > 8 ? " …" : "");
@@ -522,7 +518,6 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   function iniciar(datos, esDemo, actualizado) {
     ofertas = datos;
     $("orden").value = estado.orden;
-    $("ocultarDudosos").checked = estado.ocultarDudosos;
     if (actualizado) {
       $("pie").textContent = "Actualizado el " + new Date(actualizado).toLocaleString("es-CL", { dateStyle: "medium", timeStyle: "short" }) +
         " · Los precios y el stock los fija cada tienda y pueden cambiar. Revisa el precio final antes de comprar.";
@@ -541,7 +536,6 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     $(id).addEventListener("change", function (e) { estado[id] = e.target.value; cambio(); });
   });
   $("precioMax").addEventListener("change", function (e) { estado.precioMax = +e.target.value; cambio(); });
-  $("ocultarDudosos").addEventListener("change", function (e) { estado.ocultarDudosos = e.target.checked; cambio(); });
   $("mas").addEventListener("click", function () { estado.mostrar += POR_PAGINA; render(); });
   function abrirFiltros(abrir) { $("panelFiltros").hidden = !abrir; $("btnFiltros").setAttribute("aria-expanded", String(abrir)); }
   $("btnFiltros").addEventListener("click", function () { abrirFiltros($("panelFiltros").hidden); });

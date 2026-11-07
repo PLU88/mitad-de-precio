@@ -251,13 +251,15 @@ def historia_estrella(o, fecha):
     pegar_foto(img, o["_foto"], (90, 480, 990, 1250), 36)
     insignia(d, 120, 510, o["descuento"], 1.1)
     centrar(d, 1285, o["tienda"].upper(), montserrat(36, 700), "#FF4F8B")
-    if o.get("url"):
-        letra = figtree(32, 600)
-        centrar(d, 1340, enlace_corto(d, o["url"], letra, 900), letra, "#C9C9D6")
-    y = 1400
+    y = 1340
     for linea in partir(d, o["nombre"], figtree(50, 600), 900, 2):
         centrar(d, y, linea, figtree(50, 600), BLANCO)
         y += 62
+    if o.get("url"):
+        # "Ir al descuento" con el enlace de la tienda, justo bajo el nombre
+        letra = figtree(32, 600)
+        centrar(d, y + 4, "Ir al descuento: " + enlace_corto(d, o["url"], letra, 900 - d.textlength("Ir al descuento: ", font=letra)), letra, "#FF4F8B")
+        y += 52
     centrar(d, y + 8, clp(o["precio"]), barlow(150), BLANCO)
     centrar(d, y + 168, "Antes " + clp(o["precio_normal"]), figtree(42, 500), "#C9C9D6")
     rectangulo(d, (140, 1760, 940, 1860), 50, FUCSIA)
