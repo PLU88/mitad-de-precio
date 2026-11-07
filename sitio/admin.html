@@ -220,12 +220,22 @@ details.tarjeta summary { cursor: pointer; }
         var img = new Image(); img.src = url; img.alt = titulo + " " + (i + 1); img.loading = "lazy"; f.appendChild(img);
         var b = el("button", "suave", "Descargar"); b.type = "button";
         b.addEventListener("click", function () { descargar(url, "priveofertazos-" + dia.fecha + "-" + a, b); });
-        f.appendChild(b); g.appendChild(f);
+        f.appendChild(b);
+        // historias de oferta: link listo para pegar en el sticker de enlace
+        var n = /^historia_(\d+)\.jpg$/.exec(a), oferta = n && (dia.ofertas || [])[+n[1] - 1];
+        if (oferta && oferta.url) {
+          var cl = el("button", "primario", "Copiar link"); cl.type = "button";
+          cl.addEventListener("click", function () {
+            navigator.clipboard.writeText(oferta.url).then(function () { cl.textContent = "Link copiado"; }, function () { window.prompt("Copia el link:", oferta.url); });
+          });
+          f.appendChild(cl);
+        }
+        g.appendChild(f);
       });
       t.appendChild(g); caja.appendChild(t);
     }
     bloque("Carrusel para el feed", dia.carrusel, "Súbelas juntas, en este orden, como una sola publicación.");
-    bloque("Historias", dia.historias, "Una por cada oferta del día; la última invita a pedir acceso.");
+    bloque("Historias", dia.historias, "Una por cada oferta del día (se publican solas a las 9:15). Si quieres el sticker de link, sube la imagen desde la app de Instagram y pega el link con «Copiar link».");
     var t = el("article", "tarjeta persona");
     t.appendChild(el("span", "nombre", "Texto para la publicación"));
     t.appendChild(el("pre", "texto-ig", dia.texto));
