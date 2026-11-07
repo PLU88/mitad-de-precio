@@ -26,7 +26,7 @@ ESTADO = os.path.join(RAIZ, "datos", "estado.json")
 CHILE = ZoneInfo("America/Santiago")
 HORA_INICIO = (7, 30)
 DIAS_GUARDADOS = 7
-CANTIDAD = 6
+CANTIDAD = 7
 
 MARINO, FUCSIA, CREMA, BLANCO, GRIS = "#1A1A2E", "#D61F69", "#F7F3EE", "#FFFFFF", "#6B6B7B"
 TRAMOS = {50: ("#F2B705", "#2B2100"), 60: ("#F07B13", "#2A1200"), 70: ("#D7262E", "#FFFFFF"), 80: ("#9D1660", "#FFFFFF")}
@@ -243,11 +243,13 @@ def lamina_oferta(o, n, total, fecha):
     return img
 
 
-def historia_estrella(o, fecha):
+def historia_estrella(o, fecha, n=1, total=1):
     img = Image.new("RGB", (1080, 1920), MARINO)
     d = ImageDraw.Draw(img)
     logo(d, (1080 - ancho_logo(1.1)) / 2, 150, 1.1, claro=True)
-    centrar(d, 330, "OFERTAZO DEL DÍA", barlow(120), "#FF4F8B")
+    if total > 1:
+        d.text((1010, 110), f"{n}/{total}", font=montserrat(34, 700), fill="#C9C9D6", anchor="rm")
+    centrar(d, 330, "OFERTAZO DEL DÍA" if n == 1 else "OFERTAZO", barlow(120), "#FF4F8B")
     pegar_foto(img, o["_foto"], (90, 480, 990, 1250), 36)
     insignia(d, 120, 510, o["descuento"], 1.1)
     centrar(d, 1285, o["tienda"].upper(), montserrat(36, 700), "#FF4F8B")
@@ -367,18 +369,26 @@ def main(forzar=False):
         nombre = f"carrusel_{n}.jpg"
         guardar(lamina_oferta(o, n, len(elegidas), fecha), os.path.join(carpeta, nombre))
         archivos.append(nombre)
-    guardar(historia_estrella(elegidas[0], fecha), os.path.join(carpeta, "historia_oferta.jpg"))
+    # una historia por oferta y una que invita a pedir acceso
+    historias = []
+    for n, o in enumerate(elegidas, 1):
+        nombre = f"historia_{n}.jpg"
+        guardar(historia_estrella(o, fecha, n, len(elegidas)), os.path.join(carpeta, nombre))
+        historias.append(nombre)
     guardar(historia_promo(elegidas, len(ofertas), tiendas), os.path.join(carpeta, "historia_promo.jpg"))
+    historias.append("historia_promo.jpg")
     texto = texto_publicacion(fecha, elegidas, len(ofertas))
     open(os.path.join(carpeta, "texto.txt"), "w", encoding="utf-8").write(texto)
 
     indice["dias"] = [x for x in indice["dias"] if x["fecha"] != fecha.isoformat()]
     indice["dias"].insert(0, {
         "fecha": fecha.isoformat(), "creado": ahora.isoformat(timespec="minutes"),
-        "carrusel": archivos, "historias": ["historia_oferta.jpg", "historia_promo.jpg"], "texto": texto,
+        "carrusel": archivos, "historias": historias, "texto": texto,
         "ofertas": [{k: o[k] for k in ("id", "nombre", "tienda", "precio", "precio_normal", "descuento", "url")} for o in elegidas],
     })
-    indice["publicadas"][fecha.isoformat()] = [o["id"] for o in elegidas]
+    # si se rehacen las de hoy, se suman a las ya elegidas (para no repetirlas en 21 días)
+    previas = indice["publicadas"].get(fecha.isoformat(), [])
+    indice["publicadas"][fecha.isoformat()] = previas + [o["id"] for o in elegidas if o["id"] not in previas]
     # guardar solo los últimos días
     fechas = sorted({x["fecha"] for x in indice["dias"]}, reverse=True)[:DIAS_GUARDADOS]
     indice["dias"] = [x for x in indice["dias"] if x["fecha"] in fechas]
