@@ -1,8 +1,9 @@
 """Arma cada mañana las imágenes y el texto para Instagram con las mejores ofertas del día.
 
 Se ejecuta en cada vuelta del recolector, pero solo trabaja una vez al día (desde las 7:30 de Chile).
-Deja en datos/publicaciones/<fecha>/ un carrusel (portada + 6 ofertas, 1080x1350), dos historias
-(1080x1920) y texto.txt; y en datos/publicaciones/indice.json la lista de los últimos 7 días.
+Deja en datos/publicaciones/<fecha>/ un carrusel (portada + 7 ofertas, 1080x1350), la historia de
+invitación (1080x1920) y texto.txt; y en datos/publicaciones/indice.json la lista de los últimos 7 días.
+Además, cada 3 horas, datos/publicaciones/vitrina/ con 30 historias de ofertas y sus links para subirlas a mano.
 """
 import datetime as dt
 import io
@@ -214,32 +215,29 @@ def lamina_portada(fecha, elegidas, total_ofertas, total_tiendas):
 
 
 def lamina_oferta(o, n, total, fecha):
-    img = Image.new("RGB", (1080, 1350), CREMA)
+    img = Image.new("RGB", (1080, 1350), MARINO)
     d = ImageDraw.Draw(img)
-    logo(d, 60, 44, 0.8)
-    d.text((1020, 88), f"{n}/{total}", font=montserrat(30, 700), fill=GRIS, anchor="rm")
+    logo(d, 60, 44, 0.8, claro=True)
+    d.text((1020, 88), f"{n}/{total}", font=montserrat(30, 700), fill="#C9C9D6", anchor="rm")
     pegar_foto(img, o["_foto"], (60, 150, 1020, 870))
     insignia(d, 84, 174, o["descuento"], 1.0)
-    d.text((60, 905), o["tienda"].upper(), font=montserrat(30, 700), fill=FUCSIA)
+    d.text((60, 905), o["tienda"].upper(), font=montserrat(30, 700), fill="#FF4F8B")
     y = 950
     for linea in partir(d, o["nombre"], figtree(46, 600), 960, 2):
-        d.text((60, y), linea, font=figtree(46, 600), fill=MARINO)
+        d.text((60, y), linea, font=figtree(46, 600), fill=BLANCO)
         y += 58
     y = max(y + 14, 1085)
-    d.text((60, y), clp(o["precio"]), font=barlow(130), fill=MARINO)
+    d.text((60, y), clp(o["precio"]), font=barlow(130), fill=BLANCO)
     antes = "Antes " + clp(o["precio_normal"])
     letra = figtree(40, 500)
     xa = 60 + d.textlength(clp(o["precio"]), font=barlow(130)) + 36
-    d.text((xa, y + 34), antes, font=letra, fill=GRIS)
+    d.text((xa, y + 34), antes, font=letra, fill="#C9C9D6")
     wa = d.textlength(antes, font=letra)
     xs = xa + d.textlength("Antes ", font=letra)
-    d.line((xs, y + 60, xa + wa, y + 60), fill=GRIS, width=3)
-    d.text((xa, y + 86), "Ahorras " + clp(o["precio_normal"] - o["precio"]), font=figtree(36, 700), fill=FUCSIA)
-    if o.get("url"):
-        letra = figtree(30, 700)
-        d.text((540, 1252), enlace_corto(d, o["url"], letra, 960), font=letra, fill=FUCSIA, anchor="mm")
-    d.text((540, 1305), f"Precio del {fecha.day} de {MESES[fecha.month - 1]}, puede cambiar · priveofertazos.cl",
-           font=figtree(26, 500), fill=GRIS, anchor="mm")
+    d.line((xs, y + 60, xa + wa, y + 60), fill="#C9C9D6", width=3)
+    d.text((xa, y + 86), "Ahorras " + clp(o["precio_normal"] - o["precio"]), font=figtree(36, 700), fill="#FF4F8B")
+    d.text((540, 1300), f"Precio del {fecha.day} de {MESES[fecha.month - 1]}, puede cambiar · priveofertazos.cl",
+           font=figtree(26, 500), fill="#C9C9D6", anchor="mm")
     return img
 
 
@@ -257,11 +255,7 @@ def historia_estrella(o, fecha, n=1, total=1):
     for linea in partir(d, o["nombre"], figtree(50, 600), 900, 2):
         centrar(d, y, linea, figtree(50, 600), BLANCO)
         y += 62
-    if o.get("url"):
-        # "Ir al descuento" con el enlace de la tienda, justo bajo el nombre
-        letra = figtree(32, 600)
-        centrar(d, y + 4, "Ir al descuento: " + enlace_corto(d, o["url"], letra, 900 - d.textlength("Ir al descuento: ", font=letra)), letra, "#FF4F8B")
-        y += 52
+    y += 60  # espacio libre para poner el sticker de enlace
     centrar(d, y + 8, clp(o["precio"]), barlow(150), BLANCO)
     centrar(d, y + 168, "Antes " + clp(o["precio_normal"]), figtree(42, 500), "#C9C9D6")
     rectangulo(d, (140, 1760, 940, 1860), 50, FUCSIA)
@@ -294,16 +288,16 @@ def historia_promo(elegidas, total_ofertas, total_tiendas):
 
 
 # ------------------------------------------------------------------ selección y texto
-def elegir(ofertas, ya_publicadas):
+def elegir(ofertas, ya_publicadas, cantidad=CANTIDAD, por_tienda=1, por_categoria=2):
     candidatas = [o for o in ofertas if o.get("imagen") and not o.get("dudoso") and 55 <= o["descuento"] <= 85
                   and o["precio"] >= 3000 and 10000 <= o["precio_normal"] <= 1500000 and o["id"] not in ya_publicadas
                   and o.get("categoria") not in ("Otros",) and o.get("subcategoria") != "Salud y bienestar"]
     def puntaje(o):
         return o["descuento"] + (8 if o.get("minimo_30d") else 0) + 4 * math.log10(max(o["precio_normal"] - o["precio"], 1)) + random.random() * 6
     candidatas.sort(key=puntaje, reverse=True)
-    elegidas, tiendas, categorias = [], set(), {}
+    elegidas, tiendas, categorias = [], {}, {}
     for o in candidatas:
-        if o["tienda"] in tiendas or categorias.get(o["categoria"], 0) >= 2:
+        if tiendas.get(o["tienda"], 0) >= por_tienda or categorias.get(o["categoria"], 0) >= por_categoria:
             continue
         try:
             o["_foto"] = bajar_imagen(o["imagen"])
@@ -312,9 +306,9 @@ def elegir(ofertas, ya_publicadas):
             continue
         o = dict(o, nombre=nombre_bonito(o["nombre"]), _foto=o["_foto"])
         elegidas.append(o)
-        tiendas.add(o["tienda"])
+        tiendas[o["tienda"]] = tiendas.get(o["tienda"], 0) + 1
         categorias[o["categoria"]] = categorias.get(o["categoria"], 0) + 1
-        if len(elegidas) == CANTIDAD:
+        if len(elegidas) == cantidad:
             break
     return elegidas
 
@@ -340,11 +334,53 @@ def guardar(img, ruta):
     img.save(ruta, "JPEG", quality=88, optimize=True, progressive=True)
 
 
+# ------------------------------------------------------------------ vitrina: 30 historias para subir a mano
+VITRINA = os.path.join(CARPETA, "vitrina")
+VITRINA_CANTIDAD = 30
+VITRINA_HORAS = 3
+
+
+def vitrina(ofertas, forzar=False):
+    """Cada 3 horas deja 30 historias de ofertas (fondo oscuro, sin link escrito) con su link aparte."""
+    ahora = dt.datetime.now(CHILE)
+    ruta = os.path.join(VITRINA, "indice.json")
+    previo = json.load(open(ruta, encoding="utf-8")) if os.path.exists(ruta) else {}
+    if not forzar and previo.get("creado"):
+        if ahora - dt.datetime.fromisoformat(previo["creado"]) < dt.timedelta(hours=VITRINA_HORAS):
+            return
+    # no repetir lo mostrado en las últimas 24 horas
+    recientes = {i: t for i, t in (previo.get("recientes") or {}).items() if ahora - dt.datetime.fromisoformat(t) < dt.timedelta(hours=24)}
+    elegidas = elegir(ofertas, set(recientes), VITRINA_CANTIDAD, por_tienda=3, por_categoria=8)
+    if len(elegidas) < 5:
+        print("Vitrina: no hay suficientes ofertas con foto.")
+        return
+    os.makedirs(VITRINA, exist_ok=True)
+    for a in os.listdir(VITRINA):
+        if a.endswith(".jpg"):
+            os.remove(os.path.join(VITRINA, a))
+    sello = ahora.strftime("%Y%m%d%H%M")  # nombre nuevo en cada vuelta, para que no quede la imagen vieja en caché
+    lista = []
+    for n, o in enumerate(elegidas, 1):
+        archivo = f"oferta_{sello}_{n:02d}.jpg"
+        guardar(historia_estrella(o, ahora.date()), os.path.join(VITRINA, archivo))
+        lista.append({"archivo": archivo, **{k: o[k] for k in ("id", "nombre", "tienda", "precio", "precio_normal", "descuento", "url")}})
+        recientes[o["id"]] = ahora.isoformat(timespec="minutes")
+    json.dump({"creado": ahora.isoformat(timespec="minutes"), "ofertas": lista, "recientes": recientes},
+              open(ruta, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(f"Vitrina: {len(lista)} historias nuevas.")
+
+
 def main(forzar=False):
     ahora = dt.datetime.now(CHILE)
     fecha = ahora.date()
     indice_ruta = os.path.join(CARPETA, "indice.json")
     indice = json.load(open(indice_ruta, encoding="utf-8")) if os.path.exists(indice_ruta) else {"dias": [], "publicadas": {}}
+    datos = json.load(open(OFERTAS, encoding="utf-8"))
+    ofertas = datos["ofertas"]
+    try:
+        vitrina(ofertas, forzar)
+    except Exception as e:  # la vitrina nunca debe frenar lo demás
+        print("Vitrina: no se pudo hacer:", e)
     if not forzar:
         if (ahora.hour, ahora.minute) < HORA_INICIO:
             print("Publicaciones: todavía es temprano.")
@@ -352,8 +388,6 @@ def main(forzar=False):
         if any(x["fecha"] == fecha.isoformat() for x in indice["dias"]):
             print("Publicaciones: las de hoy ya están hechas.")
             return 0
-    datos = json.load(open(OFERTAS, encoding="utf-8"))
-    ofertas = datos["ofertas"]
     tiendas = sum(1 for t in json.load(open(ESTADO, encoding="utf-8"))["tiendas"] if t.get("ok")) if os.path.exists(ESTADO) else 0
     ya = {i for f, ids in indice.get("publicadas", {}).items() for i in ids}
     elegidas = elegir(ofertas, ya)
@@ -369,14 +403,9 @@ def main(forzar=False):
         nombre = f"carrusel_{n}.jpg"
         guardar(lamina_oferta(o, n, len(elegidas), fecha), os.path.join(carpeta, nombre))
         archivos.append(nombre)
-    # una historia por oferta y una que invita a pedir acceso
-    historias = []
-    for n, o in enumerate(elegidas, 1):
-        nombre = f"historia_{n}.jpg"
-        guardar(historia_estrella(o, fecha, n, len(elegidas)), os.path.join(carpeta, nombre))
-        historias.append(nombre)
+    # se publica sola solo la historia que invita a pedir acceso; las de ofertas (con link) están en la vitrina
     guardar(historia_promo(elegidas, len(ofertas), tiendas), os.path.join(carpeta, "historia_promo.jpg"))
-    historias.append("historia_promo.jpg")
+    historias = ["historia_promo.jpg"]
     texto = texto_publicacion(fecha, elegidas, len(ofertas))
     open(os.path.join(carpeta, "texto.txt"), "w", encoding="utf-8").write(texto)
 
