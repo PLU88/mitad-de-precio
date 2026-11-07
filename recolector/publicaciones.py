@@ -114,6 +114,22 @@ def foto_grande(url):
         return url
 
 
+def enlace_limpio(url):
+    """Enlace al producto sin parámetros de seguimiento (más corto para el texto)."""
+    x = urllib.parse.urlsplit(url or "")
+    return urllib.parse.urlunsplit((x.scheme or "https", x.netloc, x.path, "", "")).rstrip("/") if x.netloc else ""
+
+
+def enlace_corto(dibujo, url, letra, ancho):
+    """Enlace sin "https://www." y recortado con "…" para que quepa en la imagen."""
+    t = re.sub(r"^https?://(www\.)?", "", enlace_limpio(url))
+    if dibujo.textlength(t, font=letra) <= ancho:
+        return t
+    while t and dibujo.textlength(t + "…", font=letra) > ancho:
+        t = t[:-1]
+    return t + "…"
+
+
 def bajar_imagen(url):
     req = urllib.request.Request(foto_grande(url), headers={"User-Agent": UA, "Accept": "image/avif,image/webp,image/*,*/*"})
     with urllib.request.urlopen(req, timeout=25) as r:
@@ -219,7 +235,10 @@ def lamina_oferta(o, n, total, fecha):
     xs = xa + d.textlength("Antes ", font=letra)
     d.line((xs, y + 60, xa + wa, y + 60), fill=GRIS, width=3)
     d.text((xa, y + 86), "Ahorras " + clp(o["precio_normal"] - o["precio"]), font=figtree(36, 700), fill=FUCSIA)
-    d.text((540, 1300), f"Precio del {fecha.day} de {MESES[fecha.month - 1]}, puede cambiar · priveofertazos.cl",
+    if o.get("url"):
+        letra = figtree(30, 700)
+        d.text((540, 1252), enlace_corto(d, o["url"], letra, 960), font=letra, fill=FUCSIA, anchor="mm")
+    d.text((540, 1305), f"Precio del {fecha.day} de {MESES[fecha.month - 1]}, puede cambiar · priveofertazos.cl",
            font=figtree(26, 500), fill=GRIS, anchor="mm")
     return img
 
@@ -229,15 +248,18 @@ def historia_estrella(o, fecha):
     d = ImageDraw.Draw(img)
     logo(d, (1080 - ancho_logo(1.1)) / 2, 150, 1.1, claro=True)
     centrar(d, 330, "OFERTAZO DEL DÍA", barlow(120), "#FF4F8B")
-    pegar_foto(img, o["_foto"], (90, 500, 990, 1320), 36)
-    insignia(d, 120, 530, o["descuento"], 1.1)
-    centrar(d, 1360, o["tienda"].upper(), montserrat(36, 700), "#FF4F8B")
-    y = 1415
+    pegar_foto(img, o["_foto"], (90, 480, 990, 1250), 36)
+    insignia(d, 120, 510, o["descuento"], 1.1)
+    centrar(d, 1285, o["tienda"].upper(), montserrat(36, 700), "#FF4F8B")
+    if o.get("url"):
+        letra = figtree(32, 600)
+        centrar(d, 1340, enlace_corto(d, o["url"], letra, 900), letra, "#C9C9D6")
+    y = 1400
     for linea in partir(d, o["nombre"], figtree(50, 600), 900, 2):
         centrar(d, y, linea, figtree(50, 600), BLANCO)
         y += 62
-    centrar(d, y + 20, clp(o["precio"]), barlow(150), BLANCO)
-    centrar(d, y + 190, "Antes " + clp(o["precio_normal"]), figtree(42, 500), "#C9C9D6")
+    centrar(d, y + 8, clp(o["precio"]), barlow(150), BLANCO)
+    centrar(d, y + 168, "Antes " + clp(o["precio_normal"]), figtree(42, 500), "#C9C9D6")
     rectangulo(d, (140, 1760, 940, 1860), 50, FUCSIA)
     centrar(d, 1785, "Más ofertas en priveofertazos.cl", figtree(40, 700), BLANCO)
     return img
@@ -250,13 +272,13 @@ def historia_promo(elegidas, total_ofertas, total_tiendas):
     centrar(d, 330, "LO MEJOR, A MITAD DE PRECIO", montserrat(40, 700), GRIS)
     centrar(d, 450, f"+{total_ofertas:,}".replace(",", "."), barlow(220), FUCSIA)
     centrar(d, 680, "OFERTAS DESDE 50%", barlow(110), MARINO)
-    centrar(d, 810, f"en {total_tiendas} tiendas de Chile, revisadas cada 30 minutos", figtree(40, 600), MARINO)
+    centrar(d, 810, f"en {total_tiendas} tiendas de Chile", figtree(40, 600), MARINO)
     x = 75
     for o in elegidas[:3]:
         pegar_foto(img, o["_foto"], (x, 920, x + 290, 1210), 26)
         insignia(d, x + 12, 932, o["descuento"], 0.45)
         x += 320
-    lineas = ["Moda, calzado, hogar, tecnología y más", "Solo descuentos reales: te avisamos", "cuando un precio \"rebajado\" es dudoso"]
+    lineas = ["Moda, calzado, hogar, tecnología y más", "Ofertazos nuevos todos los días"]
     y = 1290
     for i, t in enumerate(lineas):
         centrar(d, y, t, figtree(42, 700 if i == 0 else 500), MARINO)
@@ -293,15 +315,21 @@ def elegir(ofertas, ya_publicadas):
     return elegidas
 
 
-def texto_publicacion(fecha, elegidas, total_ofertas):
+def texto_publicacion(fecha, elegidas, total_ofertas, largo_nombre=None):
     lineas = [f"🔥 Los ofertazos de hoy, {fecha_larga(fecha)}", ""]
     for i, o in enumerate(elegidas, 1):
-        lineas.append(f"{i}. {o['nombre']} en {o['tienda']}: {clp(o['precio'])} (antes {clp(o['precio_normal'])}, -{o['descuento']}%)")
+        nombre = o["nombre"] if not largo_nombre or len(o["nombre"]) <= largo_nombre else o["nombre"][:largo_nombre].rstrip() + "…"
+        lineas.append(f"{i}. {nombre} en {o['tienda']}: {clp(o['precio'])} (antes {clp(o['precio_normal'])}, -{o['descuento']}%)")
+        if enlace_limpio(o.get("url")):
+            lineas.append("👉 " + enlace_limpio(o["url"]))
     lineas += ["", f"Estas y más de {total_ofertas:,} ofertas desde 50% de descuento en priveofertazos.cl".replace(",", "."),
                "Es solo para miembros: pide tu acceso en el link de la bio o escríbenos por DM 💌", "",
                "Precios revisados esta mañana; la tienda puede cambiarlos en cualquier momento.", "",
                "#ofertas #descuentos #ofertaschile #chile #liquidacion #outlet #ahorro #moda #hogar #priveofertazos"]
-    return "\n".join(lineas)
+    texto = "\n".join(lineas)
+    if len(texto) > 2200 and (largo_nombre or 999) > 30:  # Instagram acepta hasta 2.200 caracteres
+        return texto_publicacion(fecha, elegidas, total_ofertas, (largo_nombre or 80) - 10)
+    return texto
 
 
 def guardar(img, ruta):
