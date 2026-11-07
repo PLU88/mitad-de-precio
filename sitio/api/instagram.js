@@ -52,6 +52,27 @@ async function listo(contenedor, token) {
   throw new Error("Instagram tardó demasiado en procesar las imágenes");
 }
 
+// Publica las historias que falten (si alguna falla, se reintenta en la próxima llamada).
+async function publicarHistorias(res, estado, fecha, archivos, id, base, token) {
+  const hoy = estado.publicado[fecha];
+  for (const archivo of archivos) {
+    try {
+      const h = await graph(`/${id}/media`, token, { image_url: base + archivo, media_type: "STORIES" });
+      await listo(h.id, token);
+      const p = await graph(`/${id}/media_publish`, token, { creation_id: h.id });
+      hoy.historias.push(p.id);
+      hoy.hechas.push(archivo);
+      await guardarEstado(estado);
+    } catch (e) {
+      console.error("Historia no publicada:", archivo, e.message);
+    }
+  }
+  // guardar solo los últimos 30 días
+  estado.publicado = Object.fromEntries(Object.entries(estado.publicado).sort().slice(-30));
+  await guardarEstado(estado);
+  return responder(res, 200, { ok: true, fecha, publicado: estado.publicado[fecha] });
+}
+
 function hoyEnChile() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "America/Santiago" }).format(new Date());
 }
@@ -92,13 +113,17 @@ export default async function handler(req, res) {
       return responder(res, 200, { ok: true, prueba: true, cuenta: info.username, publicaciones: info.media_count, seguidores: info.followers_count, tipo: deMeta ? "meta" : "instagram" });
     }
     const fecha = (req.query && req.query.fecha) || hoyEnChile();
-    if (estado.publicado[fecha]) return responder(res, 200, { ok: true, motivo: "Lo de hoy ya está publicado.", fecha });
     const indice = await fetch(RAW + "indice.json?v=" + Date.now()).then((r) => r.json());
     const dia = (indice.dias || []).find((x) => x.fecha === fecha);
     if (!dia) return responder(res, 200, { ok: false, motivo: "Todavía no están las imágenes de hoy.", fecha });
-
     const id = estado.usuario.id;
     const base = RAW + fecha + "/";
+    const hoy = estado.publicado[fecha];
+    if (hoy && !hoy.hechas) hoy.hechas = hoy.historias.length ? ["historia_oferta.jpg", "historia_promo.jpg"].slice(0, hoy.historias.length) : [];
+    const pendientes = (dia.historias || []).filter((a) => !(hoy && hoy.hechas.includes(a)));
+    if (hoy && !pendientes.length) return responder(res, 200, { ok: true, motivo: "Lo de hoy ya está publicado.", fecha });
+    if (hoy) return await publicarHistorias(res, estado, fecha, pendientes, id, base, token);
+
     // carrusel: un contenedor por imagen y uno que las agrupa
     const hijos = [];
     for (const archivo of dia.carrusel.slice(0, 10)) {
@@ -109,24 +134,9 @@ export default async function handler(req, res) {
     const carrusel = await graph(`/${id}/media`, token, { media_type: "CAROUSEL", children: hijos.join(","), caption: dia.texto.slice(0, 2200) });
     await listo(carrusel.id, token);
     const publicado = await graph(`/${id}/media_publish`, token, { creation_id: carrusel.id });
-    estado.publicado[fecha] = { carrusel: publicado.id, historias: [], cuando: new Date().toISOString() };
+    estado.publicado[fecha] = { carrusel: publicado.id, historias: [], hechas: [], cuando: new Date().toISOString() };
     await guardarEstado(estado);
-
-    // historias (si alguna falla, el carrusel ya quedó publicado)
-    for (const archivo of dia.historias || []) {
-      try {
-        const h = await graph(`/${id}/media`, token, { image_url: base + archivo, media_type: "STORIES" });
-        await listo(h.id, token);
-        const p = await graph(`/${id}/media_publish`, token, { creation_id: h.id });
-        estado.publicado[fecha].historias.push(p.id);
-      } catch (e) {
-        console.error("Historia no publicada:", e.message);
-      }
-    }
-    // guardar solo los últimos 30 días
-    estado.publicado = Object.fromEntries(Object.entries(estado.publicado).sort().slice(-30));
-    await guardarEstado(estado);
-    return responder(res, 200, { ok: true, fecha, publicado: estado.publicado[fecha] });
+    return await publicarHistorias(res, estado, fecha, dia.historias || [], id, base, token);
   } catch (e) {
     console.error(e);
     return responder(res, 500, { ok: false, error: e.message });

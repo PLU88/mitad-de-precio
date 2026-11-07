@@ -119,7 +119,7 @@ details.tarjeta summary { cursor: pointer; }
 
   <section id="instagram" hidden>
     <div class="contenedor" style="padding:0">
-      <p class="dato">Cada mañana (desde las 7:30) se arma un carrusel con las mejores ofertas del día, dos historias y el texto.
+      <p class="dato">Cada mañana (desde las 7:30) se arma un carrusel con las mejores ofertas del día, una historia por oferta y el texto.
         Descárgalas y súbelas a <a href="https://www.instagram.com/priveofertazos/" target="_blank" rel="noopener">@priveofertazos</a>.</p>
       <div class="fila"><label for="igDia" class="dato" style="display:flex;gap:8px;align-items:center">Día
         <select id="igDia" style="font:500 15px var(--cuerpo);padding:8px;border-radius:8px;border:1px solid var(--linea);background:var(--fondo);color:var(--tinta)"></select></label></div>
@@ -225,7 +225,7 @@ details.tarjeta summary { cursor: pointer; }
       t.appendChild(g); caja.appendChild(t);
     }
     bloque("Carrusel para el feed", dia.carrusel, "Súbelas juntas, en este orden, como una sola publicación.");
-    bloque("Historias", dia.historias, "La primera muestra la oferta estrella; la segunda invita a pedir acceso.");
+    bloque("Historias", dia.historias, "Una por cada oferta del día; la última invita a pedir acceso.");
     var t = el("article", "tarjeta persona");
     t.appendChild(el("span", "nombre", "Texto para la publicación"));
     t.appendChild(el("pre", "texto-ig", dia.texto));
