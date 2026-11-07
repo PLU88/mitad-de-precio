@@ -1,4 +1,4 @@
 {
   "crons": [{ "path": "/api/instagram", "schedule": "15 12 * * *" }],
-  "functions": { "api/instagram.js": { "maxDuration": 60 } }
+  "functions": { "api/instagram.js": { "maxDuration": 300 } }
 }
