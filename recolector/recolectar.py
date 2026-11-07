@@ -632,7 +632,38 @@ def recolectar_prestashop_html(tienda):
     return ofertas
 
 
-RECOLECTORES = {"shopify": recolectar_shopify, "magento_html": recolectar_magento_html, "prestashop_html": recolectar_prestashop_html, "sfcc": recolectar_sfcc, "vtex": recolectar_vtex,
+# ---------------------------------------------------------------- ofertas cargadas a mano
+# Para tiendas que no se pueden leer desde el servidor (por ejemplo Mercado Libre): las ofertas se juntan desde
+# el navegador de la dueña y se guardan en recolector/manuales/<id>.json como
+#   {"fecha": "<ISO>", "ofertas": [[nombre, url, imagen, precio, precio_normal, vendedor?], ...]}
+# Se muestran solo durante HORAS_MANUALES desde esa fecha, para no publicar precios viejos.
+HORAS_MANUALES = 48
+
+
+def recolectar_archivo(tienda):
+    ruta = os.path.join(RAIZ, "recolector", "manuales", tienda["id"] + ".json")
+    datos = leer_json(ruta, None)
+    if not datos:
+        raise ValueError("todavía no hay ofertas cargadas")
+    fecha = dt.datetime.fromisoformat(datos["fecha"])
+    if dt.datetime.now(dt.timezone.utc) - fecha > dt.timedelta(hours=HORAS_MANUALES):
+        raise ValueError(f"las ofertas cargadas tienen más de {HORAS_MANUALES} horas; hay que renovarlas")
+    base_url, base_img = tienda.get("base_url", ""), tienda.get("base_imagen", "")
+    ofertas = []
+    for fila in datos["ofertas"]:
+        nombre, url, imagen, precio, normal = fila[:5]
+        vendedor = fila[5] if len(fila) > 5 else ""
+        url = url if url.startswith("http") else base_url + url
+        imagen = imagen if not imagen or imagen.startswith("http") else base_img + imagen
+        if not precio or not normal or calcular_descuento(precio, normal) < DESCUENTO_MINIMO:
+            continue
+        pid = re.search(r"(MLC[U-]?\d+)", url.replace("MLC-", "MLC"))
+        pid = pid.group(1) if pid else str(abs(hash(url)))
+        ofertas.append(nueva_oferta(tienda, pid, nombre, vendedor if vendedor != "Mercado Libre" else "", "", precio, normal, imagen, url))
+    return ofertas
+
+
+RECOLECTORES = {"archivo": recolectar_archivo, "shopify": recolectar_shopify, "magento_html": recolectar_magento_html, "prestashop_html": recolectar_prestashop_html, "sfcc": recolectar_sfcc, "vtex": recolectar_vtex,
                 "magento": recolectar_magento, "woo": recolectar_woo, "falabella": recolectar_falabella}
 
 

@@ -96,7 +96,7 @@
  {"id": "americanino", "nombre": "Americanino", "dominio": "www.americanino.cl", "tipo": "especial", "activa": false, "nota": "Plataforma propia (Next.js)."},
  {"id": "umbro", "nombre": "Umbro", "dominio": "www.umbro.cl", "tipo": "especial", "activa": false, "nota": "Bloquea consultas desde servidores (403)."},
  {"id": "converse", "nombre": "Converse", "dominio": "www.converse.cl", "tipo": "especial", "activa": false, "nota": "Bloquea consultas desde servidores (403)."},
- {"id": "mercadolibre", "nombre": "Mercado Libre", "dominio": "www.mercadolibre.cl", "tipo": "especial", "activa": false, "nota": "Su API exige registrarse como desarrollador."},
+ {"id": "mercadolibre", "nombre": "Mercado Libre", "dominio": "www.mercadolibre.cl", "tipo": "archivo", "activa": true, "nota": "Mercado Libre bloquea a los servidores: las ofertas se juntan desde el navegador y se guardan en recolector/manuales/mercadolibre.json (duran 48 horas).", "base_url": "https://www.mercadolibre.cl/", "base_imagen": "https://http2.mlstatic.com/"},
  {"id": "ash", "nombre": "Ash", "dominio": "www.ashchile.cl", "tipo": "magento_html", "categorias": ["cybermonday/crazy-ash.html", "special-prices.html", "tops.html", "bottoms.html", "blazers-y-chaquetas.html", "night.html", "linos.html", "productos-seleccionados.html"], "genero": "Mujer"},
  {"id": "elvolcan", "nombre": "El Volcán", "dominio": "www.elvolcan.cl", "tipo": "prestashop_html", "listado": "/productos-rebajados"},
  {"id": "kitchenhouse", "nombre": "Kitchen House", "dominio": "kitchenhouse.cl", "tipo": "shopify"},
