@@ -9,7 +9,10 @@ const sitio = (req) => "https://" + (req.headers["x-forwarded-host"] || req.head
 export default async function handler(req, res) {
   try {
     if (req.method === "GET") {
-      const base = { precio: PRECIO };
+      const base = {
+        precio: PRECIO,
+        pagos: { mercadopago: Boolean(process.env.MP_ACCESS_TOKEN), flow: Boolean(process.env.FLOW_API_KEY && process.env.FLOW_SECRET_KEY) },
+      };
       const ses = leerSesion(req);
       if (!ses) return responder(res, 200, { ...base, conectado: false });
       const m = (await leerMiembros()).miembros[ses.e];

@@ -216,7 +216,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
       <label for="paWhatsapp">WhatsApp (opcional)<input id="paWhatsapp" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678"></label>
       <button type="submit" class="pago-mp" data-proveedor="mercadopago">Pagar con Mercado Pago</button>
       <button type="submit" class="pago-flow" data-proveedor="flow">Pagar con Webpay, Servipag o transferencia</button>
-      <p class="nota">Mercado Pago acepta tarjetas y saldo en tu cuenta. La segunda opción (Flow) acepta Webpay de Transbank, Servipag, Mach y transferencia bancaria.</p>
+      <p class="nota">Mercado Pago acepta tarjetas de crédito, débito y saldo en tu cuenta.<span id="notaFlow"> La segunda opción (Flow) acepta Webpay de Transbank, Servipag, Mach y transferencia bancaria.</span></p>
       <p class="msg" id="msgPagar" role="status"></p>
     </form>
     <form class="panel" id="formIngresar" novalidate>
@@ -593,6 +593,13 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   function fecha(iso) { return new Date(iso).toLocaleDateString("es-CL", { day: "numeric", month: "long", timeZone: "America/Santiago" }); }
   function pesos(n) { return "$" + Number(n).toLocaleString("es-CL"); }
   function ponerPrecio(n) { if (n) document.querySelectorAll("[data-precio]").forEach(function (el) { el.textContent = pesos(n); }); }
+  // muestra solo los medios de pago que ya están conectados
+  function ponerMedios(p) {
+    if (!p) return;
+    document.querySelectorAll('button[data-proveedor="flow"]').forEach(function (b) { b.hidden = !p.flow; });
+    document.querySelectorAll('button[data-proveedor="mercadopago"]').forEach(function (b) { b.hidden = !p.mercadopago; });
+    $("notaFlow").hidden = !p.flow;
+  }
   function pagar(proveedor, datos, botones, msg) {
     msg.className = "msg"; msg.textContent = "Abriendo el pago…";
     botones.forEach(function (b) { b.disabled = true; });
@@ -679,7 +686,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   });
   var pagoVuelta = new URLSearchParams(location.search).get("pago");
   api("/api/sesion").then(function (d) {
-    ponerPrecio(d.precio);
+    ponerPrecio(d.precio); ponerMedios(d.pagos);
     if (pagoVuelta) return revisarPago(pagoVuelta);
     if (d.conectado) { mostrarVence(d); cargarOfertas(); return; }
     mostrarAcceso();
