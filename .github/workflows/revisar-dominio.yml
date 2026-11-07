@@ -5,7 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "--- vercel"; dig A priveofertazos.cl @ns1.vercel-dns.com +noall +answer +comments | grep -E "status|IN"
-          echo "--- google"; dig A priveofertazos.cl @8.8.8.8 +noall +answer +comments | grep -E "status|IN"
-          dig A www.priveofertazos.cl @8.8.8.8 +noall +answer +comments | grep -E "status|IN"
-          curl -sS -m 20 -o /dev/null -w "https %{http_code}\n" https://priveofertazos.cl/ || true
+          for d in priveofertazos.cl www.priveofertazos.cl; do
+            echo "== $d"; dig +short A $d @8.8.8.8; dig +short A $d @ns1.vercel-dns.com
+            curl -sS -m 20 -o /dev/null -w "https %{http_code} -> %{redirect_url}\n" https://$d/ || true
+            curl -sS -m 20 https://$d/api/sesion || true; echo
+            curl -sS -m 20 https://$d/ | grep -o "<title>[^<]*</title>" || true
+          done
