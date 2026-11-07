@@ -249,7 +249,7 @@ def historia_promo(elegidas, total_ofertas, total_tiendas):
     logo(d, (1080 - ancho_logo(1.4)) / 2, 160, 1.4)
     centrar(d, 330, "LO MEJOR, A MITAD DE PRECIO", montserrat(40, 700), GRIS)
     centrar(d, 450, f"+{total_ofertas:,}".replace(",", "."), barlow(220), FUCSIA)
-    centrar(d, 680, "OFERTAS DE 50% A 80%", barlow(110), MARINO)
+    centrar(d, 680, "OFERTAS DESDE 50%", barlow(110), MARINO)
     centrar(d, 810, f"en {total_tiendas} tiendas de Chile, revisadas cada 30 minutos", figtree(40, 600), MARINO)
     x = 75
     for o in elegidas[:3]:
@@ -297,7 +297,7 @@ def texto_publicacion(fecha, elegidas, total_ofertas):
     lineas = [f"🔥 Los ofertazos de hoy, {fecha_larga(fecha)}", ""]
     for i, o in enumerate(elegidas, 1):
         lineas.append(f"{i}. {o['nombre']} en {o['tienda']}: {clp(o['precio'])} (antes {clp(o['precio_normal'])}, -{o['descuento']}%)")
-    lineas += ["", f"Estas y más de {total_ofertas:,} ofertas de 50% a 80% en priveofertazos.cl".replace(",", "."),
+    lineas += ["", f"Estas y más de {total_ofertas:,} ofertas desde 50% de descuento en priveofertazos.cl".replace(",", "."),
                "Es solo para miembros: pide tu acceso en el link de la bio o escríbenos por DM 💌", "",
                "Precios revisados esta mañana; la tienda puede cambiarlos en cualquier momento.", "",
                "#ofertas #descuentos #ofertaschile #chile #liquidacion #outlet #ahorro #moda #hogar #priveofertazos"]
