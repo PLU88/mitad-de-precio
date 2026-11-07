@@ -1,0 +1,88 @@
+{
+ "dias": [
+  {
+   "fecha": "2026-11-07",
+   "creado": "2026-11-07T17:13-03:00",
+   "carrusel": [
+    "carrusel_0.jpg",
+    "carrusel_1.jpg",
+    "carrusel_2.jpg",
+    "carrusel_3.jpg",
+    "carrusel_4.jpg",
+    "carrusel_5.jpg",
+    "carrusel_6.jpg"
+   ],
+   "historias": [
+    "historia_oferta.jpg",
+    "historia_promo.jpg"
+   ],
+   "texto": "🔥 Los ofertazos de hoy, sábado 7 de noviembre\n\n1. Jeans skinny tiro medio dana b gris en Lolita LPK: $5.000 (antes $32.900, -85%)\n👉 https://www.lpk.cl/products/jeans-dana-b-gris\n2. Polerón niño new york en Tricot: $4.990 (antes $31.990, -84%)\n👉 https://www.tricot.cl/poleron-nino-new-york-552373.html\n3. Juego De Sábanas Belle Noite Liso 300 25p / King / 300 Hilos en Hites: $19.990 (antes $119.990, -83%)\n👉 https://www.hites.com/juego-de-sabanas-belle-noite-liso-300-25p-king-300-hilos-952043.html\n4. Letrero estilo neon you and me (usb/30,5x60,9cm) en Casa Royal: $9.990 (antes $59.990, -83%)\n👉 https://www.casaroyal.cl/letrero-estilo-neon-you-and-me---usb-30-5x60-9cm-/p\n5. Cable de freno Ruta Bontrager en Sparta: $29.980 (antes $149.900, -80%)\n👉 https://www.sparta.cl/cable-de-freno-ruta-bontrager-26200000095931310000.html\n6. Rociador de Ducha SPA1 250 Ultra Slim Inoxidable Teka en Kitchen House: $14.990 (antes $74.990, -80%)\n👉 https://kitchenhouse.cl/products/rociador-de-ducha-spa1-250-ultra-slim-inoxidable-teka\n\nEstas y más de 29.383 ofertas desde 50% de descuento en priveofertazos.cl\nEs solo para miembros: pide tu acceso en el link de la bio o escríbenos por DM 💌\n\nPrecios revisados esta mañana; la tienda puede cambiarlos en cualquier momento.\n\n#ofertas #descuentos #ofertaschile #chile #liquidacion #outlet #ahorro #moda #hogar #priveofertazos",
+   "ofertas": [
+    {
+     "id": "lpk-8249964396850",
+     "nombre": "Jeans skinny tiro medio dana b gris",
+     "tienda": "Lolita LPK",
+     "precio": 5000,
+     "precio_normal": 32900,
+     "descuento": 85,
+     "url": "https://www.lpk.cl/products/jeans-dana-b-gris"
+    },
+    {
+     "id": "tricot-552373",
+     "nombre": "Polerón niño new york",
+     "tienda": "Tricot",
+     "precio": 4990,
+     "precio_normal": 31990,
+     "descuento": 84,
+     "url": "https://www.tricot.cl/poleron-nino-new-york-552373.html"
+    },
+    {
+     "id": "hites-952043001",
+     "nombre": "Juego De Sábanas Belle Noite Liso 300 25p / King / 300 Hilos",
+     "tienda": "Hites",
+     "precio": 19990,
+     "precio_normal": 119990,
+     "descuento": 83,
+     "url": "https://www.hites.com/juego-de-sabanas-belle-noite-liso-300-25p-king-300-hilos-952043.html"
+    },
+    {
+     "id": "casaroyal-110611",
+     "nombre": "Letrero estilo neon you and me (usb/30,5x60,9cm)",
+     "tienda": "Casa Royal",
+     "precio": 9990,
+     "precio_normal": 59990,
+     "descuento": 83,
+     "url": "https://www.casaroyal.cl/letrero-estilo-neon-you-and-me---usb-30-5x60-9cm-/p"
+    },
+    {
+     "id": "sparta-26200000095931310000",
+     "nombre": "Cable de freno Ruta Bontrager",
+     "tienda": "Sparta",
+     "precio": 29980,
+     "precio_normal": 149900,
+     "descuento": 80,
+     "url": "https://www.sparta.cl/cable-de-freno-ruta-bontrager-26200000095931310000.html"
+    },
+    {
+     "id": "kitchenhouse-7469554991238",
+     "nombre": "Rociador de Ducha SPA1 250 Ultra Slim Inoxidable Teka",
+     "tienda": "Kitchen House",
+     "precio": 14990,
+     "precio_normal": 74990,
+     "descuento": 80,
+     "url": "https://kitchenhouse.cl/products/rociador-de-ducha-spa1-250-ultra-slim-inoxidable-teka"
+    }
+   ]
+  }
+ ],
+ "publicadas": {
+  "2026-11-07": [
+   "lpk-8249964396850",
+   "tricot-552373",
+   "hites-952043001",
+   "casaroyal-110611",
+   "sparta-26200000095931310000",
+   "kitchenhouse-7469554991238"
+  ]
+ }
+}
