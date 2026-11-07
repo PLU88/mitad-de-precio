@@ -169,5 +169,11 @@
  {"id": "laoferta", "nombre": "La Oferta", "dominio": "laoferta.cl", "tipo": "especial", "activa": false, "nota": "Bloquea consultas desde servidores (403)."},
  {"id": "lasmellizas", "nombre": "Las Mellizas", "dominio": "www.lasmellizas.com", "tipo": "especial", "activa": false, "nota": "Bsale: falta un lector para su plataforma."},
  {"id": "booz", "nombre": "Booz", "dominio": "www.booz.cl", "tipo": "especial", "activa": false, "nota": "Plataforma no identificada."},
- {"id": "pedidosya", "nombre": "PedidosYa", "dominio": "www.pedidosya.cl", "tipo": "especial", "activa": false, "nota": "Aplicación de delivery; no publica un catálogo abierto."}
+ {"id": "pedidosya", "nombre": "PedidosYa", "dominio": "www.pedidosya.cl", "tipo": "especial", "activa": false, "nota": "Aplicación de delivery; no publica un catálogo abierto."},
+ {"id": "tost", "nombre": "Tost", "dominio": "tost.cl", "tipo": "shopify"},
+ {"id": "housebar", "nombre": "House Bar", "dominio": "www.housebar.cl", "tipo": "vtex"},
+ {"id": "elbrindis", "nombre": "El Brindis", "dominio": "elbrindis.cl", "tipo": "woo"},
+ {"id": "micocacola", "nombre": "Mi Coca-Cola", "dominio": "andina.micoca-cola.cl", "tipo": "vtex"},
+ {"id": "liquidos", "nombre": "Líquidos", "dominio": "www.liquidos.cl", "tipo": "especial", "activa": false, "nota": "Plataforma propia sin catálogo abierto."},
+ {"id": "labarra", "nombre": "La Barra", "dominio": "labarra.cl", "tipo": "especial", "activa": false, "nota": "Protección Cloudflare."}
 ]
