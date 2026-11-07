@@ -55,7 +55,7 @@ def barlow(tam): return fuente("BarlowCondensed-ExtraBold.ttf", tam)
 def nombre_bonito(t):
     """'PARKA HOMBRE NEGRA' -> 'Parka hombre negra' (los nombres en mayúsculas se ven gritados)."""
     letras = [c for c in t if c.isalpha()]
-    if letras and sum(c.isupper() for c in letras) / len(letras) > 0.7:
+    if letras and sum(c.isupper() for c in letras) / len(letras) > 0.55:
         t = t.lower()
         t = t[:1].upper() + t[1:]
     return re.sub(r"\s+", " ", t).strip()
@@ -269,8 +269,8 @@ def historia_promo(elegidas, total_ofertas, total_tiendas):
 
 # ------------------------------------------------------------------ selección y texto
 def elegir(ofertas, ya_publicadas):
-    candidatas = [o for o in ofertas if o.get("imagen") and not o.get("dudoso") and 55 <= o["descuento"] < 92
-                  and o["precio"] >= 3000 and o["precio_normal"] >= 10000 and o["id"] not in ya_publicadas
+    candidatas = [o for o in ofertas if o.get("imagen") and not o.get("dudoso") and 55 <= o["descuento"] <= 85
+                  and o["precio"] >= 3000 and 10000 <= o["precio_normal"] <= 1500000 and o["id"] not in ya_publicadas
                   and o.get("categoria") not in ("Otros",) and o.get("subcategoria") != "Salud y bienestar"]
     def puntaje(o):
         return o["descuento"] + (8 if o.get("minimo_30d") else 0) + 4 * math.log10(max(o["precio_normal"] - o["precio"], 1)) + random.random() * 6

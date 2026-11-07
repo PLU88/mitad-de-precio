@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "*/30 * * * *"   # cada 30 minutos (GitHub puede atrasarlo algunos minutos)
   workflow_dispatch:          # botón "Run workflow" para correrlo a mano
+    inputs:
+      rehacer_publicaciones:
+        description: "Volver a armar las imágenes de Instagram de hoy"
+        type: boolean
+        default: false
 
 # Si una vuelta todavía no termina, la siguiente espera en vez de encimarse.
 concurrency:
@@ -32,7 +37,7 @@ jobs:
       - name: Recolectar ofertas
         run: python recolector/recolectar.py
       - name: Preparar las publicaciones de Instagram (una vez al día)
-        run: python recolector/publicaciones.py
+        run: python recolector/publicaciones.py ${{ inputs.rehacer_publicaciones && '--forzar' || '' }}
       - name: Cifrar ofertas
         run: python recolector/cifrar.py
       - name: Publicar en la rama "datos" (se reemplaza cada vez, así el repositorio no crece)
