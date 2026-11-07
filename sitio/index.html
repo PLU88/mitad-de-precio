@@ -156,6 +156,14 @@ main { max-width: 1180px; margin: 0 auto; padding: 14px 16px 40px; display: grid
 .msg { font-size: 14px; margin: 0; }
 .msg.error { color: var(--acento); }
 .msg.ok { color: var(--bien); }
+.insta { gap: 8px; }
+.insta .lead { font-size: 14px; }
+.boton-ig { display: block; text-align: center; text-decoration: none; border-radius: 8px; padding: 11px; font: 700 15px var(--cuerpo);
+  color: #fff; background: linear-gradient(90deg, #D61F69, #9d1660); }
+.enlace-ig { font-size: 13.5px; font-weight: 600; color: var(--acento); }
+.ig-cabecera { margin-left: auto; font: 700 13px var(--cuerpo); color: var(--acento); text-decoration: none; }
+.ig-cabecera + .salir { margin-left: 12px; }
+footer a { color: var(--acento); font-weight: 600; }
 .salir { appearance: none; background: none; border: 0; color: var(--tinta-suave); font: 600 13px var(--cuerpo); text-decoration: underline; cursor: pointer; padding: 0; margin-left: auto; }
 footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--tinta-suave); font-size: 12.5px; }
 @media (prefers-reduced-motion: no-preference) { .tarjeta { transition: transform .12s ease; } .tarjeta:hover { transform: translateY(-2px); } }
@@ -200,6 +208,12 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
       <p class="msg" id="msgSolicitar" role="status"></p>
     </form>
   </div>
+  <div class="panel insta">
+    <h3>¿Prefieres Instagram?</h3>
+    <p class="lead">Escríbenos por mensaje directo a <b>@priveofertazos</b> con tu nombre y correo, y te enviamos tu código por ahí.</p>
+    <a class="boton-ig" href="https://ig.me/m/priveofertazos" target="_blank" rel="noopener">Pedir acceso por Instagram</a>
+    <a class="enlace-ig" href="https://www.instagram.com/priveofertazos/" target="_blank" rel="noopener">Ver las ofertas del día en @priveofertazos</a>
+  </div>
 </section>
 <div id="app" hidden>
 <header class="cabecera">
@@ -207,6 +221,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     <div class="marca">
       <h1 class="sr">Privé Ofertazos</h1><div class="logo" role="img" aria-label="Privé Ofertazos"><svg class="monograma" width="44" height="44" viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="74" fill="none" stroke="currentColor" stroke-width="4"></circle><text x="96" y="110" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="78" fill="var(--marca)">O</text><text x="66" y="114" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-style="italic" font-weight="400" font-size="112" fill="currentColor">P</text></svg><span class="palabra"><span class="prive">Privé</span><span class="ofertazos">OFERTAZOS</span></span></div>
       <p class="lema">Lo mejor, a mitad de precio</p>
+      <a class="ig-cabecera" href="https://www.instagram.com/priveofertazos/" target="_blank" rel="noopener" aria-label="Instagram de Privé Ofertazos">Instagram</a>
       <button class="salir" id="salir" type="button" hidden>Salir</button>
     </div>
     <div class="tramos" role="group" aria-label="Descuento mínimo">
@@ -257,7 +272,8 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   <button class="mas" id="mas" hidden>Ver más ofertas</button>
 </main>
 </div>
-<footer id="pie">Los precios y el stock los fija cada tienda y pueden cambiar. Revisa el precio final antes de comprar.</footer>
+<footer><span id="pie">Los precios y el stock los fija cada tienda y pueden cambiar. Revisa el precio final antes de comprar.</span>
+  · <a href="https://www.instagram.com/priveofertazos/" target="_blank" rel="noopener">Síguenos en Instagram @priveofertazos</a></footer>
 
 <script>
 (function () {

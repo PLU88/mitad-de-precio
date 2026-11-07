@@ -23,13 +23,16 @@ jobs:
         with:
           python-version: "3.12"
       - name: Instalar cifrado
-        run: pip install "cryptography>=42"
+        run: pip install "cryptography>=42" "Pillow>=10"
       - name: Traer el historial de precios de la vuelta anterior
         run: |
           git fetch --depth 1 origin datos:refs/remotes/origin/datos || true
           git show origin/datos:datos/historial.json > datos/historial.json 2>/dev/null || echo '{}' > datos/historial.json
+          git checkout origin/datos -- datos/publicaciones 2>/dev/null || true
       - name: Recolectar ofertas
         run: python recolector/recolectar.py
+      - name: Preparar las publicaciones de Instagram (una vez al día)
+        run: python recolector/publicaciones.py
       - name: Cifrar ofertas
         run: python recolector/cifrar.py
       - name: Publicar en la rama "datos" (se reemplaza cada vez, así el repositorio no crece)
@@ -38,6 +41,7 @@ jobs:
           if [ -f datos/ofertas.enc ]; then cp datos/ofertas.enc /tmp/pub/datos/;
           else git show origin/datos:datos/ofertas.enc > /tmp/pub/datos/ofertas.enc; fi
           cp datos/estado.json datos/historial.json /tmp/pub/datos/
+          if [ -d datos/publicaciones ]; then cp -r datos/publicaciones /tmp/pub/datos/; fi
           cd /tmp/pub
           git init -q -b datos
           git add .

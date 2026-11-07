@@ -1,7 +1,7 @@
 // Panel de administración: entrar con la clave, ver solicitudes, aprobar, rechazar y quitar acceso.
 import {
   responder, soloPost, claveAdminCorrecta, cookieAdmin, esAdmin, cookie, leerMiembros, guardarMiembros,
-  normalizarCorreo, nuevoCodigo, hashCodigo,
+  normalizarCorreo, nuevoCodigo, hashCodigo, correoValido, texto,
 } from "./_lib.js";
 
 function publico(m) {
@@ -33,10 +33,26 @@ export default async function handler(req, res) {
       return responder(res, 200, { miembros: lista });
     }
 
+    if (accion === "agregar") {
+      // Para quien pidió acceso por Instagram u otro medio: queda aprobada de inmediato.
+      const correo = normalizarCorreo(cuerpo.email), nombre = texto(cuerpo.nombre, 80);
+      if (!correoValido(correo)) return responder(res, 400, { error: "Revisa el correo: no parece válido." });
+      if (nombre.length < 2) return responder(res, 400, { error: "Escribe el nombre." });
+      const previo = datos.miembros[correo];
+      datos.miembros[correo] = {
+        ...(previo || {}),
+        email: correo, nombre,
+        whatsapp: texto(cuerpo.whatsapp, 20).replace(/[^0-9+]/g, "") || (previo && previo.whatsapp) || "",
+        mensaje: texto(cuerpo.mensaje, 300) || (previo && previo.mensaje) || "",
+        estado: "pendiente", creado: (previo && previo.creado) || new Date().toISOString(),
+        version: (previo && previo.version) || 0, intentos: 0,
+      };
+    }
+
     const m = datos.miembros[normalizarCorreo(cuerpo.email)];
     if (!m) return responder(res, 404, { error: "No encontré a esa persona." });
 
-    if (accion === "aprobar" || accion === "nuevo_codigo") {
+    if (accion === "aprobar" || accion === "nuevo_codigo" || accion === "agregar") {
       const codigo = nuevoCodigo();
       m.estado = "aprobado";
       m.codigo_hash = hashCodigo(m.email, codigo);

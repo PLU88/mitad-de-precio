@@ -71,6 +71,15 @@ button:disabled { opacity: .6; cursor: wait; }
 .msg { margin: 0; font-size: 14px; }
 .msg.error { color: var(--acento); }
 .vacio { color: var(--tinta-suave); text-align: center; padding: 24px 8px; }
+details.tarjeta summary { cursor: pointer; }
+.secciones { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: var(--superficie); border: 1px solid var(--linea); border-radius: 10px; padding: 4px; }
+.secciones button { appearance: none; border: 0; background: none; border-radius: 7px; padding: 9px; font: 700 14px var(--cuerpo); color: var(--tinta); cursor: pointer; }
+.secciones button[aria-selected="true"] { background: var(--tinta); color: var(--superficie); }
+.galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.galeria figure { margin: 0; display: grid; gap: 6px; }
+.galeria img { width: 100%; border-radius: 8px; border: 1px solid var(--linea); background: #fff; display: block; }
+.galeria button { width: 100%; padding: 8px; font-size: 13px; }
+.texto-ig { white-space: pre-wrap; font: 14px/1.45 var(--cuerpo); background: var(--fondo); border-radius: 8px; padding: 10px; margin: 0; max-height: 260px; overflow: auto; }
 
 /* Logo Privé Ofertazos: monograma PO (azul marino + fucsia) y nombre en dos tipografías. */
 :root { --marino: #1A1A2E; --marca: #D61F69; }
@@ -103,6 +112,22 @@ button:disabled { opacity: .6; cursor: wait; }
     <p class="msg" id="msgEntrar" role="status"></p>
   </form>
 
+  <div class="secciones" id="secciones" role="tablist" hidden>
+    <button type="button" role="tab" data-s="miembros" aria-selected="true">Miembros</button>
+    <button type="button" role="tab" data-s="instagram" aria-selected="false">Instagram</button>
+  </div>
+
+  <section id="instagram" hidden>
+    <div class="contenedor" style="padding:0">
+      <p class="dato">Cada mañana (desde las 7:30) se arma un carrusel con las mejores ofertas del día, dos historias y el texto.
+        Descárgalas y súbelas a <a href="https://www.instagram.com/priveofertazos/" target="_blank" rel="noopener">@priveofertazos</a>.</p>
+      <div class="fila"><label for="igDia" class="dato" style="display:flex;gap:8px;align-items:center">Día
+        <select id="igDia" style="font:500 15px var(--cuerpo);padding:8px;border-radius:8px;border:1px solid var(--linea);background:var(--fondo);color:var(--tinta)"></select></label></div>
+      <p class="msg" id="msgIg" role="status"></p>
+      <div id="igContenido" class="contenedor" style="padding:0"></div>
+    </div>
+  </section>
+
   <div id="panel" hidden>
     <div class="contenedor" style="padding:0">
       <div class="resumen">
@@ -117,6 +142,16 @@ button:disabled { opacity: .6; cursor: wait; }
       </div>
       <p class="msg" id="msgPanel" role="status"></p>
       <div id="lista" class="contenedor" style="padding:0"></div>
+      <details class="tarjeta" id="agregar">
+        <summary><b>Agregar a alguien a mano</b> <span class="dato">(por ejemplo, si te pidió acceso por Instagram)</span></summary>
+        <form id="formAgregar" class="persona" novalidate style="margin-top:10px">
+          <label for="agNombre">Nombre<input id="agNombre" autocomplete="off" required></label>
+          <label for="agCorreo">Correo (con este correo entrará)<input id="agCorreo" type="email" autocomplete="off" required></label>
+          <label for="agWhatsapp">WhatsApp (opcional)<input id="agWhatsapp" type="tel" autocomplete="off"></label>
+          <button class="aprobar" type="submit">Dar acceso y crear código</button>
+          <p class="msg" id="msgAgregar" role="status"></p>
+        </form>
+      </details>
     </div>
   </div>
 </div>
@@ -144,8 +179,63 @@ button:disabled { opacity: .6; cursor: wait; }
       "Entra en " + SITIO + " con:\nCorreo: " + m.email + "\nCódigo: " + codigo + "\n\nEl código es personal, no lo compartas.";
   }
 
-  function mostrarPanel() { $("formEntrar").hidden = true; $("panel").hidden = false; $("salir").hidden = false; cargar(); }
-  function mostrarEntrar() { $("formEntrar").hidden = false; $("panel").hidden = true; $("salir").hidden = true; }
+  function mostrarPanel() { $("formEntrar").hidden = true; $("secciones").hidden = false; mostrarSeccion("miembros"); $("salir").hidden = false; cargar(); }
+
+  // ---------- Instagram: imágenes y texto del día
+  var RAW = "https://raw.githubusercontent.com/PLU88/mitad-de-precio/datos/datos/publicaciones/";
+  var igIndice = null;
+  function mostrarSeccion(cual) {
+    document.querySelectorAll(".secciones button").forEach(function (b) { b.setAttribute("aria-selected", String(b.dataset.s === cual)); });
+    $("panel").hidden = cual !== "miembros"; $("instagram").hidden = cual !== "instagram";
+    if (cual === "instagram" && !igIndice) cargarInstagram();
+  }
+  function cargarInstagram() {
+    $("msgIg").textContent = "Cargando…";
+    fetch(RAW + "indice.json?v=" + Date.now()).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (d) {
+      igIndice = d; $("msgIg").textContent = "";
+      var s = $("igDia"); s.textContent = "";
+      (d.dias || []).forEach(function (x) { var o = el("option", null, fecha(x.fecha + "T12:00:00")); o.value = x.fecha; s.appendChild(o); });
+      if (!(d.dias || []).length) { $("msgIg").textContent = "Todavía no hay publicaciones. Se arman cada mañana desde las 7:30."; return; }
+      pintarInstagram();
+    }).catch(function () { $("msgIg").className = "msg"; $("msgIg").textContent = "Todavía no hay publicaciones. Se arman cada mañana desde las 7:30."; });
+  }
+  function descargar(url, nombre, boton) {
+    boton.disabled = true;
+    fetch(url).then(function (r) { return r.blob(); }).then(function (b) {
+      var a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = nombre; document.body.appendChild(a); a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000); boton.disabled = false;
+    }).catch(function () { boton.disabled = false; window.open(url, "_blank"); });
+  }
+  function pintarInstagram() {
+    var dia = (igIndice.dias || []).filter(function (x) { return x.fecha === $("igDia").value; })[0];
+    var caja = $("igContenido"); caja.textContent = "";
+    if (!dia) return;
+    function bloque(titulo, archivos, nota) {
+      var t = el("article", "tarjeta persona");
+      t.appendChild(el("span", "nombre", titulo));
+      if (nota) t.appendChild(el("div", "dato", nota));
+      var g = el("div", "galeria");
+      archivos.forEach(function (a, i) {
+        var url = RAW + dia.fecha + "/" + a, f = el("figure");
+        var img = new Image(); img.src = url; img.alt = titulo + " " + (i + 1); img.loading = "lazy"; f.appendChild(img);
+        var b = el("button", "suave", "Descargar"); b.type = "button";
+        b.addEventListener("click", function () { descargar(url, "priveofertazos-" + dia.fecha + "-" + a, b); });
+        f.appendChild(b); g.appendChild(f);
+      });
+      t.appendChild(g); caja.appendChild(t);
+    }
+    bloque("Carrusel para el feed", dia.carrusel, "Súbelas juntas, en este orden, como una sola publicación.");
+    bloque("Historias", dia.historias, "La primera muestra la oferta estrella; la segunda invita a pedir acceso.");
+    var t = el("article", "tarjeta persona");
+    t.appendChild(el("span", "nombre", "Texto para la publicación"));
+    t.appendChild(el("pre", "texto-ig", dia.texto));
+    var cp = el("button", "primario", "Copiar texto"); cp.type = "button";
+    cp.addEventListener("click", function () { navigator.clipboard.writeText(dia.texto).then(function () { cp.textContent = "Copiado"; }, function () { cp.textContent = "No se pudo copiar"; }); });
+    t.appendChild(cp); caja.appendChild(t);
+  }
+  document.querySelectorAll(".secciones button").forEach(function (b) { b.addEventListener("click", function () { mostrarSeccion(b.dataset.s); }); });
+  $("igDia").addEventListener("change", pintarInstagram);
+  function mostrarEntrar() { $("formEntrar").hidden = false; $("panel").hidden = true; $("instagram").hidden = true; $("secciones").hidden = true; $("salir").hidden = true; }
 
   function cargar() {
     api({ accion: "listar" }).then(function (d) {
@@ -232,6 +322,19 @@ button:disabled { opacity: .6; cursor: wait; }
     visibles.forEach(function (m) { lista.appendChild(tarjeta(m)); });
   }
 
+  $("formAgregar").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var b = e.target.querySelector("button"), msg = $("msgAgregar");
+    b.disabled = true; msg.className = "msg"; msg.textContent = "";
+    api({ accion: "agregar", nombre: $("agNombre").value, email: $("agCorreo").value, whatsapp: $("agWhatsapp").value, mensaje: "Agregada a mano desde el panel" }).then(function (d) {
+      b.disabled = false;
+      if (d._status === 401) return mostrarEntrar();
+      if (!d.ok) { msg.className = "msg error"; msg.textContent = d.error || "No se pudo agregar."; return; }
+      codigos[d.miembro.email] = d.codigo; filtro = "aprobado"; e.target.reset();
+      msg.textContent = "Listo. Arriba, en «Con acceso», toca «Copiar mensaje» y pégaselo por Instagram.";
+      cargar();
+    });
+  });
   document.querySelectorAll(".pestanas button").forEach(function (b) {
     b.addEventListener("click", function () { filtro = b.dataset.f; pintar(); });
   });
@@ -245,7 +348,7 @@ button:disabled { opacity: .6; cursor: wait; }
     });
   });
   $("salir").addEventListener("click", function () { api({ accion: "salir" }).then(mostrarEntrar); });
-  api({ accion: "listar" }).then(function (d) { if (d.miembros) { miembros = d.miembros; $("formEntrar").hidden = true; $("panel").hidden = false; $("salir").hidden = false; pintar(); } else mostrarEntrar(); });
+  api({ accion: "listar" }).then(function (d) { if (d.miembros) { miembros = d.miembros; $("formEntrar").hidden = true; $("secciones").hidden = false; mostrarSeccion("miembros"); $("salir").hidden = false; pintar(); } else mostrarEntrar(); });
 })();
 </script>
 </body>
