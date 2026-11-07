@@ -61,6 +61,7 @@ button:disabled { opacity: .6; cursor: wait; }
 .fila { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .nombre { font-weight: 700; font-size: 16px; }
 .dato { color: var(--tinta-suave); font-size: 13px; overflow-wrap: anywhere; }
+.dato.vence { color: var(--tinta); font-weight: 700; }
 .estado { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
 .estado.pendiente { background: var(--espera-fondo); color: var(--espera); }
 .estado.aprobado { background: var(--bien-fondo); color: var(--bien); }
@@ -131,24 +132,25 @@ details.tarjeta summary { cursor: pointer; }
   <div id="panel" hidden>
     <div class="contenedor" style="padding:0">
       <div class="resumen">
-        <div class="cifra"><b id="nPend">0</b><span>esperando</span></div>
         <div class="cifra"><b id="nAprob">0</b><span>con acceso</span></div>
-        <div class="cifra"><b id="nRech">0</b><span>sin acceso</span></div>
+        <div class="cifra"><b id="nVenc">0</b><span>vencidos</span></div>
+        <div class="cifra"><b id="nPagos">0</b><span>pagos en línea</span></div>
       </div>
       <div class="pestanas" role="group" aria-label="Filtrar">
-        <button class="suave" data-f="pendiente" aria-pressed="true">Solicitudes</button>
-        <button class="suave" data-f="aprobado" aria-pressed="false">Con acceso</button>
+        <button class="suave" data-f="aprobado" aria-pressed="true">Con acceso</button>
+        <button class="suave" data-f="vencido" aria-pressed="false">Vencidos</button>
+        <button class="suave" data-f="pendiente" aria-pressed="false">Por aprobar <span id="nPend"></span></button>
         <button class="suave" data-f="rechazado" aria-pressed="false">Sin acceso</button>
       </div>
       <p class="msg" id="msgPanel" role="status"></p>
       <div id="lista" class="contenedor" style="padding:0"></div>
       <details class="tarjeta" id="agregar">
-        <summary><b>Agregar a alguien a mano</b> <span class="dato">(por ejemplo, si te pidió acceso por Instagram)</span></summary>
+        <summary><b>Agregar a alguien a mano</b> <span class="dato">(por ejemplo, si te pagó por transferencia o por Instagram: queda con 30 días)</span></summary>
         <form id="formAgregar" class="persona" novalidate style="margin-top:10px">
           <label for="agNombre">Nombre<input id="agNombre" autocomplete="off" required></label>
           <label for="agCorreo">Correo (con este correo entrará)<input id="agCorreo" type="email" autocomplete="off" required></label>
           <label for="agWhatsapp">WhatsApp (opcional)<input id="agWhatsapp" type="tel" autocomplete="off"></label>
-          <button class="aprobar" type="submit">Dar acceso y crear código</button>
+          <button class="aprobar" type="submit">Dar 30 días de acceso y crear código</button>
           <p class="msg" id="msgAgregar" role="status"></p>
         </form>
       </details>
@@ -160,7 +162,7 @@ details.tarjeta summary { cursor: pointer; }
 (function () {
   "use strict";
   var SITIO = location.origin;
-  var filtro = "pendiente", miembros = [], codigos = {};
+  var filtro = "aprobado", miembros = [], codigos = {};
   var $ = function (id) { return document.getElementById(id); };
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
   function api(cuerpo) {
@@ -176,7 +178,7 @@ details.tarjeta summary { cursor: pointer; }
   }
   function mensajeAcceso(m, codigo) {
     return "¡Hola " + m.nombre.split(" ")[0] + "! Ya tienes acceso a Privé Ofertazos: lo mejor del retail chileno, a mitad de precio.\n\n" +
-      "Entra en " + SITIO + " con:\nCorreo: " + m.email + "\nCódigo: " + codigo + "\n\nEl código es personal, no lo compartas.";
+      (m.vence ? "Tu acceso dura hasta el " + fecha(m.vence) + ".\n\n" : "") + "Entra en " + SITIO + " con:\nCorreo: " + m.email + "\nCódigo: " + codigo + "\n\nEl código es personal, no lo compartas.";
   }
 
   function mostrarPanel() { $("formEntrar").hidden = true; $("secciones").hidden = false; mostrarSeccion("miembros"); $("salir").hidden = false; cargar(); }
@@ -265,7 +267,8 @@ details.tarjeta summary { cursor: pointer; }
     var t = el("article", "tarjeta persona");
     var f = el("div", "fila");
     f.appendChild(el("span", "nombre", m.nombre));
-    f.appendChild(el("span", "estado " + m.estado, { pendiente: "Esperando", aprobado: "Con acceso", rechazado: "Sin acceso" }[m.estado]));
+    var g = grupo(m);
+    f.appendChild(el("span", "estado " + (g === "vencido" ? "pendiente" : m.estado), { pendiente: "Por aprobar", aprobado: "Con acceso", vencido: "Vencido", rechazado: "Sin acceso" }[g]));
     if (m.bloqueado) f.appendChild(el("span", "estado rechazado", "Bloqueado por intentos"));
     t.appendChild(f);
     t.appendChild(el("div", "dato", m.email + (m.whatsapp ? " · WhatsApp " + m.whatsapp : "")));
@@ -273,11 +276,15 @@ details.tarjeta summary { cursor: pointer; }
     var info = "Pidió acceso el " + fecha(m.creado);
     if (m.ultimo_ingreso) info += " · Última entrada " + fecha(m.ultimo_ingreso);
     t.appendChild(el("div", "dato", info));
+    if (m.estado === "aprobado") {
+      var v = m.vence ? (m.vigente ? "Acceso hasta el " + fecha(m.vence) : "Venció el " + fecha(m.vence)) : "Sin pago registrado (era miembro gratis)";
+      t.appendChild(el("div", "dato vence", v + (m.pagos ? " · " + m.pagos + (m.pagos === 1 ? " pago en línea" : " pagos en línea") : "")));
+    }
 
     var codigo = codigos[m.email];
     if (codigo && m.estado === "aprobado") {
       var c = el("div", "codigo");
-      c.appendChild(el("div", "dato", "Código de acceso (cópialo ahora: por seguridad no se vuelve a mostrar)"));
+      c.appendChild(el("div", "dato", "Código de acceso. Ya se lo enviamos por correo; si quieres, mándaselo también por WhatsApp o Instagram (por seguridad no se vuelve a mostrar)."));
       c.appendChild(el("strong", null, codigo));
       var acc = el("div", "acciones");
       var texto = mensajeAcceso(m, codigo);
@@ -301,22 +308,26 @@ details.tarjeta summary { cursor: pointer; }
 
     var a = el("div", "acciones");
     function boton(txt, cls, nombre) { var b = el("button", cls, txt); b.type = "button"; b.addEventListener("click", function () { accion(nombre, m, b); }); a.appendChild(b); }
-    if (m.estado === "pendiente") { boton("Aprobar", "aprobar", "aprobar"); boton("Rechazar", "peligro", "rechazar"); }
-    if (m.estado === "aprobado") { boton("Crear código nuevo", "suave", "nuevo_codigo"); boton("Quitar acceso", "peligro", "quitar"); }
-    if (m.estado === "rechazado") { boton("Dar acceso", "aprobar", "aprobar"); boton("Borrar de la lista", "peligro", "borrar"); }
+    if (g === "pendiente") { boton("Aprobar (30 días)", "aprobar", "aprobar"); boton("Rechazar", "peligro", "rechazar"); }
+    if (g === "aprobado") { boton("Sumar 30 días", "aprobar", "dar_dias"); boton("Crear código nuevo", "suave", "nuevo_codigo"); boton("Quitar acceso", "peligro", "quitar"); }
+    if (g === "vencido") { boton("Dar 30 días (me pagó por fuera)", "aprobar", "dar_dias"); boton("Quitar de la lista", "peligro", "quitar"); }
+    if (g === "rechazado") { boton("Dar acceso (30 días)", "aprobar", "aprobar"); boton("Borrar de la lista", "peligro", "borrar"); }
     t.appendChild(a);
     return t;
   }
 
+  function grupo(m) { return m.estado === "aprobado" && !m.vigente ? "vencido" : m.estado; }
   function pintar() {
-    var cuenta = { pendiente: 0, aprobado: 0, rechazado: 0 };
-    miembros.forEach(function (m) { cuenta[m.estado] = (cuenta[m.estado] || 0) + 1; });
-    $("nPend").textContent = cuenta.pendiente; $("nAprob").textContent = cuenta.aprobado; $("nRech").textContent = cuenta.rechazado;
+    var cuenta = { pendiente: 0, aprobado: 0, vencido: 0, rechazado: 0 }, pagos = 0;
+    miembros.forEach(function (m) { var g = grupo(m); cuenta[g] = (cuenta[g] || 0) + 1; pagos += m.pagos || 0; });
+    $("nAprob").textContent = cuenta.aprobado; $("nVenc").textContent = cuenta.vencido; $("nPagos").textContent = pagos;
+    $("nPend").textContent = cuenta.pendiente ? "(" + cuenta.pendiente + ")" : "";
     document.querySelectorAll(".pestanas button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.f === filtro)); });
     var lista = $("lista"); lista.textContent = "";
-    var visibles = miembros.filter(function (m) { return m.estado === filtro; });
+    var visibles = miembros.filter(function (m) { return grupo(m) === filtro; });
+    if (filtro === "aprobado") visibles.sort(function (a, b) { return String(a.vence).localeCompare(String(b.vence)); });
     if (!visibles.length) {
-      lista.appendChild(el("p", "vacio", { pendiente: "No hay solicitudes nuevas.", aprobado: "Todavía nadie tiene acceso.", rechazado: "No hay personas sin acceso." }[filtro]));
+      lista.appendChild(el("p", "vacio", { pendiente: "No hay solicitudes por aprobar.", aprobado: "Todavía nadie tiene acceso pagado.", vencido: "Nadie con acceso vencido.", rechazado: "No hay personas sin acceso." }[filtro]));
       return;
     }
     visibles.forEach(function (m) { lista.appendChild(tarjeta(m)); });
@@ -331,7 +342,7 @@ details.tarjeta summary { cursor: pointer; }
       if (d._status === 401) return mostrarEntrar();
       if (!d.ok) { msg.className = "msg error"; msg.textContent = d.error || "No se pudo agregar."; return; }
       codigos[d.miembro.email] = d.codigo; filtro = "aprobado"; e.target.reset();
-      msg.textContent = "Listo. Arriba, en «Con acceso», toca «Copiar mensaje» y pégaselo por Instagram.";
+      msg.textContent = d.enviado ? "Listo: tiene 30 días y le enviamos su código por correo. Si quieres, arriba en «Con acceso» toca «Copiar mensaje» para mandárselo por Instagram." : "Listo: tiene 30 días. Arriba, en «Con acceso», toca «Copiar mensaje» y pégaselo por Instagram.";
       cargar();
     });
   });
