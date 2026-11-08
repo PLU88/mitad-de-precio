@@ -659,6 +659,9 @@ def recolectar_archivo(tienda):
             continue
         pid = re.search(r"(MLC[U-]?\d+)", url.replace("MLC-", "MLC"))
         pid = pid.group(1) if pid else str(abs(hash(url)))
+        # 7ª columna opcional: link de afiliada (meli.la) para cobrar comisión
+        if len(fila) > 6 and str(fila[6]).startswith("http"):
+            url = fila[6]
         ofertas.append(nueva_oferta(tienda, pid, nombre, vendedor if vendedor != "Mercado Libre" else "", "", precio, normal, imagen, url))
     return ofertas
 
