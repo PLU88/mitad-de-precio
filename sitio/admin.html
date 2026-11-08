@@ -145,6 +145,7 @@ details.tarjeta summary { cursor: pointer; }
     <div class="contenedor" style="padding:0">
       <p class="dato">Cada mañana (desde las 7:30) se arma y se publica solo un carrusel con 7 ofertas y una historia de invitación. Las historias de ofertas para subir con link
         están aquí abajo y se renuevan cada 3 horas. Todo es para <a href="https://www.instagram.com/priveofertazos/" target="_blank" rel="noopener">@priveofertazos</a>.</p>
+      <div id="igMercadoLibre" class="contenedor" style="padding:0"></div>
       <div id="igVitrina" class="contenedor" style="padding:0"></div>
       <div class="fila"><label for="igDia" class="dato" style="display:flex;gap:8px;align-items:center">Día
         <select id="igDia" style="font:500 15px var(--cuerpo);padding:8px;border-radius:8px;border:1px solid var(--linea);background:var(--fondo);color:var(--tinta)"></select></label></div>
@@ -265,16 +266,18 @@ details.tarjeta summary { cursor: pointer; }
     }).catch(function () { boton.disabled = false; window.open(url, "_blank"); });
   }
   // Vitrina: 30 historias de ofertas que se renuevan cada 3 horas, para subirlas con el sticker de link.
-  function cargarVitrina() {
-    var caja = $("igVitrina"); caja.textContent = "";
-    fetch(RAW + "vitrina/indice.json?v=" + Date.now()).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (v) {
+  function cargarVitrina() { cargarGaleria("igMercadoLibre", "mercadolibre/", true); cargarGaleria("igVitrina", "vitrina/", false); }
+  function cargarGaleria(idCaja, carpeta, esML) {
+    var caja = $(idCaja); caja.textContent = "";
+    fetch(RAW + carpeta + "indice.json?v=" + Date.now()).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (v) {
       var t = el("article", "tarjeta persona");
-      t.appendChild(el("span", "nombre", "30 historias para subir (con link)"));
       var hora = new Date(v.creado).toLocaleString("es-CL", { weekday: "long", hour: "2-digit", minute: "2-digit" });
-      t.appendChild(el("div", "dato", "Se renuevan cada 3 horas (estas son del " + hora + "). Descarga la imagen, súbela como historia desde la app de Instagram, agrega el sticker «Enlace» y pega el link con «Copiar link»."));
+      t.appendChild(el("span", "nombre", esML ? "20 ofertas de Mercado Libre de hoy (con tu link de comisión)" : "30 historias para subir (con link)"));
+      t.appendChild(el("div", "dato", (esML ? "Se renuevan cada día (estas son del " + hora + "); las primeras 9 también salen solas en un carrusel. " : "Se renuevan cada 3 horas (estas son del " + hora + "). ") +
+        "Descarga la imagen, súbela como historia desde la app de Instagram, agrega el sticker «Enlace» y pega el link con «Copiar link»."));
       var g = el("div", "galeria");
       (v.ofertas || []).forEach(function (o) {
-        var url = RAW + "vitrina/" + o.archivo, f = el("figure");
+        var url = RAW + carpeta + o.archivo, f = el("figure");
         var img = new Image(); img.src = url; img.alt = o.nombre; img.loading = "lazy"; f.appendChild(img);
         f.appendChild(el("div", "dato", o.tienda + " · -" + o.descuento + "%"));
         var b = el("button", "suave", "Descargar"); b.type = "button";
@@ -287,7 +290,7 @@ details.tarjeta summary { cursor: pointer; }
         f.appendChild(cl); g.appendChild(f);
       });
       t.appendChild(g); caja.appendChild(t);
-    }).catch(function () { caja.appendChild(el("p", "dato", "Las 30 historias para subir aparecen aquí en unos minutos.")); });
+    }).catch(function () { caja.appendChild(el("p", "dato", esML ? "Las 20 ofertas de Mercado Libre de hoy aparecen aquí en unos minutos." : "Las 30 historias para subir aparecen aquí en unos minutos.")); });
   }
 
   function pintarInstagram() {
@@ -319,6 +322,7 @@ details.tarjeta summary { cursor: pointer; }
       t.appendChild(g); caja.appendChild(t);
     }
     bloque("Carrusel para el feed", dia.carrusel, "Súbelas juntas, en este orden, como una sola publicación.");
+    if (dia.carrusel_ml && dia.carrusel_ml.length) bloque("Carrusel de Mercado Libre", dia.carrusel_ml, "Se publica solo junto al carrusel del día, con tus links de comisión en el texto.");
     bloque("Historia del día", dia.historias, "Se publica sola a las 9:15 e invita a pedir acceso. Las historias de ofertas, con su link, están más abajo en «30 historias para subir».");
     var t = el("article", "tarjeta persona");
     t.appendChild(el("span", "nombre", "Texto para la publicación"));

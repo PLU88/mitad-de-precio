@@ -118,25 +118,37 @@ export default async function handler(req, res) {
     if (!dia) return responder(res, 200, { ok: false, motivo: "Todavía no están las imágenes de hoy.", fecha });
     const id = estado.usuario.id;
     const base = RAW + fecha + "/";
-    const hoy = estado.publicado[fecha];
-    if (hoy && !hoy.hechas) hoy.hechas = hoy.historias.length ? ["historia_oferta.jpg", "historia_promo.jpg"].slice(0, hoy.historias.length) : [];
-    const pendientes = (dia.historias || []).filter((a) => !(hoy && hoy.hechas.includes(a)));
-    if (hoy && !pendientes.length) return responder(res, 200, { ok: true, motivo: "Lo de hoy ya está publicado.", fecha });
-    if (hoy) return await publicarHistorias(res, estado, fecha, pendientes, id, base, token);
-
-    // carrusel: un contenedor por imagen y uno que las agrupa
-    const hijos = [];
-    for (const archivo of dia.carrusel.slice(0, 10)) {
-      const c = await graph(`/${id}/media`, token, { image_url: base + archivo, is_carousel_item: true });
-      hijos.push(c.id);
+    // publica un carrusel (un contenedor por imagen y uno que las agrupa); devuelve el id de la publicación
+    async function carrusel(archivos, texto) {
+      const hijos = [];
+      for (const archivo of archivos.slice(0, 10)) {
+        const c = await graph(`/${id}/media`, token, { image_url: base + archivo, is_carousel_item: true });
+        hijos.push(c.id);
+      }
+      for (const h of hijos) await listo(h, token);
+      const c = await graph(`/${id}/media`, token, { media_type: "CAROUSEL", children: hijos.join(","), caption: (texto || "").slice(0, 2200) });
+      await listo(c.id, token);
+      return (await graph(`/${id}/media_publish`, token, { creation_id: c.id })).id;
     }
-    for (const h of hijos) await listo(h, token);
-    const carrusel = await graph(`/${id}/media`, token, { media_type: "CAROUSEL", children: hijos.join(","), caption: dia.texto.slice(0, 2200) });
-    await listo(carrusel.id, token);
-    const publicado = await graph(`/${id}/media_publish`, token, { creation_id: carrusel.id });
-    estado.publicado[fecha] = { carrusel: publicado.id, historias: [], hechas: [], cuando: new Date().toISOString() };
-    await guardarEstado(estado);
-    return await publicarHistorias(res, estado, fecha, dia.historias || [], id, base, token);
+    let hoy = estado.publicado[fecha];
+    if (hoy && !hoy.hechas) hoy.hechas = hoy.historias.length ? ["historia_oferta.jpg", "historia_promo.jpg"].slice(0, hoy.historias.length) : [];
+    if (!hoy) {
+      const pid = await carrusel(dia.carrusel, dia.texto);
+      hoy = estado.publicado[fecha] = { carrusel: pid, historias: [], hechas: [], cuando: new Date().toISOString() };
+      await guardarEstado(estado);
+    }
+    // segundo carrusel: las ofertas de Mercado Libre del día
+    if (dia.carrusel_ml && dia.carrusel_ml.length && !hoy.carrusel_ml) {
+      try {
+        hoy.carrusel_ml = await carrusel(dia.carrusel_ml, dia.texto_ml);
+        await guardarEstado(estado);
+      } catch (e) {
+        console.error("Carrusel de Mercado Libre no publicado:", e.message);
+      }
+    }
+    const pendientes = (dia.historias || []).filter((a) => !hoy.hechas.includes(a));
+    if (!pendientes.length) return responder(res, 200, { ok: true, motivo: "Lo de hoy ya está publicado.", fecha, publicado: hoy });
+    return await publicarHistorias(res, estado, fecha, pendientes, id, base, token);
   } catch (e) {
     console.error(e);
     return responder(res, 500, { ok: false, error: e.message });

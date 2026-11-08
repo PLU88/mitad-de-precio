@@ -237,12 +237,12 @@ def pegar_foto(lienzo, foto, caja, radio=28):
 
 
 # ------------------------------------------------------------------ láminas
-def lamina_portada(fecha, elegidas, total_ofertas, total_tiendas):
+def lamina_portada(fecha, elegidas, total_ofertas, total_tiendas, linea1="LOS OFERTAZOS", linea2="DE HOY", pie=None):
     img2 = Image.new("RGB", (1080, 1350), MARINO)
     d = ImageDraw.Draw(img2)
     logo(d, (1080 - ancho_logo(1.25)) / 2, 90, 1.25, claro=True)
-    centrar(d, 310, "LOS OFERTAZOS", barlow(150), BLANCO)
-    centrar(d, 450, "DE HOY", barlow(150), "#FF4F8B")
+    centrar(d, 310, linea1, barlow(150), BLANCO)
+    centrar(d, 450, linea2, barlow(150), "#FF4F8B")
     centrar(d, 620, fecha_larga(fecha).capitalize(), figtree(44, 600), "#C9C9D6")
     maximo = max(o["descuento"] for o in elegidas)
     centrar(d, 700, f"{len(elegidas)} ofertas de hasta -{maximo}%", figtree(44, 700), BLANCO)
@@ -254,7 +254,7 @@ def lamina_portada(fecha, elegidas, total_ofertas, total_tiendas):
         insignia(d, x + 12, 812, o["descuento"], 0.42)
         x += 300
     rectangulo(d, (90, 1130, 990, 1250), 60, FUCSIA)
-    centrar(d, 1158, f"+{total_ofertas:,} ofertas en {total_tiendas} tiendas".replace(",", "."), figtree(40, 700), BLANCO)
+    centrar(d, 1158, pie or f"+{total_ofertas:,} ofertas en {total_tiendas} tiendas".replace(",", "."), figtree(40, 700), BLANCO)
     centrar(d, 1278, "Desliza para verlas  →", figtree(34, 600), "#C9C9D6")
     sello_black_friday(img2, 905, 250, 0.62, giro=8)
     return img2
@@ -419,6 +419,92 @@ def vitrina(ofertas, forzar=False):
     print(f"Vitrina: {len(lista)} historias nuevas.")
 
 
+# ------------------------------------------------------------------ Mercado Libre: 20 ofertas del día
+ML_CARPETA = os.path.join(CARPETA, "mercadolibre")
+ML_CANTIDAD = 20      # historias del día en el panel, con su link de afiliada
+ML_CARRUSEL = 9       # de esas, las primeras van al carrusel automático (máximo 10 imágenes con la portada)
+ML_DIAS_SIN_REPETIR = 2
+
+
+def elegir_ml(ofertas, excluir, cantidad):
+    candidatas = [o for o in ofertas if o.get("tienda") == "Mercado Libre" and o.get("imagen") and not o.get("dudoso")
+                  and o["descuento"] >= 50 and o["precio"] >= 2000]
+    def puntaje(o):
+        return o["descuento"] + 4 * math.log10(max(o["precio_normal"] - o["precio"], 1)) + random.random() * 6
+    candidatas.sort(key=puntaje, reverse=True)
+    # primero las que no salieron en los últimos días; si no alcanzan, se repiten
+    candidatas = [o for o in candidatas if o["id"] not in excluir] + [o for o in candidatas if o["id"] in excluir]
+    elegidas, categorias, vistos = [], {}, set()
+    # primera pasada: máximo 6 por categoría; segunda: sin tope, para completar las 20
+    for pasada, o in [(1, o) for o in candidatas] + [(2, o) for o in candidatas]:
+        if len(elegidas) == cantidad:
+            break
+        if o["id"] in vistos or (pasada == 1 and categorias.get(o.get("categoria"), 0) >= 6):
+            continue
+        vistos.add(o["id"])
+        try:
+            foto = bajar_imagen(o["imagen"])
+        except Exception as e:
+            print(f"  sin foto para {o['nombre'][:40]}: {e}")
+            continue
+        elegidas.append(dict(o, nombre=nombre_bonito(o["nombre"]), _foto=foto))
+        categorias[o.get("categoria")] = categorias.get(o.get("categoria"), 0) + 1
+        if len(elegidas) == cantidad:
+            break
+    return elegidas
+
+
+def mercadolibre_del_dia(ofertas, forzar=False):
+    """Una vez al día: 20 historias de Mercado Libre (con link de afiliada aparte) para el panel.
+    Devuelve las ofertas del día (las nuevas traen su foto en "_foto")."""
+    ahora = dt.datetime.now(CHILE)
+    hoy = ahora.date().isoformat()
+    ruta = os.path.join(ML_CARPETA, "indice.json")
+    previo = json.load(open(ruta, encoding="utf-8")) if os.path.exists(ruta) else {}
+    if not forzar and previo.get("fecha") == hoy:
+        return previo.get("ofertas") or []
+    limite = (ahora.date() - dt.timedelta(days=ML_DIAS_SIN_REPETIR)).isoformat()
+    recientes = {i: f for i, f in (previo.get("recientes") or {}).items() if f > limite and f != hoy}
+    elegidas = elegir_ml(ofertas, set(recientes), ML_CANTIDAD)
+    if len(elegidas) < 5:
+        print("Mercado Libre: no hay suficientes ofertas con foto.")
+        return previo.get("ofertas") or []
+    os.makedirs(ML_CARPETA, exist_ok=True)
+    for a in os.listdir(ML_CARPETA):
+        if a.endswith(".jpg"):
+            os.remove(os.path.join(ML_CARPETA, a))
+    sello = ahora.strftime("%Y%m%d%H%M")
+    lista = []
+    for n, o in enumerate(elegidas, 1):
+        archivo = f"ml_{sello}_{n:02d}.jpg"
+        guardar(historia_estrella(o, ahora.date(), n, len(elegidas)), os.path.join(ML_CARPETA, archivo))
+        lista.append({"archivo": archivo, "imagen": o["imagen"], **{k: o[k] for k in ("id", "nombre", "tienda", "precio", "precio_normal", "descuento", "url")}})
+        recientes[o["id"]] = hoy
+    json.dump({"fecha": hoy, "creado": ahora.isoformat(timespec="minutes"), "ofertas": lista, "recientes": recientes},
+              open(ruta, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(f"Mercado Libre: {len(lista)} historias del día.")
+    for o, x in zip(elegidas, lista):
+        x["_foto"] = o["_foto"]
+    return lista
+
+
+def texto_ml(fecha, elegidas, largo_nombre=None):
+    lineas = [f"🛒 Mercado Libre: {len(elegidas)} ofertazos de hoy, {fecha_larga(fecha)}", ""]
+    for i, o in enumerate(elegidas, 1):
+        nombre = o["nombre"] if not largo_nombre or len(o["nombre"]) <= largo_nombre else o["nombre"][:largo_nombre].rstrip() + "…"
+        lineas.append(f"{i}. {nombre}: {clp(o['precio'])} (antes {clp(o['precio_normal'])}, -{o['descuento']}%)")
+        if o.get("url"):
+            lineas.append("👉 " + o["url"].replace("https://", ""))
+    lineas += ["", "Más ofertas de Mercado Libre y de +90 tiendas, desde 50% de descuento, en priveofertazos.cl",
+               "Los links también están en nuestras historias 💌", "",
+               "Precios revisados hoy; Mercado Libre puede cambiarlos en cualquier momento.", "",
+               "#mercadolibre #ofertas #descuentos #ofertaschile #chile #ahorro #blackfriday #priveofertazos"]
+    texto = "\n".join(lineas)
+    if len(texto) > 2200 and (largo_nombre or 999) > 30:
+        return texto_ml(fecha, elegidas, (largo_nombre or 80) - 10)
+    return texto
+
+
 def main(forzar=False):
     ahora = dt.datetime.now(CHILE)
     fecha = ahora.date()
@@ -430,6 +516,11 @@ def main(forzar=False):
         vitrina(ofertas, forzar)
     except Exception as e:  # la vitrina nunca debe frenar lo demás
         print("Vitrina: no se pudo hacer:", e)
+    try:
+        ml = mercadolibre_del_dia(ofertas, forzar)
+    except Exception as e:
+        print("Mercado Libre: no se pudo hacer:", e)
+        ml = []
     if not forzar:
         if (ahora.hour, ahora.minute) < HORA_INICIO:
             print("Publicaciones: todavía es temprano.")
@@ -457,11 +548,35 @@ def main(forzar=False):
     historias = ["historia_promo.jpg"]
     texto = texto_publicacion(fecha, elegidas, len(ofertas))
     open(os.path.join(carpeta, "texto.txt"), "w", encoding="utf-8").write(texto)
+    # segundo carrusel: ofertas de Mercado Libre del día (con link de afiliada en el texto)
+    carrusel_ml, txt_ml = [], ""
+    try:
+        para_ml = []
+        for o in ml[:ML_CARRUSEL]:
+            if "_foto" not in o:
+                try:
+                    o = dict(o, _foto=bajar_imagen(o["imagen"]))
+                except Exception:
+                    continue
+            para_ml.append(o)
+        if len(para_ml) >= 3:
+            total_ml = sum(1 for o in ofertas if o.get("tienda") == "Mercado Libre")
+            guardar(lamina_portada(fecha, para_ml, len(ofertas), tiendas, "MERCADO LIBRE", "OFERTAS DE HOY",
+                                   f"{total_ml} ofertas de Mercado Libre desde 50%"), os.path.join(carpeta, "ml_0.jpg"))
+            carrusel_ml.append("ml_0.jpg")
+            for n, o in enumerate(para_ml, 1):
+                guardar(lamina_oferta(o, n, len(para_ml), fecha), os.path.join(carpeta, f"ml_{n}.jpg"))
+                carrusel_ml.append(f"ml_{n}.jpg")
+            txt_ml = texto_ml(fecha, para_ml)
+    except Exception as e:
+        print("Mercado Libre: no se pudo armar el carrusel:", e)
+        carrusel_ml, txt_ml = [], ""
 
     indice["dias"] = [x for x in indice["dias"] if x["fecha"] != fecha.isoformat()]
     indice["dias"].insert(0, {
         "fecha": fecha.isoformat(), "creado": ahora.isoformat(timespec="minutes"),
         "carrusel": archivos, "historias": historias, "texto": texto,
+        **({"carrusel_ml": carrusel_ml, "texto_ml": txt_ml} if carrusel_ml else {}),
         "ofertas": [{k: o[k] for k in ("id", "nombre", "tienda", "precio", "precio_normal", "descuento", "url")} for o in elegidas],
     })
     # si se rehacen las de hoy, se suman a las ya elegidas (para no repetirlas en 21 días)
