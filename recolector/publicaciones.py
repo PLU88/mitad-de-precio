@@ -493,10 +493,9 @@ def texto_ml(fecha, elegidas, largo_nombre=None):
     for i, o in enumerate(elegidas, 1):
         nombre = o["nombre"] if not largo_nombre or len(o["nombre"]) <= largo_nombre else o["nombre"][:largo_nombre].rstrip() + "…"
         lineas.append(f"{i}. {nombre}: {clp(o['precio'])} (antes {clp(o['precio_normal'])}, -{o['descuento']}%)")
-        if o.get("url"):
-            lineas.append("👉 " + o["url"].replace("https://", ""))
-    lineas += ["", "Más ofertas de Mercado Libre y de +90 tiendas, desde 50% de descuento, en priveofertazos.cl",
-               "Los links también están en nuestras historias 💌", "",
+    # sin links en el texto: una cuenta nueva con muchos links acortados se ve como spam para Instagram
+    lineas += ["", "👉 Links en priveofertazos.cl (link en la bio): toca «Solo Mercado Libre»",
+               "Más ofertas de Mercado Libre y de +130 tiendas, desde 50% de descuento 💌", "",
                "Precios revisados hoy; Mercado Libre puede cambiarlos en cualquier momento.", "",
                "#mercadolibre #ofertas #descuentos #ofertaschile #chile #ahorro #blackfriday #priveofertazos"]
     texto = "\n".join(lineas)
