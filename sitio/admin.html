@@ -71,6 +71,7 @@ button:disabled { opacity: .6; cursor: wait; }
 .codigo strong { font: 800 30px/1 var(--display); letter-spacing: .06em; color: var(--bien); }
 .msg { margin: 0; font-size: 14px; }
 .msg.error { color: var(--acento); }
+.msg.ok { color: #1f7a4d; }
 .vacio { color: var(--tinta-suave); text-align: center; padding: 24px 8px; }
 details.tarjeta summary { cursor: pointer; }
 .secciones { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: var(--superficie); border: 1px solid var(--linea); border-radius: 10px; padding: 4px; }
@@ -116,7 +117,29 @@ details.tarjeta summary { cursor: pointer; }
   <div class="secciones" id="secciones" role="tablist" hidden>
     <button type="button" role="tab" data-s="miembros" aria-selected="true">Miembros</button>
     <button type="button" role="tab" data-s="instagram" aria-selected="false">Instagram</button>
+    <button type="button" role="tab" data-s="cupones" aria-selected="false">Cupones</button>
   </div>
+
+  <section id="cupones" hidden>
+    <div class="contenedor" style="padding:0">
+      <p class="dato">Los cupones de tiendas, bancos, Entel y Metrogas se buscan solos todos los días. Aquí puedes agregar a mano
+        los que veas en Instagram (influencers, marcas) u otros lados: aparecen primero en la sección «Cupones» de la página.</p>
+      <form class="tarjeta persona" id="formCupon" novalidate>
+        <b>Agregar un cupón</b>
+        <label for="cuMarca">Tienda o marca<input id="cuMarca" autocomplete="off" placeholder="Ej: Paris" required></label>
+        <label for="cuCodigo">Código<input id="cuCodigo" autocomplete="off" placeholder="Ej: MARIA15" style="text-transform:uppercase"></label>
+        <label for="cuTitulo">¿Qué descuento da?<input id="cuTitulo" autocomplete="off" placeholder="Ej: 15% en toda la tienda online"></label>
+        <label for="cuFuente">¿Dónde lo viste? (opcional)<input id="cuFuente" autocomplete="off" placeholder="Ej: @nombre_influencer"></label>
+        <label for="cuUrl">Link de la tienda (opcional)<input id="cuUrl" type="url" autocomplete="off" placeholder="https://"></label>
+        <label for="cuHasta">Vence (opcional)<input id="cuHasta" type="date"></label>
+        <label for="cuTipo">Tipo<select id="cuTipo" style="font:500 15px var(--cuerpo);padding:8px;border-radius:8px;border:1px solid var(--linea);background:var(--fondo);color:var(--tinta)">
+          <option>Instagram</option><option>Tiendas</option><option>Bancos</option><option>Telefonía</option><option>Gas</option><option>Otros</option></select></label>
+        <button class="aprobar" type="submit">Agregar cupón</button>
+        <p class="msg" id="msgCupon" role="status"></p>
+      </form>
+      <div id="listaCupones" class="contenedor" style="padding:0"></div>
+    </div>
+  </section>
 
   <section id="instagram" hidden>
     <div class="contenedor" style="padding:0">
@@ -189,9 +212,40 @@ details.tarjeta summary { cursor: pointer; }
   var igIndice = null;
   function mostrarSeccion(cual) {
     document.querySelectorAll(".secciones button").forEach(function (b) { b.setAttribute("aria-selected", String(b.dataset.s === cual)); });
-    $("panel").hidden = cual !== "miembros"; $("instagram").hidden = cual !== "instagram";
+    $("panel").hidden = cual !== "miembros"; $("instagram").hidden = cual !== "instagram"; $("cupones").hidden = cual !== "cupones";
     if (cual === "instagram" && !igIndice) cargarInstagram();
+    if (cual === "cupones") cargarCupones();
   }
+  // ---------- Cupones agregados a mano
+  function pintarCupones(lista) {
+    var caja = $("listaCupones"); caja.textContent = "";
+    if (!lista.length) { caja.appendChild(el("p", "dato", "Todavía no agregas cupones a mano.")); return; }
+    lista.forEach(function (c) {
+      var t = el("div", "tarjeta");
+      t.appendChild(el("b", null, c.m + (c.c ? " · " + c.c : "")));
+      t.appendChild(el("span", "dato", [c.ti, c.f, c.v].filter(Boolean).join(" · ")));
+      var b = el("button", "peligro", "Quitar"); b.type = "button";
+      b.addEventListener("click", function () {
+        b.disabled = true;
+        api({ accion: "cupon_quitar", id: c.id }).then(function (d) { pintarCupones(d.cupones || []); });
+      });
+      t.appendChild(b); caja.appendChild(t);
+    });
+  }
+  function cargarCupones() { api({ accion: "cupones" }).then(function (d) { if (d._status === 401) return mostrarEntrar(); pintarCupones(d.cupones || []); }); }
+  $("formCupon").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var msg = $("msgCupon"), boton = e.target.querySelector("button[type=submit]");
+    boton.disabled = true; msg.className = "msg"; msg.textContent = "";
+    api({ accion: "cupon_agregar", comercio: $("cuMarca").value, codigo: $("cuCodigo").value.toUpperCase(), titulo: $("cuTitulo").value,
+      fuente: $("cuFuente").value, url: $("cuUrl").value, hasta: $("cuHasta").value, tipo: $("cuTipo").value }).then(function (d) {
+      boton.disabled = false;
+      if (!d.ok) { msg.className = "msg error"; msg.textContent = d.error || "No se pudo agregar."; return; }
+      msg.className = "msg ok"; msg.textContent = "¡Listo! Ya aparece en la página.";
+      ["cuMarca", "cuCodigo", "cuTitulo", "cuFuente", "cuUrl", "cuHasta"].forEach(function (id) { $(id).value = ""; });
+      pintarCupones(d.cupones || []);
+    });
+  });
   function cargarInstagram() {
     $("msgIg").textContent = "Cargando…";
     cargarVitrina();
@@ -275,7 +329,7 @@ details.tarjeta summary { cursor: pointer; }
   }
   document.querySelectorAll(".secciones button").forEach(function (b) { b.addEventListener("click", function () { mostrarSeccion(b.dataset.s); }); });
   $("igDia").addEventListener("change", pintarInstagram);
-  function mostrarEntrar() { $("formEntrar").hidden = false; $("panel").hidden = true; $("instagram").hidden = true; $("secciones").hidden = true; $("salir").hidden = true; }
+  function mostrarEntrar() { $("formEntrar").hidden = false; $("panel").hidden = true; $("instagram").hidden = true; $("cupones").hidden = true; $("secciones").hidden = true; $("salir").hidden = true; }
 
   function cargar() {
     api({ accion: "listar" }).then(function (d) {

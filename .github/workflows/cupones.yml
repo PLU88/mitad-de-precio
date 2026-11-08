@@ -1,0 +1,64 @@
+name: Actualizar cupones
+
+on:
+  schedule:
+    # varias veces al día por si una vuelta se salta; solo trabaja si pasaron 20 horas desde la última
+    - cron: "7 10 * * *"
+    - cron: "7 16 * * *"
+    - cron: "7 22 * * *"
+  workflow_dispatch:
+    inputs:
+      forzar:
+        description: "Actualizar aunque se haya hecho hace poco"
+        type: boolean
+        default: false
+
+# Comparte turno con "Actualizar ofertas" para no pisarse al publicar en la rama "datos".
+concurrency:
+  group: actualizar-ofertas
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  cupones:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: ¿Toca actualizar?
+        id: toca
+        run: |
+          git fetch --depth 1 origin datos:refs/remotes/origin/datos || true
+          git show origin/datos:datos/cupones_estado.json > /tmp/estado.json 2>/dev/null || echo '{}' > /tmp/estado.json
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, datetime as dt, os
+          e = json.load(open("/tmp/estado.json"))
+          forzar = "${{ inputs.forzar }}" == "true"
+          a = e.get("actualizado")
+          viejo = (not a) or (dt.datetime.now(dt.timezone.utc) - dt.datetime.fromisoformat(a)).total_seconds() > 20 * 3600
+          print("si=" + ("1" if forzar or viejo else "0"))
+          PY
+      - name: Instalar cifrado
+        if: steps.toca.outputs.si == '1'
+        run: pip install "cryptography>=42"
+      - name: Juntar cupones
+        if: steps.toca.outputs.si == '1'
+        run: python recolector/cupones.py
+      - name: Publicar en la rama "datos"
+        if: steps.toca.outputs.si == '1'
+        run: |
+          [ -f datos/cupones.enc ] || { echo "No hubo cupones nuevos."; exit 0; }
+          mkdir -p /tmp/pub && cd /tmp/pub
+          git init -q -b datos
+          git fetch -q --depth 1 "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" datos
+          git checkout -q -B datos FETCH_HEAD
+          mkdir -p datos
+          cp "$GITHUB_WORKSPACE/datos/cupones.enc" "$GITHUB_WORKSPACE/datos/cupones_estado.json" datos/
+          git add datos/cupones.enc datos/cupones_estado.json
+          git -c user.name="bot-ofertas" -c user.email="bot-ofertas@users.noreply.github.com" commit -qm "Cupones $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" datos

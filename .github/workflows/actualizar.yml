@@ -47,6 +47,10 @@ jobs:
           else git show origin/datos:datos/ofertas.enc > /tmp/pub/datos/ofertas.enc; fi
           cp datos/estado.json datos/historial.json /tmp/pub/datos/
           if [ -d datos/publicaciones ]; then cp -r datos/publicaciones /tmp/pub/datos/; fi
+          # los cupones los actualiza otro proceso una vez al día: se conservan tal cual
+          for f in cupones.enc cupones_estado.json; do
+            git show origin/datos:datos/$f > /tmp/pub/datos/$f 2>/dev/null || rm -f /tmp/pub/datos/$f
+          done
           cd /tmp/pub
           git init -q -b datos
           git add .

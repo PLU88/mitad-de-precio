@@ -183,6 +183,30 @@ main { max-width: 1180px; margin: 0 auto; padding: 14px 16px 40px; display: grid
 .boton-ig { display: block; text-align: center; text-decoration: none; border-radius: 8px; padding: 11px; font: 700 15px var(--cuerpo);
   color: #fff; background: linear-gradient(90deg, #D61F69, #9d1660); }
 .enlace-ig { font-size: 13.5px; font-weight: 600; color: var(--acento); }
+.cupones-cabecera { margin-left: auto; font: 800 13px var(--cuerpo); color: #fff; background: var(--acento); text-decoration: none; padding: 6px 12px; border-radius: 999px; }
+.cupones-cabecera + .ig-cabecera { margin-left: 12px; }
+#app.modo-cupones .tramos, #app.modo-cupones .filtros, #app.modo-cupones #panelFiltros, #app.modo-cupones #activos, #app.modo-cupones main { display: none !important; }
+.vista-cupones { max-width: 1180px; margin: 0 auto; padding: 14px 16px 40px; display: grid; gap: 12px; }
+.cu-cabeza { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
+.cu-cabeza h2 { margin: 0; font: 800 28px/1.05 var(--display); text-transform: uppercase; }
+.cu-volver { appearance: none; border: 1px solid var(--linea); background: var(--superficie); color: var(--tinta); border-radius: 999px; padding: 7px 12px; font: 600 13px var(--cuerpo); cursor: pointer; }
+.cu-lead, .cu-conteo { margin: 0; color: var(--tinta-suave); font-size: 13.5px; }
+.cu-tipos { display: flex; flex-wrap: wrap; gap: 6px; }
+.cu-filtros { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
+.cu-filtros input[type=search] { width: 100%; font: 500 15px var(--cuerpo); color: var(--tinta); background: var(--superficie); border: 1px solid var(--linea); border-radius: 8px; padding: 9px 10px; }
+.cu-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.cupon { background: var(--superficie); border: 1px solid var(--linea); border-radius: 12px; padding: 12px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.cupon.propio { border-color: var(--acento); }
+.cu-top { display: flex; gap: 8px; align-items: baseline; justify-content: space-between; }
+.cu-marca { font-weight: 800; font-size: 15px; overflow-wrap: anywhere; }
+.cu-pct { font: 800 22px/1 var(--display); color: var(--acento); white-space: nowrap; }
+.cu-titulo { margin: 0; font-size: 14px; }
+.cu-codigo { display: flex; gap: 6px; align-items: stretch; }
+.cu-codigo code { flex: 1; min-width: 0; font: 700 16px/1 ui-monospace, Menlo, Consolas, monospace; letter-spacing: 1px; background: var(--fondo); border: 2px dashed var(--acento); border-radius: 8px; padding: 9px 10px; overflow-wrap: anywhere; user-select: all; }
+.cu-codigo button { appearance: none; border: 0; border-radius: 8px; padding: 0 12px; font: 700 13px var(--cuerpo); background: var(--tinta); color: var(--superficie); cursor: pointer; }
+.cu-sin { font-size: 12.5px; color: var(--bien); background: var(--bien-fondo); border-radius: 8px; padding: 6px 8px; }
+.cu-det, .cu-meta { font-size: 12.5px; color: var(--tinta-suave); margin: 0; overflow-wrap: anywhere; }
+.cu-ir { font-size: 13px; font-weight: 700; color: var(--acento); }
 .ig-cabecera { margin-left: auto; font: 700 13px var(--cuerpo); color: var(--acento); text-decoration: none; }
 .ig-cabecera + .salir { margin-left: 12px; }
 footer a { color: var(--acento); font-weight: 600; }
@@ -253,6 +277,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     <div class="marca">
       <h1 class="sr">Privé Ofertazos</h1><div class="logo" role="img" aria-label="Privé Ofertazos"><svg class="monograma" width="44" height="44" viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="74" fill="none" stroke="currentColor" stroke-width="4"></circle><text x="96" y="110" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="900" font-size="78" fill="var(--marca)">O</text><text x="66" y="114" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-style="italic" font-weight="400" font-size="112" fill="currentColor">P</text></svg><span class="palabra"><span class="prive">Privé</span><span class="ofertazos">OFERTAZOS</span></span></div>
       <p class="lema">Lo mejor, a mitad de precio</p>
+      <a class="cupones-cabecera" href="#cupones" id="irCupones">Cupones</a>
       <a class="ig-cabecera" href="https://www.instagram.com/priveofertazos/" target="_blank" rel="noopener" aria-label="Instagram de Privé Ofertazos">Instagram</a>
       <button class="salir" id="salir" type="button" hidden>Salir</button>
     </div>
@@ -303,6 +328,21 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   <div class="grilla" id="grilla" aria-live="polite"></div>
   <button class="mas" id="mas" hidden>Ver más ofertas</button>
 </main>
+<section class="vista-cupones" id="vistaCupones" hidden aria-labelledby="tituloCupones">
+  <div class="cu-cabeza">
+    <h2 id="tituloCupones">Cupones y códigos de descuento</h2>
+    <button type="button" class="cu-volver" id="volverOfertas">← Volver a las ofertas</button>
+  </div>
+  <p class="cu-lead" id="cuLead">Códigos de tiendas, bancos, telefonía, gas e Instagram. Se actualizan todos los días.</p>
+  <div class="cu-tipos" id="cuTipos" role="group" aria-label="Tipo de cupón"></div>
+  <div class="cu-filtros">
+    <input id="cuBuscar" type="search" placeholder="Buscar tienda o marca: Paris, Starbucks, Lipigas…" aria-label="Buscar cupón">
+    <label class="interruptor"><input type="checkbox" id="cuSoloCodigo"> Solo con código</label>
+  </div>
+  <p class="cu-conteo" id="cuConteo"></p>
+  <div class="cu-lista" id="cuLista" aria-live="polite"></div>
+  <button class="mas" id="cuMas" hidden>Ver más cupones</button>
+</section>
 </div>
 <footer><span id="pie">Los precios y el stock los fija cada tienda y pueden cambiar. Revisa el precio final antes de comprar.</span><span id="vigencia"></span>
   · <a href="https://www.instagram.com/priveofertazos/" target="_blank" rel="noopener">Síguenos en Instagram @priveofertazos</a></footer>
@@ -710,6 +750,86 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
       }).catch(function () { if (intentos < 40) setTimeout(preguntar, 4000); });
     })();
   }
+  // ---------- cupones
+  var CU_TIPOS = ["Todos", "Instagram", "Tiendas", "Bancos", "Telefonía", "Gas", "Otros"];
+  var cupones = null, cuEstado = { tipo: "Todos", q: "", solo: false, mostrar: 60 };
+  function abrirCupones() {
+    $("app").classList.add("modo-cupones"); $("vistaCupones").hidden = false;
+    if (location.hash !== "#cupones") history.replaceState(null, "", "#cupones");
+    window.scrollTo(0, 0);
+    if (cupones) return pintarCupones();
+    $("cuConteo").textContent = "Cargando cupones…";
+    api("/api/cupones").then(function (d) {
+      if (d._status === 401) return mostrarAcceso();
+      cupones = Array.isArray(d.cupones) ? d.cupones : [];
+      if (d.actualizado) $("cuLead").textContent = "Códigos de tiendas, bancos, telefonía, gas e Instagram. Actualizados el " +
+        new Date(d.actualizado).toLocaleString("es-CL", { dateStyle: "medium", timeStyle: "short" }) + ".";
+      pintarCupones();
+    }).catch(function () { $("cuConteo").textContent = "Sin conexión. Revisa tu internet y vuelve a intentarlo."; });
+  }
+  function cerrarCupones() {
+    $("app").classList.remove("modo-cupones"); $("vistaCupones").hidden = true;
+    history.replaceState(null, "", location.pathname);
+  }
+  function filtrarCupones() {
+    var q = normalizar(cuEstado.q).split(/\s+/).filter(Boolean);
+    return cupones.filter(function (c) {
+      if (cuEstado.tipo !== "Todos" && c.t !== cuEstado.tipo) return false;
+      if (cuEstado.solo && !c.c) return false;
+      if (q.length) {
+        var t = c._t || (c._t = normalizar([c.m, c.ti, c.d, c.f].join(" ")));
+        for (var i = 0; i < q.length; i++) if (t.indexOf(q[i]) < 0) return false;
+      }
+      return true;
+    }).sort(function (a, b) { return (b.propio ? 1 : 0) - (a.propio ? 1 : 0) || (b.c ? 1 : 0) - (a.c ? 1 : 0); });
+  }
+  function copiar(texto, boton) {
+    var listo = function () { boton.textContent = "¡Copiado!"; setTimeout(function () { boton.textContent = "Copiar"; }, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(texto).then(listo).catch(function () { boton.textContent = "Mantén presionado"; });
+    else boton.textContent = "Mantén presionado";
+  }
+  function tarjetaCupon(c) {
+    var t = el("article", "cupon" + (c.propio ? " propio" : ""));
+    var top = el("div", "cu-top"); top.appendChild(el("span", "cu-marca", c.m)); if (c.x) top.appendChild(el("span", "cu-pct", c.x));
+    t.appendChild(top);
+    t.appendChild(el("p", "cu-titulo", c.ti));
+    if (c.c) {
+      var fila = el("div", "cu-codigo"); fila.appendChild(el("code", null, c.c));
+      var b = el("button", null, "Copiar"); b.type = "button"; b.setAttribute("aria-label", "Copiar código " + c.c);
+      b.addEventListener("click", function () { copiar(c.c, b); }); fila.appendChild(b); t.appendChild(fila);
+    } else {
+      t.appendChild(el("span", "cu-sin", c.t === "Telefonía" && c.f === "Entel" ? "El código se saca en la App Entel" : "Sin código: se aplica al pagar con el medio indicado"));
+    }
+    if (c.d) t.appendChild(el("p", "cu-det", c.d));
+    var meta = [c.v, (c.t === "Instagram" ? "Visto en " : "Fuente: ") + c.f].filter(Boolean).join(" · ");
+    t.appendChild(el("p", "cu-meta", meta));
+    if (c.u) { var a = el("a", "cu-ir", "Ver condiciones →"); a.href = c.u; a.target = "_blank"; a.rel = "noopener nofollow"; t.appendChild(a); }
+    return t;
+  }
+  function pintarCupones() {
+    var tipos = $("cuTipos"); tipos.textContent = "";
+    var cuenta = {}; cupones.forEach(function (c) { cuenta[c.t] = (cuenta[c.t] || 0) + 1; });
+    CU_TIPOS.forEach(function (tp) {
+      var n = tp === "Todos" ? cupones.length : (cuenta[tp] || 0);
+      if (!n && tp !== "Todos" && cuEstado.tipo !== tp) return;
+      tipos.appendChild(opcion(tp, n, cuEstado.tipo === tp, function () { cuEstado.tipo = tp; cuEstado.mostrar = 60; pintarCupones(); }));
+    });
+    var lista = filtrarCupones(), caja = $("cuLista"); caja.textContent = "";
+    if (!lista.length) caja.appendChild(el("p", "vacio", "No hay cupones con ese filtro."));
+    var frag = document.createDocumentFragment();
+    lista.slice(0, cuEstado.mostrar).forEach(function (c) { frag.appendChild(tarjetaCupon(c)); });
+    caja.appendChild(frag);
+    $("cuMas").hidden = lista.length <= cuEstado.mostrar;
+    var conCodigo = lista.filter(function (c) { return c.c; }).length;
+    $("cuConteo").textContent = miles.format(lista.length) + (lista.length === 1 ? " cupón" : " cupones") + " · " + miles.format(conCodigo) + " con código";
+  }
+  $("irCupones").addEventListener("click", function (e) { e.preventDefault(); abrirCupones(); });
+  $("volverOfertas").addEventListener("click", cerrarCupones);
+  $("cuMas").addEventListener("click", function () { cuEstado.mostrar += 60; pintarCupones(); });
+  var tcu;
+  $("cuBuscar").addEventListener("input", function (e) { clearTimeout(tcu); tcu = setTimeout(function () { cuEstado.q = e.target.value; cuEstado.mostrar = 60; pintarCupones(); }, 150); });
+  $("cuSoloCodigo").addEventListener("change", function (e) { cuEstado.solo = e.target.checked; cuEstado.mostrar = 60; pintarCupones(); });
+
   $("salir").addEventListener("click", function () {
     api("/api/sesion", { accion: "salir" }).then(function () { location.reload(); });
   });
@@ -717,7 +837,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   api("/api/sesion").then(function (d) {
     ponerMedios(d.pagos, d.transferencia); ponerPrecio(d.precio);
     if (pagoVuelta) return revisarPago(pagoVuelta);
-    if (d.conectado) { mostrarVence(d); cargarOfertas(); return; }
+    if (d.conectado) { mostrarVence(d); cargarOfertas(); if (location.hash === "#cupones") abrirCupones(); return; }
     mostrarAcceso();
     if (d.vencido) prepararRenovacion(d, "Tu acceso venció. Renuévalo y vuelves a entrar al tiro.");
   }).catch(mostrarAcceso);

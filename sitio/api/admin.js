@@ -4,6 +4,11 @@ import {
   normalizarCorreo, nuevoCodigo, hashCodigo, correoValido, texto, vigente, extenderAcceso, enviarCodigo,
   enviarCorreo, fechaCorta, DIAS_MEMBRESIA,
 } from "./_lib.js";
+import crypto from "node:crypto";
+import { put } from "@vercel/blob";
+import { cuponesManuales } from "./cupones.js";
+
+const TIPOS_CUPON = ["Instagram", "Tiendas", "Bancos", "Telefonía", "Gas", "Otros"];
 
 const sitio = (req) => "https://" + (req.headers["x-forwarded-host"] || req.headers.host || "priveofertazos.cl");
 
@@ -29,6 +34,33 @@ export default async function handler(req, res) {
     }
     if (accion === "salir") return responder(res, 200, { ok: true }, [cookie("mdp_admin", "", 0)]);
     if (!esAdmin(req)) return responder(res, 401, { error: "Tu sesión de administración terminó. Entra de nuevo." });
+
+    if (accion === "cupones" || accion === "cupon_agregar" || accion === "cupon_quitar") {
+      // Cupones que la dueña agrega a mano (por ejemplo, los que ve en Instagram)
+      const d = await cuponesManuales();
+      if (accion === "cupon_agregar") {
+        const comercio = texto(cuerpo.comercio, 60), codigo = texto(cuerpo.codigo, 40).replace(/\s+/g, "");
+        const titulo = texto(cuerpo.titulo, 140), hasta = /^\d{4}-\d{2}-\d{2}$/.test(cuerpo.hasta || "") ? cuerpo.hasta : "";
+        if (comercio.length < 2) return responder(res, 400, { error: "Escribe la tienda o marca." });
+        if (!codigo && titulo.length < 3) return responder(res, 400, { error: "Escribe el código o qué descuento es." });
+        let url = texto(cuerpo.url, 300);
+        if (url && !/^https?:\/\//i.test(url)) url = "https://" + url;
+        const tipo = TIPOS_CUPON.includes(cuerpo.tipo) ? cuerpo.tipo : "Instagram";
+        const pct = (titulo.match(/(\d{1,2})\s?%/) || [])[1];
+        d.cupones.unshift({
+          id: crypto.randomUUID(), t: tipo, f: texto(cuerpo.fuente, 60) || (tipo === "Instagram" ? "Instagram" : "Privé Ofertazos"),
+          m: comercio, ti: titulo || "Código de descuento", d: texto(cuerpo.detalle, 220), c: codigo, u: url,
+          hasta, v: hasta ? "Vence el " + fechaCorta(hasta + "T12:00:00Z") : "", x: pct ? pct + "%" : "",
+          creado: new Date().toISOString(),
+        });
+      }
+      if (accion === "cupon_quitar") d.cupones = d.cupones.filter((c) => c.id !== cuerpo.id);
+      if (accion !== "cupones") {
+        d.cupones = d.cupones.slice(0, 500);
+        await put("cupones_manuales.json", JSON.stringify(d), { access: "private", addRandomSuffix: false, allowOverwrite: true, contentType: "application/json" });
+      }
+      return responder(res, 200, { ok: true, cupones: d.cupones });
+    }
 
     const datos = await leerMiembros();
     if (accion === "listar") {
