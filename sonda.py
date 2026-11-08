@@ -11,28 +11,17 @@ def get(u, extra=None):
     except Exception as e:
         return str(e), ""
 def txt(t): return re.sub(r'\s+',' ',H.unescape(re.sub(r'<script.*?</script>|<style.*?</style>|<[^>]+>',' ',t,flags=re.S)))
-s,js=get("https://cdn.picodi.com/assets/v20/js/shop-single.b5b01c0d.js")
-for kw in ["/api/","fetch(","axios",",code:","getCode","offerId","/offer"]:
-    for m in list(re.finditer(re.escape(kw),js))[:4]:
-        print("PJS",kw,"::",js[max(0,m.start()-150):m.start()+200].replace("\n"," "))
 s,t=get("https://www.picodi.com/cl/shein")
-for m in list(re.finditer(r'data-[a-z\-]+="[^"]{0,80}"',t))[:0]: pass
-i=t.find('id="c_shein_69984"'); print("LI", t[i-600:i+100])
-s,t=get("https://sitiospublicos.bancochile.cl/personas/beneficios")
-print("BCH scripts json", [m[:80] for m in re.findall(r'<script[^>]*type="application/(?:json|ld\+json)"[^>]*>(.{0,200})',t,re.S)][:5])
-print("BCH apis", sorted(set(re.findall(r'["\'](/[^"\'\s]*(?:api|json)[^"\'\s]*)["\']',t)))[:30])
-T=txt(t); i=T.find('%'); print("BCH text", T[:200], "...", T[i-500:i+1500])
-print("BCH codigos", re.findall(r'[Cc]ódigo[^.]{0,80}',T)[:20])
-s,t=get("https://www.bci.cl/beneficios/beneficios-bci")
-print("BCI spaces", sorted(set(re.findall(r'/api/content/spaces/[^"\'\s<>]+',t)))[:20])
-T=txt(t); print("BCI text", T[:1500])
-for u in ["https://www.bci.cl/api/content/spaces/beneficios/types/beneficio/entries?per_page=5","https://www.bci.cl/api/content/spaces/beneficios-bci/types/beneficios/entries?per_page=5"]:
-    s,t2=get(u); print("BCIAPI",u,s,t2[:600])
-s,t=get("https://www.entel.cl/beneficios")
-L=sorted(set(re.findall(r'https://www\.entel\.cl/beneficios/[a-z\-]+/[a-z0-9\-]+',t))); print("ENTEL",len(L),L[:60])
-print("ENTEL spaces", sorted(set(re.findall(r'/api/content/spaces/[^"\'\s<>]+',t)))[:20])
-if L:
-    s,t3=get(L[0]); T=txt(t3); i=T.find('%'); print("ENTEL1",L[0],T[max(0,i-400):i+800])
-s,t=get("https://lipigas.cl/hogar/promociones/"); T=txt(t); print("LIPI",s,T[:3000])
-s,t=get("https://www.metrogas.cl/"); print("METRO links", sorted(set(re.findall(r'href="([^"]*(?:benef|promo|descu|club)[^"]*)"',t,re.I)))[:20]); print(txt(t)[:800])
-s,t=get("https://ww2.movistar.cl/"); print("MOV links", sorted(set(re.findall(r'href="([^"]*(?:club|benef|descu)[^"]*)"',t,re.I)))[:20])
+for kw in ["S_PICODI_PATH","envs","market="]:
+    for m in list(re.finditer(re.escape(kw),t))[:3]: print("PENV",kw,t[max(0,m.start()-100):m.start()+300].replace("\n"," "))
+s,js=get("https://cdn.picodi.com/assets/v20/js/shop-single.b5b01c0d.js")
+for kw in ["decodeOfferCode","api/offers/","grecaptcha.execute","captcha"]:
+    for m in list(re.finditer(re.escape(kw),js))[:3]: print("PJS",kw,"::",js[max(0,m.start()-300):m.start()+400].replace("\n"," "))
+for u in ["https://www.picodi.com/cl/api/offers/69984","https://s.picodi.com/cl/api/offers/69984","https://www.picodi.com/api/offers/69984"]:
+    s,t2=get(u,{"Accept":"application/json","X-Requested-With":"XMLHttpRequest"}); print("PAPI",u,s,t2[:800])
+s,t=get("https://sitiospublicos.bancochile.cl/api/content/spaces/personas/types/beneficios/entries?per_page=3",{"Accept":"application/json"})
+print("BCHAPI",s,len(t),t[:3000])
+for u in ["https://lipigas.cl/hogar/promociones/cupones/","https://lipigas.cl/cupones/","https://www.clubmetrogas.cl/","https://ww2.movistar.cl/movistar-club/","https://ww2.movistar.cl/club/","https://www.movistar.cl/club"]:
+    s,t=get(u); T=txt(t); print("PAGE",u,s,len(t),T[:1200])
+s,t=get("https://lipigas.cl/hogar/promociones/"); print("LIPI links",sorted(set(re.findall(r'href="([^"]*(?:cupon|promoc|descuent)[^"]*)"',t,re.I)))[:30])
+s,t=get("https://www.bci.cl/beneficios/beneficios-bci/restaurantes"); print("BCI js",sorted(set(re.findall(r'(?:src|href)="([^"]*\.js[^"]*)"',t)))[:15]); print("BCI urls",sorted(set(re.findall(r'["\'](https?://[^"\']*(?:api|json)[^"\']*)["\']',t)))[:20]); print(txt(t)[1500:3500])
