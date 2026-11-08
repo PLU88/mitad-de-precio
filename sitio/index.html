@@ -107,6 +107,8 @@ main { max-width: 1180px; margin: 0 auto; padding: 14px 16px 40px; display: grid
 .aviso strong { font-weight: 700; }
 .resumen { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; color: var(--tinta-suave); font-size: 13.5px; }
 .resumen b { color: var(--tinta); font-variant-numeric: tabular-nums; }
+.atajo { appearance: none; border: 1px solid #FFE600; background: #FFF159; color: #2D3277; border-radius: 999px; padding: 6px 12px; font: 700 13px var(--cuerpo); cursor: pointer; }
+.atajo[aria-pressed="true"] { background: #2D3277; color: #fff; border-color: #2D3277; }
 .interruptor { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
 .interruptor input { accent-color: var(--acento); width: 18px; height: 18px; }
 
@@ -296,6 +298,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   <div class="aviso" id="aviso" hidden></div>
   <div class="resumen">
     <span id="conteo"></span>
+    <button class="atajo" id="atajoML" type="button" aria-pressed="false">Solo Mercado Libre</button>
   </div>
   <div class="grilla" id="grilla" aria-live="polite"></div>
   <button class="mas" id="mas" hidden>Ver más ofertas</button>
@@ -506,6 +509,8 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   }
 
   function render() {
+    var ml = $("atajoML"), esML = estado.tienda === "Mercado Libre";
+    ml.setAttribute("aria-pressed", String(esML)); ml.textContent = esML ? "Ver todas las tiendas" : "Solo Mercado Libre";
     document.querySelectorAll(".tramo").forEach(function (b) { b.setAttribute("aria-pressed", String(+b.dataset.t === estado.min)); });
     pintarFiltros();
     var lista = filtradas();
@@ -545,6 +550,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     $(id).addEventListener("change", function (e) { estado[id] = e.target.value; cambio(); });
   });
   $("precioMax").addEventListener("change", function (e) { estado.precioMax = +e.target.value; cambio(); });
+  $("atajoML").addEventListener("click", function () { estado.tienda = estado.tienda === "Mercado Libre" ? "" : "Mercado Libre"; cambio(); });
   $("mas").addEventListener("click", function () { estado.mostrar += POR_PAGINA; render(); });
   function abrirFiltros(abrir) { $("panelFiltros").hidden = !abrir; $("btnFiltros").setAttribute("aria-expanded", String(abrir)); }
   $("btnFiltros").addEventListener("click", function () { abrirFiltros($("panelFiltros").hidden); });
