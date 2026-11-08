@@ -130,7 +130,7 @@ def picodi_tienda(slug):
         ti = re.sub(r"^\s*(cup[oó]n(es)?|c[oó]digos?)( de)?( de)?( descuento| promocional)?\s+" + re.escape(nombre) + r"\s*:?\s*", "", ti, flags=re.I) or ti
         salida.append(cupon(tipo, "Picodi", nombre, ti[:1].upper() + ti[1:],
                             texto(desc.group(1)) if desc else "", codigo, vig, "", texto(valor.group(1)) if valor else ""))
-        time.sleep(0.4)
+        time.sleep(1.0)
     return salida
 
 
@@ -140,10 +140,27 @@ def picodi():
     slugs = [s for s in slugs if s not in {"tiendas", "categoria", "contacto", "blog", "cashback", "top-50", "terminos", "privacidad"}]
     if PRUEBA:
         slugs = ["shein", "entel", "adidas", "cruz-verde", "nike", "ripley"] + slugs[:6]
-    salida = []
-    with concurrent.futures.ThreadPoolExecutor(4) as ex:
-        for r in ex.map(lambda s: _seguro(picodi_tienda, s), slugs):
-            salida += r
+    # De a una tienda y con pausas: si se consulta muy rápido, Picodi bloquea un rato (error 403).
+    salida, bloqueos = [], 0
+    for slug in slugs:
+        for intento in range(2):
+            try:
+                salida += picodi_tienda(slug)
+                bloqueos = 0
+                break
+            except urllib.error.HTTPError as e:
+                if e.code == 404:
+                    break
+                bloqueos += 1
+                print("  aviso:", slug, e, "(espero y reintento)" if intento == 0 else "")
+                time.sleep(45)
+            except Exception as e:
+                print("  aviso:", slug, e)
+                break
+        if bloqueos >= 6:
+            print("  Picodi sigue bloqueando: se guarda lo que alcanzó.")
+            break
+        time.sleep(2.5)
     return salida
 
 
