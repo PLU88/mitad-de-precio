@@ -2,7 +2,16 @@
 import {
   responder, soloPost, normalizarCorreo, correoValido, leerMiembros, guardarMiembros,
   MAX_INTENTOS, hashCodigo, crearSesion, cookie, leerSesion, vigente, fechaCorta, nuevoCodigo, enviarCodigo, PRECIO,
+  texto, avisarSolicitud,
 } from "./_lib.js";
+
+// Datos para transferir: variable TRANSFERENCIA en Vercel, una línea por dato con el formato "Etiqueta: valor".
+function datosTransferencia() {
+  return String(process.env.TRANSFERENCIA || "").split(/\r?\n|\|/).map((l) => l.trim()).filter(Boolean).map((l) => {
+    const i = l.indexOf(":");
+    return i > 0 ? [l.slice(0, i).trim(), l.slice(i + 1).trim()] : ["", l];
+  });
+}
 
 const sitio = (req) => "https://" + (req.headers["x-forwarded-host"] || req.headers.host || "priveofertazos.cl");
 
@@ -11,7 +20,8 @@ export default async function handler(req, res) {
     if (req.method === "GET") {
       const base = {
         precio: PRECIO,
-        pagos: { mercadopago: Boolean(process.env.MP_ACCESS_TOKEN), flow: Boolean(process.env.FLOW_API_KEY && process.env.FLOW_SECRET_KEY) },
+        pagos: { transferencia: true },
+        transferencia: { datos: datosTransferencia() },
       };
       const ses = leerSesion(req);
       if (!ses) return responder(res, 200, { ...base, conectado: false });
@@ -33,8 +43,27 @@ export default async function handler(req, res) {
     const correo = normalizarCorreo(cuerpo.email);
     if (!correoValido(correo)) return responder(res, 400, { error: "Revisa tu correo: no parece válido." });
 
-    if (accion === "solicitar") {
-      return responder(res, 400, { error: "Ahora el acceso se activa al pagar. Usa el botón de pago." });
+    if (accion === "solicitar" || accion === "transferi") {
+      // La persona avisa que transfirió: queda "por aprobar" y la dueña recibe un correo para revisarlo en el panel.
+      const nombre = texto(cuerpo.nombre, 80);
+      if (nombre.length < 2) return responder(res, 400, { error: "Escribe tu nombre." });
+      const datos = await leerMiembros();
+      const actual = datos.miembros[correo];
+      const listo = "¡Gracias! Recibimos tu aviso. Apenas confirmemos la transferencia te enviamos tu código a " + correo + ".";
+      if (actual && actual.aviso_transferencia && Date.now() - Date.parse(actual.aviso_transferencia) < 30 * 60e3) {
+        return responder(res, 200, { ok: true, mensaje: listo });
+      }
+      const whatsapp = texto(cuerpo.whatsapp, 20).replace(/[^0-9+]/g, "");
+      const m = actual || { email: correo, creado: new Date().toISOString(), version: 0, intentos: 0 };
+      m.nombre = nombre;
+      if (whatsapp) m.whatsapp = whatsapp;
+      if (m.estado !== "aprobado") m.estado = "pendiente";
+      m.aviso_transferencia = new Date().toISOString();
+      m.mensaje = "Avisó que transfirió $" + PRECIO.toLocaleString("es-CL") + (m.estado === "aprobado" ? " (renovación: usa «Sumar/Dar 30 días»)" : "");
+      datos.miembros[correo] = m;
+      await guardarMiembros(datos);
+      await avisarSolicitud(m, sitio(req));
+      return responder(res, 200, { ok: true, mensaje: listo });
     }
 
     if (accion === "recuperar") {

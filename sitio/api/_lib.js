@@ -173,12 +173,12 @@ export async function avisarSolicitud(m, sitio) {
     "Nombre: " + m.nombre,
     "Correo: " + m.email,
     m.whatsapp ? "WhatsApp: " + m.whatsapp : "",
-    m.mensaje ? "Cómo nos conoció: " + m.mensaje : "",
+    m.mensaje ? "Nota: " + m.mensaje : "",
   ].filter(Boolean);
   const html =
     '<div style="font-family:Arial,sans-serif;font-size:15px;color:#1A1A2E;line-height:1.5">' +
     '<p style="font-family:Georgia,serif;font-style:italic;font-size:22px;margin:0">Privé <span style="font-family:Arial Black,Arial,sans-serif;font-style:normal;font-size:14px;letter-spacing:2px;color:#D61F69">OFERTAZOS</span></p>' +
-    "<p><b>" + escapar(m.nombre) + "</b> pidió acceso.</p><p>" + lineas.map(escapar).join("<br>") + "</p>" +
+    "<p><b>" + escapar(m.nombre) + "</b> " + (m.aviso_transferencia ? "avisa que te transfirió. Revisa tu cuenta Mercado Pago y, si llegó, dale acceso." : "pidió acceso.") + "</p><p>" + lineas.map(escapar).join("<br>") + "</p>" +
     '<p><a href="' + panel + '" style="display:inline-block;background:#D61F69;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:bold">Abrir el panel para aprobar</a></p></div>';
   try {
     const r = await fetch("https://api.resend.com/emails", {
@@ -188,8 +188,8 @@ export async function avisarSolicitud(m, sitio) {
         from: process.env.AVISO_DESDE || "Privé Ofertazos <onboarding@resend.dev>",
         to: [para],
         reply_to: m.email,
-        subject: "Nueva solicitud de acceso: " + m.nombre,
-        text: m.nombre + " pidió acceso a Privé Ofertazos.\n\n" + lineas.join("\n") + "\n\nApruébala aquí: " + panel,
+        subject: (m.aviso_transferencia ? "Transferencia por revisar: " : "Nueva solicitud de acceso: ") + m.nombre,
+        text: m.nombre + (m.aviso_transferencia ? " avisa que te transfirió (revisa tu cuenta Mercado Pago)." : " pidió acceso a Privé Ofertazos.") + "\n\n" + lineas.join("\n") + "\n\nApruébala aquí: " + panel,
         html,
       }),
     });

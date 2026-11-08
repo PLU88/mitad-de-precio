@@ -161,6 +161,11 @@ main { max-width: 1180px; margin: 0 auto; padding: 14px 16px 40px; display: grid
 .precio .monto { font: 800 34px/1 var(--display); color: var(--tinta); }
 .nota { margin: 0; font-size: 13px; color: var(--tinta-suave); }
 .panel button.pago-mp { background: #009EE3; color: #fff; }
+.boton-transferir { display: block; text-align: center; text-decoration: none; border-radius: 8px; padding: 11px; font: 700 15px var(--cuerpo); background: var(--acento); color: #fff; }
+.datos-transf { display: grid; gap: 8px; background: var(--fondo); border: 1px solid var(--linea); border-radius: 10px; padding: 12px; }
+.datos-transf dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; margin: 0; font-size: 14.5px; }
+.datos-transf dt { color: var(--tinta-suave); }
+.datos-transf dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; user-select: all; }
 .panel button.pago-flow { background: var(--tinta); color: var(--superficie); }
 .panel button.enlace { background: none; color: var(--acento); padding: 2px 0; font-size: 14px; text-decoration: underline; justify-self: start; }
 .estado-pago { font-size: 15px; }
@@ -210,13 +215,18 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     <form class="panel miembro" id="formPagar" novalidate>
       <h3 id="tituloPagar">Hazte miembro</h3>
       <p class="precio"><b class="monto" data-precio>$10.000</b> <span>· 30 días de acceso</span></p>
-      <p class="nota" id="notaPagar">Pago único: no se renueva solo. Al pagar entras de inmediato y te enviamos tu código al correo.</p>
+      <p class="nota" id="notaPagar">Pago único por transferencia: no se renueva solo. Cuando confirmemos tu transferencia te enviamos tu código al correo.</p>
       <label for="paNombre">Nombre<input id="paNombre" autocomplete="name" required></label>
       <label for="paCorreo">Correo<input id="paCorreo" type="email" autocomplete="email" required></label>
       <label for="paWhatsapp">WhatsApp (opcional)<input id="paWhatsapp" type="tel" autocomplete="tel" placeholder="+56 9 1234 5678"></label>
-      <button type="submit" class="pago-mp" data-proveedor="mercadopago">Pagar con Mercado Pago</button>
-      <button type="submit" class="pago-flow" data-proveedor="flow">Pagar con Webpay, Servipag o transferencia</button>
-      <p class="nota">Mercado Pago acepta tarjetas de crédito, débito y saldo en tu cuenta.<span id="notaFlow"> La segunda opción (Flow) acepta Webpay de Transbank, Servipag, Mach y transferencia bancaria.</span></p>
+      <a class="boton-transferir" href="#datosTransferencia" id="verDatos">Ver datos para transferir</a>
+      <div class="datos-transf" id="datosTransferencia" hidden>
+        <b>Datos para transferir <span data-precio>$10.000</span></b>
+        <dl id="listaDatos"></dl>
+        <button type="button" class="sec" id="copiarDatos">Copiar datos</button>
+        <p class="nota">Después de transferir, toca el botón de abajo para avisarnos (usa el mismo correo de arriba).</p>
+        <button type="submit" class="pago-mp" id="yaTransferi">Ya transferí: avisar</button>
+      </div>
       <p class="msg" id="msgPagar" role="status"></p>
     </form>
     <form class="panel" id="formIngresar" novalidate>
@@ -282,8 +292,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
 
 <main>
   <div class="renovar" id="renovar" hidden role="status"><span id="renovarTexto"></span>
-    <button type="button" data-proveedor="mercadopago">Renovar con Mercado Pago</button>
-    <button type="button" data-proveedor="flow">Renovar con Webpay / Flow</button></div>
+    <button type="button" id="renovarTransf">Renovar por transferencia</button></div>
   <div class="aviso" id="aviso" hidden></div>
   <div class="resumen">
     <span id="conteo"></span>
@@ -594,12 +603,25 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   function pesos(n) { return "$" + Number(n).toLocaleString("es-CL"); }
   function ponerPrecio(n) { if (n) document.querySelectorAll("[data-precio]").forEach(function (el) { el.textContent = pesos(n); }); }
   // muestra solo los medios de pago que ya están conectados
-  function ponerMedios(p) {
-    if (!p) return;
-    document.querySelectorAll('button[data-proveedor="flow"]').forEach(function (b) { b.hidden = !p.flow; });
-    document.querySelectorAll('button[data-proveedor="mercadopago"]').forEach(function (b) { b.hidden = !p.mercadopago; });
-    $("notaFlow").hidden = !p.flow;
+  var DATOS = [];
+  function ponerMedios(p, transf) {
+    DATOS = (transf && transf.datos) || [];
+    var dl = $("listaDatos"); dl.textContent = "";
+    if (!DATOS.length) { dl.appendChild(el("dd", null, "Escríbenos por Instagram @priveofertazos y te enviamos los datos.")); return; }
+    DATOS.forEach(function (d) { dl.appendChild(el("dt", null, d[0])); dl.appendChild(el("dd", null, d[1])); });
   }
+  function abrirDatos() {
+    var c = $("datosTransferencia"); c.hidden = false;
+    c.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  $("verDatos").addEventListener("click", function (e) { e.preventDefault(); abrirDatos(); });
+  $("copiarDatos").addEventListener("click", function () {
+    var t = DATOS.map(function (d) { return d[0] + ": " + d[1]; }).join("\n");
+    var b = $("copiarDatos");
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+      b.textContent = "¡Copiado!"; setTimeout(function () { b.textContent = "Copiar datos"; }, 1800);
+    }).catch(function () { b.textContent = "Mantén presionado para copiar"; });
+  });
   function pagar(proveedor, datos, botones, msg) {
     msg.className = "msg"; msg.textContent = "Abriendo el pago…";
     botones.forEach(function (b) { b.disabled = true; });
@@ -615,16 +637,17 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   }
   $("formPagar").addEventListener("submit", function (e) {
     e.preventDefault();
-    var f = e.target, msg = $("msgPagar");
-    var proveedor = (e.submitter && e.submitter.dataset.proveedor) || "mercadopago";
-    var datos = { nombre: $("paNombre").value.trim(), email: $("paCorreo").value.trim(), whatsapp: $("paWhatsapp").value };
+    var msg = $("msgPagar");
+    if ($("datosTransferencia").hidden) { abrirDatos(); return; }
+    var datos = { accion: "transferi", nombre: $("paNombre").value.trim(), email: $("paCorreo").value.trim(), whatsapp: $("paWhatsapp").value };
     if (datos.nombre.length < 2) { msg.className = "msg error"; msg.textContent = "Escribe tu nombre."; $("paNombre").focus(); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.email)) { msg.className = "msg error"; msg.textContent = "Revisa tu correo: ahí te llega tu código."; $("paCorreo").focus(); return; }
-    pagar(proveedor, datos, Array.prototype.slice.call(f.querySelectorAll("button[data-proveedor]")), msg);
+    enviar(null, $("yaTransferi"), msg, "/api/sesion", datos,
+      function (d) { msg.className = "msg ok"; msg.textContent = d.mensaje; });
   });
-  $("renovar").addEventListener("click", function (e) {
-    var b = e.target.closest("button[data-proveedor]"); if (!b) return;
-    pagar(b.dataset.proveedor, yo, Array.prototype.slice.call($("renovar").querySelectorAll("button")), $("renovarTexto"));
+  $("renovarTransf").addEventListener("click", function () {
+    prepararRenovacion(yo, "Renueva tu acceso por transferencia");
+    mostrarAcceso(); abrirDatos();
   });
   function prepararRenovacion(d, texto) {
     $("tituloPagar").textContent = "Renueva tu acceso";
@@ -686,7 +709,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   });
   var pagoVuelta = new URLSearchParams(location.search).get("pago");
   api("/api/sesion").then(function (d) {
-    ponerPrecio(d.precio); ponerMedios(d.pagos);
+    ponerMedios(d.pagos, d.transferencia); ponerPrecio(d.precio);
     if (pagoVuelta) return revisarPago(pagoVuelta);
     if (d.conectado) { mostrarVence(d); cargarOfertas(); return; }
     mostrarAcceso();

@@ -206,6 +206,9 @@ export default async function handler(req, res) {
     if (proveedor === "flow" && !(process.env.FLOW_API_KEY && process.env.FLOW_SECRET_KEY)) {
       return responder(res, 503, { error: "El pago con Flow todavía no está disponible. Prueba con Mercado Pago." });
     }
+    if (proveedor === "mercadopago" && process.env.MP_ACTIVO !== "1") {
+      return responder(res, 503, { error: "Por ahora el pago es por transferencia. Revisa los datos en la página." });
+    }
     if (proveedor === "mercadopago" && !process.env.MP_ACCESS_TOKEN) {
       return responder(res, 503, { error: "El pago con Mercado Pago todavía no está disponible. Prueba con Flow." });
     }
