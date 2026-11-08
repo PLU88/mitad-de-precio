@@ -76,7 +76,7 @@ def descuento_en(t):
     m = re.search(r"(\d{1,2})\s?%", t or "")
     if m and int(m.group(1)) > 0:
         return str(int(m.group(1))) + "%"
-    m = re.search(r"\$\s?(\d{1,3}(?:\.\d{3})+|\d{3,6})", t or "")
+    m = re.search(r"\$\s?(\d{1,3}(?:\.\d{3})+|\d{2,6})", t or "")
     return ("$" + m.group(1)) if m else ""
 
 
