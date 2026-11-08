@@ -225,9 +225,19 @@ export default async function handler(req, res) {
       pago.token = r.token;
       url = `${r.url}?token=${r.token}`;
     } else {
+      // Mientras más datos del comprador y del producto, menos pagos rechaza Mercado Pago por "riesgo"
+      const partes = nombre.trim().split(/\s+/);
+      const payer = { email, name: partes[0] || nombre };
+      if (partes.length > 1) payer.surname = partes.slice(1).join(" ");
+      const fono = pago.whatsapp.replace(/\D/g, "").replace(/^56/, "");
+      if (fono.length >= 8) payer.phone = { area_code: "56", number: fono };
       const r = await mp("/checkout/preferences", {
-        items: [{ id: "membresia-30", title: ASUNTO, quantity: 1, unit_price: PRECIO, currency_id: "CLP" }],
-        payer: { email, name: nombre },
+        items: [{
+          id: "membresia-30", title: ASUNTO, quantity: 1, unit_price: PRECIO, currency_id: "CLP",
+          description: `Membresía digital de ${DIAS_MEMBRESIA} días a Privé Ofertazos: ofertas del retail chileno desde 50% de descuento.`,
+          category_id: "services",
+        }],
+        payer,
         external_reference: id,
         notification_url: `${base}/api/pago?aviso=mp`,
         back_urls: { success: `${base}/?pago=${id}`, pending: `${base}/?pago=${id}`, failure: `${base}/?pago=${id}` },
