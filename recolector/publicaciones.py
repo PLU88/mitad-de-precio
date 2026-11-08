@@ -180,6 +180,51 @@ def insignia(dibujo, x, y, descuento, tam=1.0):
     dibujo.text((x + 22 * tam, y + 59 * tam), texto, font=letra, fill=tinta, anchor="lm")
 
 
+# ------------------------------------------------------------------ sello de campaña (Black Friday)
+BLACK_FRIDAY_HASTA = dt.date(2026, 11, 30)   # después de esta fecha el sello deja de aparecer solo
+AMARILLO = "#FFD23F"
+
+
+def hay_black_friday():
+    return dt.datetime.now(CHILE).date() <= BLACK_FRIDAY_HASTA
+
+
+def sello_black_friday(lienzo, cx, cy, escala=1.0, giro=-6):
+    """Pega el sello «¡Suscríbete! BLACK FRIDAY 27 al 30 de noviembre» centrado en (cx, cy)."""
+    if not hay_black_friday():
+        return
+    e = escala
+    w, h = int(470 * e), int(250 * e)
+    s = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(s)
+    d.rounded_rectangle((0, int(34 * e), w - 1, h - 1), radius=int(30 * e), fill=MARINO, outline=FUCSIA, width=max(3, int(7 * e)))
+    # cinta «¡SUSCRÍBETE!»
+    letra = montserrat(int(30 * e), 900)
+    tw = d.textlength("¡SUSCRÍBETE!", font=letra)
+    x0 = (w - tw) / 2 - 22 * e
+    d.rounded_rectangle((x0, 0, x0 + tw + 44 * e, 64 * e), radius=int(12 * e), fill=AMARILLO)
+    d.text((w / 2, 33 * e), "¡SUSCRÍBETE!", font=letra, fill=MARINO, anchor="mm")
+    # BLACK FRIDAY
+    tam = int(104 * e)
+    while True:  # achica la letra hasta que quepa con margen
+        grande = barlow(tam)
+        wb, wf = d.textlength("BLACK ", font=grande), d.textlength("FRIDAY", font=grande)
+        if wb + wf <= w - 56 * e or tam < 20:
+            break
+        tam -= 2
+    xb = (w - wb - wf) / 2
+    d.text((xb, 128 * e), "BLACK ", font=grande, fill=BLANCO, anchor="lm")
+    d.text((xb + wb, 128 * e), "FRIDAY", font=grande, fill=AMARILLO, anchor="lm")
+    # fechas
+    chica = montserrat(int(25 * e), 900)
+    ft = "27 AL 30 DE NOVIEMBRE"
+    fw = d.textlength(ft, font=chica)
+    d.rounded_rectangle(((w - fw) / 2 - 20 * e, 180 * e, (w + fw) / 2 + 20 * e, 226 * e), radius=int(23 * e), fill=BLANCO)
+    d.text((w / 2, 203 * e), ft, font=chica, fill=MARINO, anchor="mm")
+    s = s.rotate(giro, resample=Image.BICUBIC, expand=True)
+    lienzo.paste(s, (int(cx - s.width / 2), int(cy - s.height / 2)), s)
+
+
 def pegar_foto(lienzo, foto, caja, radio=28):
     x0, y0, x1, y1 = caja
     w, h = x1 - x0, y1 - y0
@@ -211,6 +256,7 @@ def lamina_portada(fecha, elegidas, total_ofertas, total_tiendas):
     rectangulo(d, (90, 1130, 990, 1250), 60, FUCSIA)
     centrar(d, 1158, f"+{total_ofertas:,} ofertas en {total_tiendas} tiendas".replace(",", "."), figtree(40, 700), BLANCO)
     centrar(d, 1278, "Desliza para verlas  →", figtree(34, 600), "#C9C9D6")
+    sello_black_friday(img2, 905, 250, 0.62, giro=8)
     return img2
 
 
@@ -238,6 +284,7 @@ def lamina_oferta(o, n, total, fecha):
     d.text((xa, y + 86), "Ahorras " + clp(o["precio_normal"] - o["precio"]), font=figtree(36, 700), fill="#FF4F8B")
     d.text((540, 1300), f"Precio del {fecha.day} de {MESES[fecha.month - 1]}, puede cambiar · priveofertazos.cl",
            font=figtree(26, 500), fill="#C9C9D6", anchor="mm")
+    sello_black_friday(img, 860, 800, 0.62)
     return img
 
 
@@ -260,6 +307,7 @@ def historia_estrella(o, fecha, n=1, total=1):
     centrar(d, y + 168, "Antes " + clp(o["precio_normal"]), figtree(42, 500), "#C9C9D6")
     rectangulo(d, (140, 1760, 940, 1860), 50, FUCSIA)
     centrar(d, 1785, "Más ofertas en priveofertazos.cl", figtree(40, 700), BLANCO)
+    sello_black_friday(img, 840, 1180, 0.66)
     return img
 
 
@@ -284,6 +332,7 @@ def historia_promo(elegidas, total_ofertas, total_tiendas):
     rectangulo(d, (110, 1560, 970, 1680), 60, FUCSIA)
     centrar(d, 1590, "Pide tu acceso en priveofertazos.cl", figtree(42, 700), BLANCO)
     centrar(d, 1730, "o escríbenos por mensaje directo", figtree(38, 600), GRIS)
+    sello_black_friday(img, 540, 1478, 0.55, giro=-3)
     return img
 
 
