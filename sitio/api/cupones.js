@@ -1,4 +1,4 @@
-// Cupones y códigos de descuento, solo para miembros.
+// Cupones y códigos de descuento, solo para miembros (o para todos durante el período gratis).
 // Junta los cupones que el recolector actualiza cada día (cifrados en la rama "datos")
 // con los que la dueña agrega a mano desde el panel (por ejemplo, los que ve en Instagram).
 import zlib from "node:zlib";

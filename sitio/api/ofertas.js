@@ -1,4 +1,4 @@
-// Entrega las ofertas solo a miembros aprobados con sesión activa.
+// Entrega las ofertas a miembros con sesión activa (o a todos durante el período gratis).
 // El archivo ya viene comprimido (gzip), así cabe en el límite de tamaño de Vercel y llega más rápido.
 import { responder, miembroConectado, ofertas } from "./_lib.js";
 import { accesoGratis } from "./_gratis.js";
