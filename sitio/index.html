@@ -135,6 +135,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 14px 16px 40px; display: grid
 .chips { display: flex; flex-wrap: wrap; gap: 4px; }
 .chip { font-size: 11.5px; font-weight: 600; padding: 2px 7px; border-radius: 999px; }
 .chip.bien { background: var(--bien-fondo); color: var(--bien); }
+.chip.nuevo { background: var(--acento); color: #fff; }
 .chip.alerta { background: var(--alerta-fondo); color: var(--alerta); }
 .boton { display: block; text-align: center; text-decoration: none; font-weight: 700; font-size: 14px; padding: 9px; border-radius: 8px;
   background: var(--tinta); color: var(--superficie); margin-top: 4px; }
@@ -299,6 +300,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
           <option value="desc">Más descuento</option>
           <option value="ahorro">Más ahorro $</option>
           <option value="barato">Más barato</option>
+          <option value="nuevos">Últimos descuentos</option>
         </select>
       </div>
     </div>
@@ -414,7 +416,8 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     var cmp = {
       desc: function (a, b) { return b.descuento - a.descuento || a.precio - b.precio; },
       ahorro: function (a, b) { return (b.precio_normal - b.precio) - (a.precio_normal - a.precio); },
-      barato: function (a, b) { return a.precio - b.precio; }
+      barato: function (a, b) { return a.precio - b.precio; },
+      nuevos: function (a, b) { return String(b.desde || "").localeCompare(String(a.desde || "")) || b.descuento - a.descuento; }
     }[estado.orden];
     return lista.sort(cmp);
   }
@@ -460,6 +463,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     n.append(" · ahorras " + clp.format(o.precio_normal - o.precio));
     p.appendChild(n); c.appendChild(p);
     var chips = el("div", "chips");
+    if (o.desde && o.desde >= diaNuevo) chips.appendChild(el("span", "chip nuevo", o.desde === diaHoy ? "Nuevo hoy" : "Nuevo"));
     if (o.minimo_30d) chips.appendChild(el("span", "chip bien", "Precio más bajo en 30 días"));
     if (chips.childNodes.length) c.appendChild(chips);
     if (o.tallas && o.tallas.length) {
@@ -569,8 +573,13 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
     $("verOfertas").textContent = "Ver " + miles.format(lista.length) + (lista.length === 1 ? " oferta" : " ofertas");
   }
 
+  var diaHoy = "", diaNuevo = "9999";
   function iniciar(datos, esDemo, actualizado) {
     ofertas = datos;
+    // «Nuevo»: ofertas que aparecieron hoy o ayer (según la fecha de la última actualización)
+    var ref = actualizado ? new Date(actualizado) : new Date();
+    diaHoy = ref.toISOString().slice(0, 10);
+    diaNuevo = new Date(ref.getTime() - 864e5).toISOString().slice(0, 10);
     $("orden").value = estado.orden;
     if (actualizado) {
       $("pie").textContent = "Actualizado el " + new Date(actualizado).toLocaleString("es-CL", { dateStyle: "medium", timeStyle: "short" }) +

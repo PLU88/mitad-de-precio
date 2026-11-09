@@ -715,6 +715,7 @@ def evaluar_con_historial(oferta, registros, hoy):
     recientes = [r for r in previos if r[0] >= hace30]
     oferta["minimo_30d"] = bool(recientes) and oferta["precio"] <= min(r[1] for r in recientes)
     oferta["dias_observado"] = len({r[0] for r in registros})
+    oferta["desde"] = registros[0][0] if registros else hoy  # primer día en que la vimos en oferta
     if previos:
         primer_dia = dt.date.fromisoformat(previos[0][0])
         dias = (dt.date.fromisoformat(hoy) - primer_dia).days
