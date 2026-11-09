@@ -4,6 +4,7 @@
 import zlib from "node:zlib";
 import { get } from "@vercel/blob";
 import { responder, miembroConectado, descifrar } from "./_lib.js";
+import { accesoGratis } from "./_gratis.js";
 
 const FUENTE = process.env.CUPONES_URL || "https://raw.githubusercontent.com/PLU88/mitad-de-precio/datos/datos/cupones.enc";
 let cache = { cuando: 0, datos: null };
@@ -27,7 +28,7 @@ async function automaticos() {
 
 export default async function handler(req, res) {
   try {
-    const m = await miembroConectado(req);
+    const m = accesoGratis() || (await miembroConectado(req));
     if (!m) return responder(res, 401, { error: "Necesitas entrar con tu correo y código." });
     const [auto, manual] = await Promise.all([
       automaticos().catch((e) => { console.error(e); return { actualizado: null, cupones: [] }; }),

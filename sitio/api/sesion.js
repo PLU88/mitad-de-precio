@@ -4,6 +4,7 @@ import {
   MAX_INTENTOS, hashCodigo, crearSesion, cookie, leerSesion, vigente, fechaCorta, nuevoCodigo, enviarCodigo, PRECIO,
   texto, avisarSolicitud,
 } from "./_lib.js";
+import { accesoGratis, GRATIS_HASTA } from "./_gratis.js";
 
 // Datos para transferir: variable TRANSFERENCIA en Vercel, una línea por dato con el formato "Etiqueta: valor".
 function datosTransferencia() {
@@ -22,6 +23,7 @@ export default async function handler(req, res) {
         precio: PRECIO,
         pagos: { transferencia: true },
         transferencia: { datos: datosTransferencia() },
+        ...(accesoGratis() ? { gratis: true, gratis_hasta: GRATIS_HASTA } : {}),
       };
       const ses = leerSesion(req);
       if (!ses) return responder(res, 200, { ...base, conectado: false });

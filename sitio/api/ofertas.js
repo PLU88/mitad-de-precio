@@ -1,10 +1,11 @@
 // Entrega las ofertas solo a miembros aprobados con sesión activa.
 // El archivo ya viene comprimido (gzip), así cabe en el límite de tamaño de Vercel y llega más rápido.
 import { responder, miembroConectado, ofertas } from "./_lib.js";
+import { accesoGratis } from "./_gratis.js";
 
 export default async function handler(req, res) {
   try {
-    const m = await miembroConectado(req);
+    const m = accesoGratis() || (await miembroConectado(req));
     if (!m) return responder(res, 401, { error: "Necesitas entrar con tu correo y código." });
     const comprimido = await ofertas();
     res.setHeader("Cache-Control", "private, no-store");

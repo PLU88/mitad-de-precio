@@ -74,7 +74,7 @@ button:disabled { opacity: .6; cursor: wait; }
 .msg.ok { color: #1f7a4d; }
 .vacio { color: var(--tinta-suave); text-align: center; padding: 24px 8px; }
 details.tarjeta summary { cursor: pointer; }
-.secciones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--superficie); border: 1px solid var(--linea); border-radius: 10px; padding: 4px; }
+.secciones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--superficie); border: 1px solid var(--linea); border-radius: 10px; padding: 4px; }
 .secciones button { appearance: none; border: 0; background: none; border-radius: 7px; padding: 9px; font: 700 14px var(--cuerpo); color: var(--tinta); cursor: pointer; }
 .secciones button[aria-selected="true"] { background: var(--tinta); color: var(--superficie); }
 .galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
@@ -118,7 +118,22 @@ details.tarjeta summary { cursor: pointer; }
     <button type="button" role="tab" data-s="miembros" aria-selected="true">Miembros</button>
     <button type="button" role="tab" data-s="instagram" aria-selected="false">Instagram</button>
     <button type="button" role="tab" data-s="cupones" aria-selected="false">Cupones</button>
+    <button type="button" role="tab" data-s="visitas" aria-selected="false">Visitas</button>
   </div>
+
+  <section id="visitas" hidden>
+    <div class="contenedor" style="padding:0">
+      <div class="resumen">
+        <div class="cifra"><b id="vHoy">0</b><span>personas hoy</span></div>
+        <div class="cifra"><b id="v7">0</b><span>últimos 7 días</span></div>
+        <div class="cifra"><b id="v30">0</b><span>últimos 30 días</span></div>
+      </div>
+      <p class="dato">«Personas» cuenta cada celular o computador una vez al día. «Visitas» cuenta cada vez que se abre la página. No se guardan datos personales.</p>
+      <div class="tarjeta"><b>Últimos 14 días</b><div id="vGrafico" role="img" aria-label="Personas por día, últimos 14 días" style="display:flex;align-items:flex-end;gap:6px;height:160px;margin-top:8px"></div></div>
+      <div class="tarjeta" style="overflow-x:auto"><table id="vTabla" style="width:100%;border-collapse:collapse;font-size:14px"></table></div>
+      <p class="msg" id="msgVisitas" role="status"></p>
+    </div>
+  </section>
 
   <section id="cupones" hidden>
     <div class="contenedor" style="padding:0">
@@ -213,9 +228,43 @@ details.tarjeta summary { cursor: pointer; }
   var igIndice = null;
   function mostrarSeccion(cual) {
     document.querySelectorAll(".secciones button").forEach(function (b) { b.setAttribute("aria-selected", String(b.dataset.s === cual)); });
-    $("panel").hidden = cual !== "miembros"; $("instagram").hidden = cual !== "instagram"; $("cupones").hidden = cual !== "cupones";
+    $("panel").hidden = cual !== "miembros"; $("instagram").hidden = cual !== "instagram"; $("cupones").hidden = cual !== "cupones"; $("visitas").hidden = cual !== "visitas";
+    if (cual === "visitas") cargarVisitas();
     if (cual === "instagram" && !igIndice) cargarInstagram();
     if (cual === "cupones") cargarCupones();
+  }
+  // ---------- Visitas a la página
+  function cargarVisitas() {
+    $("msgVisitas").textContent = "Cargando…";
+    api({ accion: "visitas" }).then(function (d) {
+      if (d._status === 401) return mostrarEntrar();
+      $("msgVisitas").textContent = "";
+      var dias = d.dias || {}, hoy = new Date(), lista = [];
+      for (var i = 0; i < 30; i++) {
+        var f = new Date(hoy.getTime() - i * 864e5).toLocaleDateString("en-CA", { timeZone: "America/Santiago" });
+        lista.push({ f: f, x: dias[f] || { visitas: 0, personas: 0, cupones: 0, celular: 0, instagram: 0 } });
+      }
+      var suma = function (n) { return lista.slice(0, n).reduce(function (s, d) { return s + (d.x.personas || 0); }, 0); };
+      $("vHoy").textContent = lista[0].x.personas || 0; $("v7").textContent = suma(7); $("v30").textContent = suma(30);
+      var g = $("vGrafico"); g.textContent = "";
+      var catorce = lista.slice(0, 14).reverse(), max = Math.max.apply(null, catorce.map(function (d) { return d.x.personas || 0; }).concat([1]));
+      catorce.forEach(function (d) {
+        var col = el("div"); col.style.cssText = "flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0";
+        col.appendChild(el("span", "dato", String(d.x.personas || 0)));
+        var barra = el("div"); barra.style.cssText = "width:100%;border-radius:6px 6px 0 0;background:var(--acento);height:" + Math.max(2, Math.round(110 * (d.x.personas || 0) / max)) + "px";
+        col.appendChild(barra);
+        col.appendChild(el("span", "dato", String(+d.f.slice(8))));
+        g.appendChild(col);
+      });
+      var t = $("vTabla"); t.textContent = "";
+      var cab = el("tr"); ["Día", "Personas", "Visitas", "Desde celular", "Desde Instagram", "Abrieron Cupones"].forEach(function (h) { var th = el("th", null, h); th.style.cssText = "text-align:left;padding:6px;border-bottom:1px solid var(--linea)"; cab.appendChild(th); });
+      t.appendChild(cab);
+      lista.slice(0, 14).forEach(function (d) {
+        var tr = el("tr");
+        [fecha(d.f + "T12:00:00"), d.x.personas || 0, d.x.visitas || 0, d.x.celular || 0, d.x.instagram || 0, d.x.cupones || 0].forEach(function (v) { var td = el("td", null, String(v)); td.style.cssText = "padding:6px;border-bottom:1px solid var(--linea)"; tr.appendChild(td); });
+        t.appendChild(tr);
+      });
+    });
   }
   // ---------- Cupones agregados a mano
   function pintarCupones(lista) {
@@ -333,7 +382,7 @@ details.tarjeta summary { cursor: pointer; }
   }
   document.querySelectorAll(".secciones button").forEach(function (b) { b.addEventListener("click", function () { mostrarSeccion(b.dataset.s); }); });
   $("igDia").addEventListener("change", pintarInstagram);
-  function mostrarEntrar() { $("formEntrar").hidden = false; $("panel").hidden = true; $("instagram").hidden = true; $("cupones").hidden = true; $("secciones").hidden = true; $("salir").hidden = true; }
+  function mostrarEntrar() { $("formEntrar").hidden = false; $("panel").hidden = true; $("instagram").hidden = true; $("cupones").hidden = true; $("visitas").hidden = true; $("secciones").hidden = true; $("salir").hidden = true; }
 
   function cargar() {
     api({ accion: "listar" }).then(function (d) {

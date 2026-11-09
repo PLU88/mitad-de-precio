@@ -7,6 +7,7 @@ import {
 import crypto from "node:crypto";
 import { put } from "@vercel/blob";
 import { cuponesManuales } from "./cupones.js";
+import { leerVisitas } from "./visita.js";
 
 const TIPOS_CUPON = ["Instagram", "Tiendas", "Bancos", "Telefonía", "Gas", "Otros"];
 
@@ -60,6 +61,11 @@ export default async function handler(req, res) {
         await put("cupones_manuales.json", JSON.stringify(d), { access: "private", addRandomSuffix: false, allowOverwrite: true, contentType: "application/json" });
       }
       return responder(res, 200, { ok: true, cupones: d.cupones });
+    }
+
+    if (accion === "visitas") {
+      const v = await leerVisitas();
+      return responder(res, 200, { ok: true, dias: v.dias });
     }
 
     const datos = await leerMiembros();

@@ -754,7 +754,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   var CU_TIPOS = ["Todos", "Instagram", "Tiendas", "Bancos", "Telefonía", "Gas", "Otros"];
   var cupones = null, cuEstado = { tipo: "Todos", q: "", solo: false, mostrar: 60 };
   function abrirCupones() {
-    $("app").classList.add("modo-cupones"); $("vistaCupones").hidden = false;
+    $("app").classList.add("modo-cupones"); $("vistaCupones").hidden = false; contarVisita("cupones");
     if (location.hash !== "#cupones") history.replaceState(null, "", "#cupones");
     window.scrollTo(0, 0);
     if (cupones) return pintarCupones();
@@ -833,11 +833,29 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   $("salir").addEventListener("click", function () {
     api("/api/sesion", { accion: "salir" }).then(function () { location.reload(); });
   });
+  // contador de visitas (sin datos personales): «nuevo» = primera vez hoy en este navegador
+  function contarVisita(pagina) {
+    var hoy = new Date().toLocaleDateString("en-CA", { timeZone: "America/Santiago" }), nuevo = true;
+    try { var k = "mdp-visto-" + (pagina || "inicio"); nuevo = localStorage.getItem(k) !== hoy; localStorage.setItem(k, hoy); } catch (e) {}
+    if (pagina === "cupones" && !nuevo) return;
+    try { fetch("/api/visita", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ nuevo: nuevo, pagina: pagina || "inicio", desde: document.referrer.slice(0, 80) }), keepalive: true }); } catch (e) {}
+  }
+  contarVisita();
   var pagoVuelta = new URLSearchParams(location.search).get("pago");
   api("/api/sesion").then(function (d) {
     ponerMedios(d.pagos, d.transferencia); ponerPrecio(d.precio);
     if (pagoVuelta) return revisarPago(pagoVuelta);
     if (d.conectado) { mostrarVence(d); cargarOfertas(); if (location.hash === "#cupones") abrirCupones(); return; }
+    if (d.gratis) {
+      // período gratis: todos entran sin código
+      cargarOfertas(); $("salir").hidden = true;
+      $("vigencia").textContent = " · Acceso gratis para todos hasta el " + fecha(d.gratis_hasta) + ".";
+      var av = $("aviso"); av.hidden = false; av.textContent = "";
+      var b = document.createElement("strong"); b.textContent = "¡Acceso gratis hasta el " + fecha(d.gratis_hasta) + "! ";
+      av.appendChild(b); av.appendChild(document.createTextNode("Aprovecha los ofertazos de Black Friday. Síguenos en Instagram @priveofertazos para no perderte ninguno."));
+      if (location.hash === "#cupones") abrirCupones();
+      return;
+    }
     mostrarAcceso();
     if (d.vencido) prepararRenovacion(d, "Tu acceso venció. Renuévalo y vuelves a entrar al tiro.");
   }).catch(mostrarAcceso);
