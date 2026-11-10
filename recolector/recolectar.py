@@ -20,6 +20,7 @@ Uso:  python recolector/recolectar.py
 """
 import datetime as dt
 import gzip
+import hashlib
 import html
 import json
 import os
@@ -657,12 +658,14 @@ def recolectar_archivo(tienda):
         imagen = imagen if not imagen or imagen.startswith("http") else base_img + imagen
         if not precio or not normal or calcular_descuento(precio, normal) < DESCUENTO_MINIMO:
             continue
-        pid = re.search(r"(MLC[U-]?\d+)", url.replace("MLC-", "MLC"))
-        pid = pid.group(1) if pid else str(abs(hash(url)))
+        pid = re.search(r"(MLC[U-]?\d+)", url.replace("MLC-", "MLC")) or re.search(r"-p(\d{5,})\.html", url)
+        pid = pid.group(1) if pid else hashlib.md5(url.encode()).hexdigest()[:12]  # estable entre vueltas
         # 7ª columna opcional: link de afiliada (meli.la) para cobrar comisión
         if len(fila) > 6 and str(fila[6]).startswith("http"):
             url = fila[6]
-        ofertas.append(nueva_oferta(tienda, pid, nombre, vendedor if vendedor != "Mercado Libre" else "", "", precio, normal, imagen, url))
+        # 8ª columna opcional: pistas de categoría/género que dio la tienda (ej. "HOMBRE ABRIGO")
+        pistas = str(fila[7]) if len(fila) > 7 and fila[7] else ""
+        ofertas.append(nueva_oferta(tienda, pid, nombre, vendedor if vendedor != "Mercado Libre" else "", pistas, precio, normal, imagen, url, None, pistas))
     return ofertas
 
 

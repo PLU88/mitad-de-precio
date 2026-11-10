@@ -80,7 +80,7 @@
  {"id": "ripley", "nombre": "Ripley", "dominio": "simple.ripley.cl", "tipo": "especial", "activa": false, "nota": "Bloquea consultas desde servidores (403)."},
  {"id": "tottus", "nombre": "Tottus", "dominio": "www.tottus.cl", "tipo": "especial", "activa": false, "nota": "Bloquea consultas desde servidores (403)."},
  {"id": "adidas", "nombre": "Adidas", "dominio": "www.adidas.cl", "tipo": "especial", "activa": false, "nota": "Protección Akamai (403)."},
- {"id": "zara", "nombre": "Zara", "dominio": "www.zara.com", "pais": "cl", "tipo": "zara", "activa": true, "nota": "Se revisan sus categorías SPECIAL PRICES y REBAJAS."},
+ {"id": "zara", "nombre": "Zara", "dominio": "www.zara.com", "tipo": "archivo", "activa": true, "nota": "Zara bloquea a los servidores (403): las ofertas se juntan desde el navegador con recolector/manuales/zara_navegador.js y se guardan en recolector/manuales/zara.json (duran 48 horas)."},
  {"id": "hm", "nombre": "H&M", "dominio": "cl.hm.com", "tipo": "vtex", "activa": true, "nota": "La tienda chilena (cl.hm.com) es VTEX; www2.hm.com está bloqueada por Akamai."},
  {"id": "lider", "nombre": "Lider", "dominio": "www.lider.cl", "tipo": "especial", "activa": false, "nota": "Plataforma propia (Next.js)."},
  {"id": "jumbo", "nombre": "Jumbo", "dominio": "www.jumbo.cl", "tipo": "especial", "activa": false, "nota": "Plataforma propia de Cencosud (Next.js)."},

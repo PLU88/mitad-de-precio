@@ -18,7 +18,7 @@ REGLAS = [
     # ------------------------------------------------------------ Vestuario
     ("Vestuario", "Poleras", r"\bpoleras?\b|\bt-?shirts?\b|\btees?\b|\bcamisetas?\b|\btank\b|\bmusculosas?\b|\btops?\b|\bcrop\b|\btricotas?\b|\bjerseys?\b"),
     ("Vestuario", "Polerones y polares", r"\bpolerone?s?\b|\bhoodies?\b|\bsudaderas?\b|\bcanguros?\b|\bsweatshirts?\b|\bpolar(es)?\b|\bmicropolar\b|\bfleece\b|\bchiporros?\b"),
-    ("Vestuario", "Chaquetas, parkas y abrigos", r"\bchaquet(a|as|on|ones)\b|\bparkas?\b|\bjackets?\b|\bcortavientos?\b|\brompevientos?\b|\bblazers?\b|\bpuffa?\b|\bpuffers?\b|\babrigos?\b|\btapados?\b|\bimpermeables?\b|\bgillets?\b|\bchaquetillas?\b|\bsacos?\b(?! de dormir)|\bveston(es)?\b|\btrench\b|\bplumas?\b|\bsoftshell\b|\bbombers?\b|\banoraks?\b"),
+    ("Vestuario", "Chaquetas, parkas y abrigos", r"\bchaquet(a|as|on|ones)\b|\bparkas?\b|\bjackets?\b|\bcortavientos?\b|\brompevientos?\b|\bblazers?\b|\bpuffa?\b|\bpuffers?\b|\babrigos?\b|\btapados?\b|\bimpermeables?\b|\bgillets?\b|\bchaquetillas?\b|\bsacos?\b(?! de dormir)|\bveston(es)?\b|\btrench\b|\bplumas?\b|\bsoftshell\b|\bbombers?\b|\banoraks?\b|\bcazadoras?\b|\bsobrecamisas?\b"),
     ("Vestuario", "Sweaters y chalecos", r"\bsweaters?\b|\btejid[oa]s?\b|\bswetters?\b|\bchalecos?\b|\bcardigans?\b|\bpullovers?\b|\bbeatles?\b|\bsueter(es)?\b|\bponchos?\b|\bcapas?\b(?! (base|termica))"),
     ("Vestuario", "Camisas y blusas", r"\bcamisas?\b(?! de dormir)|\bsobrecamisas?\b|\bblusas?\b|\bshirts?\b|\bguayaberas?\b|\bcamiseros?\b|\bkimonos?\b|\btunicas?\b"),
     ("Vestuario", "Jeans", r"\bjeans?\b|\bdenim\b|\bmom fit\b"),
