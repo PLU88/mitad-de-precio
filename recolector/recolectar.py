@@ -666,8 +666,63 @@ def recolectar_archivo(tienda):
     return ofertas
 
 
+# ---------------------------------------------------------------- Zara (API de categorías del sitio)
+# Zara guarda sus productos con descuento en categorías «SPECIAL PRICES» (fuera de temporada)
+# y «REBAJAS»/«SALE» (en temporada). Se revisan solo esas, que es donde aparecen los descuentos.
+ZARA_CATEGORIA_OFERTA = re.compile(r"rebaja|sale|special price|precios-especiales|precios especiales|outlet|oferta", re.I)
+ZARA_SECCION = {"WOMAN": "mujer", "MAN": "hombre", "KID": "niños", "KIDS": "niños"}
+
+
+def recolectar_zara(tienda):
+    base = f"https://{tienda['dominio']}/{tienda.get('pais', 'cl')}/es"
+    arbol = pedir_json(base + "/categories?ajax=true")
+    if not isinstance(arbol, dict) or "categories" not in arbol:
+        raise ValueError("Zara no entregó su lista de categorías")
+    hojas = {}
+
+    def recorrer(cats, ruta, dentro):
+        for c in cats or []:
+            r = f"{ruta}/{c.get('name', '')}"
+            es = dentro or bool(ZARA_CATEGORIA_OFERTA.search(f"{c.get('name', '')} {(c.get('seo') or {}).get('keyword', '')}"))
+            if es and not c.get("subcategories"):
+                hojas[c["id"]] = r
+            recorrer(c.get("subcategories"), r, es)
+    recorrer(arbol["categories"], "", False)
+
+    ofertas, vistos = [], set()
+    for cid, ruta in list(hojas.items())[:80]:
+        datos = pedir_json(f"{base}/category/{cid}/products?ajax=true") or {}
+        for grupo in datos.get("productGroups") or []:
+            for el in grupo.get("elements") or []:
+                for c in el.get("commercialComponents") or []:
+                    precio, normal = c.get("price"), c.get("oldPrice")
+                    if not precio or not normal or calcular_descuento(precio, normal) < DESCUENTO_MINIMO:
+                        continue
+                    clave = (c.get("name"), precio)
+                    if clave in vistos:  # el mismo producto en otro color
+                        continue
+                    vistos.add(clave)
+                    seo = c.get("seo") or {}
+                    url = f"{base}/{seo.get('keyword', 'producto')}-p{seo.get('seoProductId', '')}.html"
+                    if seo.get("discernProductId"):
+                        url += f"?v1={seo['discernProductId']}"
+                    imagen = ""
+                    colores = (c.get("detail") or {}).get("colors") or []
+                    medios = (colores[0].get("xmedia") if colores else None) or c.get("xmedia") or []
+                    for m in medios:
+                        if m.get("type", "image") == "image" and m.get("url"):
+                            imagen = m["url"].replace("{width}", "750")
+                            break
+                    seccion = ZARA_SECCION.get(str(c.get("sectionName", "")).upper(), "")
+                    pistas = f"{ruta} {c.get('familyName', '')} {c.get('subfamilyName', '')} {seccion}"
+                    ofertas.append(nueva_oferta(tienda, seo.get("seoProductId") or c.get("id"), str(c.get("name", "")).capitalize(),
+                                                "", f"{seccion} {c.get('familyName', '')}", precio, normal, imagen, url, None, pistas))
+        time.sleep(PAUSA_SEGUNDOS)
+    return ofertas
+
+
 RECOLECTORES = {"archivo": recolectar_archivo, "shopify": recolectar_shopify, "magento_html": recolectar_magento_html, "prestashop_html": recolectar_prestashop_html, "sfcc": recolectar_sfcc, "vtex": recolectar_vtex,
-                "magento": recolectar_magento, "woo": recolectar_woo, "falabella": recolectar_falabella}
+                "magento": recolectar_magento, "woo": recolectar_woo, "falabella": recolectar_falabella, "zara": recolectar_zara}
 
 
 def explicar_error(e):
