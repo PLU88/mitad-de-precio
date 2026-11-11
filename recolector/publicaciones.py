@@ -510,7 +510,8 @@ def main(forzar=False):
     indice_ruta = os.path.join(CARPETA, "indice.json")
     indice = json.load(open(indice_ruta, encoding="utf-8")) if os.path.exists(indice_ruta) else {"dias": [], "publicadas": {}}
     datos = json.load(open(OFERTAS, encoding="utf-8"))
-    ofertas = datos["ofertas"]
+    # Instagram sigue mostrando solo 50% o más (el tramo de 40% es solo para la página)
+    ofertas = [o for o in datos["ofertas"] if o.get("descuento", 0) >= 50]
     try:
         vitrina(ofertas, forzar)
     except Exception as e:  # la vitrina nunca debe frenar lo demás

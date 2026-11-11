@@ -18,7 +18,7 @@ datos = json.load(open(sys.argv[1], encoding="utf-8"))
 if datos.get("productos", 0) < MINIMO_PRODUCTOS:
     sys.exit(f"La revisión solo vio {datos.get('productos', 0)} productos; algo falló y no se guardó nada.")
 buenas = [f for f in datos["filas"]
-          if len(f) >= 5 and f[3] and f[4] and 1 - f[3] / f[4] >= 0.5 and str(f[1]).startswith("https://www.zara.com/")]
+          if len(f) >= 5 and f[3] and f[4] and round((1 - f[3] / f[4]) * 100) >= 40 and str(f[1]).startswith("https://www.zara.com/")]
 
 ruta = os.path.join(os.path.dirname(os.path.abspath(__file__)), "zara.json")
 salida = {

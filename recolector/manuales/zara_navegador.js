@@ -1,4 +1,4 @@
-// Junta las ofertas de Zara Chile (50% o más) desde el navegador.
+// Junta las ofertas de Zara Chile (40% o más) desde el navegador.
 // Zara bloquea a los servidores, así que esto se corre en una pestaña abierta en
 // https://www.zara.com/cl/ y el resultado se guarda con guardar_zara.py.
 //
@@ -32,7 +32,7 @@ window.__zaraScrape = async function () {
     for (const g of d.productGroups || []) for (const el of g.elements || []) for (const c of el.commercialComponents || []) {
       if (!c.price) continue;
       productos++;
-      if (!c.oldPrice || 1 - c.price / c.oldPrice < 0.5) continue;
+      if (!c.oldPrice || Math.round((1 - c.price / c.oldPrice) * 100) < 40) continue;
       const clave = c.name + "|" + c.price;  // mismo producto en otro color
       if (vistos.has(clave)) continue;
       vistos.add(clave);

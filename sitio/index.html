@@ -19,6 +19,7 @@
   --tinta-suave: #5b616e;
   --linea: #dfe2e8;
   --acento: #D61F69;
+  --t40: #9cc83a; --t40-tinta: #1a2500;
   --t50: #f2b705; --t50-tinta: #2b2100;
   --t60: #f07b13; --t60-tinta: #2a1200;
   --t70: #d7262e; --t70-tinta: #ffffff;
@@ -58,12 +59,13 @@ a { color: inherit; }
 .marca h1 span { color: var(--acento); }
 .marca p { margin: 0; color: var(--tinta-suave); font-size: 13px; }
 
-.tramos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.tramos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
 .tramo { appearance: none; border: 2px solid var(--linea); background: var(--superficie); color: var(--tinta);
   border-radius: 10px; padding: 6px 4px 5px; cursor: pointer; display: grid; justify-items: center; gap: 0; font-family: var(--cuerpo); }
 .tramo b { font: 800 26px/1 var(--display); }
 .tramo small { font-size: 11px; color: var(--tinta-suave); }
 .tramo[aria-pressed="true"] { border-color: transparent; }
+.tramo[data-t="40"][aria-pressed="true"] { background: var(--t40); color: var(--t40-tinta); }
 .tramo[data-t="50"][aria-pressed="true"] { background: var(--t50); color: var(--t50-tinta); }
 .tramo[data-t="60"][aria-pressed="true"] { background: var(--t60); color: var(--t60-tinta); }
 .tramo[data-t="70"][aria-pressed="true"] { background: var(--t70); color: var(--t70-tinta); }
@@ -119,6 +121,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 14px 16px 40px; display: grid
 .foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #fff; }
 .foto .ph { font: 700 13px var(--cuerpo); color: var(--tinta-suave); text-transform: uppercase; letter-spacing: .06em; text-align: center; padding: 10px; }
 .etiqueta { position: absolute; z-index: 1; top: 8px; left: 8px; font: 800 24px/1 var(--display); padding: 5px 8px 4px; border-radius: 6px; }
+.etiqueta.t40 { background: var(--t40); color: var(--t40-tinta); }
 .etiqueta.t50 { background: var(--t50); color: var(--t50-tinta); }
 .etiqueta.t60 { background: var(--t60); color: var(--t60-tinta); }
 .etiqueta.t70 { background: var(--t70); color: var(--t70-tinta); }
@@ -283,6 +286,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
       <button class="salir" id="salir" type="button" hidden>Salir</button>
     </div>
     <div class="tramos" role="group" aria-label="Descuento mínimo">
+      <button class="tramo" data-t="40" aria-pressed="false"><b>40%</b><small>o más</small></button>
       <button class="tramo" data-t="50" aria-pressed="true"><b>50%</b><small>o más</small></button>
       <button class="tramo" data-t="60" aria-pressed="false"><b>60%</b><small>o más</small></button>
       <button class="tramo" data-t="70" aria-pressed="false"><b>70%</b><small>o más</small></button>
@@ -369,7 +373,7 @@ footer { max-width: 1180px; margin: 0 auto; padding: 0 16px 30px; color: var(--t
   var clp = new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 });
   var miles = new Intl.NumberFormat("es-CL");
   var normalizar = function (s) { return (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); };
-  var tramo = function (d) { return d >= 80 ? 80 : d >= 70 ? 70 : d >= 60 ? 60 : 50; };
+  var tramo = function (d) { return d >= 80 ? 80 : d >= 70 ? 70 : d >= 60 ? 60 : d >= 50 ? 50 : 40; };
 
   try {
     var guardado = JSON.parse(localStorage.getItem("mdp-filtros") || "{}");

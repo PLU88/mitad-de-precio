@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Recolector de ofertas del retail chileno (descuentos de 50% o más).
+Recolector de ofertas del retail chileno (descuentos de 40% o más; la página muestra 50%+ por defecto).
 
 Cómo funciona, en simple:
   1. Lee la lista de tiendas en tiendas.json.
@@ -10,7 +10,7 @@ Cómo funciona, en simple:
        - sfcc:    tiendas Salesforce (como Hites) muestran su grilla ordenada por
                   descuento, y cada producto trae sus datos en la página.
        - vtex:    tiendas VTEX publican un catálogo ordenable por descuento.
-  3. Se queda con los productos con stock y descuento >= 50%.
+  3. Se queda con los productos con stock y descuento >= 40%.
   4. Guarda el historial de precios para detectar descuentos "inflados".
   5. Escribe datos/ofertas.json; luego cifrar.py lo convierte en datos/ofertas.enc,
      que solo la página de miembros puede leer.
@@ -44,7 +44,7 @@ ARCHIVO_SALIDA = os.path.join(RAIZ, "datos", "ofertas.json")   # no se sube: se 
 ARCHIVO_HISTORIAL = os.path.join(RAIZ, "datos", "historial.json")
 ARCHIVO_ESTADO = os.path.join(RAIZ, "datos", "estado.json")
 
-DESCUENTO_MINIMO = 50          # % mínimo para guardar una oferta
+DESCUENTO_MINIMO = 40          # % mínimo para guardar una oferta (el tramo «40%» de la página)
 MAX_PAGINAS = 40               # tope de páginas por tienda
 PAUSA_SEGUNDOS = 1.0           # pausa entre consultas, para no sobrecargar a la tienda
 DIAS_HISTORIAL = 60
@@ -280,7 +280,7 @@ def leer_grilla_abc(tienda, texto):
 
 
 def recolectar_sfcc(tienda):
-    """Pide la grilla ordenada por mayor descuento, de 48 en 48, hasta bajar del 50%."""
+    """Pide la grilla ordenada por mayor descuento, de 48 en 48, hasta bajar del mínimo."""
     base = f"https://{tienda['dominio']}/on/demandware.store/Sites-{tienda['sitio']}-Site/default/Search-UpdateGrid"
     regla = tienda.get("orden", "discount-off")
     ofertas, vistos = [], set()
