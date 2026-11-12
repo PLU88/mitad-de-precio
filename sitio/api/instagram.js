@@ -4,6 +4,7 @@
 //  - "EAA…": token de usuario del sistema de Meta (inicio de sesión unificado). No caduca. Usa graph.facebook.com.
 //  - "IG…":  token de Instagram Login. Dura 60 días y se renueva solo cada semana. Usa graph.instagram.com.
 // ?probar=1 solo revisa que el permiso funcione (no publica nada).
+// ?parte=cupones publica las 10 historias de cupones del día (segunda llamada diaria de Vercel).
 import { get, put } from "@vercel/blob";
 import { esAdmin, responder } from "./_lib.js";
 
@@ -73,6 +74,28 @@ async function publicarHistorias(res, estado, fecha, archivos, id, base, token) 
   return responder(res, 200, { ok: true, fecha, publicado: estado.publicado[fecha] });
 }
 
+// Las 10 historias de cupones del día (las arma recolector/cupones_ig.py en datos/publicaciones/cupones/).
+async function publicarCupones(res, estado, fecha, id, token) {
+  const indice = await fetch(RAW + "cupones/indice.json?v=" + Date.now()).then((r) => (r.ok ? r.json() : { dias: [] }));
+  const dia = (indice.dias || []).find((x) => x.fecha === fecha);
+  if (!dia) return responder(res, 200, { ok: false, motivo: "Todavía no están las historias de cupones de hoy.", fecha });
+  const hoy = (estado.publicado[fecha] = estado.publicado[fecha] || { historias: [], hechas: [], cuando: new Date().toISOString() });
+  hoy.cupones = hoy.cupones || [];
+  const base = RAW + "cupones/" + fecha + "/";
+  for (const archivo of dia.historias.filter((a) => !hoy.cupones.includes(a))) {
+    try {
+      const h = await graph(`/${id}/media`, token, { image_url: base + archivo, media_type: "STORIES" });
+      await listo(h.id, token);
+      await graph(`/${id}/media_publish`, token, { creation_id: h.id });
+      hoy.cupones.push(archivo);
+      await guardarEstado(estado);
+    } catch (e) {
+      console.error("Historia de cupón no publicada:", archivo, e.message);
+    }
+  }
+  return responder(res, 200, { ok: true, fecha, cupones: hoy.cupones.length, de: dia.historias.length });
+}
+
 function hoyEnChile() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "America/Santiago" }).format(new Date());
 }
@@ -113,6 +136,7 @@ export default async function handler(req, res) {
       return responder(res, 200, { ok: true, prueba: true, cuenta: info.username, publicaciones: info.media_count, seguidores: info.followers_count, tipo: deMeta ? "meta" : "instagram" });
     }
     const fecha = (req.query && req.query.fecha) || hoyEnChile();
+    if (req.query && req.query.parte === "cupones") return await publicarCupones(res, estado, fecha, estado.usuario.id, token);
     const indice = await fetch(RAW + "indice.json?v=" + Date.now()).then((r) => r.json());
     const dia = (indice.dias || []).find((x) => x.fecha === fecha);
     if (!dia) return responder(res, 200, { ok: false, motivo: "Todavía no están las imágenes de hoy.", fecha });
@@ -132,9 +156,10 @@ export default async function handler(req, res) {
     }
     let hoy = estado.publicado[fecha];
     if (hoy && !hoy.hechas) hoy.hechas = hoy.historias.length ? ["historia_oferta.jpg", "historia_promo.jpg"].slice(0, hoy.historias.length) : [];
-    if (!hoy) {
-      const pid = await carrusel(dia.carrusel, dia.texto);
-      hoy = estado.publicado[fecha] = { carrusel: pid, historias: [], hechas: [], cuando: new Date().toISOString() };
+    if (!hoy) hoy = estado.publicado[fecha] = { historias: [], hechas: [], cuando: new Date().toISOString() };
+    if (!hoy.carrusel) {
+      hoy.carrusel = await carrusel(dia.carrusel, dia.texto);
+      hoy.cuando = new Date().toISOString();
       await guardarEstado(estado);
     }
     // segundo carrusel: las ofertas de Mercado Libre del día

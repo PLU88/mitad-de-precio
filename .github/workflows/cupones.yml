@@ -45,10 +45,15 @@ jobs:
           PY
       - name: Instalar cifrado
         if: steps.toca.outputs.si == '1'
-        run: pip install "cryptography>=42"
+        run: pip install "cryptography>=42" "Pillow>=10"
       - name: Juntar cupones
         if: steps.toca.outputs.si == '1'
         run: python recolector/cupones.py
+      - name: Armar las 10 historias de cupones para Instagram
+        if: steps.toca.outputs.si == '1'
+        run: |
+          git checkout origin/datos -- datos/publicaciones/cupones 2>/dev/null || true
+          python recolector/cupones_ig.py
       - name: Publicar en la rama "datos"
         if: steps.toca.outputs.si == '1'
         run: |
@@ -59,6 +64,10 @@ jobs:
           git checkout -q -B datos FETCH_HEAD
           mkdir -p datos
           cp "$GITHUB_WORKSPACE/datos/cupones.enc" "$GITHUB_WORKSPACE/datos/cupones_estado.json" datos/
-          git add datos/cupones.enc datos/cupones_estado.json
+          if [ -d "$GITHUB_WORKSPACE/datos/publicaciones/cupones" ]; then
+            rm -rf datos/publicaciones/cupones && mkdir -p datos/publicaciones
+            cp -r "$GITHUB_WORKSPACE/datos/publicaciones/cupones" datos/publicaciones/
+          fi
+          git add -A datos/cupones.enc datos/cupones_estado.json datos/publicaciones/cupones
           git -c user.name="bot-ofertas" -c user.email="bot-ofertas@users.noreply.github.com" commit -qm "Cupones $(date -u +%Y-%m-%dT%H:%MZ)"
           git push -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" datos
