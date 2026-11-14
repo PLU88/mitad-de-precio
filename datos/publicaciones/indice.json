@@ -1,0 +1,784 @@
+{
+ "dias": [
+  {
+   "fecha": "2026-11-14",
+   "creado": "2026-11-14T07:52-03:00",
+   "carrusel": [
+    "carrusel_0.jpg",
+    "carrusel_1.jpg",
+    "carrusel_2.jpg",
+    "carrusel_3.jpg",
+    "carrusel_4.jpg",
+    "carrusel_5.jpg",
+    "carrusel_6.jpg",
+    "carrusel_7.jpg"
+   ],
+   "historias": [
+    "historia_promo.jpg"
+   ],
+   "texto": "🔥 Los ofertazos de hoy, sábado 14 de noviembre\n\n1. Zapatilla infantil (26 a 31) retro cortes en Tricot: $4.990 (antes $31.990, -84%)\n👉 https://www.tricot.cl/zapatilla-infantil-%2826-a-31%29-retro-cortes-412933.html\n2. Espejo Global De Red Silv 50x50 en Hites: $7.900 (antes $39.990, -80%)\n👉 https://www.hites.com/espejo-global-de-red-silv-50x50-965239001.html\n3. Aleta Natación Unisex Speedo Biofuse Training Fin Gris en Sparta: $3.990 (antes $24.990, -84%)\n👉 https://www.sparta.cl/aleta-natacin-unisex-speedo-biofuse-training-fin-gris-242000808841b07619.html\n4. Sábanas 1 Plazas 180 Hilos Liso Palo Rosa en Falabella: $30.990 (antes $139.990, -78%)\n👉 https://www.falabella.com/falabella-cl/product/145432541/Sabanas-Cannon-1-Plazas-180-Hilos-Liso-Palo-Rosa\n5. Gorro Nylon Reciclado Unisex Bucket Quilted Azul Rockford en Rockford: $5.990 (antes $24.990, -76%)\n👉 https://www.rockford.cl/products/gorro-unisex-bucket-quilted-rockford-rk4090314-biv\n6. Abrigo milano gris en Lolita LPK: $42.000 (antes $149.900, -72%)\n👉 https://www.lpk.cl/products/abrigo-milano-gris\n7. Chaqueta mujer helium rain jacket en Kliper: $59.990 (antes $199.990, -70%)\n👉 https://www.kliper.cl/chaqueta-mujer-helium-rain-jacket-by300236-om041\n\nEstas y más de 29.712 ofertas desde 50% de descuento en priveofertazos.cl\nEs solo para miembros: pide tu acceso en el link de la bio o escríbenos por DM 💌\n\nPrecios revisados esta mañana; la tienda puede cambiarlos en cualquier momento.\n\n#ofertas #descuentos #ofertaschile #chile #liquidacion #outlet #ahorro #moda #hogar #priveofertazos",
+   "carrusel_ml": [
+    "ml_0.jpg",
+    "ml_1.jpg",
+    "ml_2.jpg",
+    "ml_3.jpg",
+    "ml_4.jpg",
+    "ml_5.jpg",
+    "ml_6.jpg",
+    "ml_7.jpg",
+    "ml_8.jpg",
+    "ml_9.jpg"
+   ],
+   "texto_ml": "🛒 Mercado Libre: 9 ofertazos de hoy, sábado 14 de noviembre\n\n1. Colchón Emma Confort Premium 2 Plazas Color Blanco: $197.990 (antes $593.719, -67%)\n2. Mochila Notebook Hombre Mochila para Portátil de 15,6 Pulgadas, 37L, Ampliable de Gran Capacidad Impermeable y Antirrobo Matein 1364: $17.917 (antes $50.762, -65%)\n3. Monitor Kolke Curvo Led Full Hd 23.6 1920 X 1080 / 75hz. Color Blanco: $69.082 (antes $199.990, -65%)\n4. Magnesio Bisglicinato Düa Labs 120 Cápsulas Para 60 Días: $11.990 (antes $32.990, -64%)\n5. Audífonos Inalámbricos Sleve Pulse ANC Over-Ear con Cancelación de Ruido Activa y 45h de Batería: $24.990 (antes $69.990, -64%)\n6. Trotadora Tm40 Lite Ten Series: $119.990 (antes $299.990, -60%)\n7. Perfume Mykonos Inferno Extrait De Parfum 100 Ml: $44.990 (antes $117.200, -62%)\n8. Set Perfume Her Scret Temptation Edt 80ml + Deo 150ml Ab: $13.990 (antes $39.990, -65%)\n9. Monitor Arzopa Portátil S1 15.6 Con Parlante 1080p Color Negro: $79.990 (antes $199.990, -60%)\n\n👉 Links en priveofertazos.cl (link en la bio): toca «Solo Mercado Libre»\nMás ofertas de Mercado Libre y de +130 tiendas, desde 50% de descuento 💌\n\nPrecios revisados hoy; Mercado Libre puede cambiarlos en cualquier momento.\n\n#mercadolibre #ofertas #descuentos #ofertaschile #chile #ahorro #blackfriday #priveofertazos",
+   "ofertas": [
+    {
+     "id": "tricot-412933",
+     "nombre": "Zapatilla infantil (26 a 31) retro cortes",
+     "tienda": "Tricot",
+     "precio": 4990,
+     "precio_normal": 31990,
+     "descuento": 84,
+     "url": "https://www.tricot.cl/zapatilla-infantil-%2826-a-31%29-retro-cortes-412933.html"
+    },
+    {
+     "id": "hites-965239001",
+     "nombre": "Espejo Global De Red Silv 50x50",
+     "tienda": "Hites",
+     "precio": 7900,
+     "precio_normal": 39990,
+     "descuento": 80,
+     "url": "https://www.hites.com/espejo-global-de-red-silv-50x50-965239001.html"
+    },
+    {
+     "id": "sparta-242000808841B07619",
+     "nombre": "Aleta Natación Unisex Speedo Biofuse Training Fin Gris",
+     "tienda": "Sparta",
+     "precio": 3990,
+     "precio_normal": 24990,
+     "descuento": 84,
+     "url": "https://www.sparta.cl/aleta-natacin-unisex-speedo-biofuse-training-fin-gris-242000808841b07619.html"
+    },
+    {
+     "id": "falabella-145432541",
+     "nombre": "Sábanas 1 Plazas 180 Hilos Liso Palo Rosa",
+     "tienda": "Falabella",
+     "precio": 30990,
+     "precio_normal": 139990,
+     "descuento": 78,
+     "url": "https://www.falabella.com/falabella-cl/product/145432541/Sabanas-Cannon-1-Plazas-180-Hilos-Liso-Palo-Rosa"
+    },
+    {
+     "id": "rockford-8209822613540",
+     "nombre": "Gorro Nylon Reciclado Unisex Bucket Quilted Azul Rockford",
+     "tienda": "Rockford",
+     "precio": 5990,
+     "precio_normal": 24990,
+     "descuento": 76,
+     "url": "https://www.rockford.cl/products/gorro-unisex-bucket-quilted-rockford-rk4090314-biv"
+    },
+    {
+     "id": "lpk-10113865122098",
+     "nombre": "Abrigo milano gris",
+     "tienda": "Lolita LPK",
+     "precio": 42000,
+     "precio_normal": 149900,
+     "descuento": 72,
+     "url": "https://www.lpk.cl/products/abrigo-milano-gris"
+    },
+    {
+     "id": "kliper-2742150",
+     "nombre": "Chaqueta mujer helium rain jacket",
+     "tienda": "Kliper",
+     "precio": 59990,
+     "precio_normal": 199990,
+     "descuento": 70,
+     "url": "https://www.kliper.cl/chaqueta-mujer-helium-rain-jacket-by300236-om041"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-13",
+   "creado": "2026-11-13T07:50-03:00",
+   "carrusel": [
+    "carrusel_0.jpg",
+    "carrusel_1.jpg",
+    "carrusel_2.jpg",
+    "carrusel_3.jpg",
+    "carrusel_4.jpg",
+    "carrusel_5.jpg",
+    "carrusel_6.jpg",
+    "carrusel_7.jpg"
+   ],
+   "historias": [
+    "historia_promo.jpg"
+   ],
+   "texto": "🔥 Los ofertazos de hoy, viernes 13 de noviembre\n\n1. Polerón niño dibujo skate en Tricot: $4.990 (antes $31.990, -84%)\n👉 https://www.tricot.cl/poleron-nino-dibujo-skate-552372.html\n2. Traje de Baño Natación Hombre Speedo Fastskin LZR Ignite Jammer Bicolor en Sparta: $49.990 (antes $289.990, -83%)\n👉 https://www.sparta.cl/traje-de-ba-o-natacion-hombre-speedo-fastskin-lzr-ignite-jammer-bicolor-242008-13438h81996.html\n3. Sitial Casanova Fiorella 1 Cuerpo Café en abc: $89.990 (antes $399.990, -78%)\n👉 https://www.abc.cl/sitial-casanova-fiorella-1-cuerpo-cafe/29081743.html\n4. Espejo Global De Red Silv 80x80 en Hites: $15.600 (antes $79.990, -80%)\n👉 https://www.hites.com/espejo-global-de-red-silv-80x80-965244001.html\n5. Sérum Hydra-Global Anti-Aging 40 Ml en Falabella: $77.990 (antes $313.990, -75%)\n👉 https://www.falabella.com/falabella-cl/product/6773280/serum-hydra-global-anti-aging-40-ml-sisley\n6. Gorro Nylon Reciclado Unisex Bucket Quilted Rosado Rockford en Rockford: $5.990 (antes $24.990, -76%)\n👉 https://www.rockford.cl/products/gorro-unisex-bucket-quilted-rockford-rk4090314-rs8\n7. Guantes vigor heavyweight sensor hombre en Kliper: $15.990 (antes $54.990, -71%)\n👉 https://www.kliper.cl/guantes-vigor-heavyweight-sensor-hombre-by271560-om900\n\nEstas y más de 29.138 ofertas desde 50% de descuento en priveofertazos.cl\nEs solo para miembros: pide tu acceso en el link de la bio o escríbenos por DM 💌\n\nPrecios revisados esta mañana; la tienda puede cambiarlos en cualquier momento.\n\n#ofertas #descuentos #ofertaschile #chile #liquidacion #outlet #ahorro #moda #hogar #priveofertazos",
+   "carrusel_ml": [
+    "ml_0.jpg",
+    "ml_1.jpg",
+    "ml_2.jpg",
+    "ml_3.jpg",
+    "ml_4.jpg",
+    "ml_5.jpg",
+    "ml_6.jpg",
+    "ml_7.jpg",
+    "ml_8.jpg",
+    "ml_9.jpg"
+   ],
+   "texto_ml": "🛒 Mercado Libre: 9 ofertazos de hoy, viernes 13 de noviembre\n\n1. Colchón Emma Confort Premium 2 Plazas Color Blanco: $197.990 (antes $593.719, -67%)\n2. Mochila Notebook Hombre Mochila para Portátil de 15,6 Pulgadas, 37L, Ampliable de Gran Capacidad Impermeable y Antirrobo Matein 1364: $17.917 (antes $50.762, -65%)\n3. Monitor Kolke Curvo Led Full Hd 23.6 1920 X 1080 / 75hz. Color Blanco: $69.082 (antes $199.990, -65%)\n4. Magnesio Bisglicinato Düa Labs 120 Cápsulas Para 60 Días: $11.990 (antes $32.990, -64%)\n5. Audífonos Inalámbricos Sleve Pulse ANC Over-Ear con Cancelación de Ruido Activa y 45h de Batería: $24.990 (antes $69.990, -64%)\n6. Trotadora Tm40 Lite Ten Series: $119.990 (antes $299.990, -60%)\n7. Perfume Mykonos Inferno Extrait De Parfum 100 Ml: $44.990 (antes $117.200, -62%)\n8. Set Perfume Her Scret Temptation Edt 80ml + Deo 150ml Ab: $13.990 (antes $39.990, -65%)\n9. Monitor Arzopa Portátil S1 15.6 Con Parlante 1080p Color Negro: $79.990 (antes $199.990, -60%)\n\n👉 Links en priveofertazos.cl (link en la bio): toca «Solo Mercado Libre»\nMás ofertas de Mercado Libre y de +130 tiendas, desde 50% de descuento 💌\n\nPrecios revisados hoy; Mercado Libre puede cambiarlos en cualquier momento.\n\n#mercadolibre #ofertas #descuentos #ofertaschile #chile #ahorro #blackfriday #priveofertazos",
+   "ofertas": [
+    {
+     "id": "tricot-552372",
+     "nombre": "Polerón niño dibujo skate",
+     "tienda": "Tricot",
+     "precio": 4990,
+     "precio_normal": 31990,
+     "descuento": 84,
+     "url": "https://www.tricot.cl/poleron-nino-dibujo-skate-552372.html"
+    },
+    {
+     "id": "sparta-242008-13438H81996",
+     "nombre": "Traje de Baño Natación Hombre Speedo Fastskin LZR Ignite Jammer Bicolor",
+     "tienda": "Sparta",
+     "precio": 49990,
+     "precio_normal": 289990,
+     "descuento": 83,
+     "url": "https://www.sparta.cl/traje-de-ba-o-natacion-hombre-speedo-fastskin-lzr-ignite-jammer-bicolor-242008-13438h81996.html"
+    },
+    {
+     "id": "abc-29081743",
+     "nombre": "Sitial Casanova Fiorella 1 Cuerpo Café",
+     "tienda": "abc",
+     "precio": 89990,
+     "precio_normal": 399990,
+     "descuento": 78,
+     "url": "https://www.abc.cl/sitial-casanova-fiorella-1-cuerpo-cafe/29081743.html"
+    },
+    {
+     "id": "hites-965244001",
+     "nombre": "Espejo Global De Red Silv 80x80",
+     "tienda": "Hites",
+     "precio": 15600,
+     "precio_normal": 79990,
+     "descuento": 80,
+     "url": "https://www.hites.com/espejo-global-de-red-silv-80x80-965244001.html"
+    },
+    {
+     "id": "falabella-6773280",
+     "nombre": "Sérum Hydra-Global Anti-Aging 40 Ml",
+     "tienda": "Falabella",
+     "precio": 77990,
+     "precio_normal": 313990,
+     "descuento": 75,
+     "url": "https://www.falabella.com/falabella-cl/product/6773280/serum-hydra-global-anti-aging-40-ml-sisley"
+    },
+    {
+     "id": "rockford-8209822777380",
+     "nombre": "Gorro Nylon Reciclado Unisex Bucket Quilted Rosado Rockford",
+     "tienda": "Rockford",
+     "precio": 5990,
+     "precio_normal": 24990,
+     "descuento": 76,
+     "url": "https://www.rockford.cl/products/gorro-unisex-bucket-quilted-rockford-rk4090314-rs8"
+    },
+    {
+     "id": "kliper-1793187",
+     "nombre": "Guantes vigor heavyweight sensor hombre",
+     "tienda": "Kliper",
+     "precio": 15990,
+     "precio_normal": 54990,
+     "descuento": 71,
+     "url": "https://www.kliper.cl/guantes-vigor-heavyweight-sensor-hombre-by271560-om900"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-12",
+   "creado": "2026-11-12T07:45-03:00",
+   "carrusel": [
+    "carrusel_0.jpg",
+    "carrusel_1.jpg",
+    "carrusel_2.jpg",
+    "carrusel_3.jpg",
+    "carrusel_4.jpg",
+    "carrusel_5.jpg",
+    "carrusel_6.jpg",
+    "carrusel_7.jpg"
+   ],
+   "historias": [
+    "historia_promo.jpg"
+   ],
+   "texto": "🔥 Los ofertazos de hoy, jueves 12 de noviembre\n\n1. Velador Cic Munich en Hites: $49.990 (antes $259.990, -81%)\n👉 https://www.hites.com/velador-cic-munich-935310001.html\n2. Polera mujer rayas doradas en Tricot: $3.990 (antes $25.990, -85%)\n👉 https://www.tricot.cl/polera-mujer-rayas-doradas-719937180.html\n3. Traje de Baño Niña Speedo Frozen Disney Azul en Sparta: $3.990 (antes $21.990, -82%)\n👉 https://www.sparta.cl/traje-de-ba-o-ni-a-speedo-frozen-disney-azul-242000807970c78316.html\n4. Sábanas 1 Plazas 180 Hilos Liso Acero en Falabella: $30.990 (antes $139.990, -78%)\n👉 https://www.falabella.com/falabella-cl/product/145432662/Sabanas-Cannon-1-Plazas-180-Hilos-Liso-Acero\n5. Zapatilla Palladium Palla Ace Re-Quilt Metal Mujer Naranjo en Blockstore: $19.990 (antes $89.990, -78%)\n👉 https://www.blockstore.cl/products/zapatilla-palladium-palla-ace-re-quilt-mujer-naranjo-pa94325645m\n6. Escobilla Eléctrica B100 Osoji en Kitchen Center: $19.990 (antes $79.990, -75%)\n👉 https://www.kitchencenter.cl/products/escobilla-electrica-osoji-b100\n7. Gorro Nylon Reciclado Unisex Bucket Quilted Verde Rockford en Rockford: $5.990 (antes $24.990, -76%)\n👉 https://www.rockford.cl/products/gorro-unisex-bucket-quilted-rockford-rk4090314-gvg\n\nEstas y más de 28.168 ofertas desde 50% de descuento en priveofertazos.cl\nEs solo para miembros: pide tu acceso en el link de la bio o escríbenos por DM 💌\n\nPrecios revisados esta mañana; la tienda puede cambiarlos en cualquier momento.\n\n#ofertas #descuentos #ofertaschile #chile #liquidacion #outlet #ahorro #moda #hogar #priveofertazos",
+   "carrusel_ml": [
+    "ml_0.jpg",
+    "ml_1.jpg",
+    "ml_2.jpg",
+    "ml_3.jpg",
+    "ml_4.jpg",
+    "ml_5.jpg",
+    "ml_6.jpg",
+    "ml_7.jpg",
+    "ml_8.jpg",
+    "ml_9.jpg"
+   ],
+   "texto_ml": "🛒 Mercado Libre: 9 ofertazos de hoy, jueves 12 de noviembre\n\n1. Colchón Emma Confort Premium 2 Plazas Color Blanco: $197.990 (antes $593.719, -67%)\n2. Mochila Notebook Hombre Mochila para Portátil de 15,6 Pulgadas, 37L, Ampliable de Gran Capacidad Impermeable y Antirrobo Matein 1364: $17.917 (antes $50.762, -65%)\n3. Monitor Kolke Curvo Led Full Hd 23.6 1920 X 1080 / 75hz. Color Blanco: $69.082 (antes $199.990, -65%)\n4. Magnesio Bisglicinato Düa Labs 120 Cápsulas Para 60 Días: $11.990 (antes $32.990, -64%)\n5. Audífonos Inalámbricos Sleve Pulse ANC Over-Ear con Cancelación de Ruido Activa y 45h de Batería: $24.990 (antes $69.990, -64%)\n6. Trotadora Tm40 Lite Ten Series: $119.990 (antes $299.990, -60%)\n7. Perfume Mykonos Inferno Extrait De Parfum 100 Ml: $44.990 (antes $117.200, -62%)\n8. Set Perfume Her Scret Temptation Edt 80ml + Deo 150ml Ab: $13.990 (antes $39.990, -65%)\n9. Monitor Arzopa Portátil S1 15.6 Con Parlante 1080p Color Negro: $79.990 (antes $199.990, -60%)\n\n👉 Links en priveofertazos.cl (link en la bio): toca «Solo Mercado Libre»\nMás ofertas de Mercado Libre y de +130 tiendas, desde 50% de descuento 💌\n\nPrecios revisados hoy; Mercado Libre puede cambiarlos en cualquier momento.\n\n#mercadolibre #ofertas #descuentos #ofertaschile #chile #ahorro #blackfriday #priveofertazos",
+   "ofertas": [
+    {
+     "id": "hites-935310001",
+     "nombre": "Velador Cic Munich",
+     "tienda": "Hites",
+     "precio": 49990,
+     "precio_normal": 259990,
+     "descuento": 81,
+     "url": "https://www.hites.com/velador-cic-munich-935310001.html"
+    },
+    {
+     "id": "tricot-719937180",
+     "nombre": "Polera mujer rayas doradas",
+     "tienda": "Tricot",
+     "precio": 3990,
+     "precio_normal": 25990,
+     "descuento": 85,
+     "url": "https://www.tricot.cl/polera-mujer-rayas-doradas-719937180.html"
+    },
+    {
+     "id": "sparta-242000807970C78316",
+     "nombre": "Traje de Baño Niña Speedo Frozen Disney Azul",
+     "tienda": "Sparta",
+     "precio": 3990,
+     "precio_normal": 21990,
+     "descuento": 82,
+     "url": "https://www.sparta.cl/traje-de-ba-o-ni-a-speedo-frozen-disney-azul-242000807970c78316.html"
+    },
+    {
+     "id": "falabella-145432662",
+     "nombre": "Sábanas 1 Plazas 180 Hilos Liso Acero",
+     "tienda": "Falabella",
+     "precio": 30990,
+     "precio_normal": 139990,
+     "descuento": 78,
+     "url": "https://www.falabella.com/falabella-cl/product/145432662/Sabanas-Cannon-1-Plazas-180-Hilos-Liso-Acero"
+    },
+    {
+     "id": "blockstore-7146890330192",
+     "nombre": "Zapatilla Palladium Palla Ace Re-Quilt Metal Mujer Naranjo",
+     "tienda": "Blockstore",
+     "precio": 19990,
+     "precio_normal": 89990,
+     "descuento": 78,
+     "url": "https://www.blockstore.cl/products/zapatilla-palladium-palla-ace-re-quilt-mujer-naranjo-pa94325645m"
+    },
+    {
+     "id": "kitchencenter-7163288780855",
+     "nombre": "Escobilla Eléctrica B100 Osoji",
+     "tienda": "Kitchen Center",
+     "precio": 19990,
+     "precio_normal": 79990,
+     "descuento": 75,
+     "url": "https://www.kitchencenter.cl/products/escobilla-electrica-osoji-b100"
+    },
+    {
+     "id": "rockford-8209823137828",
+     "nombre": "Gorro Nylon Reciclado Unisex Bucket Quilted Verde Rockford",
+     "tienda": "Rockford",
+     "precio": 5990,
+     "precio_normal": 24990,
+     "descuento": 76,
+     "url": "https://www.rockford.cl/products/gorro-unisex-bucket-quilted-rockford-rk4090314-gvg"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-11",
+   "creado": "2026-11-11T07:44-03:00",
+   "carrusel": [
+    "carrusel_0.jpg",
+    "carrusel_1.jpg",
+    "carrusel_2.jpg",
+    "carrusel_3.jpg",
+    "carrusel_4.jpg",
+    "carrusel_5.jpg",
+    "carrusel_6.jpg",
+    "carrusel_7.jpg"
+   ],
+   "historias": [
+    "historia_promo.jpg"
+   ],
+   "texto": "🔥 Los ofertazos de hoy, miércoles 11 de noviembre\n\n1. Juego De Sábanas Belle Noite Hikaru 15 / 1.5 Plazas / 180 Hilos en Hites: $10.990 (antes $69.990, -84%)\n👉 https://www.hites.com/juego-de-sabanas-belle-noite-hikaru-15-1.5-plazas-180-hilos-952029.html\n2. Letrero estilo neon cachai (blanco/usb/45,5x15cm) en Casa Royal: $7.990 (antes $49.990, -84%)\n👉 https://www.casaroyal.cl/-letrero-estilo-neon-cachai--blanco-usb-45-5x15cm-/p\n3. Pijama hombre cuello v en Tricot: $6.990 (antes $41.990, -83%)\n👉 https://www.tricot.cl/pijama-hombre-cuello-v-720449.html\n4. Traje de Baño Natación Niño Speedo Dive Aquashort Negro en Sparta: $3.990 (antes $22.990, -83%)\n👉 https://www.sparta.cl/traje-de-ba-o-natacion-ni-o-speedo-dive-aquashort-negro-242000812872h13721.html\n5. Sandalia Mujer 21987602 en Falabella: $10.990 (antes $49.990, -78%)\n👉 https://www.falabella.com/falabella-cl/product/138125921/Sandalia-Via-Uno-Mujer-21987602\n6. Poste de soporte exterior 40 cm con anclaje espiral en Sodimac: $9.990 (antes $39.990, -75%)\n👉 https://www.sodimac.cl/sodimac-cl/articulo/152321919/kit-de-anclaje-espiral-para-arboles-y-jardin-9-piezas\n7. Tote Bag Colo Colo Blanco El Eterno Campeón en Tienda Copec: $3.990 (antes $16.990, -77%)\n👉 https://www.tiendacopec.cl/products/bolsa-de-genero-colo-colo-blanco-escudo-color\n\nEstas y más de 29.007 ofertas desde 50% de descuento en priveofertazos.cl\nEs solo para miembros: pide tu acceso en el link de la bio o escríbenos por DM 💌\n\nPrecios revisados esta mañana; la tienda puede cambiarlos en cualquier momento.\n\n#ofertas #descuentos #ofertaschile #chile #liquidacion #outlet #ahorro #moda #hogar #priveofertazos",
+   "carrusel_ml": [
+    "ml_0.jpg",
+    "ml_1.jpg",
+    "ml_2.jpg",
+    "ml_3.jpg",
+    "ml_4.jpg",
+    "ml_5.jpg",
+    "ml_6.jpg",
+    "ml_7.jpg",
+    "ml_8.jpg",
+    "ml_9.jpg"
+   ],
+   "texto_ml": "🛒 Mercado Libre: 9 ofertazos de hoy, miércoles 11 de noviembre\n\n1. 2.4 M Inflable Navideños Piernas Largas Papá Noel Luces Led Rojo: $47.797 (antes $238.984, -80%)\n2. Colchon 2 Plazas Hamptons Hybrid Resortes + Memory Foam Color Blanco: $164.890 (antes $554.990, -70%)\n3. Hecelo Llave De Impacto Alto Torque 2 Batteries 1/2 Great Capacity | ¡incluye Kit De Enchufes De Regalo Y Maletín Plástico: $62.410 (antes $245.562, -75%)\n4. Cubre Asiento Para Perro Mancro 6009, Accesorios Para Autos, Fundas Para Autos Impermeable, Color Negro: $12.845 (antes $49.999, -74%)\n5. Máquina Selladora Al Vacío Con Cortador + 1 Rollos 28cm: $14.174 (antes $48.592, -71%)\n6. Cama Abel Zinus Resortes Pocket 2 Plazas 25cms Color Negro: $219.990 (antes $589.990, -63%)\n7. Hex 420NM Inalámbrico de impacto llave sin pincel 3 en 1 Y Taladro destornillador para Mecánica Construcción Doméstica Multiusos: $31.974 (antes $97.194, -67%)\n8. Cambiador Horizontal Fijo Gris Aromaker Plástico PVC 86x10x49 cm: $70.415 (antes $199.990, -65%)\n9. Alberca Inflable Grandes Piscinas Rectangulares 200x150x50: $18.367 (antes $58.651, -69%)\n\n👉 Links en priveofertazos.cl (link en la bio): toca «Solo Mercado Libre»\nMás ofertas de Mercado Libre y de +130 tiendas, desde 50% de descuento 💌\n\nPrecios revisados hoy; Mercado Libre puede cambiarlos en cualquier momento.\n\n#mercadolibre #ofertas #descuentos #ofertaschile #chile #ahorro #blackfriday #priveofertazos",
+   "ofertas": [
+    {
+     "id": "hites-952029001",
+     "nombre": "Juego De Sábanas Belle Noite Hikaru 15 / 1.5 Plazas / 180 Hilos",
+     "tienda": "Hites",
+     "precio": 10990,
+     "precio_normal": 69990,
+     "descuento": 84,
+     "url": "https://www.hites.com/juego-de-sabanas-belle-noite-hikaru-15-1.5-plazas-180-hilos-952029.html"
+    },
+    {
+     "id": "casaroyal-110618",
+     "nombre": "Letrero estilo neon cachai (blanco/usb/45,5x15cm)",
+     "tienda": "Casa Royal",
+     "precio": 7990,
+     "precio_normal": 49990,
+     "descuento": 84,
+     "url": "https://www.casaroyal.cl/-letrero-estilo-neon-cachai--blanco-usb-45-5x15cm-/p"
+    },
+    {
+     "id": "tricot-720449",
+     "nombre": "Pijama hombre cuello v",
+     "tienda": "Tricot",
+     "precio": 6990,
+     "precio_normal": 41990,
+     "descuento": 83,
+     "url": "https://www.tricot.cl/pijama-hombre-cuello-v-720449.html"
+    },
+    {
+     "id": "sparta-242000812872H13721",
+     "nombre": "Traje de Baño Natación Niño Speedo Dive Aquashort Negro",
+     "tienda": "Sparta",
+     "precio": 3990,
+     "precio_normal": 22990,
+     "descuento": 83,
+     "url": "https://www.sparta.cl/traje-de-ba-o-natacion-ni-o-speedo-dive-aquashort-negro-242000812872h13721.html"
+    },
+    {
+     "id": "falabella-138125921",
+     "nombre": "Sandalia Mujer 21987602",
+     "tienda": "Falabella",
+     "precio": 10990,
+     "precio_normal": 49990,
+     "descuento": 78,
+     "url": "https://www.falabella.com/falabella-cl/product/138125921/Sandalia-Via-Uno-Mujer-21987602"
+    },
+    {
+     "id": "sodimac-152321919",
+     "nombre": "Poste de soporte exterior 40 cm con anclaje espiral",
+     "tienda": "Sodimac",
+     "precio": 9990,
+     "precio_normal": 39990,
+     "descuento": 75,
+     "url": "https://www.sodimac.cl/sodimac-cl/articulo/152321919/kit-de-anclaje-espiral-para-arboles-y-jardin-9-piezas?exp=so_com"
+    },
+    {
+     "id": "copec-15316587774025",
+     "nombre": "Tote Bag Colo Colo Blanco El Eterno Campeón",
+     "tienda": "Tienda Copec",
+     "precio": 3990,
+     "precio_normal": 16990,
+     "descuento": 77,
+     "url": "https://www.tiendacopec.cl/products/bolsa-de-genero-colo-colo-blanco-escudo-color"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-10",
+   "creado": "2026-11-10T07:36-03:00",
+   "carrusel": [
+    "carrusel_0.jpg",
+    "carrusel_1.jpg",
+    "carrusel_2.jpg",
+    "carrusel_3.jpg",
+    "carrusel_4.jpg",
+    "carrusel_5.jpg",
+    "carrusel_6.jpg",
+    "carrusel_7.jpg"
+   ],
+   "historias": [
+    "historia_promo.jpg"
+   ],
+   "texto": "🔥 Los ofertazos de hoy, martes 10 de noviembre\n\n1. Juego De Sábanas Belle Noite Claudia / 2 Plazas en Hites: $7.390 (antes $44.990, -84%)\n👉 https://www.hites.com/juego-de-sabanas-belle-noite-claudia-2-plazas-863264.html\n2. Zapatilla infantil (26 a 31) lona camuflaje en Tricot: $3.990 (antes $25.990, -85%)\n👉 https://www.tricot.cl/zapatilla-infantil-%2826-a-31%29-lona-camuflaje-412939.html\n3. Traje de Baño Natación Mujer Speedo Fastskin LZR Ignite Kneeskin Celeste en Sparta: $69.990 (antes $329.990, -79%)\n👉 https://www.sparta.cl/traje-de-ba-o-natacion-mujer-speedo-fastskin-lzr-ignite-kneeskin-celeste-242008-13437h78315.html\n4. Alfombra Handwoven Eco Ethnic 190X290 Taupe 200201 en Falabella: $127.590 (antes $579.980, -78%)\n👉 https://www.falabella.com/falabella-cl/product/146247411/alfombra-handwoven-eco-ethnic-190x290-taupe-200201\n5. Jeans Berlín negro en Jacinta: $5.990 (antes $29.990, -80%)\n👉 https://jacintatienda.cl/products/jeans-new-york-negro\n6. Poste de soporte exterior 40 cm con anclaje espiral en Sodimac: $9.490 (antes $39.990, -76%)\n👉 https://www.sodimac.cl/sodimac-cl/articulo/152321917/kit-de-anclaje-espiral-para-arboles-y-jardin-9-piezas\n7. Coche Travel System Modes Nest Norah Graco en Bebesit: $399.990 (antes $1.399.990, -71%)\n👉 https://www.bebesit.cl/products/coche-travel-system-elite-lt-norah\n\nEstas y más de 29.775 ofertas desde 50% de descuento en priveofertazos.cl\nEs solo para miembros: pide tu acceso en el link de la bio o escríbenos por DM 💌\n\nPrecios revisados esta mañana; la tienda puede cambiarlos en cualquier momento.\n\n#ofertas #descuentos #ofertaschile #chile #liquidacion #outlet #ahorro #moda #hogar #priveofertazos",
+   "carrusel_ml": [
+    "ml_0.jpg",
+    "ml_1.jpg",
+    "ml_2.jpg",
+    "ml_3.jpg",
+    "ml_4.jpg",
+    "ml_5.jpg",
+    "ml_6.jpg",
+    "ml_7.jpg",
+    "ml_8.jpg",
+    "ml_9.jpg"
+   ],
+   "texto_ml": "🛒 Mercado Libre: 9 ofertazos de hoy, martes 10 de noviembre\n\n1. Colchón Emma Hybrid Premium 2 Plazas: $242.990 (antes $799.967, -70%)\n2. Sofá Zinus Benton 3 Cuerpos Pistacho: $229.990 (antes $799.990, -71%)\n3. Rack Mueble de Tv Kappesberg 218cm Hasta 85 Pulgadas con 3 Puertas Color Canela: $129.000 (antes $379.000, -66%)\n4. Colchón Emma Confort Premium 2 Plazas Color Blanco: $197.990 (antes $593.719, -67%)\n5. 100 Chapitas Metalicas Para Sublimable Con Película Pvc 37mm: $3.336 (antes $11.680, -71%)\n6. 15 Luces, 15 Metros, Cadena De Luces E27, Resistente Al Agua: $18.208 (antes $59.701, -70%)\n7. Monitor Kolke Curvo Led Full Hd 23.6 1920 X 1080 / 75hz. Color Blanco: $69.082 (antes $199.990, -65%)\n8. Smartwatch Reloj Inteligente Doble Correa Unisex: $12.935 (antes $46.009, -72%)\n9. Máquina Corta Pelo Inalámbrica Para Mascotas, Perros Y Gatos: $19.422 (antes $62.686, -69%)\n\n👉 Links en priveofertazos.cl (link en la bio): toca «Solo Mercado Libre»\nMás ofertas de Mercado Libre y de +130 tiendas, desde 50% de descuento 💌\n\nPrecios revisados hoy; Mercado Libre puede cambiarlos en cualquier momento.\n\n#mercadolibre #ofertas #descuentos #ofertaschile #chile #ahorro #blackfriday #priveofertazos",
+   "ofertas": [
+    {
+     "id": "hites-863264006",
+     "nombre": "Juego De Sábanas Belle Noite Claudia / 2 Plazas",
+     "tienda": "Hites",
+     "precio": 7390,
+     "precio_normal": 44990,
+     "descuento": 84,
+     "url": "https://www.hites.com/juego-de-sabanas-belle-noite-claudia-2-plazas-863264.html"
+    },
+    {
+     "id": "tricot-412939",
+     "nombre": "Zapatilla infantil (26 a 31) lona camuflaje",
+     "tienda": "Tricot",
+     "precio": 3990,
+     "precio_normal": 25990,
+     "descuento": 85,
+     "url": "https://www.tricot.cl/zapatilla-infantil-%2826-a-31%29-lona-camuflaje-412939.html"
+    },
+    {
+     "id": "sparta-242008-13437H78315",
+     "nombre": "Traje de Baño Natación Mujer Speedo Fastskin LZR Ignite Kneeskin Celeste",
+     "tienda": "Sparta",
+     "precio": 69990,
+     "precio_normal": 329990,
+     "descuento": 79,
+     "url": "https://www.sparta.cl/traje-de-ba-o-natacion-mujer-speedo-fastskin-lzr-ignite-kneeskin-celeste-242008-13437h78315.html"
+    },
+    {
+     "id": "falabella-146247411",
+     "nombre": "Alfombra Handwoven Eco Ethnic 190X290 Taupe 200201",
+     "tienda": "Falabella",
+     "precio": 127590,
+     "precio_normal": 579980,
+     "descuento": 78,
+     "url": "https://www.falabella.com/falabella-cl/product/146247411/alfombra-handwoven-eco-ethnic-190x290-taupe-200201"
+    },
+    {
+     "id": "jacinta-6599969964087",
+     "nombre": "Jeans Berlín negro",
+     "tienda": "Jacinta",
+     "precio": 5990,
+     "precio_normal": 29990,
+     "descuento": 80,
+     "url": "https://jacintatienda.cl/products/jeans-new-york-negro"
+    },
+    {
+     "id": "sodimac-152321917",
+     "nombre": "Poste de soporte exterior 40 cm con anclaje espiral",
+     "tienda": "Sodimac",
+     "precio": 9490,
+     "precio_normal": 39990,
+     "descuento": 76,
+     "url": "https://www.sodimac.cl/sodimac-cl/articulo/152321917/kit-de-anclaje-espiral-para-arboles-y-jardin-9-piezas?exp=so_com"
+    },
+    {
+     "id": "bebesit-7573991162041",
+     "nombre": "Coche Travel System Modes Nest Norah Graco",
+     "tienda": "Bebesit",
+     "precio": 399990,
+     "precio_normal": 1399990,
+     "descuento": 71,
+     "url": "https://www.bebesit.cl/products/coche-travel-system-elite-lt-norah"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-09",
+   "creado": "2026-11-09T07:47-03:00",
+   "carrusel": [
+    "carrusel_0.jpg",
+    "carrusel_1.jpg",
+    "carrusel_2.jpg",
+    "carrusel_3.jpg",
+    "carrusel_4.jpg",
+    "carrusel_5.jpg",
+    "carrusel_6.jpg",
+    "carrusel_7.jpg"
+   ],
+   "historias": [
+    "historia_promo.jpg"
+   ],
+   "texto": "🔥 Los ofertazos de hoy, lunes 9 de noviembre\n\n1. Velador Cic Milán en Hites: $59.990 (antes $299.990, -80%)\n👉 https://www.hites.com/velador-cic-milan-935751001.html\n2. Polerón niño skate en Tricot: $4.990 (antes $31.990, -84%)\n👉 https://www.tricot.cl/poleron-nino-skate-552374.html\n3. Sabana King 180 Hilos Palo Rosa en Falabella: $41.990 (antes $204.990, -80%)\n👉 https://www.falabella.com/falabella-cl/product/145431740/Sabana-Cannon-King-180-Hilos-Palo-Rosa\n4. Blusa Lavanda Cielo en Ludovica: $7.180 (antes $35.900, -80%)\n👉 https://ludovica.cl/products/blusa-lavanda-cielo\n5. Smartwatch Bluetooth Llamadas Deportivo Rosa Mesh en Mercado Libre: $13.870 (antes $60.835, -77%)\n👉 https://meli.la/31XxAEj\n6. Zapatillas Ciclismo MTB Hombre Bontrager Evoke Negra en Sparta: $29.990 (antes $119.990, -75%)\n👉 https://www.sparta.cl/zapatillas-ciclismo-mtb-hombre-bontrager-evoke-negra-291055185055186321.html\n7. Pañuelo arena en Guante: $4.990 (antes $22.950, -78%)\n👉 https://www.guante.cl/products/panuelo-arena\n\nEstas y más de 29.218 ofertas desde 50% de descuento en priveofertazos.cl\nEs solo para miembros: pide tu acceso en el link de la bio o escríbenos por DM 💌\n\nPrecios revisados esta mañana; la tienda puede cambiarlos en cualquier momento.\n\n#ofertas #descuentos #ofertaschile #chile #liquidacion #outlet #ahorro #moda #hogar #priveofertazos",
+   "carrusel_ml": [
+    "ml_0.jpg",
+    "ml_1.jpg",
+    "ml_2.jpg",
+    "ml_3.jpg",
+    "ml_4.jpg",
+    "ml_5.jpg",
+    "ml_6.jpg",
+    "ml_7.jpg",
+    "ml_8.jpg",
+    "ml_9.jpg"
+   ],
+   "texto_ml": "🛒 Mercado Libre: 9 ofertazos de hoy, lunes 9 de noviembre\n\n1. Hecelo Llave De Impacto Alto Torque 2 Batteries 1/2 Great Capacity | ¡incluye Kit De Enchufes De Regalo Y Maletín Plástico: $65.612 (antes $243.398, -73%)\n2. Smartwatch Bluetooth Llamadas Deportivo Rosa Mesh: $13.870 (antes $60.835, -77%)\n3. Arrancador de batería Vtoman X1 portátil compresor inflador color gris: $67.631 (antes $217.630, -69%)\n4. 250w Cabeza Móvil Led Giratorio Rgb Luz Discoteca 6brazo Dmx: $89.989 (antes $298.506, -70%)\n5. Lbel Perfume Para Mujer Fleur Divine Eau De Parfum 50ml: $11.687 (antes $42.200, -72%)\n6. Billetera Tarjetero Cuero Hombre Minimalista Con Rfid: $8.001 (antes $28.999, -72%)\n7. Hex 420NM Inalámbrico de impacto llave sin pincel 3 en 1 Y Taladro destornillador para Mecánica Construcción Doméstica Multiusos: $32.547 (antes $98.934, -67%)\n8. Malla Antimaleza 1x100 Mts Tela Rollo Ground Cover Hardpro Hardpro: $19.979 (antes $59.990, -67%)\n9. Ace Smart Watch Hombre Con Linterna Reloj Inteligent Militar Negro: $23.586 (antes $75.990, -69%)\n\n👉 Links en priveofertazos.cl (link en la bio): toca «Solo Mercado Libre»\nMás ofertas de Mercado Libre y de +130 tiendas, desde 50% de descuento 💌\n\nPrecios revisados hoy; Mercado Libre puede cambiarlos en cualquier momento.\n\n#mercadolibre #ofertas #descuentos #ofertaschile #chile #ahorro #blackfriday #priveofertazos",
+   "ofertas": [
+    {
+     "id": "hites-935751001",
+     "nombre": "Velador Cic Milán",
+     "tienda": "Hites",
+     "precio": 59990,
+     "precio_normal": 299990,
+     "descuento": 80,
+     "url": "https://www.hites.com/velador-cic-milan-935751001.html"
+    },
+    {
+     "id": "tricot-552374",
+     "nombre": "Polerón niño skate",
+     "tienda": "Tricot",
+     "precio": 4990,
+     "precio_normal": 31990,
+     "descuento": 84,
+     "url": "https://www.tricot.cl/poleron-nino-skate-552374.html"
+    },
+    {
+     "id": "falabella-145431740",
+     "nombre": "Sabana King 180 Hilos Palo Rosa",
+     "tienda": "Falabella",
+     "precio": 41990,
+     "precio_normal": 204990,
+     "descuento": 80,
+     "url": "https://www.falabella.com/falabella-cl/product/145431740/Sabana-Cannon-King-180-Hilos-Palo-Rosa"
+    },
+    {
+     "id": "ludovica-9163654267197",
+     "nombre": "Blusa Lavanda Cielo",
+     "tienda": "Ludovica",
+     "precio": 7180,
+     "precio_normal": 35900,
+     "descuento": 80,
+     "url": "https://ludovica.cl/products/blusa-lavanda-cielo"
+    },
+    {
+     "id": "mercadolibre-MLCU4186701662",
+     "nombre": "Smartwatch Bluetooth Llamadas Deportivo Rosa Mesh",
+     "tienda": "Mercado Libre",
+     "precio": 13870,
+     "precio_normal": 60835,
+     "descuento": 77,
+     "url": "https://meli.la/31XxAEj"
+    },
+    {
+     "id": "sparta-291055185055186321",
+     "nombre": "Zapatillas Ciclismo MTB Hombre Bontrager Evoke Negra",
+     "tienda": "Sparta",
+     "precio": 29990,
+     "precio_normal": 119990,
+     "descuento": 75,
+     "url": "https://www.sparta.cl/zapatillas-ciclismo-mtb-hombre-bontrager-evoke-negra-291055185055186321.html"
+    },
+    {
+     "id": "guante-10766155252004",
+     "nombre": "Pañuelo arena",
+     "tienda": "Guante",
+     "precio": 4990,
+     "precio_normal": 22950,
+     "descuento": 78,
+     "url": "https://www.guante.cl/products/panuelo-arena"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-08",
+   "creado": "2026-11-08T10:49-03:00",
+   "carrusel": [
+    "carrusel_0.jpg",
+    "carrusel_1.jpg",
+    "carrusel_2.jpg",
+    "carrusel_3.jpg",
+    "carrusel_4.jpg",
+    "carrusel_5.jpg",
+    "carrusel_6.jpg",
+    "carrusel_7.jpg"
+   ],
+   "historias": [
+    "historia_promo.jpg"
+   ],
+   "texto": "🔥 Los ofertazos de hoy, domingo 8 de noviembre\n\n1. Pantalón buzo niño tricolor en Tricot: $3.990 (antes $25.990, -85%)\n👉 https://www.tricot.cl/pantalon-buzo-nino-tricolor-552349.html\n2. Velador Cic Milán en Hites: $59.990 (antes $299.990, -80%)\n👉 https://www.hites.com/velador-cic-milan-935752001.html\n3. Pantalón aria negro en Lolita LPK: $9.000 (antes $49.900, -82%)\n👉 https://www.lpk.cl/products/pantalon-aria-negro\n4. Sabana King 180 Hilos Blanco en Falabella: $41.990 (antes $204.990, -80%)\n👉 https://www.falabella.com/falabella-cl/product/145431680/Sabana-Cannon-King-180-Hilos-Blanco\n5. Silla de Auto Convertible Isofix Supra 360º Premium Gris en Bebesit: $124.990 (antes $499.990, -75%)\n👉 https://www.bebesit.cl/products/s-auto-suprap360-prem\n6. Silla de Auto Convertible Supra 360° Premium Gris Bebesit en Mercado Libre: $129.990 (antes $499.990, -74%)\n👉 https://meli.la/1eESvyX\n7. Pack Mochila Jane Negra 16L y Lentes de Sol Split en Tienda Copec: $18.990 (antes $74.990, -75%)\n👉 https://www.tiendacopec.cl/products/combo-mochila-jane-negra-16l-lentes-sol-split\n\nEstas y más de 29.122 ofertas desde 50% de descuento en priveofertazos.cl\nEs solo para miembros: pide tu acceso en el link de la bio o escríbenos por DM 💌\n\nPrecios revisados esta mañana; la tienda puede cambiarlos en cualquier momento.\n\n#ofertas #descuentos #ofertaschile #chile #liquidacion #outlet #ahorro #moda #hogar #priveofertazos",
+   "carrusel_ml": [
+    "ml_0.jpg",
+    "ml_1.jpg",
+    "ml_2.jpg",
+    "ml_3.jpg",
+    "ml_4.jpg",
+    "ml_5.jpg",
+    "ml_6.jpg",
+    "ml_7.jpg",
+    "ml_8.jpg",
+    "ml_9.jpg"
+   ],
+   "texto_ml": "🛒 Mercado Libre: 9 ofertazos de hoy, domingo 8 de noviembre\n\n1. Silla de Auto Convertible Supra 360° Premium Gris Bebesit: $129.990 (antes $499.990, -74%)\n👉 meli.la/1eESvyX\n2. 3pzas 0.8mm 1kg Soldadura Microalambre Flux Core Sin Gas: $12.935 (antes $59.701, -78%)\n👉 meli.la/2hLNrcs\n3. Mochila Mujer Notebook Impermeable Mochila Escolar Mujer Pequena Antirrobo Bolso Mujer Moda Mini Para Escolar, Uso Diario y Viajes Ocasionales, Matein: $12.805 (antes $49.462, -74%)\n👉 meli.la/2xj61ch\n4. Cubre Asiento Para Perro Mancro 6009, Accesorios Para Autos, Fundas Para Autos Impermeable, Color Negro: $12.935 (antes $50.348, -74%)\n👉 meli.la/18qq96Y\n5. Smartwatch Bluetooth Llamadas Deportivo Negro Mesh: $13.870 (antes $60.835, -77%)\n👉 meli.la/1Lgouu8\n6. Colchón Emma Hybrid Premium 2 Plazas: $254.990 (antes $799.967, -68%)\n👉 meli.la/1zDozhg\n7. Colchón Emma Confort Premium 1 Plaza: $145.990 (antes $437.469, -67%)\n👉 meli.la/1uVPYbK\n8. Máscara De Pestañas Mega Full Size Ésika Larga Duración 8g Negro: $3.899 (antes $15.100, -74%)\n👉 meli.la/1WGC46n\n9. Foco Solar 218 Led Exterior Con Unitario Y Sensor Movimiento: $12.736 (antes $49.751, -74%)\n👉 meli.la/2yfT1CM\n\nMás ofertas de Mercado Libre y de +90 tiendas, desde 50% de descuento, en priveofertazos.cl\nLos links también están en nuestras historias 💌\n\nPrecios revisados hoy; Mercado Libre puede cambiarlos en cualquier momento.\n\n#mercadolibre #ofertas #descuentos #ofertaschile #chile #ahorro #blackfriday #priveofertazos",
+   "ofertas": [
+    {
+     "id": "tricot-552349",
+     "nombre": "Pantalón buzo niño tricolor",
+     "tienda": "Tricot",
+     "precio": 3990,
+     "precio_normal": 25990,
+     "descuento": 85,
+     "url": "https://www.tricot.cl/pantalon-buzo-nino-tricolor-552349.html"
+    },
+    {
+     "id": "hites-935752001",
+     "nombre": "Velador Cic Milán",
+     "tienda": "Hites",
+     "precio": 59990,
+     "precio_normal": 299990,
+     "descuento": 80,
+     "url": "https://www.hites.com/velador-cic-milan-935752001.html"
+    },
+    {
+     "id": "lpk-9913520193842",
+     "nombre": "Pantalón aria negro",
+     "tienda": "Lolita LPK",
+     "precio": 9000,
+     "precio_normal": 49900,
+     "descuento": 82,
+     "url": "https://www.lpk.cl/products/pantalon-aria-negro"
+    },
+    {
+     "id": "falabella-145431680",
+     "nombre": "Sabana King 180 Hilos Blanco",
+     "tienda": "Falabella",
+     "precio": 41990,
+     "precio_normal": 204990,
+     "descuento": 80,
+     "url": "https://www.falabella.com/falabella-cl/product/145431680/Sabana-Cannon-King-180-Hilos-Blanco"
+    },
+    {
+     "id": "bebesit-7526837092537",
+     "nombre": "Silla de Auto Convertible Isofix Supra 360º Premium Gris",
+     "tienda": "Bebesit",
+     "precio": 124990,
+     "precio_normal": 499990,
+     "descuento": 75,
+     "url": "https://www.bebesit.cl/products/s-auto-suprap360-prem"
+    },
+    {
+     "id": "mercadolibre-MLC36819123",
+     "nombre": "Silla de Auto Convertible Supra 360° Premium Gris Bebesit",
+     "tienda": "Mercado Libre",
+     "precio": 129990,
+     "precio_normal": 499990,
+     "descuento": 74,
+     "url": "https://meli.la/1eESvyX"
+    },
+    {
+     "id": "copec-15828361609289",
+     "nombre": "Pack Mochila Jane Negra 16L y Lentes de Sol Split",
+     "tienda": "Tienda Copec",
+     "precio": 18990,
+     "precio_normal": 74990,
+     "descuento": 75,
+     "url": "https://www.tiendacopec.cl/products/combo-mochila-jane-negra-16l-lentes-sol-split"
+    }
+   ]
+  }
+ ],
+ "publicadas": {
+  "2026-11-07": [
+   "lpk-8249964396850",
+   "tricot-552373",
+   "hites-952043001",
+   "casaroyal-110611",
+   "sparta-26200000095931310000",
+   "kitchenhouse-7469554991238",
+   "hites-B91524545",
+   "abc-28956223",
+   "tricot-412930",
+   "lpk-9966218641714",
+   "blockstore-6924977176656",
+   "lineatre-9913496895794",
+   "sparta-29100000000622372100",
+   "tricot-683174",
+   "lpk-9687509696818",
+   "hites-952044001",
+   "form-9299280920884",
+   "falabella-143274286",
+   "sparta-382APD-MSGBR-04.0000",
+   "lounge-6959877849123",
+   "tricot-552350",
+   "hites-935358001",
+   "lpk-9913519604018",
+   "falabella-145431698",
+   "sparta-29100000000622442100",
+   "kitchenhouse-7469922451590",
+   "bebesit-8016473391289"
+  ],
+  "2026-11-08": [
+   "hites-929875002",
+   "jacinta-6648370692151",
+   "tricot-683178",
+   "sparta-291000000W5434682100",
+   "falabella-153987843",
+   "hoga-8715584110875",
+   "guante-10766153875748",
+   "hites-885854010",
+   "tricot-412938",
+   "lounge-7040125763619",
+   "falabella-145431184",
+   "casaroyal-111481",
+   "sodimac-155688595",
+   "guante-10766144536868",
+   "tricot-552349",
+   "hites-935752001",
+   "lpk-9913520193842",
+   "falabella-145431680",
+   "bebesit-7526837092537",
+   "mercadolibre-MLC36819123",
+   "copec-15828361609289"
+  ],
+  "2026-11-09": [
+   "hites-935751001",
+   "tricot-552374",
+   "falabella-145431740",
+   "ludovica-9163654267197",
+   "mercadolibre-MLCU4186701662",
+   "sparta-291055185055186321",
+   "guante-10766155252004"
+  ],
+  "2026-11-10": [
+   "hites-863264006",
+   "tricot-412939",
+   "sparta-242008-13437H78315",
+   "falabella-146247411",
+   "jacinta-6599969964087",
+   "sodimac-152321917",
+   "bebesit-7573991162041"
+  ],
+  "2026-11-11": [
+   "hites-952029001",
+   "casaroyal-110618",
+   "tricot-720449",
+   "sparta-242000812872H13721",
+   "falabella-138125921",
+   "sodimac-152321919",
+   "copec-15316587774025"
+  ],
+  "2026-11-12": [
+   "hites-935310001",
+   "tricot-719937180",
+   "sparta-242000807970C78316",
+   "falabella-145432662",
+   "blockstore-7146890330192",
+   "kitchencenter-7163288780855",
+   "rockford-8209823137828"
+  ],
+  "2026-11-13": [
+   "tricot-552372",
+   "sparta-242008-13438H81996",
+   "abc-29081743",
+   "hites-965244001",
+   "falabella-6773280",
+   "rockford-8209822777380",
+   "kliper-1793187"
+  ],
+  "2026-11-14": [
+   "tricot-412933",
+   "hites-965239001",
+   "sparta-242000808841B07619",
+   "falabella-145432541",
+   "rockford-8209822613540",
+   "lpk-10113865122098",
+   "kliper-2742150"
+  ]
+ }
+}

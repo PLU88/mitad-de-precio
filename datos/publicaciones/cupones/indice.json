@@ -1,0 +1,237 @@
+{
+ "dias": [
+  {
+   "fecha": "2026-11-12",
+   "historias": [
+    "cupon_01.jpg",
+    "cupon_02.jpg",
+    "cupon_03.jpg",
+    "cupon_04.jpg",
+    "cupon_05.jpg",
+    "cupon_06.jpg",
+    "cupon_07.jpg",
+    "cupon_08.jpg",
+    "cupon_09.jpg",
+    "cupon_10.jpg"
+   ],
+   "cupones": [
+    {
+     "m": "Easy",
+     "c": "ELECTROLUX10",
+     "ti": "-10% en aspirado Electrolux con cupon descuento Easy"
+    },
+    {
+     "m": "Airalo",
+     "c": "NEWTOAIRALO15",
+     "ti": "15% OFF en eSIMs para nuevos clientes con codigo descuento Airalo"
+    },
+    {
+     "m": "HP",
+     "c": "OFERTA10A",
+     "ti": "10% de descuento en monitores"
+    },
+    {
+     "m": "Barceló",
+     "c": "URB10",
+     "ti": "10% adicional en ofertas de hoteles urbanos con codigo descuento Barceló Hotels & Resorts"
+    },
+    {
+     "m": "Cocha",
+     "c": "LAPAQ100",
+     "ti": "$120.000 menos en paquetes Latam Caribe y USA sobre $1.200.000"
+    },
+    {
+     "m": "Huawei",
+     "c": "AFC2SN",
+     "ti": "$20.000 de descuento en FreeClip 2S con cupón Huawei"
+    },
+    {
+     "m": "Natura",
+     "c": "NATURABCH",
+     "ti": "10% de descuento con tarjetas Banco de Chile (belleza)"
+    },
+    {
+     "m": "Otto Burger",
+     "c": "",
+     "ti": "40% de descuento con tarjetas Banco de Chile (40 de descuento visa)"
+    },
+    {
+     "m": "Dunkin’",
+     "c": "",
+     "ti": "30% de descuento con tarjetas Banco de Chile (cafeterias)"
+    },
+    {
+     "m": "Just Burger",
+     "c": "",
+     "ti": "25% dcto. lunes, martes, jueves y domingo"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-13",
+   "historias": [
+    "cupon_01.jpg",
+    "cupon_02.jpg",
+    "cupon_03.jpg",
+    "cupon_04.jpg",
+    "cupon_05.jpg",
+    "cupon_06.jpg",
+    "cupon_07.jpg",
+    "cupon_08.jpg",
+    "cupon_09.jpg",
+    "cupon_10.jpg"
+   ],
+   "cupones": [
+    {
+     "m": "Puma",
+     "c": "SAVINGS15",
+     "ti": "15% de descuento extra"
+    },
+    {
+     "m": "Sodimac",
+     "c": "MUEBLES10",
+     "ti": "10% de descuento en muebles"
+    },
+    {
+     "m": "L'bel",
+     "c": "DOBLE70",
+     "ti": "70% de descuento en toda la tienda con codigo descuento L'bel"
+    },
+    {
+     "m": "Cyzone",
+     "c": "DOBLE70",
+     "ti": "70% de descuento en toda la tienda"
+    },
+    {
+     "m": "Merrell",
+     "c": "BIENVENIDO15",
+     "ti": "15% de descuento en tu primera compra"
+    },
+    {
+     "m": "Falabella",
+     "c": "SAMSUNG10",
+     "ti": "10% de descuento en celulares Samsung Galaxy Ultra seleccionados con cupon de descuento Falabella"
+    },
+    {
+     "m": "Farmex",
+     "c": "CHILE15",
+     "ti": "15% de descuento con tarjetas Banco de Chile (salud)"
+    },
+    {
+     "m": "Movistar",
+     "c": "",
+     "ti": "77% de descuento con tarjetas Banco de Chile (beneficios y descuentos)"
+    },
+    {
+     "m": "Adidas",
+     "c": "",
+     "ti": "30% de descuento con tarjetas Banco de Chile (beneficios y descuentos)"
+    },
+    {
+     "m": "Dunkin",
+     "c": "",
+     "ti": "30% descuento Todos los jueves"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-14",
+   "historias": [
+    "cupon_01.jpg",
+    "cupon_02.jpg",
+    "cupon_03.jpg",
+    "cupon_04.jpg",
+    "cupon_05.jpg",
+    "cupon_06.jpg",
+    "cupon_07.jpg",
+    "cupon_08.jpg",
+    "cupon_09.jpg",
+    "cupon_10.jpg"
+   ],
+   "cupones": [
+    {
+     "m": "LG",
+     "c": "LG-BANCOS",
+     "ti": "10% de descuento adicional"
+    },
+    {
+     "m": "Temu",
+     "c": "CLNEW30",
+     "ti": "30% de descuento en pedidos de $37.000 o más | cupón Temu"
+    },
+    {
+     "m": "Nike",
+     "c": "NIKE20",
+     "ti": "Members Week: Hasta un 20% de ahorro para miembros con codigo descuento Nike"
+    },
+    {
+     "m": "Mamut",
+     "c": "MAMUTRETIRO",
+     "ti": "20% de descuento en pedidos con retiro en tienda con codigo descuento Mamut"
+    },
+    {
+     "m": "Lenovo",
+     "c": "LNVPROMO",
+     "ti": "Hasta un 5% de descuento en pedidos seleccionados con cupon descuento Lenovo"
+    },
+    {
+     "m": "Samsung",
+     "c": "NEWBUDS4",
+     "ti": "10% de descuento en Galaxy Buds4 Pro"
+    },
+    {
+     "m": "Ryge Burger – Justo",
+     "c": "BCHJUSTO26",
+     "ti": "25% de descuento con tarjetas Banco de Chile (delivery)"
+    },
+    {
+     "m": "Farmacias Cruz Verde",
+     "c": "",
+     "ti": "60% de descuento con tarjetas Banco de Chile (salud)"
+    },
+    {
+     "m": "Loston Burger",
+     "c": "",
+     "ti": "20% de descuento con tarjetas Banco de Chile (restaurantes y bares)"
+    },
+    {
+     "m": "Doggis",
+     "c": "",
+     "ti": "30% dcto en todo el menú solo los miércoles"
+    }
+   ]
+  }
+ ],
+ "recientes": {
+  "easy|electrolux10": "2026-11-12",
+  "airalo|newtoairalo15": "2026-11-12",
+  "hp|oferta10a": "2026-11-12",
+  "barceló|urb10": "2026-11-12",
+  "cocha|lapaq100": "2026-11-12",
+  "huawei|afc2sn": "2026-11-12",
+  "natura|naturabch": "2026-11-12",
+  "otto burger|40% de descuento con tarjetas banco de chile (40 de descuento visa)": "2026-11-12",
+  "dunkin’|30% de descuento con tarjetas banco de chile (cafeterias)": "2026-11-12",
+  "just burger|25% dcto. lunes, martes, jueves y domingo": "2026-11-12",
+  "puma|savings15": "2026-11-13",
+  "sodimac|muebles10": "2026-11-13",
+  "l'bel|doble70": "2026-11-13",
+  "cyzone|doble70": "2026-11-13",
+  "merrell|bienvenido15": "2026-11-13",
+  "falabella|samsung10": "2026-11-13",
+  "farmex|chile15": "2026-11-13",
+  "movistar|77% de descuento con tarjetas banco de chile (beneficios y descuentos)": "2026-11-13",
+  "adidas|30% de descuento con tarjetas banco de chile (beneficios y descuentos)": "2026-11-13",
+  "dunkin|30% descuento todos los jueves": "2026-11-13",
+  "lg|lg-bancos": "2026-11-14",
+  "temu|clnew30": "2026-11-14",
+  "nike|nike20": "2026-11-14",
+  "mamut|mamutretiro": "2026-11-14",
+  "lenovo|lnvpromo": "2026-11-14",
+  "samsung|newbuds4": "2026-11-14",
+  "ryge burger – justo|bchjusto26": "2026-11-14",
+  "farmacias cruz verde|60% de descuento con tarjetas banco de chile (salud)": "2026-11-14",
+  "loston burger|20% de descuento con tarjetas banco de chile (restaurantes y bares)": "2026-11-14",
+  "doggis|30% dcto en todo el menú solo los miércoles": "2026-11-14"
+ }
+}

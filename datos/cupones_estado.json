@@ -1,0 +1,22 @@
+{
+ "actualizado": "2026-11-14T11:06:27+00:00",
+ "total": 1175,
+ "fuentes": {
+  "Picodi": {
+   "ok": true,
+   "cupones": 175
+  },
+  "Banco de Chile": {
+   "ok": true,
+   "cupones": 919
+  },
+  "Entel": {
+   "ok": true,
+   "cupones": 82
+  },
+  "Club Metrogas": {
+   "ok": true,
+   "cupones": 12
+  }
+ }
+}

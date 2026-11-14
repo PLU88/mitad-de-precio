@@ -1,0 +1,670 @@
+{
+ "actualizado": "2026-11-14T12:29+00:00",
+ "tiendas": [
+  {
+   "tienda": "Hites",
+   "ok": true,
+   "ofertas": 1883
+  },
+  {
+   "tienda": "Fashion's Park",
+   "ok": true,
+   "ofertas": 1850
+  },
+  {
+   "tienda": "Hush Puppies",
+   "ok": true,
+   "ofertas": 668
+  },
+  {
+   "tienda": "Under Armour",
+   "ok": true,
+   "ofertas": 1092
+  },
+  {
+   "tienda": "Crocs",
+   "ok": true,
+   "ofertas": 84
+  },
+  {
+   "tienda": "Vans",
+   "ok": true,
+   "ofertas": 107
+  },
+  {
+   "tienda": "Lippi",
+   "ok": true,
+   "ofertas": 1763
+  },
+  {
+   "tienda": "Merrell",
+   "ok": true,
+   "ofertas": 583
+  },
+  {
+   "tienda": "Blockstore",
+   "ok": true,
+   "ofertas": 162
+  },
+  {
+   "tienda": "Lounge",
+   "ok": true,
+   "ofertas": 240
+  },
+  {
+   "tienda": "Mashini",
+   "ok": true,
+   "ofertas": 1614
+  },
+  {
+   "tienda": "Leonisa",
+   "ok": true,
+   "ofertas": 1
+  },
+  {
+   "tienda": "Only",
+   "ok": true,
+   "ofertas": 2
+  },
+  {
+   "tienda": "Wild Lama",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Volkanica",
+   "ok": true,
+   "ofertas": 250
+  },
+  {
+   "tienda": "Intime",
+   "ok": true,
+   "ofertas": 41
+  },
+  {
+   "tienda": "Umbrale",
+   "ok": true,
+   "ofertas": 226
+  },
+  {
+   "tienda": "Columbia",
+   "ok": true,
+   "ofertas": 384
+  },
+  {
+   "tienda": "abc",
+   "ok": true,
+   "ofertas": 896
+  },
+  {
+   "tienda": "Lineatre",
+   "ok": true,
+   "ofertas": 144
+  },
+  {
+   "tienda": "Lolita LPK",
+   "ok": true,
+   "ofertas": 51
+  },
+  {
+   "tienda": "Raindoor",
+   "ok": true,
+   "ofertas": 204
+  },
+  {
+   "tienda": "Rockford",
+   "ok": true,
+   "ofertas": 993
+  },
+  {
+   "tienda": "Doite",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Nicopoly",
+   "ok": true,
+   "ofertas": 151
+  },
+  {
+   "tienda": "Falabella",
+   "ok": true,
+   "ofertas": 5136
+  },
+  {
+   "tienda": "Sodimac",
+   "ok": true,
+   "ofertas": 584
+  },
+  {
+   "tienda": "Tricot",
+   "ok": true,
+   "ofertas": 1920
+  },
+  {
+   "tienda": "Maicao",
+   "ok": true,
+   "ofertas": 5
+  },
+  {
+   "tienda": "CIC",
+   "ok": true,
+   "ofertas": 118
+  },
+  {
+   "tienda": "SuperZoo",
+   "ok": true,
+   "ofertas": 1
+  },
+  {
+   "tienda": "Sparta",
+   "ok": true,
+   "ofertas": 1693
+  },
+  {
+   "tienda": "Liola",
+   "ok": true,
+   "ofertas": 739
+  },
+  {
+   "tienda": "Rapsodia",
+   "ok": true,
+   "ofertas": 2
+  },
+  {
+   "tienda": "Ópticas Schilling",
+   "ok": true,
+   "ofertas": 78
+  },
+  {
+   "tienda": "Thomas",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Ellus",
+   "ok": true,
+   "ofertas": 247
+  },
+  {
+   "tienda": "Levi's",
+   "ok": true,
+   "ofertas": 288
+  },
+  {
+   "tienda": "Calvin Klein",
+   "ok": true,
+   "ofertas": 763
+  },
+  {
+   "tienda": "Tommy Hilfiger",
+   "ok": true,
+   "ofertas": 579
+  },
+  {
+   "tienda": "Reebok",
+   "ok": true,
+   "ofertas": 347
+  },
+  {
+   "tienda": "Blush-Bar",
+   "ok": true,
+   "ofertas": 39
+  },
+  {
+   "tienda": "Sally Beauty",
+   "ok": true,
+   "ofertas": 11
+  },
+  {
+   "tienda": "Dr. Simi",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Casa Royal",
+   "ok": true,
+   "ofertas": 472
+  },
+  {
+   "tienda": "Electrolux",
+   "ok": true,
+   "ofertas": 42
+  },
+  {
+   "tienda": "Oster",
+   "ok": true,
+   "ofertas": 2
+  },
+  {
+   "tienda": "Swarovski",
+   "ok": true,
+   "ofertas": 629
+  },
+  {
+   "tienda": "Miniso",
+   "ok": true,
+   "ofertas": 55
+  },
+  {
+   "tienda": "Ficcus",
+   "ok": true,
+   "ofertas": 1592
+  },
+  {
+   "tienda": "Pillín",
+   "ok": true,
+   "ofertas": 1192
+  },
+  {
+   "tienda": "Colloky",
+   "ok": true,
+   "ofertas": 1996
+  },
+  {
+   "tienda": "Motorola",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Nostalgic",
+   "ok": true,
+   "ofertas": 113
+  },
+  {
+   "tienda": "Guante",
+   "ok": true,
+   "ofertas": 272
+  },
+  {
+   "tienda": "Amphora",
+   "ok": true,
+   "ofertas": 741
+  },
+  {
+   "tienda": "Steve Madden",
+   "ok": true,
+   "ofertas": 79
+  },
+  {
+   "tienda": "Avon",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Petrizzio",
+   "ok": true,
+   "ofertas": 2
+  },
+  {
+   "tienda": "Farmex",
+   "ok": true,
+   "ofertas": 118
+  },
+  {
+   "tienda": "Dermotienda",
+   "ok": true,
+   "ofertas": 7
+  },
+  {
+   "tienda": "Ópticas GMO",
+   "ok": true,
+   "ofertas": 147
+  },
+  {
+   "tienda": "Kitchen Center",
+   "ok": true,
+   "ofertas": 294
+  },
+  {
+   "tienda": "Tramontina",
+   "ok": true,
+   "ofertas": 1
+  },
+  {
+   "tienda": "Sur Diseño",
+   "ok": true,
+   "ofertas": 1
+  },
+  {
+   "tienda": "Patagonia",
+   "ok": true,
+   "ofertas": 10
+  },
+  {
+   "tienda": "Salomon",
+   "ok": true,
+   "ofertas": 23
+  },
+  {
+   "tienda": "Petvet",
+   "ok": true,
+   "ofertas": 61
+  },
+  {
+   "tienda": "Contrapunto",
+   "ok": true,
+   "ofertas": 1
+  },
+  {
+   "tienda": "Bebesit",
+   "ok": true,
+   "ofertas": 266
+  },
+  {
+   "tienda": "The Body Shop",
+   "ok": true,
+   "ofertas": 2
+  },
+  {
+   "tienda": "EcoFarmacias",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Feria Chilena del Libro",
+   "ok": true,
+   "ofertas": 73
+  },
+  {
+   "tienda": "Zara",
+   "ok": false,
+   "error": "Respuesta inesperada: las ofertas cargadas tienen más de 48 horas; hay que renovarlas."
+  },
+  {
+   "tienda": "H&M",
+   "ok": true,
+   "ofertas": 3
+  },
+  {
+   "tienda": "Casaideas",
+   "ok": true,
+   "ofertas": 163
+  },
+  {
+   "tienda": "iO",
+   "ok": true,
+   "ofertas": 482
+  },
+  {
+   "tienda": "Mercado Libre",
+   "ok": false,
+   "error": "Respuesta inesperada: las ofertas cargadas tienen más de 48 horas; hay que renovarlas."
+  },
+  {
+   "tienda": "Ash",
+   "ok": true,
+   "ofertas": 167
+  },
+  {
+   "tienda": "El Volcán",
+   "ok": true,
+   "ofertas": 142
+  },
+  {
+   "tienda": "Kitchen House",
+   "ok": true,
+   "ofertas": 30
+  },
+  {
+   "tienda": "Imahe",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "KW Market",
+   "ok": true,
+   "ofertas": 50
+  },
+  {
+   "tienda": "Kios Club",
+   "ok": true,
+   "ofertas": 37
+  },
+  {
+   "tienda": "Tienda Copec",
+   "ok": true,
+   "ofertas": 697
+  },
+  {
+   "tienda": "Porcelanosa",
+   "ok": true,
+   "ofertas": 62
+  },
+  {
+   "tienda": "Menajexpress",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Punto Chef",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Importclick",
+   "ok": true,
+   "ofertas": 3
+  },
+  {
+   "tienda": "Eurohome",
+   "ok": true,
+   "ofertas": 10
+  },
+  {
+   "tienda": "Baima Family",
+   "ok": true,
+   "ofertas": 5
+  },
+  {
+   "tienda": "Jior",
+   "ok": true,
+   "ofertas": 253
+  },
+  {
+   "tienda": "Spot Essence",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Agua House Deco",
+   "ok": true,
+   "ofertas": 1
+  },
+  {
+   "tienda": "Kado",
+   "ok": true,
+   "ofertas": 113
+  },
+  {
+   "tienda": "Hoga",
+   "ok": true,
+   "ofertas": 238
+  },
+  {
+   "tienda": "Casa Limón",
+   "ok": true,
+   "ofertas": 19
+  },
+  {
+   "tienda": "Patio Oriente",
+   "ok": true,
+   "ofertas": 6
+  },
+  {
+   "tienda": "DKO Home",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Form",
+   "ok": true,
+   "ofertas": 142
+  },
+  {
+   "tienda": "El Garage",
+   "ok": true,
+   "ofertas": 12
+  },
+  {
+   "tienda": "Casa Mía Deco",
+   "ok": true,
+   "ofertas": 5
+  },
+  {
+   "tienda": "Casa en Orden",
+   "ok": true,
+   "ofertas": 1
+  },
+  {
+   "tienda": "Humana",
+   "ok": true,
+   "ofertas": 791
+  },
+  {
+   "tienda": "Jacinta",
+   "ok": true,
+   "ofertas": 189
+  },
+  {
+   "tienda": "Anastassia",
+   "ok": true,
+   "ofertas": 48
+  },
+  {
+   "tienda": "Stern",
+   "ok": false,
+   "error": "La tienda respondió con error 503."
+  },
+  {
+   "tienda": "Surprice",
+   "ok": true,
+   "ofertas": 1150
+  },
+  {
+   "tienda": "Kliper",
+   "ok": true,
+   "ofertas": 2150
+  },
+  {
+   "tienda": "Todo Moda",
+   "ok": true,
+   "ofertas": 18
+  },
+  {
+   "tienda": "Mota",
+   "ok": true,
+   "ofertas": 41
+  },
+  {
+   "tienda": "Ludovica",
+   "ok": true,
+   "ofertas": 129
+  },
+  {
+   "tienda": "Amanda Moda",
+   "ok": true,
+   "ofertas": 14
+  },
+  {
+   "tienda": "Isidora",
+   "ok": true,
+   "ofertas": 96
+  },
+  {
+   "tienda": "Eclipse",
+   "ok": true,
+   "ofertas": 205
+  },
+  {
+   "tienda": "Tus Mascotas",
+   "ok": true,
+   "ofertas": 65
+  },
+  {
+   "tienda": "Pet City",
+   "ok": true,
+   "ofertas": 49
+  },
+  {
+   "tienda": "Bsoul",
+   "ok": true,
+   "ofertas": 232
+  },
+  {
+   "tienda": "Everlast",
+   "ok": true,
+   "ofertas": 79
+  },
+  {
+   "tienda": "La Charcutería Artesanal",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Las Almendras",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Piwen",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "La Cotidiana",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Mixgreen",
+   "ok": true,
+   "ofertas": 25
+  },
+  {
+   "tienda": "Mercado Silvestre",
+   "ok": true,
+   "ofertas": 50
+  },
+  {
+   "tienda": "Comidas La Punta",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "CC Nuts",
+   "ok": true,
+   "ofertas": 20
+  },
+  {
+   "tienda": "La Soberanía",
+   "ok": true,
+   "ofertas": 1
+  },
+  {
+   "tienda": "Tostaduría El Pistacho",
+   "ok": true,
+   "ofertas": 0
+  },
+  {
+   "tienda": "Tost",
+   "ok": true,
+   "ofertas": 329
+  },
+  {
+   "tienda": "House Bar",
+   "ok": true,
+   "ofertas": 3
+  },
+  {
+   "tienda": "El Brindis",
+   "ok": true,
+   "ofertas": 249
+  },
+  {
+   "tienda": "Mi Coca-Cola",
+   "ok": true,
+   "ofertas": 2
+  }
+ ]
+}
