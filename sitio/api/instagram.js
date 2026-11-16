@@ -5,6 +5,7 @@
 //  - "IG…":  token de Instagram Login. Dura 60 días y se renueva solo cada semana. Usa graph.instagram.com.
 // ?probar=1 solo revisa que el permiso funcione (no publica nada).
 // ?parte=cupones publica las 10 historias de cupones del día (segunda llamada diaria de Vercel).
+// ?parte=ofertas publica 10 historias de ofertas tomadas de la vitrina (tercera llamada diaria).
 import { get, put } from "@vercel/blob";
 import { esAdmin, responder } from "./_lib.js";
 
@@ -96,6 +97,33 @@ async function publicarCupones(res, estado, fecha, id, token) {
   return responder(res, 200, { ok: true, fecha, cupones: hoy.cupones.length, de: dia.historias.length });
 }
 
+// 10 historias de ofertas del día, tomadas de la vitrina (la arma publicaciones.py cada 3 horas, sin repetir en 24 h).
+const OFERTAS_DIARIAS = 10;
+async function publicarOfertas(res, estado, fecha, id, token) {
+  const vitrina = await fetch(RAW + "vitrina/indice.json?v=" + Date.now()).then((r) => (r.ok ? r.json() : { ofertas: [] }));
+  const hoy = (estado.publicado[fecha] = estado.publicado[fecha] || { historias: [], hechas: [], cuando: new Date().toISOString() });
+  hoy.ofertas = hoy.ofertas || [];
+  // no repetir ofertas subidas los últimos 3 días
+  const ya = new Set(Object.entries(estado.publicado).filter(([f]) => f >= fechaMenos(fecha, 3)).flatMap(([, d]) => d.ofertas || []));
+  const pendientes = (vitrina.ofertas || []).filter((o) => o.descuento >= 50 && !ya.has(o.id)).slice(0, OFERTAS_DIARIAS - hoy.ofertas.length);
+  for (const o of pendientes) {
+    try {
+      const h = await graph(`/${id}/media`, token, { image_url: RAW + "vitrina/" + o.archivo, media_type: "STORIES" });
+      await listo(h.id, token);
+      await graph(`/${id}/media_publish`, token, { creation_id: h.id });
+      hoy.ofertas.push(o.id);
+      await guardarEstado(estado);
+    } catch (e) {
+      console.error("Historia de oferta no publicada:", o.archivo, e.message);
+    }
+  }
+  return responder(res, 200, { ok: true, fecha, ofertas: hoy.ofertas.length });
+}
+
+function fechaMenos(fecha, dias) {
+  return new Date(Date.parse(fecha + "T12:00:00Z") - dias * 864e5).toISOString().slice(0, 10);
+}
+
 function hoyEnChile() {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "America/Santiago" }).format(new Date());
 }
@@ -137,6 +165,7 @@ export default async function handler(req, res) {
     }
     const fecha = (req.query && req.query.fecha) || hoyEnChile();
     if (req.query && req.query.parte === "cupones") return await publicarCupones(res, estado, fecha, estado.usuario.id, token);
+    if (req.query && req.query.parte === "ofertas") return await publicarOfertas(res, estado, fecha, estado.usuario.id, token);
     const indice = await fetch(RAW + "indice.json?v=" + Date.now()).then((r) => r.json());
     const dia = (indice.dias || []).find((x) => x.fecha === fecha);
     if (!dia) return responder(res, 200, { ok: false, motivo: "Todavía no están las imágenes de hoy.", fecha });

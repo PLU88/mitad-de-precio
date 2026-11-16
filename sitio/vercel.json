@@ -1,7 +1,8 @@
 {
   "crons": [
     { "path": "/api/instagram", "schedule": "15 12 * * *" },
-    { "path": "/api/instagram?parte=cupones", "schedule": "45 15 * * *" }
+    { "path": "/api/instagram?parte=cupones", "schedule": "45 15 * * *" },
+    { "path": "/api/instagram?parte=ofertas", "schedule": "45 21 * * *" }
   ],
   "functions": { "api/instagram.js": { "maxDuration": 300 } }
 }
