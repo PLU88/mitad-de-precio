@@ -4,8 +4,8 @@
 //  - "EAA…": token de usuario del sistema de Meta (inicio de sesión unificado). No caduca. Usa graph.facebook.com.
 //  - "IG…":  token de Instagram Login. Dura 60 días y se renueva solo cada semana. Usa graph.instagram.com.
 // ?probar=1 solo revisa que el permiso funcione (no publica nada).
-// ?parte=cupones publica las 10 historias de cupones del día (segunda llamada diaria de Vercel).
-// ?parte=ofertas publica 10 historias de ofertas tomadas de la vitrina (tercera llamada diaria).
+// ?parte=cupones publica las 5 historias de cupones del día (segunda llamada diaria de Vercel).
+// ?parte=ofertas publica 5 historias de ofertas tomadas de la vitrina (tercera llamada diaria).
 import { get, put } from "@vercel/blob";
 import { esAdmin, responder } from "./_lib.js";
 
@@ -75,7 +75,7 @@ async function publicarHistorias(res, estado, fecha, archivos, id, base, token) 
   return responder(res, 200, { ok: true, fecha, publicado: estado.publicado[fecha] });
 }
 
-// Las 10 historias de cupones del día (las arma recolector/cupones_ig.py en datos/publicaciones/cupones/).
+// Las historias de cupones del día, máximo 5 (las arma recolector/cupones_ig.py en datos/publicaciones/cupones/).
 async function publicarCupones(res, estado, fecha, id, token) {
   const indice = await fetch(RAW + "cupones/indice.json?v=" + Date.now()).then((r) => (r.ok ? r.json() : { dias: [] }));
   const dia = (indice.dias || []).find((x) => x.fecha === fecha);
@@ -83,7 +83,8 @@ async function publicarCupones(res, estado, fecha, id, token) {
   const hoy = (estado.publicado[fecha] = estado.publicado[fecha] || { historias: [], hechas: [], cuando: new Date().toISOString() });
   hoy.cupones = hoy.cupones || [];
   const base = RAW + "cupones/" + fecha + "/";
-  for (const archivo of dia.historias.filter((a) => !hoy.cupones.includes(a))) {
+  // máximo 5 al día mientras la cuenta es nueva (para no parecer automatizada)
+  for (const archivo of dia.historias.slice(0, CUPONES_DIARIOS).filter((a) => !hoy.cupones.includes(a))) {
     try {
       const h = await graph(`/${id}/media`, token, { image_url: base + archivo, media_type: "STORIES" });
       await listo(h.id, token);
@@ -94,11 +95,12 @@ async function publicarCupones(res, estado, fecha, id, token) {
       console.error("Historia de cupón no publicada:", archivo, e.message);
     }
   }
-  return responder(res, 200, { ok: true, fecha, cupones: hoy.cupones.length, de: dia.historias.length });
+  return responder(res, 200, { ok: true, fecha, cupones: hoy.cupones.length });
 }
 
-// 10 historias de ofertas del día, tomadas de la vitrina (la arma publicaciones.py cada 3 horas, sin repetir en 24 h).
-const OFERTAS_DIARIAS = 10;
+// 5 historias de ofertas del día, tomadas de la vitrina (la arma publicaciones.py cada 3 horas, sin repetir en 24 h).
+const OFERTAS_DIARIAS = 5;
+const CUPONES_DIARIOS = 5;
 async function publicarOfertas(res, estado, fecha, id, token) {
   const vitrina = await fetch(RAW + "vitrina/indice.json?v=" + Date.now()).then((r) => (r.ok ? r.json() : { ofertas: [] }));
   const hoy = (estado.publicado[fecha] = estado.publicado[fecha] || { historias: [], hechas: [], cuando: new Date().toISOString() });

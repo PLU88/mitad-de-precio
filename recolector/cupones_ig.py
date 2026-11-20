@@ -1,7 +1,7 @@
-"""Arma cada día 10 historias de Instagram (1080x1920) con cupones, una por cupón.
+"""Arma cada día 5 historias de Instagram (1080x1920) con cupones, una por cupón.
 
 Se ejecuta después de cupones.py (workflow «Actualizar cupones»). Lee datos/cupones.json y deja:
-  datos/publicaciones/cupones/<fecha>/cupon_01.jpg ... cupon_10.jpg
+  datos/publicaciones/cupones/<fecha>/cupon_01.jpg ... cupon_05.jpg
   datos/publicaciones/cupones/indice.json  {"dias": [{"fecha", "historias": [...]}], "recientes": {clave: fecha}}
 La función /api/instagram (llamada con ?parte=cupones) las publica como historias.
 
@@ -27,7 +27,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CUPONES = os.path.join(RAIZ, "datos", "cupones.json")
 PRUEBA = "--prueba" in sys.argv
 CARPETA = "/tmp/cupones_ig" if PRUEBA else os.path.join(RAIZ, "datos", "publicaciones", "cupones")
-CANTIDAD = 10
+CANTIDAD = 5  # por ahora 5 al día: la cuenta es nueva y no conviene publicar demasiado
 DIAS_GUARDADOS = 7
 ROJO = "#E8262E"
 SUAVE = "#C9C9D6"
@@ -78,9 +78,8 @@ def elegir(cupones, recientes, hoy):
             elegidos.append(c)
             cuantos -= 1
 
-    tomar(candidatos(lambda c: c["c"] and c["t"] == "Tiendas"), 6)
-    tomar(candidatos(lambda c: c["c"] and c["t"] != "Tiendas"), 1)
-    tomar(candidatos(lambda c: c["t"] == "Bancos" and not c["c"]), 2)
+    tomar(candidatos(lambda c: c["c"] and c["t"] == "Tiendas"), 3)
+    tomar(candidatos(lambda c: c["t"] == "Bancos" and not c["c"]), 1)
     tomar(candidatos(lambda c: c["t"] == "Telefonía"), 1)
     tomar(candidatos(lambda c: True), CANTIDAD)  # completar si faltó algo
     return elegidos
