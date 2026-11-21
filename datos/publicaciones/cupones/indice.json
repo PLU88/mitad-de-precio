@@ -1,0 +1,505 @@
+{
+ "dias": [
+  {
+   "fecha": "2026-11-15",
+   "historias": [
+    "cupon_01.jpg",
+    "cupon_02.jpg",
+    "cupon_03.jpg",
+    "cupon_04.jpg",
+    "cupon_05.jpg",
+    "cupon_06.jpg",
+    "cupon_07.jpg",
+    "cupon_08.jpg",
+    "cupon_09.jpg",
+    "cupon_10.jpg"
+   ],
+   "cupones": [
+    {
+     "m": "Juan Maestro",
+     "c": "JMRETIRO",
+     "ti": "20% de descuento con codigo promocional Juan Maestro para pedidos con retiro en tienda"
+    },
+    {
+     "m": "Hot Topic",
+     "c": "HTDEAL",
+     "ti": "20% de descuento en toda la tienda"
+    },
+    {
+     "m": "Ripley",
+     "c": "CYBERELECTRO10",
+     "ti": "10% extra en refrigeradores Midea y Samsung y lavadora LG de 19 kg"
+    },
+    {
+     "m": "Asics",
+     "c": "SANTANDER15",
+     "ti": "15% de descuento con Santander"
+    },
+    {
+     "m": "ABC",
+     "c": "XIAOMI30",
+     "ti": "$30.000 de descuento en tablets Xiaomi seleccionadas"
+    },
+    {
+     "m": "Marmot",
+     "c": "MARMOTA30",
+     "ti": "30% de descuento en tu próxima compra al unirte al club"
+    },
+    {
+     "m": "Carl’s Jr.",
+     "c": "CARLSBCH",
+     "ti": "20% de descuento con tarjetas Banco de Chile (comida rapida)"
+    },
+    {
+     "m": "CinePlanet",
+     "c": "",
+     "ti": "$5.200 de descuento con tarjetas Banco de Chile (cine)"
+    },
+    {
+     "m": "Starbucks",
+     "c": "",
+     "ti": "30% de descuento con tarjetas Banco de Chile (cafeterias)"
+    },
+    {
+     "m": "Burger King",
+     "c": "",
+     "ti": "25% dcto los días miércoles"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-16",
+   "historias": [
+    "cupon_01.jpg",
+    "cupon_02.jpg",
+    "cupon_03.jpg",
+    "cupon_04.jpg",
+    "cupon_05.jpg",
+    "cupon_06.jpg",
+    "cupon_07.jpg",
+    "cupon_08.jpg",
+    "cupon_09.jpg",
+    "cupon_10.jpg"
+   ],
+   "cupones": [
+    {
+     "m": "Fashion's Park",
+     "c": "EXTRA44",
+     "ti": "44% de descuento en productos seleccionados, solo online"
+    },
+    {
+     "m": "Aliexpress",
+     "c": "ADMD4",
+     "ti": "-$4 en compras superiores a $25 con codigo promocional Aliexpress"
+    },
+    {
+     "m": "Asus",
+     "c": "CYBER40K2026",
+     "ti": "$40.000 de descuento en gaming"
+    },
+    {
+     "m": "París",
+     "c": "AZGT4R10",
+     "ti": "10% de descuento adicional en muebles"
+    },
+    {
+     "m": "Kinguin",
+     "c": "INGAME5",
+     "ti": "5% de descuento en artículos dentro del juego | codigo de descuento Kinguin"
+    },
+    {
+     "m": "Cuponatic",
+     "c": "TUFINDE",
+     "ti": "5% de descuento"
+    },
+    {
+     "m": "Natura Sushi – Justo",
+     "c": "BCHJUSTO26",
+     "ti": "30% de descuento con tarjetas Banco de Chile (delivery)"
+    },
+    {
+     "m": "KFC",
+     "c": "",
+     "ti": "30% de descuento con tarjetas Banco de Chile (comida rapida)"
+    },
+    {
+     "m": "Holy Burger and Bar",
+     "c": "",
+     "ti": "20% de descuento con tarjetas Banco de Chile (restaurantes y bares)"
+    },
+    {
+     "m": "Papa Johns",
+     "c": "",
+     "ti": "25% de dcto. en el total de tu boleta"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-17",
+   "historias": [
+    "cupon_01.jpg",
+    "cupon_02.jpg",
+    "cupon_03.jpg",
+    "cupon_04.jpg",
+    "cupon_05.jpg",
+    "cupon_06.jpg",
+    "cupon_07.jpg",
+    "cupon_08.jpg",
+    "cupon_09.jpg",
+    "cupon_10.jpg"
+   ],
+   "cupones": [
+    {
+     "m": "Cocha",
+     "c": "D2Y38RIBE",
+     "ti": "$120.000 menos en paquetes de San Andrés sobre $1.500.000"
+    },
+    {
+     "m": "Airalo",
+     "c": "APBLOG15",
+     "ti": "15% en tu primera eSIM (tope $3), con cuenta y pago habilitado: codigo descuento Airalo"
+    },
+    {
+     "m": "HP",
+     "c": "PYMEHP",
+     "ti": "$30.000 de descuento en PCs empresariales al comprar más de 3 unidades"
+    },
+    {
+     "m": "Despegar",
+     "c": "VUELACONAC",
+     "ti": "10% de descuento con el cupón Despegar"
+    },
+    {
+     "m": "Easy",
+     "c": "MIDEA10",
+     "ti": "10% de descuento adicional en productos Midea"
+    },
+    {
+     "m": "Huawei",
+     "c": "AWGT7PN",
+     "ti": "$30.000 de descuento en WATCH GT 7 Pro con cupón Huawei"
+    },
+    {
+     "m": "BomboBurger – Justo",
+     "c": "BCHJUSTO26",
+     "ti": "30% de descuento con tarjetas Banco de Chile (delivery)"
+    },
+    {
+     "m": "BurgerBeef",
+     "c": "",
+     "ti": "20% de descuento con tarjetas Banco de Chile (comida rapida)"
+    },
+    {
+     "m": "Rocker Burger",
+     "c": "",
+     "ti": "20% de descuento con tarjetas Banco de Chile (restaurantes y bares)"
+    },
+    {
+     "m": "Dominos Pizza",
+     "c": "",
+     "ti": "40% dcto. los domingos con el Club Entel"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-18",
+   "historias": [
+    "cupon_01.jpg",
+    "cupon_02.jpg",
+    "cupon_03.jpg",
+    "cupon_04.jpg",
+    "cupon_05.jpg",
+    "cupon_06.jpg",
+    "cupon_07.jpg",
+    "cupon_08.jpg",
+    "cupon_09.jpg",
+    "cupon_10.jpg"
+   ],
+   "cupones": [
+    {
+     "m": "Falabella",
+     "c": "CYBER10",
+     "ti": "10% extra en zapatillas, zapatos, ropa interior y accesorios"
+    },
+    {
+     "m": "Sodimac",
+     "c": "ELECTROLUX10",
+     "ti": "10% de rebaja en Electrolux con cupón Sodimac"
+    },
+    {
+     "m": "Barceló",
+     "c": "26BF15",
+     "ti": "Hotels & Resorts: 15% extra de descuento en hoteles y resorts"
+    },
+    {
+     "m": "Puma",
+     "c": "SORETO15",
+     "ti": "Ahorra un 15% adicional"
+    },
+    {
+     "m": "Natura",
+     "c": "1PESO",
+     "ti": "3ª unidad a $1 al comprar 3 productos de belleza del outlet"
+    },
+    {
+     "m": "Kliper",
+     "c": "CALZADO20",
+     "ti": "20% adicional en calzado DC Shoes seleccionado"
+    },
+    {
+     "m": "Local Burger – Justo",
+     "c": "BCHJUSTO26",
+     "ti": "30% de descuento con tarjetas Banco de Chile (delivery)"
+    },
+    {
+     "m": "Termas Cochamó",
+     "c": "",
+     "ti": "20% de descuento con tarjetas Banco de Chile (entretencion)"
+    },
+    {
+     "m": "Soho Burger",
+     "c": "",
+     "ti": "20% de descuento con tarjetas Banco de Chile (restaurantes y bares)"
+    },
+    {
+     "m": "Roof Burger",
+     "c": "",
+     "ti": "25% dcto en el total de tu boleta lunes y jueves"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-19",
+   "historias": [
+    "cupon_01.jpg",
+    "cupon_02.jpg",
+    "cupon_03.jpg",
+    "cupon_04.jpg",
+    "cupon_05.jpg",
+    "cupon_06.jpg",
+    "cupon_07.jpg",
+    "cupon_08.jpg",
+    "cupon_09.jpg",
+    "cupon_10.jpg"
+   ],
+   "cupones": [
+    {
+     "m": "Mercado Libre Chile",
+     "c": "PLAYER1",
+     "ti": "$5.000 de descuento desde $50.000 con cupón Mercado Libre Chile"
+    },
+    {
+     "m": "Temu",
+     "c": "CLEARPAY30",
+     "ti": "Descuento del 30% en pedidos superiores a 39€ para nuevos usuarios | cupón Temu"
+    },
+    {
+     "m": "Doggis",
+     "c": "DOGGISRETIRO",
+     "ti": "20% de descuento en pedidos con retiro en tienda"
+    },
+    {
+     "m": "Lenovo",
+     "c": "VIBEOFF",
+     "ti": "ARS $50,000 de descuento en IdeaPad Vibe con cupon descuento Lenovo"
+    },
+    {
+     "m": "Xcaret",
+     "c": "PROMOMEX",
+     "ti": "20% de descuento en productos seleccionados con codigo descuento Xcaret"
+    },
+    {
+     "m": "CAT",
+     "c": "FDSCAT10",
+     "ti": "10% de descuento en todo el sitio por compras sobre $59.990"
+    },
+    {
+     "m": "Burgerhouse – Justo",
+     "c": "BCHJUSTO26",
+     "ti": "30% de descuento con tarjetas Banco de Chile (delivery)"
+    },
+    {
+     "m": "Cine Muvix",
+     "c": "",
+     "ti": "$4.800 de descuento con tarjetas Banco de Chile (cine)"
+    },
+    {
+     "m": "La Casona Belga",
+     "c": "",
+     "ti": "15% de descuento con tarjetas Banco de Chile (restaurantes y bares)"
+    },
+    {
+     "m": "Nike",
+     "c": "",
+     "ti": "30% de descuento en colección exclusiva Entel"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-20",
+   "historias": [
+    "cupon_01.jpg",
+    "cupon_02.jpg",
+    "cupon_03.jpg",
+    "cupon_04.jpg",
+    "cupon_05.jpg"
+   ],
+   "cupones": [
+    {
+     "m": "Ripley",
+     "c": "CYBERGARMIN",
+     "ti": "10% de descuento adicional en relojes Garmin"
+    },
+    {
+     "m": "ABC",
+     "c": "BLIK10",
+     "ti": "10% de descuento adicional en Blik con cupon descuento ABC"
+    },
+    {
+     "m": "Google Workspace",
+     "c": "FC3CLEMAVXLQJL9",
+     "ti": "12% de descuento en el plan Business Standard"
+    },
+    {
+     "m": "Juan Maestro",
+     "c": "",
+     "ti": "40% de descuento con tarjetas Banco de Chile (comida rapida)"
+    },
+    {
+     "m": "Adidas",
+     "c": "",
+     "ti": "20% dcto. en catálogo seleccionado"
+    }
+   ]
+  },
+  {
+   "fecha": "2026-11-21",
+   "historias": [
+    "cupon_01.jpg",
+    "cupon_02.jpg",
+    "cupon_03.jpg",
+    "cupon_04.jpg",
+    "cupon_05.jpg"
+   ],
+   "cupones": [
+    {
+     "m": "Fashion's Park",
+     "c": "EXTRA40",
+     "ti": "40% de descuento con codigo descuento Fashion's Park"
+    },
+    {
+     "m": "Merrell",
+     "c": "BLACK15MLL",
+     "ti": "15% extra de descuento en todo el sitio"
+    },
+    {
+     "m": "París",
+     "c": "ACER10",
+     "ti": "10% adicional en Notebooks Acer con cupón París"
+    },
+    {
+     "m": "Skechers",
+     "c": "",
+     "ti": "40% de descuento con tarjetas Banco de Chile (deportes)"
+    },
+    {
+     "m": "Mercado Libre",
+     "c": "",
+     "ti": "$5.000 de dcto. exclusivo para nuevos usuarios de Mercado Libre"
+    }
+   ]
+  }
+ ],
+ "recientes": {
+  "easy|electrolux10": "2026-11-12",
+  "airalo|newtoairalo15": "2026-11-12",
+  "hp|oferta10a": "2026-11-12",
+  "barceló|urb10": "2026-11-12",
+  "cocha|lapaq100": "2026-11-12",
+  "huawei|afc2sn": "2026-11-12",
+  "natura|naturabch": "2026-11-12",
+  "otto burger|40% de descuento con tarjetas banco de chile (40 de descuento visa)": "2026-11-12",
+  "dunkin’|30% de descuento con tarjetas banco de chile (cafeterias)": "2026-11-12",
+  "just burger|25% dcto. lunes, martes, jueves y domingo": "2026-11-12",
+  "puma|savings15": "2026-11-13",
+  "sodimac|muebles10": "2026-11-13",
+  "l'bel|doble70": "2026-11-13",
+  "cyzone|doble70": "2026-11-13",
+  "merrell|bienvenido15": "2026-11-13",
+  "falabella|samsung10": "2026-11-13",
+  "farmex|chile15": "2026-11-13",
+  "movistar|77% de descuento con tarjetas banco de chile (beneficios y descuentos)": "2026-11-13",
+  "adidas|30% de descuento con tarjetas banco de chile (beneficios y descuentos)": "2026-11-13",
+  "dunkin|30% descuento todos los jueves": "2026-11-13",
+  "lg|lg-bancos": "2026-11-14",
+  "temu|clnew30": "2026-11-14",
+  "nike|nike20": "2026-11-14",
+  "mamut|mamutretiro": "2026-11-14",
+  "lenovo|lnvpromo": "2026-11-14",
+  "samsung|newbuds4": "2026-11-14",
+  "ryge burger – justo|bchjusto26": "2026-11-14",
+  "farmacias cruz verde|60% de descuento con tarjetas banco de chile (salud)": "2026-11-14",
+  "loston burger|20% de descuento con tarjetas banco de chile (restaurantes y bares)": "2026-11-14",
+  "doggis|30% dcto en todo el menú solo los miércoles": "2026-11-14",
+  "juan maestro|jmretiro": "2026-11-15",
+  "hot topic|htdeal": "2026-11-15",
+  "ripley|cyberelectro10": "2026-11-15",
+  "asics|santander15": "2026-11-15",
+  "abc|xiaomi30": "2026-11-15",
+  "marmot|marmota30": "2026-11-15",
+  "carl’s jr.|carlsbch": "2026-11-15",
+  "cineplanet|$5.200 de descuento con tarjetas banco de chile (cine)": "2026-11-15",
+  "starbucks|30% de descuento con tarjetas banco de chile (cafeterias)": "2026-11-15",
+  "burger king|25% dcto los días miércoles": "2026-11-15",
+  "fashion's park|extra44": "2026-11-16",
+  "aliexpress|admd4": "2026-11-16",
+  "asus|cyber40k2026": "2026-11-16",
+  "parís|azgt4r10": "2026-11-16",
+  "kinguin|ingame5": "2026-11-16",
+  "cuponatic|tufinde": "2026-11-16",
+  "natura sushi – justo|bchjusto26": "2026-11-16",
+  "kfc|30% de descuento con tarjetas banco de chile (comida rapida)": "2026-11-16",
+  "holy burger and bar|20% de descuento con tarjetas banco de chile (restaurantes y bares)": "2026-11-16",
+  "papa johns|25% de dcto. en el total de tu boleta": "2026-11-16",
+  "cocha|d2y38ribe": "2026-11-17",
+  "airalo|apblog15": "2026-11-17",
+  "hp|pymehp": "2026-11-17",
+  "despegar|vuelaconac": "2026-11-17",
+  "easy|midea10": "2026-11-17",
+  "huawei|awgt7pn": "2026-11-17",
+  "bomboburger – justo|bchjusto26": "2026-11-17",
+  "burgerbeef|20% de descuento con tarjetas banco de chile (comida rapida)": "2026-11-17",
+  "rocker burger|20% de descuento con tarjetas banco de chile (restaurantes y bares)": "2026-11-17",
+  "dominos pizza|40% dcto. los domingos con el club entel": "2026-11-17",
+  "falabella|cyber10": "2026-11-18",
+  "sodimac|electrolux10": "2026-11-18",
+  "barceló|26bf15": "2026-11-18",
+  "puma|soreto15": "2026-11-18",
+  "natura|1peso": "2026-11-18",
+  "kliper|calzado20": "2026-11-18",
+  "local burger – justo|bchjusto26": "2026-11-18",
+  "termas cochamó|20% de descuento con tarjetas banco de chile (entretencion)": "2026-11-18",
+  "soho burger|20% de descuento con tarjetas banco de chile (restaurantes y bares)": "2026-11-18",
+  "roof burger|25% dcto en el total de tu boleta lunes y jueves": "2026-11-18",
+  "mercado libre chile|player1": "2026-11-19",
+  "temu|clearpay30": "2026-11-19",
+  "doggis|doggisretiro": "2026-11-19",
+  "lenovo|vibeoff": "2026-11-19",
+  "xcaret|promomex": "2026-11-19",
+  "cat|fdscat10": "2026-11-19",
+  "burgerhouse – justo|bchjusto26": "2026-11-19",
+  "cine muvix|$4.800 de descuento con tarjetas banco de chile (cine)": "2026-11-19",
+  "la casona belga|15% de descuento con tarjetas banco de chile (restaurantes y bares)": "2026-11-19",
+  "nike|30% de descuento en colección exclusiva entel": "2026-11-19",
+  "ripley|cybergarmin": "2026-11-20",
+  "abc|blik10": "2026-11-20",
+  "google workspace|fc3clemavxlqjl9": "2026-11-20",
+  "juan maestro|40% de descuento con tarjetas banco de chile (comida rapida)": "2026-11-20",
+  "adidas|20% dcto. en catálogo seleccionado": "2026-11-20",
+  "fashion's park|extra40": "2026-11-21",
+  "merrell|black15mll": "2026-11-21",
+  "parís|acer10": "2026-11-21",
+  "skechers|40% de descuento con tarjetas banco de chile (deportes)": "2026-11-21",
+  "mercado libre|$5.000 de dcto. exclusivo para nuevos usuarios de mercado libre": "2026-11-21"
+ }
+}
